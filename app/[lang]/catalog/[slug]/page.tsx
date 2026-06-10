@@ -14,6 +14,7 @@ import {
   getCatalogProductBySlug,
   getCatalogProductsFiltered,
 } from '@/lib/catalogReads';
+import { isDatabaseConfigured } from '@/lib/db/client';
 import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
@@ -24,6 +25,7 @@ import { getReviewStatsAsync } from '@/lib/reviews';
 export const revalidate = 60;
 
 export async function generateStaticParams() {
+  if (!isDatabaseConfigured()) return [];
   const bouquets = await getCatalogBouquets();
   return locales.flatMap((lang) =>
     bouquets.map((b) => ({ lang, slug: b.slug }))

@@ -10,11 +10,11 @@ Before working on this repository, read:
 
 Do not rely on assumptions or memory. Inspect the actual code before editing.
 
-This is **EKB Flowers** — Russia storefront at [ekb-flowers.ru](https://www.ekb-flowers.ru). **Isolated** from Thailand Lanna Bloom ([lannabloom.shop](https://lannabloom.shop)).
+This is **EKB Flowers** — Russia storefront at [ekb-flowers.ru](https://www.ekb-flowers.ru).
 
-**MVP stack:** Next.js on Vercel, Neon Postgres, Vercel Blob, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
+**MVP stack:** Next.js on Vercel, Supabase Postgres (`POSTGRES_URL`), Vercel Blob, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
 
-**Forbidden in Russia runtime env:** `SUPABASE_*`, `STRIPE_*`, `NEXT_PUBLIC_GTM_ID`, `RESEND_API_KEY`.
+**Runtime env guard:** `lib/env/validateRussiaEnv.ts` — see `ai_context/03_SECURITY_RULES.md`.
 
 **Later:** Timeweb VPS — see `docs/deploy-vps.md`.
 

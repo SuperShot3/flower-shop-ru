@@ -51,7 +51,7 @@ Where code lives in the Next.js App Router monorepo.
 
 | Module | Role |
 |--------|------|
-| `lib/db/client.ts` | Postgres pool (`DATABASE_URL`) |
+| `lib/db/client.ts` | Postgres pool (`POSTGRES_URL`) |
 | `lib/db/catalogRead.ts` | Catalog reads from Postgres |
 | `lib/catalog.ts`, `lib/catalogReads.ts` | Storefront catalog facade |
 | `lib/catalog/storage.ts` | Image URLs; Blob upload (MVP) |
@@ -80,9 +80,9 @@ Where code lives in the Next.js App Router monorepo.
 
 | Store | Used for |
 |-------|----------|
-| **Neon Postgres** | Catalog, partner applications, admin users (target) |
+| **Supabase Postgres** | Catalog, partner applications, admin users (via `pg` + `POSTGRES_URL` from Vercel integration) |
 | **Vercel Blob** | Catalog image files (MVP) |
-| Stripe / Supabase | **Not used** in Russia runtime |
+| Legacy `lib/supabase/*` client / Stripe routes | Not wired for MVP storefront |
 
 ## Data stores (post-VPS)
 

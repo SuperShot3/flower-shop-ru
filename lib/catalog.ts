@@ -110,7 +110,7 @@ export type { CatalogFilterParams, PopularCatalogItem } from '@/lib/catalogListL
 
 const HERO_IMAGE_FALLBACK = '/HeroImage/heroimage.webp';
 
-/** Storefront catalog reads Postgres when DATABASE_URL is set. */
+/** Storefront catalog reads Postgres when POSTGRES_URL is set. */
 
 export function isCatalogReadFromSupabase(): boolean {
   return isDatabaseConfigured();
@@ -118,7 +118,7 @@ export function isCatalogReadFromSupabase(): boolean {
 
 function requireDatabase(): void {
   if (!isDatabaseConfigured()) {
-    throw new Error('Missing DATABASE_URL — configure Postgres on the Timeweb VPS.');
+    throw new Error('Missing POSTGRES_URL — set Supabase pooler URL in .env.local or via Vercel integration.');
   }
 }
 

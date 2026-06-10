@@ -1,7 +1,7 @@
 /**
  * One-time import: bouquet catalog rows from Thailand Supabase → Russia Postgres.
  *
- * Run locally with `.env.export.local` + `DATABASE_URL` (Russia Supabase).
+ * Run locally with `.env.export.local` + `POSTGRES_URL` (Russia Supabase).
  * Requires `npm run mirror-catalog` first (manifest rewrites image URLs).
  *
  * Usage:
@@ -176,7 +176,8 @@ async function upsertRows(
 async function main() {
   requireExportEnv('SUPABASE_EXPORT_URL');
   requireExportEnv('SUPABASE_EXPORT_SERVICE_ROLE_KEY');
-  const databaseUrl = requireExportEnv('DATABASE_URL');
+  const { requireDatabaseUrl } = await import('../lib/db/resolveDatabaseUrl');
+  const databaseUrl = requireDatabaseUrl();
 
   console.log('[import-catalog] Dry run:', DRY_RUN);
   console.log('[import-catalog] Include pending bouquets:', INCLUDE_PENDING);

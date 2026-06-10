@@ -1,5 +1,5 @@
 /**
- * Storefront catalog reads — Postgres (Supabase connection via DATABASE_URL).
+ * Storefront catalog reads — Supabase Postgres via POSTGRES_URL.
  */
 import 'server-only';
 
@@ -32,7 +32,7 @@ import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 
 function catalogReadNotConfigured(): never {
   throw new Error(
-    'Missing DATABASE_URL — set Postgres connection string (Supabase pooler URL on Vercel).'
+    'Missing POSTGRES_URL — set Supabase pooler URL in .env.local or via Vercel integration.'
   );
 }
 

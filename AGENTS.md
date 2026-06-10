@@ -4,9 +4,7 @@ Before working on this repository, read [`ai_context/00_START_HERE.md`](ai_conte
 
 **Site:** [ekb-flowers.ru](https://www.ekb-flowers.ru) · **Repo:** [github.com/SuperShot3/flower-shop-ru](https://github.com/SuperShot3/flower-shop-ru)
 
-**Isolated from** [lannabloom.shop](https://lannabloom.shop) — never share Vercel projects, env, Neon DB, or Blob stores with Thailand.
-
-Then read the relevant context file for the task:
+Read the relevant context file for the task:
 
 | Task area | Context file |
 |-----------|----------------|
@@ -19,7 +17,7 @@ Then read the relevant context file for the task:
 
 ## MVP stack (current)
 
-- **Vercel** + **Neon Postgres** + **Vercel Blob** (free tier)
+- **Vercel** + **Supabase Postgres** + **Vercel Blob** (free tier)
 - Domain **ekb-flowers.ru** (REG.RU) → DNS to Vercel
 - Payments **disabled**; YooKassa later
 - **Timeweb VPS** — post-MVP ([docs/deploy-vps.md](docs/deploy-vps.md))

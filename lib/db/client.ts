@@ -1,6 +1,9 @@
 import 'server-only';
 
 import { Pool, type QueryResultRow } from 'pg';
+import { resolveDatabaseUrl } from '@/lib/db/resolveDatabaseUrl';
+
+export { resolveDatabaseUrl, requireDatabaseUrl } from '@/lib/db/resolveDatabaseUrl';
 
 export type { QueryResultRow };
 
@@ -23,13 +26,15 @@ function normalizeConnectionString(connectionString: string): string {
 }
 
 export function isDatabaseConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL?.trim());
+  return Boolean(resolveDatabaseUrl());
 }
 
 export function getPool(): Pool {
-  const connectionString = process.env.DATABASE_URL?.trim();
+  const connectionString = resolveDatabaseUrl();
   if (!connectionString) {
-    throw new Error('Missing DATABASE_URL — set Postgres connection string (VPS Docker or local).');
+    throw new Error(
+      'Missing POSTGRES_URL — set Supabase pooler URL in .env.local or via Vercel Supabase integration.'
+    );
   }
 
   if (!pool) {

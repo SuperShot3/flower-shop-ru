@@ -77,7 +77,7 @@ export function loadExportEnv(): void {
 export function requireExportEnv(name: string): string {
   const value = process.env[name]?.trim();
   if (!value) {
-    throw new Error(`Missing ${name} — set it in .env.export.local (and DATABASE_URL in .env.local for import).`);
+    throw new Error(`Missing ${name} — set it in .env.export.local (and POSTGRES_URL in .env.local for import).`);
   }
   return value;
 }

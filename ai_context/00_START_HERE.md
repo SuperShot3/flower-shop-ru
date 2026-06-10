@@ -4,7 +4,7 @@ Read this file before substantive work. Use topic files below for depth; use `do
 
 ## What this is
 
-**EKB Flowers** — flower and gift delivery storefront for Russia ([ekb-flowers.ru](https://www.ekb-flowers.ru)). Forked from Lanna Bloom (Thailand); **fully isolated** from [lannabloom.shop](https://lannabloom.shop).
+**EKB Flowers** — flower and gift delivery storefront for Russia ([ekb-flowers.ru](https://www.ekb-flowers.ru)).
 
 **MVP focus:** live site on custom domain, partner application form, empty/minimal catalog. Payments (YooKassa) and full partner catalog come later.
 
@@ -13,8 +13,8 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Layer | Technology |
 |-------|------------|
 | App | Next.js 14 App Router, React 18, TypeScript |
-| Hosting | **Vercel** Hobby (separate project from Thailand) |
-| Database | **Supabase** Postgres via `DATABASE_URL` — catalog, partners, orders (later) |
+| Hosting | **Vercel** Hobby |
+| Database | **Supabase** Postgres via `POSTGRES_URL` — catalog, partners, orders (later) |
 | Catalog images | **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`) until VPS migration |
 | Domain | `ekb-flowers.ru` at REG.RU → DNS to Vercel |
 | Payments | **Disabled** — `lib/checkout/paymentAvailability.ts` |
@@ -28,12 +28,6 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Hosting | Timeweb VPS + Docker — see [docs/deploy-vps.md](../docs/deploy-vps.md) |
 | Database | Postgres on VPS |
 | Images | VPS disk `/var/www/catalog/` (nginx) |
-
-## Isolation rules
-
-- **Never** deploy this repo to the Thailand Vercel project or share env/Blob/DB with Thailand.
-- **Never** set Thailand runtime credentials — `lib/env/validateRussiaEnv.ts` blocks `SUPABASE_*`, `STRIPE_*`, `NEXT_PUBLIC_GTM_ID`, `RESEND_API_KEY`.
-- Export scripts may **read** Thailand Supabase via `.env.export.local` only (local Mac, gitignored).
 
 ## Context index
 
@@ -68,22 +62,21 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Variable | Purpose |
 |----------|---------|
 | `NEXT_PUBLIC_APP_URL` | `https://www.ekb-flowers.ru` |
-| `DATABASE_URL` | Supabase Postgres (Vercel) or local Docker Postgres |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob — **this project's store only** |
+| `POSTGRES_URL` | Supabase Postgres pooler URL (Vercel integration or `.env.local`) |
+| `BLOB_READ_WRITE_TOKEN` | Vercel Blob — catalog images |
 | `AUTH_SECRET` | Admin NextAuth |
 | `ADMIN_SEED_EMAIL` | `k.v.polovnikov@gmail.com` (seed script) |
 | `ADMIN_SEED_PASSWORD` | Set locally; never commit |
 | `NEXT_PUBLIC_YANDEX_METRICA_ID` | Analytics (optional MVP) |
 
-**Forbidden at runtime:** `SUPABASE_*`, `STRIPE_*`, `NEXT_PUBLIC_GTM_ID`, `RESEND_API_KEY` (Thailand stack).
+**Blocked credentials:** see `lib/env/validateRussiaEnv.ts` and [03_SECURITY_RULES.md](03_SECURITY_RULES.md).
 
 ## Agent rules of thumb
 
-1. **Inspect code** — much of `lib/supabase/` and Stripe routes are Thailand legacy; Russia MVP uses `lib/db/*` + Postgres.
+1. **Inspect code** — storefront catalog uses `lib/db/*` + Postgres (`POSTGRES_URL`).
 2. **Server recomputes money** — never trust client prices (still applies when YooKassa ships).
-3. **Do not enable Stripe or Thailand Supabase** in this repo's production env.
-4. **Content copy** — use `.cursor/skills/` writers for product/blog text.
-5. **REG.RU FTP/MySQL** — not used; domain DNS points to Vercel.
+3. **Content copy** — use `.cursor/skills/` writers for product/blog text.
+4. **REG.RU FTP/MySQL** — not used; domain DNS points to Vercel.
 
 ## Deep dive (`docs/`)
 

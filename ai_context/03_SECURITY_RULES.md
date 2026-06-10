@@ -8,12 +8,12 @@ At startup, `instrumentation.ts` calls `assertRussiaRuntimeEnv()`. These vars mu
 
 | Forbidden | Reason |
 |-----------|--------|
-| `SUPABASE_*` | Thailand database — use `DATABASE_URL` (Neon/VPS Postgres) |
+| Thailand `SUPABASE_URL` / Postgres URLs | Thailand project ref (`kwbffyojrdjlehdhpptf`) — Russia uses `POSTGRES_URL` from Vercel Supabase |
 | `STRIPE_*` | Thailand payments — YooKassa later |
 | `NEXT_PUBLIC_GTM_ID` | Thailand analytics — use Yandex Metrica |
 | `RESEND_API_KEY` | Thailand email — defer or RU SMTP later |
 
-**Allowed for Russia MVP:** `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN` (this repo's **own** Vercel Blob store), `AUTH_SECRET`, `NEXT_PUBLIC_APP_URL`.
+**Allowed for Russia MVP:** `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN` (this repo's **own** Vercel Blob store), `AUTH_SECRET`, `NEXT_PUBLIC_APP_URL`.
 
 Run `npm run check-isolation` to scan for Thailand domain/IDs in source.
 
@@ -31,7 +31,7 @@ Run `npm run check-isolation` to scan for Thailand domain/IDs in source.
 
 | Secret | Rule |
 |--------|------|
-| `DATABASE_URL` | Server-only. Never `NEXT_PUBLIC_*`. |
+| `POSTGRES_URL` | Server-only. Never `NEXT_PUBLIC_*`. |
 | `BLOB_READ_WRITE_TOKEN` | Server-only. Russia Vercel project Blob only — not Thailand store. |
 | `AUTH_SECRET` | Admin session signing only. |
 | `ADMIN_SEED_PASSWORD` | Local/CI seed only — never commit. |

@@ -1,13 +1,11 @@
 /**
  * Fail fast when Thailand runtime credentials are present.
- * Russia storefront uses Neon/VPS Postgres + this repo's own Vercel Blob — never Thailand Supabase or Stripe.
+ * Russia Supabase on Vercel sets POSTGRES_URL + SUPABASE_URL — only the Thailand project ref is blocked.
  */
 
+const THAILAND_SUPABASE_PROJECT_REF = 'kwbffyojrdjlehdhpptf';
+
 const FORBIDDEN_RUNTIME_VARS = [
-  'SUPABASE_URL',
-  'SUPABASE_SERVICE_ROLE_KEY',
-  'NEXT_PUBLIC_SUPABASE_URL',
-  'NEXT_PUBLIC_SUPABASE_ANON_KEY',
   'STRIPE_SECRET_KEY',
   'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
   'STRIPE_WEBHOOK_SECRET',
@@ -15,11 +13,36 @@ const FORBIDDEN_RUNTIME_VARS = [
   'RESEND_API_KEY',
 ] as const;
 
+const POSTGRES_ENV_KEYS = ['POSTGRES_URL', 'POSTGRES_PRISMA_URL', 'DATABASE_URL'] as const;
+
+function pointsAtThailandSupabase(value: string): boolean {
+  return value.includes(THAILAND_SUPABASE_PROJECT_REF);
+}
+
 export function getForbiddenRuntimeEnvVars(): string[] {
-  return FORBIDDEN_RUNTIME_VARS.filter((name) => {
+  const forbidden = FORBIDDEN_RUNTIME_VARS.filter((name) => {
     const value = process.env[name]?.trim();
     return Boolean(value);
   });
+
+  const supabaseUrl = process.env.SUPABASE_URL?.trim();
+  if (supabaseUrl && pointsAtThailandSupabase(supabaseUrl)) {
+    forbidden.push('SUPABASE_URL');
+  }
+
+  const supabaseAnonUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  if (supabaseAnonUrl && pointsAtThailandSupabase(supabaseAnonUrl)) {
+    forbidden.push('NEXT_PUBLIC_SUPABASE_URL');
+  }
+
+  for (const key of POSTGRES_ENV_KEYS) {
+    const value = process.env[key]?.trim();
+    if (value && pointsAtThailandSupabase(value)) {
+      forbidden.push(key);
+    }
+  }
+
+  return forbidden;
 }
 
 export function assertRussiaRuntimeEnv(): void {
@@ -29,7 +52,7 @@ export function assertRussiaRuntimeEnv(): void {
   const message = [
     '[flower_shop_ru] Refusing to start: Thailand / blocked runtime credentials detected.',
     `Remove or unset: ${forbidden.join(', ')}`,
-    'This repo is isolated from lannabloom.shop — use DATABASE_URL and Russia-only vars from .env.example.',
+    'This repo is isolated from lannabloom.shop — use Russia Supabase (POSTGRES_URL on Vercel) from .env.example.',
   ].join(' ');
 
   throw new Error(message);
