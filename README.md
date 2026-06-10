@@ -1,137 +1,124 @@
-# Lanna Bloom
+# EKB Flowers (`flower-shop-ru`)
 
-A mobile-first flower shop for selling bouquets online. Customers browse the catalog, add items to the cart, and place orders with delivery details; the site generates a shareable order link and a pre-filled message for LINE, WhatsApp, or Telegram.
+Flower and gift delivery storefront for Russia — **[ekb-flowers.ru](https://www.ekb-flowers.ru)**.
 
-# Social
-- **Facebook:** https://www.facebook.com/profile.php?id=61587782069439
-- **Instagram:** https://www.instagram.com/lannabloomchiangmai/
+This repository is **independent** from [lannabloom.shop](https://lannabloom.shop) (Thailand). Do not share env files, Vercel projects, databases, or Blob stores between them.
 
-## Features
+## Status
 
-- **Two languages** — English and Thai via `/en` and `/th` URLs; language switcher in the header
-- **Catalog** — Bouquets from Sanity CMS; categories, product pages with gallery and size selector
-- **Cart & orders** — Add to cart, delivery area and date, contact info; place order → success page with order link and messenger buttons
-- **Order link** — Each order gets a public URL (e.g. `https://yoursite.com/order/LB-2026-xxxx`); stored in Vercel Blob so the link works when opened later
-- **Messenger** — Pre-filled “order via LINE / WhatsApp / Telegram” from product page and cart; contact links in the header
-- **Sanity Studio** — CMS at `/studio` for bouquets and partners; partner registration and dashboard (add/edit bouquets when approved)
-- **Admin** — `/admin`: dashboard with orders, status updates, costs, accounting (income/expenses), and remove (RBAC with NextAuth). Money-flow reference: **docs/ACCOUNTING_AND_EXPENSES.md**.
+| Area | MVP (now) | Later |
+|------|-----------|--------|
+| Hosting | [Vercel](https://vercel.com) Hobby (free) | [Timeweb VPS](docs/deploy-vps.md) when catalog + sales are ready |
+| Database | [Neon](https://neon.tech) Postgres (free) | Postgres on VPS |
+| Images | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) (free tier) | VPS disk `/var/www/catalog/` |
+| Payments | Disabled in UI | YooKassa |
+| Partners / catalog | Partner apply form; catalog grows as partners join | Admin uploads, full catalog |
+
+**Domain:** registered at REG.RU. Point DNS (`@` and `www`) to **Vercel**, not REG.RU shared hosting (FTP/MySQL). See [Deploy](#deploy-to-vercel) below.
+
+## Golden rules
+
+- **Never** deploy this repo to the Thailand Vercel project.
+- **Never** set Thailand runtime credentials — the app refuses to start if it finds `SUPABASE_*`, `STRIPE_*`, or `NEXT_PUBLIC_GTM_ID`. Use this repo's own Vercel Blob store only. See [`.env.example`](.env.example).
+- **Never** write to Thailand Supabase from runtime code. Export scripts are read-only and run locally only.
 
 ## Tech stack
 
-- **Next.js 14** (App Router)
-- **React 18**, **TypeScript**
-- **Sanity** (catalog and partner data)
-- **Vercel Blob** (order storage on Vercel)
-- **CSS** (variables, no framework)
+- **Next.js 14** (App Router), **React 18**, **TypeScript**
+- **PostgreSQL** via `pg` (`DATABASE_URL`)
+- **NextAuth** — admin at `/admin`
+- **Yandex Metrica** (optional, browser only)
 
-## Getting started
+## Local development
 
 ```bash
 npm install
+cp .env.example .env.local   # fill Russia-only variables
+docker compose up postgres -d  # optional: local Postgres
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000); you’ll be redirected to `/en`. Use the header to switch to `/th`.
+Open [http://localhost:3000](http://localhost:3000).
+
+Apply the catalog schema once (Neon SQL editor or local Postgres):
+
+```bash
+# local Docker Postgres example:
+docker compose exec -T postgres psql -U flower -d flower_ru < db/migrations/001_catalog_schema.sql
+```
 
 ### Environment variables
 
-Copy `.env.example` to `.env.local` and set:
+Copy [`.env.example`](.env.example) → `.env.local`. Minimum for MVP:
 
 | Variable | Purpose |
-|---------|---------|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project (required for catalog and Studio) |
-| `NEXT_PUBLIC_SANITY_DATASET` | Usually `production` |
-| `SANITY_API_WRITE_TOKEN` | Sanity API token (partner registration and bouquet uploads) |
-| `NEXT_PUBLIC_APP_URL` | Live site URL for order links (e.g. `https://www.lannabloom.shop`) |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob token (required on Vercel so order links work) |
-| `AUTH_SECRET` | Required for admin login (NextAuth) |
+|----------|---------|
+| `NEXT_PUBLIC_APP_URL` | `https://www.ekb-flowers.ru` |
+| `DATABASE_URL` | Neon or local Postgres connection string |
+| `AUTH_SECRET` | Random 32+ char secret for admin login |
+| `ADMIN_SEED_EMAIL` | `k.v.polovnikov@gmail.com` (first admin user) |
+| `BLOB_READ_WRITE_TOKEN` | Vercel Blob (catalog images on Vercel deploy) |
 
-See `.env.example` for comments. For order-link troubleshooting (e.g. “Order not found”), see **docs/ORDERS_VERCEL.md**.
+Do **not** copy `.env.local` from the Thailand `flower_shop` repo.
 
-## Sanity Studio (CMS)
+## Deploy to Vercel
 
-The app ships with Sanity Studio at **[/studio](http://localhost:3000/studio)** for managing bouquets and partners.
+1. Push this repo to GitHub: [github.com/SuperShot3/flower-shop-ru](https://github.com/SuperShot3/flower-shop-ru)
+2. [Vercel](https://vercel.com) → **Add New Project** → import `flower-shop-ru` (new project, not Thailand).
+3. Add the same env vars as `.env.local` in Vercel → Settings → Environment Variables.
+4. Create a **Neon** database, run `db/migrations/001_catalog_schema.sql`, set `DATABASE_URL`.
+5. Vercel → Storage → **Blob** → connect store → set `BLOB_READ_WRITE_TOKEN`.
+6. Vercel → Settings → **Domains** → add `ekb-flowers.ru` and `www.ekb-flowers.ru`.
+7. In REG.RU DNS, point records to Vercel (values shown in the Domains UI), for example:
 
-1. Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, and `SANITY_API_WRITE_TOKEN` in `.env.local`.
-2. In [sanity.io/manage](https://www.sanity.io/manage) → your project → **API** → **CORS origins**, add `http://localhost:3000` with **Allow credentials** (and your production URL when deployed).
-3. Run `npm run dev` and open [http://localhost:3000/studio](http://localhost:3000/studio).
+   | Type | Host | Value |
+   |------|------|--------|
+   | A | `@` | Vercel A record (e.g. `76.76.21.21`) |
+   | CNAME | `www` | `cname.vercel-dns.com` |
 
-**Bouquet** documents: slug, name (EN/TH), description, composition, category, images, sizes (price, label, description). Only **approved** bouquets appear on the catalog. **Partner** documents are used for the partner registration flow; approve partners in Studio to give them dashboard access.
+8. Set `NEXT_PUBLIC_APP_URL=https://www.ekb-flowers.ru` in Vercel and redeploy.
 
-## Orders and cart
+SSL is issued automatically by Vercel after DNS propagates.
 
-- **Cart** — `/[lang]/cart`: delivery area (Chiang Mai districts), date, contact name and phone, contact method; “Place Order” creates an order and redirects to the success page.
-- **Order link** — Generated after place order (e.g. `https://yoursite.com/order/LB-2026-xxxx`). Set `NEXT_PUBLIC_APP_URL` to your live URL so this link uses the correct domain. Stored in **Vercel Blob**; set `BLOB_READ_WRITE_TOKEN` for Production and Preview so the same store is used and the link works when opened.
-- **Admin** — Open `/admin`, sign in with email/password (seed admin users via `scripts/seed-admin.ts`). See **docs/ORDERS_VERCEL.md** for setup and “Order not found” fixes. Accounting reference: **docs/ACCOUNTING_AND_EXPENSES.md**.
+## One-time migration from Thailand (optional)
 
-## Catalog updates
-
-- **Development** — After changing bouquets in Studio, refresh the catalog page; changes appear immediately.
-- **Production** — Catalog and product pages revalidate every 60 seconds; new or updated bouquets show within about a minute. No rebuild needed for content-only changes.
-
-## Partner registration and dashboard
-
-- **Register** — `/[lang]/partner/register` (link can be hidden from the main nav). Form creates a Partner in Sanity with status `pending_review`.
-- **Dashboard** — `/[lang]/partner/dashboard/[partnerId]` (from success email/link). Approved partners can add and edit bouquets; new bouquets are `pending_review` until approved in Studio.
-
-## Project structure
-
-```
-app/
-  [lang]/           # Locale routes (/en, /th)
-    page.tsx        # Home: Hero + CategoryGrid
-    catalog/        # Catalog grid and product pages
-    cart/           # Cart and place order
-    checkout/confirmation-pending/
-    partner/        # Register and dashboard
-  order/[orderId]/  # Public order details page (no locale)
-  admin/orders/     # Redirects to /admin/orders
-  admin/            # Admin dashboard (orders, overview, RBAC)
-  api/orders/       # Create order, get order (checkout/confirmation-pending)
-  studio/           # Sanity Studio
-components/         # Header, Hero, BouquetCard, ProductOrderBlock, etc.
-lib/
-  i18n.ts           # Translations (EN/TH)
-  sanity.ts         # Sanity read client
-  orders.ts         # Order types and Blob/file storage
-  messenger.ts      # LINE, WhatsApp, Telegram URLs and message builder
-```
-
-## Analytics (GA4 via GTM)
-
-GA4 ecommerce events are pushed from `lib/analytics.ts` into `dataLayer`, and GTM owns transport plus pageviews in production. **Key events** (mark in GA4 Admin → Events):
-
-| Event | Where it fires |
-|-------|----------------|
-| **purchase** | **GA4 revenue (default):** `/{lang}/checkout/complete` (post-Stripe) → `dataLayer` → GTM. Optional server MP documented in `docs/ANALYTICS_GA4.md` |
-| **generate_lead** | Success page after Place Order when the order is still unpaid |
-
-Do **not** mark `contact_click` or `messenger_click` as primary key events. See `docs/ANALYTICS_GA4.md` for the full event inventory, GTM setup, and validation checklist.
-
-## Configuration
-
-- **Messenger (LINE, WhatsApp, Telegram)** — Edit `lib/messenger.ts`: phone number, LINE OA ID and lin.ee link, and (optionally) Facebook page. Header contact icons and “order via” buttons use these.
-- **Translations** — All UI strings are in `lib/i18n.ts` (EN and TH).
-
-## Design
-
-- Soft pastels, cream background, accent gold/beige
-- Typography: DM Sans (UI), Cormorant Garamond (headings)
-- Mobile-first; sticky header with burger menu when scrolled
-
-## Build and deploy
+When you need real bouquet data, run from your Mac only using `.env.export.local` (gitignored):
 
 ```bash
-npm run build
-npm start
+npm run mirror-catalog          # images → data/catalog/
+npm run import-catalog-pg       # rows → Postgres (DATABASE_URL)
 ```
 
-### Deploy to Vercel
+Uses `SUPABASE_EXPORT_*` — never deploy export credentials to Vercel or VPS.
 
-1. Push the repo to GitHub and import the project in [Vercel](https://vercel.com).
-2. Add environment variables (see table above). For orders to work: set `BLOB_READ_WRITE_TOKEN` (Storage → Blob, attach to project; use same token for Production and Preview) and `NEXT_PUBLIC_APP_URL` (your live URL).
-3. In Sanity → API → CORS origins, add your Vercel URL (and custom domain if used) with **Allow credentials** so Studio works.
-4. Optional: add a custom domain in Vercel and set `NEXT_PUBLIC_APP_URL` to that domain.
+## Project layout
 
-For detailed order storage setup and “Order not found” troubleshooting, see **docs/ORDERS_VERCEL.md**.
-# flower-shop-ru
+```
+app/[lang]/          # Storefront (en / th — Russian locale TBD)
+app/admin/           # Staff dashboard
+app/api/             # Route handlers
+lib/db/              # Postgres catalog reads
+lib/catalog/         # Images, mappers, types
+db/migrations/       # SQL schema
+docs/deploy-vps.md   # Future Timeweb VPS runbook
+```
+
+## Scripts
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run check-isolation` | Fail if Thailand env vars are set |
+| `npm run mirror-catalog` | Download Thailand catalog images (local) |
+| `npm run import-catalog-pg` | Import catalog into Postgres |
+
+## Further reading
+
+- [docs/deploy-vps.md](docs/deploy-vps.md) — production on Timeweb VPS (post-MVP)
+- [ai_context/00_START_HERE.md](ai_context/00_START_HERE.md) — agent / developer context
+- [AGENTS.md](AGENTS.md) — where code lives
+
+## License
+
+Private project.
