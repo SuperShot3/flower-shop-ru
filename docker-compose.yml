@@ -1,0 +1,40 @@
+# Production stack for Timeweb VPS — Postgres + Next.js on one server.
+# Usage: docker compose --env-file .env.production up -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-flower}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env.production}
+      POSTGRES_DB: ${POSTGRES_DB:-flower_ru}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '127.0.0.1:5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-flower} -d ${POSTGRES_DB:-flower_ru}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env.production
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-flower}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-flower_ru}
+      CATALOG_STORAGE_DIR: /data/catalog
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - catalog_images:/data/catalog
+
+volumes:
+  pgdata:
+  catalog_images:
