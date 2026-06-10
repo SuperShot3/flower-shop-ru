@@ -62,12 +62,14 @@ async function uploadBufferToVercelBlob(
 ): Promise<string> {
   const { put } = await import('@vercel/blob');
   const blobPath = `catalog/${normalizeStoragePath(storagePath)}`;
+  // @vercel/blob types only declare `access: 'public'`; private stores still accept
+  // `private` at runtime — used for probe errors in assertBlobStoreCompatible().
   const result = await put(blobPath, buffer, {
     access,
     token,
     contentType: guessContentType(storagePath),
     addRandomSuffix: false,
-  });
+  } as Parameters<typeof put>[2]);
   return result.url;
 }
 
@@ -285,7 +287,7 @@ async function main() {
           mapping.publicUrl = blobUrl;
           manifest.stats.uploadedToBlob += 1;
         } catch (blobErr) {
-          manifest.stats.blobFailed += 1;
+          manifest.stats.blobFailed = (manifest.stats.blobFailed ?? 0) + 1;
           mapping.error = blobErr instanceof Error ? blobErr.message : String(blobErr);
           console.error('[mirror-catalog] Blob upload failed:', rel, mapping.error);
         }
@@ -306,7 +308,7 @@ async function main() {
   console.log('[mirror-catalog] Skipped (already local):', manifest.stats.skippedExisting);
   if (shouldUploadBlob) {
     console.log('[mirror-catalog] Uploaded to Vercel Blob:', manifest.stats.uploadedToBlob);
-    if (manifest.stats.blobFailed > 0) {
+    if ((manifest.stats.blobFailed ?? 0) > 0) {
       console.log('[mirror-catalog] Blob upload failed:', manifest.stats.blobFailed);
     }
   }
@@ -314,7 +316,7 @@ async function main() {
 
   if (manifest.stats.failed > 0) {
     process.exitCode = 1;
-  } else if (manifest.stats.blobFailed > 0) {
+  } else if ((manifest.stats.blobFailed ?? 0) > 0) {
     console.warn(
       '[mirror-catalog] Local mirror OK, but Blob upload failed.',
       'Create a Public Blob store in Vercel, update BLOB_READ_WRITE_TOKEN, set BLOB_UPLOAD_ACCESS=public, re-run.',
