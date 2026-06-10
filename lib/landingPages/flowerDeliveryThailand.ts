@@ -1,4 +1,4 @@
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import { MARKETS } from '@/lib/delivery/markets';
 
 export type ThailandServiceArea = {
@@ -72,6 +72,6 @@ const COPY: Record<'en' | 'th', FlowerDeliveryThailandCopy> = {
 };
 
 export function getFlowerDeliveryThailandCopy(lang: Locale): FlowerDeliveryThailandCopy {
-  if (lang === 'th') return COPY.th;
+  if (isThaiLocale(lang)) return COPY.th;
   return COPY.en;
 }

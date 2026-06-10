@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isValidLocale(params.lang)) return { title: 'Terms of Service' };
   const lang = params.lang as Locale;
-  return { title: lang === 'th' ? 'ข้อกำหนดการให้บริการ | Lanna Bloom' : 'Terms of Service | Lanna Bloom' };
+  return { title: isThaiLocale(lang) ? 'ข้อกำหนดการให้บริการ | Lanna Bloom' : 'Terms of Service | Lanna Bloom' };
 }
 
 export default function TermsPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
   if (!isValidLocale(lang)) notFound();
   const locale = lang as Locale;
-  const isTh = locale === 'th';
+  const isTh = isThaiLocale(locale);
 
   return (
     <div className="container py-10">

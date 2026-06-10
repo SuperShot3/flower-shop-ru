@@ -12,7 +12,8 @@ import { Chips } from '@/components/partner/Chips';
 import { Btn } from '@/components/partner/Btn';
 import { SecTitle } from '@/components/partner/SecTitle';
 import Link from 'next/link';
-import { translations } from '@/lib/i18n';
+import { PRIMARY_SERVICE_CITY_EN } from '@/lib/market/defaultCity';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import { CATEGORY_OPTIONS, PREP_TIME_OPTIONS } from '@/lib/partnerPortal';
 import type { Locale } from '@/lib/i18n';
 
@@ -140,14 +141,14 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
 
   const prepOptions = PREP_TIME_OPTIONS.map((p) => ({
     value: p.value,
-    label: lang === 'th' ? p.labelTh : p.labelEn,
+    label: isThaiLocale(lang) ? p.labelTh : p.labelEn,
   }));
 
   const chipOptions = useMemo(
     () =>
       CATEGORY_OPTIONS.map((c) => ({
         value: c.value,
-        label: lang === 'th' ? c.labelTh : c.labelEn,
+        label: isThaiLocale(lang) ? c.labelTh : c.labelEn,
         icon: c.icon,
       })),
     [lang]
@@ -241,16 +242,21 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
         <div className="partner-apply-hero">
           <div className="partner-apply-hero-badge">LANNA BLOOM × PARTNER</div>
           <h1 className="partner-apply-hero-title">
-            {lang === 'th' ? 'ร่วมเป็น Partner กับ Lanna Bloom 🌸' : 'Become a Partner with Lanna Bloom 🌸'}
+            {isThaiLocale(lang) ? 'ร่วมเป็น Partner กับ Lanna Bloom 🌸' : 'Become a Partner with Lanna Bloom 🌸'}
           </h1>
           <p className="partner-apply-hero-how-link">
             <Link href={`/${lang}/partner/how-it-works`}>{hiw.applyHeroLink}</Link>
           </p>
           <div className="partner-apply-hero-benefits">
             {[
-              ['🛒', lang === 'th' ? 'รับออเดอร์จากลูกค้าในเชียงใหม่' : 'Receive orders from Chiang Mai customers'],
-              ['📦', lang === 'th' ? 'เราช่วยจัดการระบบให้' : 'Platform-managed logistics & payments'],
-              ['💬', lang === 'th' ? 'ติดต่อง่ายผ่าน LINE ตลอด' : 'Always connected via LINE support'],
+              [
+                '🛒',
+                isThaiLocale(lang)
+                  ? `รับออเดอร์จากลูกค้าใน${PRIMARY_SERVICE_CITY_EN}`
+                  : `Receive orders from ${PRIMARY_SERVICE_CITY_EN} customers`,
+              ],
+              ['📦', isThaiLocale(lang) ? 'เราช่วยจัดการระบบให้' : 'Platform-managed logistics & payments'],
+              ['💬', isThaiLocale(lang) ? 'ติดต่อง่ายผ่าน LINE ตลอด' : 'Always connected via LINE support'],
             ].map(([icon, text]) => (
               <div key={text} className="partner-apply-hero-row">
                 <span className="partner-apply-hero-icon">{icon}</span>
@@ -270,9 +276,9 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
 
         {step === 0 && (
           <>
-            <SecTitle lang={lang} th={lang === 'th' ? 'ข้อมูลติดต่อ' : 'Contact Information'} en="Contact Information" />
-            <Inp label={t.shopName} sub={lang === 'th' ? 'ชื่อที่แสดงในระบบ' : 'Display name'} placeholder={lang === 'th' ? 'เช่น ร้านดอกไม้มาลี' : 'e.g. Mali Flower Shop'} value={f.shopName} onChange={(v) => u('shopName', v)} required />
-            <Inp label={t.contactName} placeholder={lang === 'th' ? 'ชื่อ-นามสกุล' : 'Full name'} value={f.contactName} onChange={(v) => u('contactName', v)} required />
+            <SecTitle lang={lang} th={isThaiLocale(lang) ? 'ข้อมูลติดต่อ' : 'Contact Information'} en="Contact Information" />
+            <Inp label={t.shopName} sub={isThaiLocale(lang) ? 'ชื่อที่แสดงในระบบ' : 'Display name'} placeholder={isThaiLocale(lang) ? 'เช่น ร้านดอกไม้มาลี' : 'e.g. Mali Flower Shop'} value={f.shopName} onChange={(v) => u('shopName', v)} required />
+            <Inp label={t.contactName} placeholder={isThaiLocale(lang) ? 'ชื่อ-นามสกุล' : 'Full name'} value={f.contactName} onChange={(v) => u('contactName', v)} required />
             <Inp label={t.email} type="email" placeholder="email@example.com" value={f.email} onChange={(v) => u('email', v)} required />
             <Inp label={t.lineId} placeholder="@lineid" value={f.lineId} onChange={(v) => u('lineId', v)} required />
             <Inp label={t.phone} type="tel" placeholder="08X-XXX-XXXX" value={f.phone} onChange={(v) => u('phone', v)} required />
@@ -283,18 +289,18 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
 
         {step === 1 && (
           <>
-            <SecTitle lang={lang} th={lang === 'th' ? 'สถานที่และการจัดส่ง' : 'Location & Delivery'} en="Location & Delivery" />
-            <Tx label={t.address} hint={t.addressHint} placeholder={lang === 'th' ? 'บ้านเลขที่ ซอย ถนน ตำบล' : 'Street, building, district'} value={f.address} onChange={(v) => u('address', v)} required rows={3} />
+            <SecTitle lang={lang} th={isThaiLocale(lang) ? 'สถานที่และการจัดส่ง' : 'Location & Delivery'} en="Location & Delivery" />
+            <Tx label={t.address} hint={t.addressHint} placeholder={isThaiLocale(lang) ? 'บ้านเลขที่ ซอย ถนน ตำบล' : 'Street, building, district'} value={f.address} onChange={(v) => u('address', v)} required rows={3} />
             <Toggle label={t.selfDeliver} sub={t.selfDeliverSub} value={f.selfDeliver} onChange={(v) => u('selfDeliver', v)} />
             {f.selfDeliver && (
               <div className="partner-apply-delivery-extra">
-                <Tx label={t.deliveryZones} hint={t.deliveryZonesHint} placeholder={lang === 'th' ? 'เช่น นิมมาน, เมือง, สันกำแพง' : 'e.g. Nimman, Mueang, Hang Dong'} value={f.deliveryZones} onChange={(v) => u('deliveryZones', v)} rows={3} />
-                <Tx label={t.deliveryFee} hint={t.deliveryFeeHint} placeholder={lang === 'th' ? 'อธิบายนโยบายจัดส่ง...' : 'Explain your delivery policy...'} value={f.deliveryFee} onChange={(v) => u('deliveryFee', v)} rows={3} />
+                <Tx label={t.deliveryZones} hint={t.deliveryZonesHint} placeholder={isThaiLocale(lang) ? 'เช่น นิมมาน, เมือง, สันกำแพง' : 'e.g. Nimman, Mueang, Hang Dong'} value={f.deliveryZones} onChange={(v) => u('deliveryZones', v)} rows={3} />
+                <Tx label={t.deliveryFee} hint={t.deliveryFeeHint} placeholder={isThaiLocale(lang) ? 'อธิบายนโยบายจัดส่ง...' : 'Explain your delivery policy...'} value={f.deliveryFee} onChange={(v) => u('deliveryFee', v)} rows={3} />
               </div>
             )}
             {!f.selfDeliver && (
               <div className="partner-apply-platform-note">
-                📦 {lang === 'th' ? 'ใช้ระบบจัดส่งของ Lanna Bloom' : "Lanna Bloom handles delivery"}
+                📦 {isThaiLocale(lang) ? 'ใช้ระบบจัดส่งของ Lanna Bloom' : "Lanna Bloom handles delivery"}
               </div>
             )}
           </>
@@ -304,7 +310,7 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
           <>
             <SecTitle
               lang={lang}
-              th={lang === 'th' ? 'สิ่งที่คุณวางแผนจะขายบน Lanna Bloom' : 'What you plan to sell on Lanna Bloom'}
+              th={isThaiLocale(lang) ? 'สิ่งที่คุณวางแผนจะขายบน Lanna Bloom' : 'What you plan to sell on Lanna Bloom'}
               en="What you plan to sell on Lanna Bloom"
             />
             <div className="partner-apply-chip-label">
@@ -361,11 +367,11 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
 
         {step === 3 && (
           <>
-            <SecTitle lang={lang} th={lang === 'th' ? 'ตัวอย่างผลงาน' : 'Portfolio Samples'} en="Portfolio Samples" />
-            <Tx label={t.portfolioLinks} hint={t.samplePhotosHint} placeholder={lang === 'th' ? 'https://instagram.com/... หรือ https://drive.google.com/...' : 'https://instagram.com/... or https://drive.google.com/...'} value={f.portfolioLinks} onChange={(v) => u('portfolioLinks', v)} rows={3} />
-            <Tx label={t.experienceNote} hint={t.experienceNoteHint} placeholder={lang === 'th' ? 'เล่าเกี่ยวกับร้านของคุณ ความเชี่ยวชาญ ประสบการณ์...' : 'Tell us about your shop, expertise, experience...'} value={f.experienceNote} onChange={(v) => u('experienceNote', v)} rows={4} />
+            <SecTitle lang={lang} th={isThaiLocale(lang) ? 'ตัวอย่างผลงาน' : 'Portfolio Samples'} en="Portfolio Samples" />
+            <Tx label={t.portfolioLinks} hint={t.samplePhotosHint} placeholder={isThaiLocale(lang) ? 'https://instagram.com/... หรือ https://drive.google.com/...' : 'https://instagram.com/... or https://drive.google.com/...'} value={f.portfolioLinks} onChange={(v) => u('portfolioLinks', v)} rows={3} />
+            <Tx label={t.experienceNote} hint={t.experienceNoteHint} placeholder={isThaiLocale(lang) ? 'เล่าเกี่ยวกับร้านของคุณ ความเชี่ยวชาญ ประสบการณ์...' : 'Tell us about your shop, expertise, experience...'} value={f.experienceNote} onChange={(v) => u('experienceNote', v)} rows={4} />
             <div className="partner-apply-submit-note">
-              🙏 {lang === 'th' ? 'กดส่งเพื่อให้ทีม Lanna Bloom ตรวจสอบใบสมัครของคุณ' : 'Submit to send your application for review. We will contact you on LINE.'}
+              🙏 {isThaiLocale(lang) ? 'กดส่งเพื่อให้ทีม Lanna Bloom ตรวจสอบใบสมัครของคุณ' : 'Submit to send your application for review. We will contact you on LINE.'}
             </div>
           </>
         )}
@@ -380,7 +386,7 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
             <Btn onClick={goNext}>{t.next} →</Btn>
           ) : (
             <Btn variant="rose" onClick={() => handleSubmit()} disabled={submitting}>
-              {submitting ? (lang === 'th' ? 'กำลังส่ง…' : 'Submitting…') : `${t.submit} 🌸`}
+              {submitting ? (isThaiLocale(lang) ? 'กำลังส่ง…' : 'Submitting…') : `${t.submit} 🌸`}
             </Btn>
           )}
         </div>

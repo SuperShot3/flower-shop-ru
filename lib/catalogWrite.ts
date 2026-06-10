@@ -18,6 +18,7 @@ import {
   uploadBufferToCatalog,
 } from '@/lib/catalog/storage';
 import { getSupabaseAdmin } from '@/lib/supabase/server';
+import { PRIMARY_SERVICE_CITY_EN } from '@/lib/market/defaultCity';
 
 export type { CatalogStoredImage };
 export type CatalogImageUploadInput = CatalogStoredImage;
@@ -119,7 +120,6 @@ export async function uploadCatalogProductImages(files: {
   alt?: string;
   prefix?: string;
 }): Promise<CatalogImageUploadInput[]> {
-  const supabase = requireSupabase();
   const prefix = files.prefix ?? `products/${randomUUID()}`;
   const webpPath = `${prefix}/primary.webp`;
   const pngPath = `${prefix}/master.png`;
@@ -128,18 +128,18 @@ export async function uploadCatalogProductImages(files: {
   const pngBuffer = Buffer.from(await files.pngMaster.arrayBuffer());
 
   await Promise.all([
-    uploadBufferToCatalog(supabase, webpPath, webpBuffer, 'image/webp'),
-    uploadBufferToCatalog(supabase, pngPath, pngBuffer, 'image/png'),
+    uploadBufferToCatalog(webpPath, webpBuffer, 'image/webp'),
+    uploadBufferToCatalog(pngPath, pngBuffer, 'image/png'),
   ]);
 
   return [
-    buildCatalogImageRecord(supabase, webpPath, {
+    buildCatalogImageRecord(webpPath, {
       format: 'webp',
       is_primary: true,
       alt: files.alt,
       sort_order: 0,
     }),
-    buildCatalogImageRecord(supabase, pngPath, {
+    buildCatalogImageRecord(pngPath, {
       format: 'png_master',
       is_primary: false,
       alt: files.alt,
@@ -158,7 +158,7 @@ export async function createCatalogPartner(input: CreateCatalogPartnerInput): Pr
       phone_number: input.phoneNumber.trim(),
       line_or_whatsapp: input.lineOrWhatsapp?.trim() || null,
       shop_address: input.shopAddress?.trim() || null,
-      city: (input.city || 'Chiang Mai').trim(),
+      city: (input.city || PRIMARY_SERVICE_CITY_EN).trim(),
       status: input.supabaseUserId ? 'approved' : 'pending_review',
       supabase_user_id: input.supabaseUserId?.trim() || null,
       legacy_sanity_id: input.legacySanityId ?? null,
@@ -181,7 +181,7 @@ export async function updateCatalogPartnerProfile(
       phone_number: input.phoneNumber.trim(),
       line_or_whatsapp: input.lineOrWhatsapp?.trim() || null,
       shop_address: input.shopAddress?.trim() || null,
-      city: input.city?.trim() || 'Chiang Mai',
+      city: input.city?.trim() || PRIMARY_SERVICE_CITY_EN,
       shop_bio_en: input.shopBioEn?.trim() || null,
       shop_bio_th: input.shopBioTh?.trim() || null,
       updated_at: new Date().toISOString(),
@@ -426,7 +426,7 @@ export async function upsertCatalogSiteSettings(input: {
 
 /** Resolve public URL for a catalog storage path (server-side helper). */
 export function getCatalogStoragePublicUrl(storagePath: string): string {
-  return catalogPublicUrl(requireSupabase(), storagePath);
+  return catalogPublicUrl(storagePath);
 }
 
 export { CATALOG_BUCKET };
@@ -496,10 +496,7 @@ export type UpdateCatalogProductByAdminInput = {
   adminLastEditedBy?: string | null;
 };
 
-function writeImagesToStored(
-  supabase: ReturnType<typeof requireSupabase>,
-  images: CatalogWriteImageInput[]
-): CatalogStoredImage[] {
+function writeImagesToStored(images: CatalogWriteImageInput[]): CatalogStoredImage[] {
   const primaryFirst = [...images]
     .filter((image) => image.assetId.trim())
     .filter((image) =>
@@ -511,7 +508,7 @@ function writeImagesToStored(
     .sort((a, b) => Number(b.isPrimary === true) - Number(a.isPrimary === true));
 
   return primaryFirst.slice(0, 20).map((image, index) =>
-    buildCatalogImageRecord(supabase, image.assetId.trim(), {
+    buildCatalogImageRecord(image.assetId.trim(), {
       format: image.format === 'webp' || image.format === 'png_master' ? image.format : undefined,
       is_primary: image.isPrimary === true,
       alt: image.alt?.trim() || undefined,
@@ -560,7 +557,7 @@ export async function ensureCatalogSystemPartner(): Promise<string> {
       shop_name: 'Lanna Bloom',
       contact_name: 'Catalog',
       phone_number: '0000000000',
-      city: 'Chiang Mai',
+      city: PRIMARY_SERVICE_CITY_EN,
       status: 'approved',
     })
     .select('id')
@@ -576,7 +573,7 @@ export async function createAdminReviewBouquetInCatalog(
   const supabase = requireSupabase();
   const slug = await ensureUniqueCatalogSlug(input.slug || input.nameEn);
   const price = Math.max(0, Number(input.price));
-  const images = writeImagesToStored(supabase, input.images);
+  const images = writeImagesToStored(input.images);
   const occasion = input.occasion?.filter((value) => value.trim()) ?? [];
 
   const { data, error } = await supabase
@@ -631,7 +628,7 @@ export async function createAdminReviewProductInCatalog(
   const partnerId = await ensureCatalogSystemPartner();
   const slug = await ensureUniqueCatalogSlug(input.slug || input.nameEn || 'product');
   const price = Math.max(0, Number(input.price));
-  const images = writeImagesToStored(supabase, input.images);
+  const images = writeImagesToStored(input.images);
   const occasion = input.occasion?.find((value) => value.trim());
   const customAttributes = (input.customAttributes ?? [])
     .filter((attribute) => attribute.key.trim() && attribute.value.trim())
@@ -685,7 +682,7 @@ export async function appendCatalogBouquetImage(
   const existing = (row.images ?? []) as CatalogStoredImage[];
   const next = [
     ...existing,
-    ...writeImagesToStored(supabase, [{ ...image, isPrimary: false }]),
+    ...writeImagesToStored([{ ...image, isPrimary: false }]),
   ];
 
   const { error } = await supabase

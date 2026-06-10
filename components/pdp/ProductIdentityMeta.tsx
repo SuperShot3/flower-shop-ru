@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { translations, type Locale } from '@/lib/i18n';
+import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import styles from './product-pdp.module.css';
 
 type ProductIdentityMetaProps = {
@@ -23,7 +23,7 @@ export function ProductIdentityMeta({
 
   if (!showReviews && !showPopular) return null;
 
-  const reviewLabel = `${reviewAverage.toFixed(1)} · ${reviewCount.toLocaleString(lang === 'th' ? 'th-TH' : 'en-US')} ${tReviews.reviewsCount}`;
+  const reviewLabel = `${reviewAverage.toFixed(1)} · ${reviewCount.toLocaleString(isThaiLocale(lang) ? 'th-TH' : 'en-US')} ${tReviews.reviewsCount}`;
 
   return (
     <div className={styles.identityMeta}>

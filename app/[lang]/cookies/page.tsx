@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isValidLocale(params.lang)) return { title: 'Cookie Policy' };
   const lang = params.lang as Locale;
-  return { title: lang === 'th' ? 'นโยบายคุกกี้ | Lanna Bloom' : 'Cookie Policy | Lanna Bloom' };
+  return { title: isThaiLocale(lang) ? 'นโยบายคุกกี้ | Lanna Bloom' : 'Cookie Policy | Lanna Bloom' };
 }
 
 export default function CookiePolicyPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
   if (!isValidLocale(lang)) notFound();
   const locale = lang as Locale;
-  const isTh = locale === 'th';
+  const isTh = isThaiLocale(locale);
 
   return (
     <div className="container py-10">

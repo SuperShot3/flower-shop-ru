@@ -45,14 +45,11 @@ function cleanTextArray(values: string[] | undefined): string[] {
   return (values ?? []).map((value) => value.trim()).filter(Boolean);
 }
 
-function imageRowToStoredImage(
-  supabase: ReturnType<typeof requireSupabase>,
-  row: CatalogProductImageRow
-): CatalogStoredImage {
+function imageRowToStoredImage(row: CatalogProductImageRow): CatalogStoredImage {
   const format = typeof row.metadata?.format === 'string' ? row.metadata.format : undefined;
   return {
     storage_path: row.storage_path,
-    public_url: row.public_url?.trim() || catalogPublicUrl(supabase, row.storage_path),
+    public_url: row.public_url?.trim() || catalogPublicUrl(row.storage_path),
     alt: row.alt_en ?? undefined,
     format: format === 'webp' || format === 'png_master' || format === 'source' ? format : undefined,
     is_primary: row.is_primary,
@@ -210,7 +207,7 @@ export async function createCatalogProductImage(
       entity_id: input.entityId ?? null,
       revision_id: input.revisionId ?? null,
       storage_path: storagePath,
-      public_url: cleanText(input.publicUrl) ?? catalogPublicUrl(supabase, storagePath),
+      public_url: cleanText(input.publicUrl) ?? catalogPublicUrl(storagePath),
       source_type: input.sourceType ?? 'uploaded',
       original_image_id: input.originalImageId ?? null,
       alt_en: cleanText(input.altEn),
@@ -366,7 +363,7 @@ export async function ensureCatalogProductImagesFromInline(
     entity_id: entityId,
     revision_id: null,
     storage_path: image.storage_path.trim(),
-    public_url: image.public_url ?? catalogPublicUrl(supabase, image.storage_path.trim()),
+    public_url: image.public_url ?? catalogPublicUrl(image.storage_path.trim()),
     source_type: 'migrated_from_sanity' as CatalogImageSourceType,
     alt_en: cleanText(image.alt),
     alt_th: null,
@@ -418,7 +415,7 @@ function mergeBouquetImagesForInlineSync(
   ordered.push(...bouquetLevel);
 
   return ordered.map((row, index) => ({
-    ...imageRowToStoredImage(supabase, row),
+    ...imageRowToStoredImage(row),
     is_primary: index === 0,
     sort_order: index,
   }));
@@ -439,13 +436,13 @@ export async function syncCatalogProductInlineImagesFromNormalized(
   if (entityType === 'bouquet') {
     const mainRows = storefrontRows.filter((row) => !getCatalogImageVariantKey(row));
     inlineImages = mainRows.map((row, index) => ({
-      ...imageRowToStoredImage(supabase, row),
+      ...imageRowToStoredImage(row),
       is_primary: index === 0,
       sort_order: index,
     }));
   } else {
     inlineImages = storefrontRows.map((row, index) => ({
-      ...imageRowToStoredImage(supabase, row),
+      ...imageRowToStoredImage(row),
       is_primary: index === 0,
       sort_order: index,
     }));

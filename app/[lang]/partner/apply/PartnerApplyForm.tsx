@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { applyPartnerAction } from './actions';
+import { PRIMARY_SERVICE_CITY_EN } from '@/lib/market/defaultCity';
 import { translations } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 
@@ -49,7 +50,7 @@ export function PartnerApplyForm({ lang }: { lang: Locale }) {
       </label>
       <label>
         {t.city}
-        <input type="text" name="city" defaultValue="Chiang Mai" autoComplete="address-level2" />
+        <input type="text" name="city" defaultValue={PRIMARY_SERVICE_CITY_EN} autoComplete="address-level2" readOnly />
       </label>
       <button type="submit" className="partner-submit">
         {t.submit}

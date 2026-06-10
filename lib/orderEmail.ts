@@ -12,7 +12,7 @@ import { formatInternationalPhoneAdmin } from '@/lib/admin/orderSummaryPlainText
 import { formatShopDateTime } from '@/lib/shopTime';
 import { buildOrderTemplateVariables } from '@/lib/email/variablesFromOrder';
 import { getDefaultSocialLinks, getEmailBrandHeaderHtml, getSocialFooterHtml } from '@/lib/email/socialFooter';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 /** Primary + CC addresses for order admin emails, deduped. */
 function getOrderNotifyRecipientList(): string[] {
@@ -323,7 +323,7 @@ export async function sendCustomerPaymentFailedEmail(
   const safeOrderId = escapeHtml(order.orderId);
   const greetName = order.customerName?.trim() ? escapeHtml(order.customerName.trim()) : null;
 
-  const isTh = lang === 'th';
+  const isTh = isThaiLocale(lang);
   const subject = isTh
     ? `การชำระเงินสำหรับคำสั่งซื้อ ${order.orderId} ยังไม่สำเร็จ — Lanna Bloom`
     : `Payment didn't complete for order ${order.orderId} — Lanna Bloom`;

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { isThaiLocale } from '@/lib/i18n';
 import type { ArticleMeta } from './_data/articles';
 import { getArticleTitle, getArticleExcerpt } from './_data/articles';
 import { ShareButton } from '@/components/ShareButton';
@@ -22,11 +23,11 @@ export function InfoCard({
   const fullUrl = `${baseUrl}${href}`;
   const title = getArticleTitle(article, lang);
   const excerpt = getArticleExcerpt(article, lang);
-  const readLabel = lang === 'th' ? 'อ่านต่อ →' : 'Read →';
+  const readLabel = isThaiLocale(lang) ? 'อ่านต่อ →' : 'Read →';
 
   const formatDate = (iso: string) => {
     const d = new Date(iso);
-    return d.toLocaleDateString(lang === 'th' ? 'th-TH' : 'en-US', {
+    return d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric',

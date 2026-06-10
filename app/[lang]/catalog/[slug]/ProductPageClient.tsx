@@ -7,7 +7,7 @@ import { ProductAboutSection } from '@/components/pdp/ProductAboutSection';
 import { ProductShareLink } from '@/components/ProductShareLink';
 import type { Bouquet } from '@/lib/bouquets';
 import type { CatalogProduct } from '@/lib/sanity';
-import { translations, type Locale } from '@/lib/i18n';
+import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import { trackViewItem } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
 import { CatalogDiscountBadge } from '@/components/CatalogDiscountBadge';
@@ -70,7 +70,7 @@ export function ProductPageClient({
   const compositionLine = getCompositionSingleLine(compositionText);
 
   useEffect(() => {
-    const itemName = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+    const itemName = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
     const price = bouquet.sizes?.[0]?.price ?? 0;
     const sizeLabel = bouquet.sizes?.[0]?.label;
     trackViewItem({

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getBaseUrl } from '@/lib/orders';
-import { isValidLocale, locales, type Locale } from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import {
   getFlowerDeliveryThailandCopy,
   getThailandServiceAreas,
@@ -44,7 +44,7 @@ export default function FlowerDeliveryThailandPage({
   const lang = params.lang as Locale;
   const copy = getFlowerDeliveryThailandCopy(lang);
   const areas = getThailandServiceAreas();
-  const isTh = lang === 'th';
+  const isTh = isThaiLocale(lang);
 
   return (
     <div className="guide-page">

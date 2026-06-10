@@ -1,3 +1,4 @@
+import { isThaiLocale } from '@/lib/i18n';
 import type { Bouquet } from '@/lib/bouquets';
 import { getBaseUrl } from '@/lib/orders';
 
@@ -23,8 +24,8 @@ export function buildBouquetProductJsonLd(
   pageUrl: string
 ): Record<string, unknown> {
   const base = getBaseUrl();
-  const name = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
-  const description = (lang === 'th' ? bouquet.descriptionTh : bouquet.descriptionEn).trim().slice(0, 500);
+  const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+  const description = (isThaiLocale(lang) ? bouquet.descriptionTh : bouquet.descriptionEn).trim().slice(0, 500);
   const images = productImages(bouquet, base);
 
   return {

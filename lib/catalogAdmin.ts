@@ -20,7 +20,7 @@ import {
   getCatalogProductImagesForRevision,
 } from '@/lib/catalogCms';
 import { catalogImageFormat, isStorefrontCatalogImage } from '@/lib/catalog/storefrontImages';
-import { storedImagePublicUrl } from '@/lib/catalog/storage';
+import { catalogPublicUrl, storedImagePublicUrl } from '@/lib/catalog/storage';
 import type {
   AdminCatalogProductImage,
   CatalogBouquetRow,
@@ -93,13 +93,12 @@ export async function resolveCatalogBouquetId(idOrLegacy: string): Promise<strin
 }
 
 function indexImageUrl(
-  supabase: ReturnType<typeof requireSupabase>,
   images: CatalogProductRow['images'] | CatalogBouquetRow['images']
 ): string | undefined {
   const list = (images ?? []).filter((image) => isStorefrontCatalogImage(image));
   const primary = list.find((i) => i.is_primary) ?? list[0];
   if (!primary?.storage_path) return undefined;
-  return storedImagePublicUrl(supabase, primary);
+  return storedImagePublicUrl(primary);
 }
 
 /** Slim catalog list for the admin products studio shelf. */
@@ -136,7 +135,7 @@ export async function getAdminCatalogIndex(): Promise<AdminCatalogIndex> {
     nameEn: row.name_en,
     slug: row.slug_en,
     status: row.status,
-    imageUrl: indexImageUrl(supabase, row.images),
+    imageUrl: indexImageUrl(row.images),
     isPending: row.status === 'pending_review',
     hasDraft: bouquetDrafts.has(row.id),
   }));
@@ -151,7 +150,7 @@ export async function getAdminCatalogIndex(): Promise<AdminCatalogIndex> {
     slug: row.slug_en,
     status: row.moderation_status,
     category: row.category,
-    imageUrl: indexImageUrl(supabase, row.images),
+    imageUrl: indexImageUrl(row.images),
     isPending: row.moderation_status === 'submitted',
     hasDraft: productDrafts.has(row.id),
   }));
@@ -180,7 +179,7 @@ export async function getCatalogBouquetDetailForAdmin(
 
   const row = data as CatalogBouquetRow;
   const partner = await loadPartner(row.partner_id);
-  const mapped = mapBouquetRowToBouquet(supabase, row, partner);
+  const mapped = mapBouquetRowToBouquet(row, partner);
 
   const draft = await getActiveCatalogDraft('bouquet', row.id);
 
@@ -191,7 +190,7 @@ export async function getCatalogBouquetDetailForAdmin(
       : await ensureCatalogProductImagesFromInline('bouquet', row.id);
     editableImages = imageRows
       .filter(isGalleryCatalogImageRow)
-      .map((imageRow) => mapAdminImageRow(supabase, imageRow));
+      .map((imageRow) => mapAdminImageRow(imageRow));
   } catch (err) {
     console.error('[catalogAdmin] Failed to load editable bouquet images:', err);
   }
@@ -245,7 +244,7 @@ export async function getCatalogBouquetByIdForAdmin(idOrLegacy: string): Promise
 
   const row = data as CatalogBouquetRow;
   const partner = await loadPartner(row.partner_id);
-  return mapBouquetRowToBouquet(supabase, row, partner);
+  return mapBouquetRowToBouquet(row, partner);
 }
 
 async function mapBouquetRowsToBouquets(rows: CatalogBouquetRow[]): Promise<Bouquet[]> {
@@ -266,7 +265,6 @@ async function mapBouquetRowsToBouquets(rows: CatalogBouquetRow[]): Promise<Bouq
 
   return rows.map((row) =>
     mapBouquetRowToBouquet(
-      supabase,
       row,
       row.partner_id ? partnerMap.get(row.partner_id) ?? null : null
     )
@@ -297,11 +295,11 @@ export async function getAllBouquetsFromCatalog(): Promise<Bouquet[]> {
   return mapBouquetRowsToBouquets((data ?? []) as CatalogBouquetRow[]);
 }
 
-function primaryImageUrl(supabase: ReturnType<typeof requireSupabase>, row: CatalogProductRow): string | undefined {
+function primaryImageUrl(row: CatalogProductRow): string | undefined {
   const images = (row.images ?? []).filter((image) => isStorefrontCatalogImage(image));
   const primary = images.find((i) => i.is_primary) ?? images[0];
   if (!primary?.storage_path) return undefined;
-  return storedImagePublicUrl(supabase, primary);
+  return storedImagePublicUrl(primary);
 }
 
 function imageFormatFromRow(
@@ -314,13 +312,10 @@ function isGalleryCatalogImageRow(row: CatalogProductImageRow): boolean {
   return isStorefrontCatalogImage({ storage_path: row.storage_path, metadata: row.metadata });
 }
 
-function mapAdminImageRow(
-  supabase: ReturnType<typeof requireSupabase>,
-  row: CatalogProductImageRow
-): AdminCatalogProductImage {
+function mapAdminImageRow(row: CatalogProductImageRow): AdminCatalogProductImage {
   return {
     id: row.id,
-    url: row.public_url?.trim() || supabase.storage.from('catalog').getPublicUrl(row.storage_path).data.publicUrl,
+    url: row.public_url?.trim() || catalogPublicUrl(row.storage_path),
     storagePath: row.storage_path,
     sourceType: row.source_type,
     altEn: row.alt_en ?? '',
@@ -349,7 +344,7 @@ export async function getPendingProductsFromCatalog(): Promise<ModerationProduct
     price: Number(row.price),
     partnerId: row.partner_id,
     moderationStatus: row.moderation_status,
-    imageUrl: primaryImageUrl(supabase, row),
+    imageUrl: primaryImageUrl(row),
   }));
 }
 
@@ -370,7 +365,7 @@ export async function getAllProductsFromCatalog(): Promise<Array<ModerationProdu
     price: Number(row.price),
     partnerId: row.partner_id,
     moderationStatus: row.moderation_status,
-    imageUrl: primaryImageUrl(supabase, row),
+    imageUrl: primaryImageUrl(row),
   }));
 }
 
@@ -412,7 +407,7 @@ export async function getCatalogProductByIdForAdmin(
   if (!data) return null;
 
   const row = data as CatalogProductRow;
-  const mapped = mapProductRowToCatalogProduct(supabase, row);
+  const mapped = mapProductRowToCatalogProduct(row);
   const overrides = row.admin_overrides;
   const draft = await getActiveCatalogDraft('product', row.id);
 
@@ -423,7 +418,7 @@ export async function getCatalogProductByIdForAdmin(
       : await ensureCatalogProductImagesFromInline('product', row.id);
     editableImages = imageRows
       .filter(isGalleryCatalogImageRow)
-      .map((imageRow) => mapAdminImageRow(supabase, imageRow));
+      .map((imageRow) => mapAdminImageRow(imageRow));
   } catch (error) {
     console.error('[catalogAdmin] Failed to load editable product images:', error);
   }
@@ -474,12 +469,11 @@ export type AdminHeroSettings = {
 };
 
 function mapStoredHeroImage(
-  supabase: ReturnType<typeof requireSupabase>,
   image: CatalogStoredImage | null | undefined
 ): { url: string | null; storagePath: string | null } {
   if (!image?.storage_path) return { url: null, storagePath: null };
   return {
-    url: storedImagePublicUrl(supabase, image),
+    url: storedImagePublicUrl(image),
     storagePath: image.storage_path,
   };
 }
@@ -495,13 +489,13 @@ export async function getCatalogSiteSettingsForAdmin(): Promise<AdminHeroSetting
   if (error) throw new Error(error.message);
 
   const row = data as Pick<CatalogSiteSettingsRow, 'hero_image' | 'hero_carousel_images'> | null;
-  const hero = mapStoredHeroImage(supabase, row?.hero_image);
+  const hero = mapStoredHeroImage(row?.hero_image);
   const carousel = ((row?.hero_carousel_images ?? []) as CatalogStoredImage[])
     .filter((img) => img.storage_path)
     .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
     .map((img, index) => ({
       storagePath: img.storage_path,
-      url: storedImagePublicUrl(supabase, img),
+      url: storedImagePublicUrl(img),
       alt: img.alt?.trim() ?? '',
       sortOrder: img.sort_order ?? index,
     }));

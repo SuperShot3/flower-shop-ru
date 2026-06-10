@@ -3,7 +3,7 @@
  * Customer-facing copy lives in `label` — never rely on optionId for display.
  */
 
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 /** Legacy Sanity size keys; optional on hybrid options for cart backward compat */
 export type SizeKey = 's' | 'm' | 'l' | 'xl';
@@ -91,21 +91,21 @@ export function bouquetMatchesStemBucket(
   return sizes.some((s) => optionOverlapsStemBucket(s, bucket));
 }
 
-export function labelSingleStemCount(lang: Locale, stemCount: number, labelEn?: string, labelTh?: string): string {
-  if (lang === 'th' && labelTh?.trim()) return labelTh.trim();
+export function labelSingleStemCount(lang: Locale | 'th', stemCount: number, labelEn?: string, labelTh?: string): string {
+  if (isThaiLocale(lang) && labelTh?.trim()) return labelTh.trim();
   if (labelEn?.trim()) return labelEn.trim();
-  return lang === 'th' ? `กุหลาบ ${stemCount} ดอก` : `${stemCount} roses`;
+  return isThaiLocale(lang) ? `กุหลาบ ${stemCount} ดอก` : `${stemCount} roses`;
 }
 
-export function labelFixedVariant(lang: Locale, nameEn: string, nameTh: string, stemMin?: number, stemMax?: number): string {
-  const name = lang === 'th' && nameTh.trim() ? nameTh.trim() : nameEn.trim();
+export function labelFixedVariant(lang: Locale | 'th', nameEn: string, nameTh: string, stemMin?: number, stemMax?: number): string {
+  const name = isThaiLocale(lang) && nameTh.trim() ? nameTh.trim() : nameEn.trim();
   if (stemMin != null && stemMax != null) {
-    return lang === 'th'
+    return isThaiLocale(lang)
       ? `${name} (ประมาณ ${stemMin}–${stemMax} ดอก)`
       : `${name} (approx. ${stemMin}–${stemMax} stems)`;
   }
   if (stemMin != null) {
-    return lang === 'th' ? `${name} (ประมาณ ${stemMin}+ ดอก)` : `${name} (approx. ${stemMin}+ stems)`;
+    return isThaiLocale(lang) ? `${name} (ประมาณ ${stemMin}+ ดอก)` : `${name} (approx. ${stemMin}+ stems)`;
   }
   return name;
 }
@@ -168,14 +168,14 @@ export function resolveBouquetOptionFromIdentifier(
 }
 
 export function optionDisplayLabel(opt: BouquetSellableOption, lang: Locale): string {
-  if (lang === 'th' && opt.labelTh?.trim()) return opt.labelTh.trim();
+  if (isThaiLocale(lang) && opt.labelTh?.trim()) return opt.labelTh.trim();
   return opt.label;
 }
 
 export function labelCustomTier(lang: Locale, minPrice: number, labelEn?: string, labelTh?: string): string {
-  if (lang === 'th' && labelTh?.trim()) return labelTh.trim();
+  if (isThaiLocale(lang) && labelTh?.trim()) return labelTh.trim();
   if (labelEn?.trim()) return labelEn.trim();
-  return lang === 'th'
+  return isThaiLocale(lang)
     ? `ช่อตามงบ เริ่มต้น ฿${minPrice.toLocaleString()}`
     : `Custom bouquet from ฿${minPrice.toLocaleString()}`;
 }

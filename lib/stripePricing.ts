@@ -14,7 +14,7 @@ import { resolveBouquetOptionFromIdentifier } from '@/lib/bouquetOptions';
 import type { OrderCardType, OrderWrappingOption, OrderDeliveryDestinationId } from '@/lib/orders';
 import { isExpansionDestination } from '@/lib/delivery/markets';
 import { getZoneFee, isSupportedZone } from '@/lib/delivery/zones';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import { computeFinalPrice } from '@/lib/partnerPricing';
 import { getAddOnsTotal, type ProductAddOnsSelected } from '@/lib/addonsConfig';
 import { normalizeBalloonText } from '@/lib/balloonCustomization';
@@ -141,7 +141,7 @@ export async function computeOrderTotals(
       itemPrice += getAddOnsTotal(item.addOns?.productAddOns ?? {});
       itemPrice = applyMarkup(itemPrice);
 
-      const toyTitle = lang === 'th' && toy.nameTh ? toy.nameTh : toy.nameEn;
+      const toyTitle = isThaiLocale(lang) && toy.nameTh ? toy.nameTh : toy.nameEn;
       const sizeLabel = (item.size || toy.sizeLabel || '—').trim() || '—';
       items.push({
         bouquetId: toy.id,
@@ -173,7 +173,7 @@ export async function computeOrderTotals(
       itemPrice += getAddOnsTotal(item.addOns?.productAddOns ?? {});
       itemPrice = applyMarkup(itemPrice);
 
-      const balloonTitle = lang === 'th' && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
+      const balloonTitle = isThaiLocale(lang) && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
       const sizeLabel = (item.size || balloon.sizeLabel || '—').trim() || '—';
       items.push({
         bouquetId: balloon.id,
@@ -221,7 +221,7 @@ export async function computeOrderTotals(
       itemPrice += getAddOnsTotal(item.addOns?.productAddOns ?? {});
       itemPrice = applyMarkup(itemPrice);
 
-      const productTitle = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+      const productTitle = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
       items.push({
         bouquetId: product.id,
         bouquetTitle: productTitle,
@@ -267,7 +267,7 @@ export async function computeOrderTotals(
       itemPrice += getAddOnsTotal(item.addOns?.productAddOns ?? {});
       itemPrice = applyMarkup(itemPrice);
 
-      const bouquetTitle = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+      const bouquetTitle = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
       items.push({
         bouquetId: bouquet.id,
         bouquetTitle,

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { CatalogProduct } from '@/lib/sanity';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import { computeFinalPrice } from '@/lib/partnerPricing';
 import { useCart } from '@/contexts/CartContext';
 import { getDefaultAddOns } from '@/components/AddOnsSection';
@@ -47,7 +47,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
   const isInCart = (product: CatalogProduct) => findCartIndex(product) >= 0;
 
   const handleToggleGift = (product: CatalogProduct) => {
-    const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+    const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
     const imgSrc = product.images?.[0] ?? '';
     const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
     const index = findCartIndex(product);
@@ -114,7 +114,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
       <div className="gifts-carousel-viewport" ref={emblaRef}>
         <div className="gifts-carousel-container">
           {gifts.map((product) => {
-            const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+            const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
             const imgSrc = product.images?.[0] ?? '';
             const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
             const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
@@ -168,7 +168,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
       </div>
       {gifts.length > 1 && (
         <p className="gifts-carousel-swipe-hint" aria-hidden>
-          {lang === 'th' ? 'เลื่อนเพื่อดูเพิ่มเติม' : 'Swipe to browse'}
+          {isThaiLocale(lang) ? 'เลื่อนเพื่อดูเพิ่มเติม' : 'Swipe to browse'}
         </p>
       )}
       <style jsx>{`

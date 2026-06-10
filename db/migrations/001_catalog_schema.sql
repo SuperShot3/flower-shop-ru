@@ -1,4 +1,5 @@
--- Yandex Managed PostgreSQL — catalog MVP schema (subset of Thailand Supabase catalog).
+-- EKB Flowers — catalog MVP schema (Postgres via DATABASE_URL).
+-- Launch city: Yekaterinburg only (expand to more cities later).
 -- No Supabase auth.users FK; no RLS (app uses DATABASE_URL directly).
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -15,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.catalog_partners (
   shop_bio_en         text,
   shop_bio_th         text,
   portrait            jsonb,
-  city                text NOT NULL DEFAULT 'Moscow',
+  city                text NOT NULL DEFAULT 'Yekaterinburg',
   status              text NOT NULL DEFAULT 'pending_review'
     CHECK (status IN ('pending_review', 'approved', 'disabled')),
   supabase_user_id    uuid,

@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import type { PaymentMethodsAvailability } from '@/lib/checkout/paymentAvailability';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import {
   DELIVERY_TIME_SLOTS,
   getSelectableDeliveryTimeSlotsForDate,
@@ -225,14 +225,14 @@ export function StickyCheckoutBar({
     <div
       className={`sticky-checkout-bar ${isCollapsed ? 'sticky-checkout-bar--collapsed' : ''}`}
       role="region"
-      aria-label={lang === 'th' ? 'ชำระเงิน' : 'Checkout'}
+      aria-label={isThaiLocale(lang) ? 'ชำระเงิน' : 'Checkout'}
     >
       {isCollapsed ? (
         <button
           type="button"
           className="sticky-checkout-bar__peek"
           onClick={handleExpand}
-          aria-label={labels.showCheckout ?? (lang === 'th' ? 'แสดงชำระเงิน' : 'Show checkout')}
+          aria-label={labels.showCheckout ?? (isThaiLocale(lang) ? 'แสดงชำระเงิน' : 'Show checkout')}
         >
           <span className="sticky-checkout-bar__peek-total">฿{summary.total.toLocaleString()}</span>
           <svg className="sticky-checkout-bar__peek-chevron" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden>
@@ -300,7 +300,7 @@ export function StickyCheckoutBar({
             {labels.delivery ?? 'Delivery'}
           </span>
           <span className="sticky-checkout-bar__date-value">
-            {dateDisplay ?? (lang === 'th' ? 'เลือกวันที่และเวลา' : 'Select date & time')}
+            {dateDisplay ?? (isThaiLocale(lang) ? 'เลือกวันที่และเวลา' : 'Select date & time')}
           </span>
           {(onDateChange || onDeliveryDateTimeChange) && (
             <button
@@ -393,7 +393,7 @@ export function StickyCheckoutBar({
         </div>
 
         <p className="sticky-checkout-bar__policy-consent">
-          {lang === 'th' ? (
+          {isThaiLocale(lang) ? (
             <>
               การกดสั่งซื้อหมายความว่าคุณยอมรับ{' '}
               <Link
@@ -497,7 +497,7 @@ export function StickyCheckoutBar({
               className="sticky-checkout-bar__sheet-save"
               onClick={handleEditConfirm}
             >
-              {labels.save ?? (lang === 'th' ? 'บันทึก' : 'Save')}
+              {labels.save ?? (isThaiLocale(lang) ? 'บันทึก' : 'Save')}
             </button>
           </div>
         </>

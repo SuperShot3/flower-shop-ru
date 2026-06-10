@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import { ORDER_LIFECYCLE_STATUSES } from '@/lib/orders/lifecycle';
 import type { OrderLifecycleStatus, OrderStatusTimestamps } from '@/lib/orders/lifecycle';
 
@@ -81,7 +81,7 @@ function formatLifecycleTimestamp(value: string | null | undefined, locale: Loca
   try {
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return value;
-    return date.toLocaleString(locale === 'th' ? 'th-TH' : 'en-GB', {
+    return date.toLocaleString(isThaiLocale(locale) ? 'th-TH' : 'en-GB', {
       timeZone: 'Asia/Bangkok',
       day: 'numeric',
       month: 'long',

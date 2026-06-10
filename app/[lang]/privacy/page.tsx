@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isValidLocale(params.lang)) return { title: 'Privacy Policy' };
   const lang = params.lang as Locale;
-  return { title: lang === 'th' ? 'นโยบายความเป็นส่วนตัว | Lanna Bloom' : 'Privacy Policy | Lanna Bloom' };
+  return { title: isThaiLocale(lang) ? 'นโยบายความเป็นส่วนตัว | Lanna Bloom' : 'Privacy Policy | Lanna Bloom' };
 }
 
 export default function PrivacyPage({ params }: { params: { lang: string } }) {
@@ -14,7 +14,7 @@ export default function PrivacyPage({ params }: { params: { lang: string } }) {
   if (!isValidLocale(lang)) notFound();
   const locale = lang as Locale;
 
-  const isTh = locale === 'th';
+  const isTh = isThaiLocale(locale);
   const h1 = isTh ? 'นโยบายความเป็นส่วนตัว' : 'Privacy Policy';
 
   return (

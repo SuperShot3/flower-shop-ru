@@ -158,7 +158,7 @@ const commonFaq = {
 } satisfies Record<'en' | 'th', CollectionLandingCopy['faq']>;
 
 function withLocaleFallback<T>(copy: Record<'en' | 'th', T>): Record<Locale, T> {
-  return { ...copy, ru: copy.en, 'zh-sg': copy.en, 'zh-hk': copy.en };
+  return { en: copy.en, ru: copy.en };
 }
 
 const rosesHubCopy = withLocaleFallback({
@@ -200,7 +200,7 @@ const rosesHubCopy = withLocaleFallback({
     faqTitle: 'คำถามที่พบบ่อย',
     faq: commonFaq.th,
   },
-}) satisfies Record<'en' | 'th', RosesHubCopy>;
+} satisfies Record<'en' | 'th', RosesHubCopy>);
 
 export const roseColorLandings = [
   {
@@ -573,7 +573,7 @@ const orchidsHubCopy = withLocaleFallback({
     emptyText:
       'ตอนนี้ยังไม่พบกล้วยไม้ที่อนุมัติแล้วใน Sanity โปรดดูแคตตาล็อกทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
   },
-}) satisfies Record<'en' | 'th', CollectionHubCopy>;
+} satisfies Record<'en' | 'th', CollectionHubCopy>);
 
 export const orchidsHub: OrchidsHubConfig = {
   slug: ORCHIDS_HUB_SLUG,

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { DELIVERY_DESTINATIONS, destinationDisplayName, type DeliveryDestinationId } from '@/lib/delivery/markets';
 import { getZoneFee, getZonesForDestination } from '@/lib/delivery/zones';
@@ -64,7 +64,7 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
   }, []);
 
   const monthOptions = useMemo(() => {
-    const loc = lang === 'th' ? 'th-TH' : 'en-US';
+    const loc = isThaiLocale(lang) ? 'th-TH' : 'en-US';
     return Array.from({ length: 12 }, (_, i) => ({
       value: String(i + 1),
       label: new Intl.DateTimeFormat(loc, { month: 'long' }).format(new Date(2000, i, 1)),
@@ -72,7 +72,7 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
   }, [lang]);
 
   const weekDayLabels = useMemo(() => {
-    const loc = lang === 'th' ? 'th-TH' : 'en-US';
+    const loc = isThaiLocale(lang) ? 'th-TH' : 'en-US';
     const fmt = new Intl.DateTimeFormat(loc, { weekday: 'short' });
     return Array.from({ length: 7 }, (_, i) =>
       fmt.format(new Date(2024, 5, 2 + i))
@@ -120,7 +120,7 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
     () =>
       getZonesForDestination(selectedDestination).map((zone) => ({
         value: zone.id,
-        label: lang === 'th' ? zone.labelTh : zone.labelEn,
+        label: isThaiLocale(lang) ? zone.labelTh : zone.labelEn,
         fee: getZoneFee(selectedDestination, zone.id) ?? zone.feeThb,
       })),
     [lang, selectedDestination]
@@ -743,7 +743,7 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
                 type="text"
                 inputMode="numeric"
                 className="co-input co-input-short"
-                placeholder={lang === 'th' ? 'เช่น 1500' : 'e.g. 1500'}
+                placeholder={isThaiLocale(lang) ? 'เช่น 1500' : 'e.g. 1500'}
               />
             </div>
           </div>

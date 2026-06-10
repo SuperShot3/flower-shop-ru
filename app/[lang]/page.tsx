@@ -8,7 +8,7 @@ import { PartnersCarousel } from '@/components/PartnersCarousel';
 import { ReviewsSection } from '@/components/reviews/ReviewsSection';
 import { getHeroImageFromSanity, getHeroCarouselImagesFromSanity } from '@/lib/sanity';
 import { getBaseUrl } from '@/lib/orders';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import {isValidLocale, defaultLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { Suspense } from 'react';
 
 /** Regenerate every 60s so popular catalog items shuffle on each update */
@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!isValidLocale(params.lang)) return {};
   const base = getBaseUrl();
   const canonical = `${base}/${params.lang}`;
-  if (params.lang === 'th') {
+  if (isThaiLocale(params.lang)) {
     return {
       title: 'Lanna Bloom | ส่งดอกไม้และของขวัญ เชียงใหม่',
       description:
@@ -43,7 +43,7 @@ export default async function HomePage({
 }: {
   params: { lang: string };
 }) {
-  const lang = isValidLocale(params.lang) ? params.lang : 'en';
+  const lang = isValidLocale(params.lang) ? params.lang : defaultLocale;
   const [heroImageUrl, carouselImages] = await Promise.all([
     getHeroImageFromSanity(),
     getHeroCarouselImagesFromSanity(),

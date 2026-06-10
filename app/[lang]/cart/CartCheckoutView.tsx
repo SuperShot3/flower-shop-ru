@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { useCheckoutStickyHeader } from '@/contexts/CheckoutStickyHeaderContext';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import {
   isDeliveryTimeSlotSelectableForDate,
@@ -34,7 +34,7 @@ function formatCheckoutStickySchedule(
   else if (date === tomorrowStr) dateLabel = tomorrowLabel;
   else {
     const d = new Date(`${date}T12:00:00+07:00`);
-    dateLabel = d.toLocaleDateString(lang === 'th' ? 'th-TH' : 'en-GB', {
+    dateLabel = d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
       timeZone: 'Asia/Bangkok',
       weekday: 'short',
       day: 'numeric',
@@ -48,7 +48,7 @@ function buildStickyItemSummary(items: CartItem[], lang: Locale): string | null 
   if (items.length === 0) return null;
   const totalQty = items.reduce((sum, item) => sum + (item.quantity ?? 1), 0);
   const primary = items[0];
-  const primaryName = lang === 'th' ? primary.nameTh : primary.nameEn;
+  const primaryName = isThaiLocale(lang) ? primary.nameTh : primary.nameEn;
   if (totalQty <= 1) return primaryName;
   return `${primaryName} +${totalQty - 1}`;
 }

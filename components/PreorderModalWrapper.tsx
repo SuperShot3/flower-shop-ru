@@ -11,11 +11,7 @@ export interface PreorderModalWrapperProps {
 
 export function PreorderModalWrapper({ lang: langOverride }: PreorderModalWrapperProps) {
   const pathname = usePathname();
-  const derivedLang: Locale = pathname?.startsWith('/th')
-    ? 'th'
-    : pathname?.startsWith('/ru')
-      ? 'ru'
-      : 'en';
+  const derivedLang: Locale = pathname?.startsWith('/en') ? 'en' : 'ru';
   const lang = langOverride ?? derivedLang;
 
   return <PreorderOnlyModal lang={lang} />;

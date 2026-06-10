@@ -1,12 +1,17 @@
 import { partnerHowItWorksEn, partnerHowItWorksTh } from '@/lib/partnerHowItWorksCopy';
 
-export type Locale = 'en' | 'th' | 'ru' | 'zh-sg' | 'zh-hk';
+export type Locale = 'ru' | 'en';
 
-export const locales: Locale[] = ['en', 'th', 'ru', 'zh-sg', 'zh-hk'];
-export const defaultLocale: Locale = 'en';
+export const locales: Locale[] = ['ru', 'en'];
+export const defaultLocale: Locale = 'ru';
 
 export function isValidLocale(locale: string): locale is Locale {
   return locales.includes(locale as Locale);
+}
+
+/** Legacy Thailand fork — Thai routes redirect to /ru; kept for gradual cleanup of inline copy. */
+export function isThaiLocale(lang: Locale | string): boolean {
+  return lang === 'th';
 }
 
 const baseTranslations = {
@@ -4363,10 +4368,8 @@ const chineseHongKongTranslations = {
 } as const;
 
 export const translations = {
-  ...baseTranslations,
+  en: baseTranslations.en,
   ru: russianTranslations,
-  'zh-sg': chineseSingaporeTranslations,
-  'zh-hk': chineseHongKongTranslations,
 } as const;
 
 export type TranslationKey = keyof typeof translations.en;

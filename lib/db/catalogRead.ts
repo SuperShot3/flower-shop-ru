@@ -1,3 +1,4 @@
+import { isThaiLocale } from '@/lib/i18n';
 import 'server-only';
 
 import { fetchAllPages } from '@/lib/db/pagination';
@@ -50,7 +51,7 @@ export async function fetchBouquetBySlug(
   slug: string,
   locale: 'en' | 'th'
 ): Promise<CatalogBouquetRow | null> {
-  const col = locale === 'th' ? 'slug_th' : 'slug_en';
+  const col = isThaiLocale(locale) ? 'slug_th' : 'slug_en';
   let row = await queryOne<CatalogBouquetRow>(
     `SELECT * FROM catalog_bouquets WHERE ${col} = $1 AND status = 'approved' LIMIT 1`,
     [slug]
@@ -84,7 +85,7 @@ export async function fetchProductBySlug(
   slug: string,
   locale: 'en' | 'th'
 ): Promise<CatalogProductRow | null> {
-  const col = locale === 'th' ? 'slug_th' : 'slug_en';
+  const col = isThaiLocale(locale) ? 'slug_th' : 'slug_en';
   return queryOne<CatalogProductRow>(
     `SELECT * FROM catalog_products WHERE ${col} = $1 AND moderation_status = 'live' LIMIT 1`,
     [slug]

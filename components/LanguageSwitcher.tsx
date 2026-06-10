@@ -7,42 +7,29 @@ import { Locale } from '@/lib/i18n';
 import { trackLanguageChange } from '@/lib/analytics';
 
 const FLAG_CLASS: Record<Locale, string> = {
-  en: 'fi fi-gb',
-  th: 'fi fi-th',
   ru: 'fi fi-ru',
-  'zh-sg': 'fi fi-sg',
-  'zh-hk': 'fi fi-hk',
+  en: 'fi fi-gb',
 };
 
 const LABELS: Record<Locale, string> = {
-  en: 'English',
-  th: 'Thai',
   ru: 'Russian',
-  'zh-sg': 'Chinese (Singapore)',
-  'zh-hk': 'Chinese (Hong Kong)',
+  en: 'English',
 };
 
-const LANGUAGE_OPTIONS: { locale: Locale; label: string; region?: string }[] = [
-  { locale: 'en', label: 'English' },
-  { locale: 'th', label: 'ภาษาไทย' },
+const LANGUAGE_OPTIONS: { locale: Locale; label: string }[] = [
   { locale: 'ru', label: 'Русский' },
-  { locale: 'zh-hk', label: '繁體中文', region: 'HK' },
-  { locale: 'zh-sg', label: '繁體中文', region: 'SG' },
+  { locale: 'en', label: 'English' },
 ];
 
-const SWITCHER_QUEUE: Locale[] = ['th', 'en', 'ru', 'zh-sg', 'zh-hk'];
+const SWITCHER_QUEUE: Locale[] = ['ru', 'en'];
 const NEXT_LANG: Record<Locale, Locale> = {
-  en: 'th',
-  th: 'ru',
-  ru: 'zh-sg',
-  'zh-sg': 'zh-hk',
-  'zh-hk': 'en',
+  ru: 'en',
+  en: 'ru',
 };
 
 function activeDisplayLabel(locale: Locale): string {
   const opt = LANGUAGE_OPTIONS.find((o) => o.locale === locale);
-  if (!opt) return LABELS[locale];
-  return opt.region ? `${opt.label} (${opt.region})` : opt.label;
+  return opt?.label ?? LABELS[locale];
 }
 
 export function LanguageSwitcher({
@@ -107,7 +94,7 @@ export function LanguageSwitcher({
       window.clearTimeout(unlockTimer);
       cancelAnimationFrame(readyFrame);
       window.removeEventListener('resize', updateMenuPosition);
-      window.removeEventListener('scroll', updateMenuPosition);
+      window.removeEventListener('scroll', updateMenuPosition, true);
     };
   }, [open, updateMenuPosition]);
 
@@ -167,11 +154,6 @@ export function LanguageSwitcher({
                         }}
                       >
                         <span>{opt.label}</span>
-                        {opt.region && (
-                          <span className="rounded-[3px] bg-[#ede8e2] px-[5px] py-px text-[10px] text-stone-400">
-                            {opt.region}
-                          </span>
-                        )}
                       </Link>
                     </li>
                   );

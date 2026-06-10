@@ -5,30 +5,15 @@ import type { Locale } from '@/lib/i18n';
 export type CheckoutStep = 1 | 2 | 3;
 
 const STEP_LABELS: Record<Locale, Record<CheckoutStep, string>> = {
+  ru: {
+    1: 'Контакты',
+    2: 'Доставка',
+    3: 'Оплата',
+  },
   en: {
     1: 'Details',
     2: 'Delivery',
     3: 'Payment',
-  },
-  th: {
-    1: 'ข้อมูลติดต่อ',
-    2: 'การจัดส่ง',
-    3: 'ชำระเงิน',
-  },
-  ru: {
-    1: 'Details',
-    2: 'Delivery',
-    3: 'Payment',
-  },
-  'zh-sg': {
-    1: '详情',
-    2: '配送',
-    3: '付款',
-  },
-  'zh-hk': {
-    1: '詳情',
-    2: '配送',
-    3: '付款',
   },
 };
 

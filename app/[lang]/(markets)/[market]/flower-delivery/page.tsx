@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
 import {
   getBouquetsFromSanityPaginated,
@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const m = getMarketByPathSlug(params.market);
   if (!m) return {};
-  const isTh = params.lang === 'th';
+  const isTh = isThaiLocale(params.lang);
   const place = isTh ? m.customerFacingNameTh : m.customerFacingNameEn;
   const title = isTh ? `ส่งดอกไม้ ${place} | Lanna Bloom` : `Flower delivery ${place} | Lanna Bloom`;
   const bouquetOnly = isTh ? ' (ช่อดอกไม้เท่านั้น)' : ' (bouquet delivery only)';
@@ -45,7 +45,7 @@ export default async function MarketFlowerDeliveryPage({
     getHeroCarouselImagesFromSanity(),
   ]);
 
-  const isTh = lang === 'th';
+  const isTh = isThaiLocale(lang);
   const marketH1 = isTh
     ? `ส่งดอกไม้ ${entry.customerFacingNameTh}`
     : `${entry.customerFacingNameEn} flower delivery`;

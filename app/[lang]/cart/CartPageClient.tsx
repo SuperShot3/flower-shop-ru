@@ -11,7 +11,7 @@ import {
   isDeliveryTimeSlotSelectableForDate,
   type DeliveryFormValues,
 } from '@/components/DeliveryForm';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import type { ContactPreferenceOption } from '@/lib/orders';
 import type { CartItem } from '@/contexts/CartContext';
@@ -516,7 +516,7 @@ function cartItemsToAnalytics(
     );
     return Array.from({ length: qty }, (_, i) => ({
       item_id: item.bouquetId,
-      item_name: lang === 'th' ? item.nameTh : item.nameEn,
+      item_name: isThaiLocale(lang) ? item.nameTh : item.nameEn,
       price: unitPrice,
       quantity: 1,
       index: index + i,
@@ -1666,7 +1666,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           <p className="cart-expansion-block-notice" role="alert">
             {String(
               (t as { destinationBouquetConflict?: string }).destinationBouquetConflict ??
-                (lang === 'th'
+                (isThaiLocale(lang)
                   ? 'มีช่อในตะกร้าที่จัดส่งในพื้นที่นี้ไม่ได้'
                   : 'Some bouquets in your bag are not available for this delivery region.')
             )}
@@ -1727,7 +1727,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
               items: [
                 {
                   item_id: removed.bouquetId,
-                  item_name: lang === 'th' ? removed.nameTh : removed.nameEn,
+                  item_name: isThaiLocale(lang) ? removed.nameTh : removed.nameEn,
                   price: removed.size.price,
                   quantity: removed.quantity ?? 1,
                   index: 0,
@@ -1749,7 +1749,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
                 items: [
                   {
                     item_id: item.bouquetId,
-                    item_name: lang === 'th' ? item.nameTh : item.nameEn,
+                    item_name: isThaiLocale(lang) ? item.nameTh : item.nameEn,
                     price: item.size.price,
                     quantity: item.quantity ?? 1,
                     index: 0,

@@ -5,7 +5,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getBaseUrl } from '@/lib/orders';
-import { isValidLocale, locales, type Locale } from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { getArticleBySlug, getArticleTitle, getArticleExcerpt, getArticleCtaLinks } from '../_data/articles';
 import { ShareButton } from '@/components/ShareButton';
 import { ArticleCta } from './ArticleCta';
@@ -114,7 +114,7 @@ export default async function InfoArticlePage({
   const articleTitle = getArticleTitle(article, lang);
   const articleExcerpt = getArticleExcerpt(article, lang);
   const ctaLinks = getArticleCtaLinks(article, lang);
-  const guidesBackLabel = lang === 'th' ? '← คู่มือ' : '← Guides';
+  const guidesBackLabel = isThaiLocale(lang) ? '← คู่มือ' : '← Guides';
 
   const base = getBaseUrl();
   const basePath = `/${lang}/info`;
@@ -122,7 +122,7 @@ export default async function InfoArticlePage({
 
   const formatDate = (iso: string) => {
     const d = new Date(iso);
-    return d.toLocaleDateString(lang === 'th' ? 'th-TH' : 'en-US', {
+    return d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
       month: 'long',
       day: 'numeric',
       year: 'numeric',

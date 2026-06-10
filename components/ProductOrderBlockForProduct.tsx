@@ -9,7 +9,7 @@ import {
 } from './AddOnsSection';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { useCart } from '@/contexts/CartContext';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';
 import { TrustBadges } from '@/components/TrustBadges';
@@ -52,7 +52,7 @@ export function ProductOrderBlockForProduct({
     balloonTextPlaceholder?: string;
     balloonTextHelper?: string;
   };
-  const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+  const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
   const discountedBase = applyCatalogDiscountThb(finalPrice, product.discountPercent);
   const addOnsTotal = getAddOnsTotal(addOns.productAddOns ?? {});

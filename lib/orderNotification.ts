@@ -13,7 +13,7 @@ import {
   sendCustomerPaymentFailedEmail,
   sendMinimalAdminNewOrderEmail,
 } from '@/lib/orderEmail';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, isValidLocale, defaultLocale, type Locale } from '@/lib/i18n';
 /**
  * Send exactly one admin "new order" email for this order, then set admin_notified.
  * Safe to call on retries or refresh: if admin_notified is already true, skips send.
@@ -136,7 +136,8 @@ export async function sendPaymentFailedNotificationsOnce(params: {
       const { getOrderPublicToken } = await import('@/lib/orders');
       const publicToken = await getOrderPublicToken(trimmedId);
       const retryUrl = getOrderDetailsUrl(trimmedId, { token: publicToken });
-      const lang = params.lang === 'th' ? 'th' : 'en';
+      const lang: Locale =
+        params.lang && isValidLocale(params.lang) ? params.lang : defaultLocale;
       customerOk = await sendCustomerPaymentFailedEmail(order, retryUrl, lang);
       void sendAdminPaymentFailedEmail(trimmedId, params.reason, order.customerEmail).catch(
         (e) => console.error('[orderNotification] Admin payment-failed email failed:', e)

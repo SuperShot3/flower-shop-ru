@@ -8,7 +8,7 @@ import { Bouquet, type BouquetSize } from '@/lib/bouquets';
 import { optionDisplayLabel } from '@/lib/bouquetOptions';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
 import type { Locale } from '@/lib/i18n';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
 import { useCart } from '@/contexts/CartContext';
@@ -85,7 +85,7 @@ export function BouquetCard({
     bouquet,
     checkoutProfile.destinationId
   );
-  const name = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+  const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
   const minBasePrice = bouquet.sizes?.length
     ? Math.min(...bouquet.sizes.map((s) => s.price))
     : 0;
@@ -167,7 +167,7 @@ export function BouquetCard({
     (mode: 'stay' | 'checkout') => {
       if (!selectedSize || selectedSize.availability === false) return;
       if (!bouquetIsAvailableForDestination(bouquet, checkoutProfile.destinationId)) return;
-      const itemName = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+      const itemName = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
       const discountedSize = {
         ...selectedSize,
         price: applyCatalogDiscountThb(selectedSize.price, bouquet.discountPercent),
@@ -341,7 +341,7 @@ export function BouquetCard({
 
       const fav: FavoriteItem = {
         id: bouquet.id,
-        name: lang === 'th' ? bouquet.nameTh : bouquet.nameEn,
+        name: isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn,
         nameEn: bouquet.nameEn,
         nameTh: bouquet.nameTh,
         price: minPrice,

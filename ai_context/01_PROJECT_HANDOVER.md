@@ -6,7 +6,7 @@ Business and product context for the **Russia** storefront ([ekb-flowers.ru](htt
 
 - **Name:** EKB Flowers (working title; Yekaterinburg / Russia focus)
 - **Domain:** [ekb-flowers.ru](https://www.ekb-flowers.ru) (REG.RU registrar)
-- **Market:** Russia — Russian-first localization planned; `/en` and `/th` routes exist from Thailand fork
+- **Market:** Russia — **Yekaterinburg only** at launch (more cities later); Russian-first localization planned; `/en` and `/th` routes exist from Thailand fork
 - **Relation to Thailand:** Independent from **Lanna Bloom** ([lannabloom.shop](https://lannabloom.shop)) — separate repo, Vercel project, database, Blob store
 
 ## MVP scope (current phase)

@@ -1,7 +1,7 @@
 /**
  * Catalog bouquet pricing types, migration helpers, and sellable-option builders.
  */
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import {
   friendlyLegacyLabel,
   labelSingleStemCount,
@@ -211,11 +211,11 @@ export function ensureFourSizeSlots(rows: CatalogSizePricingRow[]): CatalogSizeP
   );
 }
 
-function sizeDisplayLabel(row: CatalogSizePricingRow, lang: Locale): string {
-  if (lang === 'th' && row.labelTh?.trim()) return row.labelTh.trim();
+function sizeDisplayLabel(row: CatalogSizePricingRow, lang: Locale | 'th'): string {
+  if (isThaiLocale(lang) && row.labelTh?.trim()) return row.labelTh.trim();
   if (row.labelEn?.trim()) return row.labelEn.trim();
   if (row.label?.trim() && !/^(s|m|l|xl)$/i.test(row.label)) return row.label.trim();
-  return lang === 'th' ? DEFAULT_SIZE_LABELS[row.key].th : DEFAULT_SIZE_LABELS[row.key].en;
+  return isThaiLocale(lang) ? DEFAULT_SIZE_LABELS[row.key].th : DEFAULT_SIZE_LABELS[row.key].en;
 }
 
 export function buildSellableOptionsFromPricing(
@@ -231,7 +231,7 @@ export function buildSellableOptionsFromPricing(
       {
         optionId: 'single_default',
         price,
-        label: lang === 'th' ? 'มาตรฐาน' : 'Standard',
+        label: isThaiLocale(lang) ? 'มาตรฐาน' : 'Standard',
         labelTh: 'มาตรฐาน',
         availability: true,
       },

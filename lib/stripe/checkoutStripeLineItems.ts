@@ -5,7 +5,7 @@
 import type Stripe from 'stripe';
 import type { ComputedOrderItem } from '@/lib/stripePricing';
 import type { ReferralDiscountAllocation } from '@/lib/referral';
-import { isValidLocale } from '@/lib/i18n';
+import { isValidLocale, defaultLocale } from '@/lib/i18n';
 
 export function buildStripeCheckoutLineItems(params: {
   computedItems: ComputedOrderItem[];
@@ -105,6 +105,6 @@ export function stripeOrderSuccessUrl(
 
 /** Cart checkout: universal thank-you page (no checkout/complete in path — avoids GTM URL false positives). */
 export function stripeCheckoutDraftSuccessUrl(baseUrl: string, lang: string): string {
-  const l = isValidLocale(lang) ? lang : 'en';
+  const l = isValidLocale(lang) ? lang : defaultLocale;
   return `${baseUrl}/lanna-order-thank-you?session_id={CHECKOUT_SESSION_ID}&lang=${l}`;
 }

@@ -19,7 +19,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 
 function CopyChip({ label, value, locale }: { label: string; value: string; locale: Locale }) {
@@ -45,7 +45,7 @@ function CopyChip({ label, value, locale }: { label: string; value: string; loca
           )}
         </button>
       </div>
-      {copied && <span className="copy-chip-toast">{locale === 'th' ? 'คัดลอกแล้ว!' : 'Copied!'}</span>}
+      {copied && <span className="copy-chip-toast">{isThaiLocale(locale) ? 'คัดลอกแล้ว!' : 'Copied!'}</span>}
 
       <style jsx>{`
         .copy-chip {
@@ -201,7 +201,7 @@ export function OrderPendingConfirmation({
           {t.paymentConfirmed}
         </p>
         <p className="pending-status-msg" role="status">
-          {locale === 'th'
+          {isThaiLocale(locale)
             ? 'กำลังพาคุณไปหน้ารายละเอียดออเดอร์...'
             : 'Taking you to your order details page…'}
         </p>

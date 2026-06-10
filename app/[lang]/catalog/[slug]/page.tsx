@@ -14,7 +14,7 @@ import {
   getProductBySlugFromSanity,
   getProductsFilteredFromSanity,
 } from '@/lib/sanity';
-import { isValidLocale, locales, type Locale } from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
 import MarketCatalogPageViaSlug from './catalog/page';
@@ -43,7 +43,7 @@ export async function generateMetadata({
   const bouquet = await getBouquetBySlugFromSanity(params.slug);
   if (!bouquet) return {};
 
-  const isTh = params.lang === 'th';
+  const isTh = isThaiLocale(params.lang);
   const name = isTh ? bouquet.nameTh : bouquet.nameEn;
   const title =
     (isTh ? bouquet.seoTitleTh : bouquet.seoTitleEn)?.trim() ||
@@ -82,16 +82,16 @@ export default async function ProductPage({
   if (bouquet) {
     const reviewStats = await getReviewStatsAsync();
     const gifts = await getProductsFilteredFromSanity({ categoryKey: 'gifts' });
-    const name = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
-    const description = lang === 'th' ? bouquet.descriptionTh : bouquet.descriptionEn;
-    const composition = lang === 'th' ? bouquet.compositionTh : bouquet.compositionEn;
+    const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+    const description = isThaiLocale(lang) ? bouquet.descriptionTh : bouquet.descriptionEn;
+    const composition = isThaiLocale(lang) ? bouquet.compositionTh : bouquet.compositionEn;
     const t = translations[lang as Locale].product;
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
     const pageUrl = `${getBaseUrl()}/${lang}/catalog/${bouquet.slug}`;
     const productJsonLd = buildBouquetProductJsonLd(
       bouquet,
-      lang === 'th' ? 'th' : 'en',
+      isThaiLocale(lang) ? 'th' : 'en',
       pageUrl
     );
 
@@ -129,8 +129,8 @@ export default async function ProductPage({
 
   const plushyToy = await getPlushyToyBySlugFromSanity(params.slug);
   if (plushyToy) {
-    const name = lang === 'th' && plushyToy.nameTh ? plushyToy.nameTh : plushyToy.nameEn;
-    const description = (lang === 'th' ? plushyToy.descriptionTh : plushyToy.descriptionEn) || '';
+    const name = isThaiLocale(lang) && plushyToy.nameTh ? plushyToy.nameTh : plushyToy.nameEn;
+    const description = (isThaiLocale(lang) ? plushyToy.descriptionTh : plushyToy.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
     const suggestedBouquets = await getPopularBouquetsFromSanity(8);
@@ -162,8 +162,8 @@ export default async function ProductPage({
 
   const balloon = await getBalloonBySlugFromSanity(params.slug);
   if (balloon) {
-    const name = lang === 'th' && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
-    const description = (lang === 'th' ? balloon.descriptionTh : balloon.descriptionEn) || '';
+    const name = isThaiLocale(lang) && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
+    const description = (isThaiLocale(lang) ? balloon.descriptionTh : balloon.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog?topCategory=balloons`;
     const suggestedBouquets = await getPopularBouquetsFromSanity(8);
@@ -196,8 +196,8 @@ export default async function ProductPage({
   const product = await getProductBySlugFromSanity(params.slug);
   if (product) {
     const gifts = await getProductsFilteredFromSanity({ categoryKey: 'gifts' });
-    const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
-    const description = (lang === 'th' ? product.descriptionTh : product.descriptionEn) || '';
+    const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+    const description = (isThaiLocale(lang) ? product.descriptionTh : product.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
 

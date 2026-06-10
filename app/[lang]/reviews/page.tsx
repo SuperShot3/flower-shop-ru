@@ -2,7 +2,7 @@ import { getAllReviewsAsync, getReviewStatsAsync } from '@/lib/reviews';
 import { ReviewCard } from '@/components/reviews/ReviewCard';
 import { Stars } from '@/components/reviews/Stars';
 import { GOOGLE_REVIEW_URL } from '@/lib/reviewsConfig';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import { isValidLocale, defaultLocale, type Locale } from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import styles from '@/components/reviews/reviews.module.css';
 
@@ -11,7 +11,7 @@ export default async function ReviewsPage({
 }: {
   params: { lang: string };
 }) {
-  const lang = isValidLocale(params.lang) ? params.lang : 'en';
+  const lang = isValidLocale(params.lang) ? params.lang : defaultLocale;
   const [reviews, stats] = await Promise.all([
     getAllReviewsAsync(),
     getReviewStatsAsync(),

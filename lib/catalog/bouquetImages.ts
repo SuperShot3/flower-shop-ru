@@ -74,9 +74,9 @@ export function attachVariantImagesToSellableOptions(
 
   return sizes.map((size) => {
     const key =
-      pricingType === 'single_stem_count'
-        ? stemVariantKey(size.stemCount ?? size.label)
-        : size.variantKey ?? size.label;
+      pricingType === 'stem_count' && size.stemCount != null
+        ? stemVariantKey(size.stemCount)
+        : size.key ?? size.optionId.replace(/^(legacy_|size_|fixed_)/, '');
     const images = byVariantKey.get(key);
     if (!images?.urls.length) return size;
     return {

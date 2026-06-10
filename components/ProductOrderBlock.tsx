@@ -9,7 +9,7 @@ import {
   type AddOnsValues,
 } from './AddOnsSection';
 import { useCart } from '@/contexts/CartContext';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
@@ -75,7 +75,7 @@ export function ProductOrderBlock({
     checkoutProfile.destinationId
   );
   const hideGiftAddOns = checkoutProfile.variant === 'expansion';
-  const destinationLabel = lang === 'th' ? checkoutProfile.labels.th : checkoutProfile.labels.en;
+  const destinationLabel = isThaiLocale(lang) ? checkoutProfile.labels.th : checkoutProfile.labels.en;
 
   const addOnsTotal = getAddOnsTotal(addOns.productAddOns ?? {});
   const qty = Math.max(1, Math.floor(quantity));
@@ -102,7 +102,7 @@ export function ProductOrderBlock({
   };
 
   const addToCartCore = () => {
-    const itemName = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+    const itemName = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
     const price = unitPrice;
     addItem(
       {
@@ -245,7 +245,7 @@ export function ProductOrderBlock({
             partnerImage={bouquet.partnerPortraitUrl ?? null}
             studioName={bouquet.partnerCity || 'Chiang Mai'}
             quote={
-              (lang === 'th' ? bouquet.partnerShopBioTh : bouquet.partnerShopBioEn) ||
+              (isThaiLocale(lang) ? bouquet.partnerShopBioTh : bouquet.partnerShopBioEn) ||
               "We source our flowers daily from local markets to ensure maximum freshness and fragrance in every arrangement."
             }
           />

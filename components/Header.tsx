@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Locale, locales, translations } from '@/lib/i18n';
+import {Locale, locales, translations, isThaiLocale} from '@/lib/i18n';
 import { useCart } from '@/contexts/CartContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { NavItem } from './NavItem';
@@ -47,7 +47,7 @@ type DeliveryPickerCopy = {
 };
 
 function getDeliveryPickerCopy(lang: Locale): DeliveryPickerCopy {
-  if (lang === 'th') {
+  if (isThaiLocale(lang)) {
     return {
       eyebrow: 'จัดส่งถึง',
       current: 'เขตปัจจุบัน',
@@ -518,7 +518,7 @@ function DeliveryProvincePicker({
       </option>
       {MARKETS.map((market) => (
         <option key={market.destinationId} value={market.destinationId}>
-          {lang === 'th' ? market.customerFacingNameTh : market.customerFacingNameEn}
+          {isThaiLocale(lang) ? market.customerFacingNameTh : market.customerFacingNameEn}
         </option>
       ))}
     </select>

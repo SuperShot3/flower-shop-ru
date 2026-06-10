@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { isThaiLocale } from '@/lib/i18n';
 import type { FormEvent } from 'react';
 import type {
   SupplierMessageCardSnapshot,
@@ -70,7 +71,7 @@ function supplierTaskCompletionKey(publicToken: string) {
 }
 
 function formatPriceDisplay(value: number, lang: Lang): string {
-  return new Intl.NumberFormat(lang === 'th' ? 'th-TH' : 'en-US', {
+  return new Intl.NumberFormat(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
     style: 'currency',
     currency: 'THB',
     minimumFractionDigits: 0,
@@ -389,9 +390,9 @@ export function SupplierResponseForm({
           <div className="supplier-task-lang" role="group" aria-label={tc.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${lang === 'th' ? 'is-active' : ''}`}
+              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
               onClick={() => setLang('th')}
-              aria-pressed={lang === 'th'}
+              aria-pressed={isThaiLocale(lang)}
             >
               {tc.thai}
             </button>
@@ -462,9 +463,9 @@ export function SupplierResponseForm({
           <div className="supplier-task-lang" role="group" aria-label={t.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${lang === 'th' ? 'is-active' : ''}`}
+              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
               onClick={() => setLang('th')}
-              aria-pressed={lang === 'th'}
+              aria-pressed={isThaiLocale(lang)}
             >
               {t.thai}
             </button>

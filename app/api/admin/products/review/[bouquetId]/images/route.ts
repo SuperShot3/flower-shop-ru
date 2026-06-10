@@ -72,8 +72,8 @@ export async function POST(
     }
     const storagePath = `bouquets/${resolvedCatalogId}/gallery-${Date.now()}.webp`;
     const buffer = Buffer.from(await webp.arrayBuffer());
-    await uploadBufferToCatalog(supabase, storagePath, buffer, 'image/webp');
-    const record = buildCatalogImageRecord(supabase, storagePath, {
+    await uploadBufferToCatalog(storagePath, buffer, 'image/webp');
+    const record = buildCatalogImageRecord(storagePath, {
       format: 'webp',
       is_primary: false,
       alt,

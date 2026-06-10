@@ -1,4 +1,4 @@
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BouquetCard } from '@/components/BouquetCard';
@@ -23,7 +23,7 @@ export async function CatalogProductCard({
   const trimmed = (slug || '').trim();
   if (!trimmed) return null;
 
-  const viewLabel = lang === 'th' ? 'ดูในแคตตาล็อก' : 'View in catalog';
+  const viewLabel = isThaiLocale(lang) ? 'ดูในแคตตาล็อก' : 'View in catalog';
   const href = `/${lang}/catalog/${encodeURIComponent(trimmed)}`;
 
   // Prefer standalone catalog documents first, then fall back to partner products.
@@ -33,7 +33,7 @@ export async function CatalogProductCard({
     (await getProductBySlugFromSanity(trimmed));
   if (product) {
     if (variant === 'article-catalog-button') {
-      const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+      const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
       const imgSrc = product.images?.[0] ?? '';
       const imgAlt = product.imageAlts?.[0]?.trim() || name;
       const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
@@ -73,7 +73,7 @@ export async function CatalogProductCard({
   const bouquet = await getBouquetBySlugFromSanity(trimmed);
   if (bouquet) {
     if (variant === 'article-catalog-button') {
-      const name = lang === 'th' ? bouquet.nameTh : bouquet.nameEn;
+      const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
       const imgSrc = bouquet.images?.[0] ?? '';
       const imgAlt = bouquet.imageAlts?.[0]?.trim() || name;
       const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');

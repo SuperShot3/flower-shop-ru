@@ -1,6 +1,6 @@
 'use client';
 
-import { translations, type Locale } from '@/lib/i18n';
+import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import {
   isMay2026FreeDeliveryActive,
   qualifiesForMay2026FreeDelivery,
@@ -11,7 +11,7 @@ import styles from './product-pdp.module.css';
 function formatCampaignEndDate(ymd: string, lang: Locale): string {
   const [y, m, d] = ymd.split('-').map(Number);
   const date = new Date(y, m - 1, d);
-  return new Intl.DateTimeFormat(lang === 'th' ? 'th-TH' : 'en-GB', {
+  return new Intl.DateTimeFormat(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',

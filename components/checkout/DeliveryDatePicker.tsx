@@ -14,9 +14,9 @@ import {
   eachDayOfInterval,
   getDay,
 } from 'date-fns';
-import { enUS, ru, th, zhCN, zhHK } from 'date-fns/locale';
+import { enUS, ru } from 'date-fns/locale';
 import type { Locale } from '@/lib/i18n';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 function ymdToDate(ymd: string): Date {
@@ -28,27 +28,13 @@ function toDateValue(date: Date): string {
 }
 
 function dateFnsLocale(lang: Locale) {
-  switch (lang) {
-    case 'th':
-      return th;
-    case 'ru':
-      return ru;
-    case 'zh-sg':
-      return zhCN;
-    case 'zh-hk':
-      return zhHK;
-    default:
-      return enUS;
-  }
+  return lang === 'ru' ? ru : enUS;
 }
 
 /** Sunday-start week, three-character weekday headers */
 const WEEKDAY_LABELS_3: Record<Locale, readonly string[]> = {
-  en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  th: ['อาท', 'จัน', 'อัง', 'พุธ', 'พฤห', 'ศุก', 'เสา'],
   ru: ['Вск', 'Пнд', 'Втр', 'Срд', 'Чтв', 'Птн', 'Сбт'],
-  'zh-sg': ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-  'zh-hk': ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
+  en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 };
 
 const DELIVERY_EMOJI = '📦🚚💨';
@@ -118,7 +104,7 @@ export function DeliveryDatePicker({
     selectedDate &&
     format(
       selectedDate,
-      lang === 'th' ? 'EEEEที่ d MMM yyyy' : 'EEE, MMM d, yyyy',
+      isThaiLocale(lang) ? 'EEEEที่ d MMM yyyy' : 'EEE, MMM d, yyyy',
       { locale }
     );
 
@@ -126,7 +112,7 @@ export function DeliveryDatePicker({
     <div
       id={id}
       role="dialog"
-      aria-label={lang === 'th' ? 'เลือกวันจัดส่ง' : 'Choose delivery date'}
+      aria-label={isThaiLocale(lang) ? 'เลือกวันจัดส่ง' : 'Choose delivery date'}
       className={cn(
         'relative w-full border border-border bg-background shadow-sm',
         compact
@@ -155,7 +141,7 @@ export function DeliveryDatePicker({
             'flex shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30',
             compact ? 'h-7 w-7' : 'h-9 w-9'
           )}
-          aria-label={lang === 'th' ? 'เดือนก่อนหน้า' : 'Previous month'}
+          aria-label={isThaiLocale(lang) ? 'เดือนก่อนหน้า' : 'Previous month'}
         >
           <ChevronLeft className={compact ? 'h-4 w-4' : 'h-5 w-5'} aria-hidden />
         </button>
@@ -188,7 +174,7 @@ export function DeliveryDatePicker({
             'flex shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground',
             compact ? 'h-7 w-7' : 'h-9 w-9'
           )}
-          aria-label={lang === 'th' ? 'เดือนถัดไป' : 'Next month'}
+          aria-label={isThaiLocale(lang) ? 'เดือนถัดไป' : 'Next month'}
         >
           <ChevronRight className={compact ? 'h-4 w-4' : 'h-5 w-5'} aria-hidden />
         </button>

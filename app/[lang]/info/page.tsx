@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getBaseUrl } from '@/lib/orders';
-import { isValidLocale, translations, type Locale } from '@/lib/i18n';
+import { isValidLocale, locales, translations, type Locale } from '@/lib/i18n';
 import {
   getFeaturedArticle,
   getMoreGuides,
@@ -42,7 +42,7 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'th' }];
+  return locales.map((lang) => ({ lang }));
 }
 
 export default async function InfoHubPage({

@@ -1,6 +1,6 @@
 'use client';
 
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 type SecTitleProps = {
   th: string;
@@ -11,7 +11,7 @@ type SecTitleProps = {
 export function SecTitle({ th, en, lang }: SecTitleProps) {
   return (
     <div className="partner-sec-title">
-      <div className="partner-sec-title-th">{lang === 'th' ? th : en}</div>
+      <div className="partner-sec-title-th">{isThaiLocale(lang) ? th : en}</div>
     </div>
   );
 }

@@ -6,7 +6,7 @@
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 import { isExpansionDestination } from '@/lib/delivery/markets';
 import type { DistrictKey } from '@/lib/deliveryFees';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 const EXPANSION_FEE_FLOOR_THB = 250;
 
@@ -117,11 +117,11 @@ export function getZoneFee(destinationId: DeliveryDestinationId, zoneId: string)
 export function zoneLabel(
   destinationId: DeliveryDestinationId,
   zoneId: string,
-  lang: Locale
+  lang: Locale | 'th'
 ): string | null {
   const z = findZoneDef(destinationId, zoneId);
   if (!z) return null;
-  return lang === 'th' ? z.labelTh : z.labelEn;
+  return isThaiLocale(lang) ? z.labelTh : z.labelEn;
 }
 
 /** Mirror legacy `district` column + Mueang central flag from Chiang Mai zone id */

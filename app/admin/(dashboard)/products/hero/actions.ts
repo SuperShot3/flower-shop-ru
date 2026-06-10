@@ -12,6 +12,10 @@ import { upsertCatalogSiteSettings } from '@/lib/catalogWrite';
 import { canChangeStatus } from '@/lib/adminRbac';
 import { getSupabaseAdmin } from '@/lib/supabase/server';
 
+function isCatalogStorageConfigured(): boolean {
+  return Boolean(process.env.CATALOG_STORAGE_DIR?.trim());
+}
+
 type ActionResult = { error?: string; message?: string };
 
 async function requireHeroEditor(): Promise<{ error?: string }> {
@@ -38,12 +42,11 @@ async function uploadHeroWebp(
 ): Promise<CatalogStoredImage> {
   await validateProductImage(file);
   const webp = await convertToWebp(file);
-  const supabase = getSupabaseAdmin();
-  if (!supabase) throw new Error('Catalog writes are not configured');
+  if (!isCatalogStorageConfigured()) throw new Error('Catalog writes are not configured');
 
   const buffer = Buffer.from(await webp.arrayBuffer());
-  await uploadBufferToCatalog(supabase, storagePath, buffer, 'image/webp');
-  return buildCatalogImageRecord(supabase, storagePath, {
+  await uploadBufferToCatalog(storagePath, buffer, 'image/webp');
+  return buildCatalogImageRecord(storagePath, {
     format: 'webp',
     is_primary: true,
     alt,

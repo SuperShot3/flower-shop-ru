@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { CatalogProduct } from '@/lib/sanity';
 import type { Locale } from '@/lib/i18n';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
 import { computeFinalPrice } from '@/lib/partnerPricing';
@@ -94,7 +94,7 @@ export function ProductCard({
   const router = useRouter();
   const { addItem } = useCart();
   const checkoutProfile = useCheckoutDeliveryProfile(lang);
-  const name = lang === 'th' && product.nameTh ? product.nameTh : product.nameEn;
+  const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
   const href = buildCatalogItemHref({ lang, slug: product.slug, pathname });
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
   const discountedBase = applyCatalogDiscountThb(finalPrice, product.discountPercent);
@@ -406,7 +406,7 @@ export function ProductCard({
           onTouchStart={canSwipeStandaloneImages ? handleTouchStart : undefined}
           onTouchEnd={canSwipeStandaloneImages ? handleTouchEnd : undefined}
           onMouseDown={canSwipeStandaloneImages ? handleMouseDown : undefined}
-          aria-label={canSwipeStandaloneImages ? (lang === 'th' ? 'เลื่อนเพื่อดูรูปเพิ่ม' : 'Swipe to see more images') : undefined}
+          aria-label={canSwipeStandaloneImages ? (isThaiLocale(lang) ? 'เลื่อนเพื่อดูรูปเพิ่ม' : 'Swipe to see more images') : undefined}
         >
           {product.isHit ? <span className="pcard-hit">{t.hitBadge}</span> : null}
           <CatalogDiscountBadge

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { locales, type Locale } from '@/lib/i18n';
+import {locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 type PartnerNavProps = {
@@ -44,7 +44,7 @@ export function PartnerNav({ lang, current }: PartnerNavProps) {
             href={applyHref}
             className={`partner-nav-link ${current === 'apply' ? 'active' : ''}`}
           >
-            {lang === 'th' ? 'สมัคร Partner' : 'Apply'}
+            {isThaiLocale(lang) ? 'สมัคร Partner' : 'Apply'}
           </Link>
         </div>
       </div>

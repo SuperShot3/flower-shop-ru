@@ -1,3 +1,4 @@
+import { isThaiLocale } from '@/lib/i18n';
 /**
  * Articles registry for the Guides / Info section.
  * Each article maps to a slug and usually MDX files:
@@ -249,13 +250,13 @@ export function getArticleBySlug(slug: string): ArticleMeta | undefined {
 
 /** Get localized title (lang: 'en' | 'th') */
 export function getArticleTitle(article: ArticleMeta, lang: string): string {
-  if (lang === 'th' && article.titleTh) return article.titleTh;
+  if (isThaiLocale(lang) && article.titleTh) return article.titleTh;
   return article.title;
 }
 
 /** Get localized excerpt (lang: 'en' | 'th') */
 export function getArticleExcerpt(article: ArticleMeta, lang: string): string {
-  if (lang === 'th' && article.excerptTh) return article.excerptTh;
+  if (isThaiLocale(lang) && article.excerptTh) return article.excerptTh;
   return article.excerpt;
 }
 

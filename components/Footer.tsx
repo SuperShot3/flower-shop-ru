@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import {
   MARKETS,
@@ -304,7 +304,7 @@ export function Footer({ lang }: { lang: Locale }) {
               {t.privacyPolicy}
             </Link>
             <Link href={`/${lang}/cookies`} className="hover:text-stone-600 transition-colors">
-              {lang === 'th' ? 'นโยบายคุกกี้' : 'Cookie Policy'}
+              {isThaiLocale(lang) ? 'นโยบายคุกกี้' : 'Cookie Policy'}
             </Link>
           </div>
           </div>

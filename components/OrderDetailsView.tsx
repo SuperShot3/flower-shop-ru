@@ -11,7 +11,7 @@ import {
 import { trackMessengerClick } from '@/lib/analytics';
 import type { Order, FulfillmentStatus } from '@/lib/orders';
 import type { ContactPreferenceStored } from '@/lib/orders';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { formatShopDateTime } from '@/lib/shopTime';
 
@@ -367,7 +367,7 @@ export function OrderDetailsView({
             disabled={refreshing}
             aria-label={t.orderStatusUpdatedAt ? 'Refresh status' : 'Refresh status'}
           >
-            {refreshing ? (locale === 'th' ? 'กำลังโหลด...' : 'Loading...') : (locale === 'th' ? 'โหลดสถานะใหม่' : 'Refresh status')}
+            {refreshing ? (isThaiLocale(locale) ? 'กำลังโหลด...' : 'Loading...') : (isThaiLocale(locale) ? 'โหลดสถานะใหม่' : 'Refresh status')}
           </button>
         </div>
       </div>
@@ -449,7 +449,7 @@ export function OrderDetailsView({
         <h2 className="order-details-heading">{t.address}</h2>
         {addressHidden ? (
           <p className="order-details-value order-details-address-hidden">
-            {locale === 'th' ? 'ที่อยู่จะถูกลบออกหลังการจัดส่ง' : 'Address removed after delivery'}
+            {isThaiLocale(locale) ? 'ที่อยู่จะถูกลบออกหลังการจัดส่ง' : 'Address removed after delivery'}
           </p>
         ) : (
           <>

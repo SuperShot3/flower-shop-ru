@@ -1,3 +1,4 @@
+import { isThaiLocale } from '@/lib/i18n';
 import type { Order } from '@/lib/orders';
 import type { ContactPreferenceStored } from '@/lib/orders/types';
 import type {
@@ -58,7 +59,7 @@ function adminDeliveryGeographyLines(order: SupabaseOrderRow, lang: 'en' | 'th' 
     order.delivery_zone?.trim() || orderJsonDelivery(order)?.deliveryZoneId?.trim();
   const postal =
     order.postal_code?.trim() || orderJsonDelivery(order)?.postalCode?.trim();
-  const isThai = lang === 'th';
+  const isThai = isThaiLocale(lang);
   const lines: string[] = [];
   if (dest) {
     const id = dest as DeliveryDestinationId;

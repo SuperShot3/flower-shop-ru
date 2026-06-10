@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import { isValidLocale, type Locale } from '@/lib/i18n';
+import { isValidLocale, defaultLocale, type Locale } from '@/lib/i18n';
 import { OrderThankYouClient } from '@/components/checkout/OrderThankYouClient';
 
 function resolveLang(langParam: string | undefined): Locale {
   const raw = langParam?.trim().toLowerCase() ?? '';
-  return isValidLocale(raw) ? raw : 'en';
+  return isValidLocale(raw) ? raw : defaultLocale;
 }
 
 export default function LannaOrderThankYouPage({

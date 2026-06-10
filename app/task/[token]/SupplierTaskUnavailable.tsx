@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { isThaiLocale } from '@/lib/i18n';
 
 type Lang = 'th' | 'en';
 
@@ -32,9 +33,9 @@ export function SupplierTaskUnavailable() {
           <div className="supplier-task-lang" role="group" aria-label={t.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${lang === 'th' ? 'is-active' : ''}`}
+              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
               onClick={() => setLang('th')}
-              aria-pressed={lang === 'th'}
+              aria-pressed={isThaiLocale(lang)}
             >
               {t.thai}
             </button>

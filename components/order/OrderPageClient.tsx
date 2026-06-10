@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getContactPhoneDisplay, getContactPhoneTelUrl, getLineContactUrl, getWhatsAppOrderUrl } from '@/lib/messenger';
 import { LineIcon, WhatsAppIcon, HomeIcon, PhoneIcon, EmailIcon } from '@/components/icons';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { OrderCustomerView } from '@/lib/orders';
 import type { Locale } from '@/lib/i18n';
 import { SUPPORT_EMAIL } from '@/lib/siteContact';
@@ -357,15 +357,15 @@ export function OrderPageClient({
       id: 'email' as const,
       href: `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Order ${orderId}`)}`,
       Icon: EmailIcon,
-      label: locale === 'th' ? 'อีเมล' : 'Email',
+      label: isThaiLocale(locale) ? 'อีเมล' : 'Email',
       external: false,
     },
     {
       id: 'phone' as const,
       href: getContactPhoneTelUrl(),
       Icon: PhoneIcon,
-      label: locale === 'th' ? 'โทรหาเรา' : 'Call us',
-      title: `${locale === 'th' ? 'โทรหาเรา' : 'Call us'}: ${getContactPhoneDisplay()}`,
+      label: isThaiLocale(locale) ? 'โทรหาเรา' : 'Call us',
+      title: `${isThaiLocale(locale) ? 'โทรหาเรา' : 'Call us'}: ${getContactPhoneDisplay()}`,
       external: false,
     },
   ];
@@ -397,7 +397,7 @@ export function OrderPageClient({
 
       {stripeSyncing && !paid && (
         <div className="order-redesign-stripe-sync" role="status" aria-live="polite">
-          {locale === 'th' ? 'กำลังยืนยันการชำระเงิน…' : 'Confirming your payment…'}
+          {isThaiLocale(locale) ? 'กำลังยืนยันการชำระเงิน…' : 'Confirming your payment…'}
         </div>
       )}
 
@@ -434,7 +434,7 @@ export function OrderPageClient({
               <div className="order-redesign-meta-label">{t.address}</div>
               {addressHidden ? (
                 <div className="order-redesign-meta-value order-redesign-address-hidden">
-                  {locale === 'th' ? 'ที่อยู่จะถูกลบออกหลังการจัดส่ง' : 'Address removed after delivery'}
+                  {isThaiLocale(locale) ? 'ที่อยู่จะถูกลบออกหลังการจัดส่ง' : 'Address removed after delivery'}
                 </div>
               ) : (
                 <div className="order-redesign-meta-value">{order.delivery?.address || '—'}</div>
@@ -482,7 +482,7 @@ export function OrderPageClient({
               <div className="order-redesign-paid-title">{t.paymentConfirmedTitle}</div>
               <div className="order-redesign-paid-sub">
                 {supabasePaidAt
-                  ? new Date(supabasePaidAt).toLocaleString(locale === 'th' ? 'th-TH' : undefined)
+                  ? new Date(supabasePaidAt).toLocaleString(isThaiLocale(locale) ? 'th-TH' : undefined)
                   : ''}
                 <br />
                 {t.paymentConfirmedSub}
@@ -510,10 +510,10 @@ export function OrderPageClient({
                 🌸
               </div>
               <div className="order-redesign-paid-title">
-                {locale === 'th' ? 'ออเดอร์อยู่ระหว่างตรวจสอบ' : 'Your order is under review'}
+                {isThaiLocale(locale) ? 'ออเดอร์อยู่ระหว่างตรวจสอบ' : 'Your order is under review'}
               </div>
               <div className="order-redesign-paid-sub">
-                {locale === 'th'
+                {isThaiLocale(locale)
                   ? 'ทีมงานจะติดต่อหรือแจ้งขั้นตอนถัดไปทาง LINE / WhatsApp'
                   : 'Our team will follow up or confirm next steps via LINE / WhatsApp.'}
               </div>
@@ -523,10 +523,10 @@ export function OrderPageClient({
           {!paid && canPay && (
             <div className="order-redesign-paid-view order-redesign-paid-inline">
               <div className="order-redesign-paid-title">
-                {locale === 'th' ? 'รอการชำระเงิน' : 'Payment pending'}
+                {isThaiLocale(locale) ? 'รอการชำระเงิน' : 'Payment pending'}
               </div>
               <div className="order-redesign-paid-sub">
-                {locale === 'th'
+                {isThaiLocale(locale)
                   ? 'การชำระเงินออนไลน์ทำผ่าน Stripe จากหน้าตะกร้าเมื่อกดสั่งซื้อ หากต้องการความช่วยเหลือติดต่อเราได้ทาง LINE / WhatsApp'
                   : 'Online payment runs on Stripe when you place your order from the cart. Contact us on LINE or WhatsApp if you need help.'}
               </div>

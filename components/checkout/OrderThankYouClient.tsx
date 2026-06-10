@@ -6,7 +6,7 @@ import {
   CHECKOUT_SUBMISSION_TOKEN_SESSION_KEY,
   markCheckoutSubmissionCompleted,
 } from '@/lib/checkout/submissionToken';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 import { trackCheckoutPurchase } from '@/lib/analytics';
 import type { PurchaseItem, PurchaseUserData } from '@/lib/analytics/gtag';
 
@@ -59,7 +59,7 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
   useEffect(() => {
     if (!sessionId) {
       setError(
-        lang === 'th'
+        isThaiLocale(lang)
           ? 'เราไม่สามารถยืนยันคำสั่งซื้อนี้ได้ในขณะนี้'
           : 'We could not confirm this order yet.'
       );
@@ -72,7 +72,7 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
       if (cancelled) return;
       if (Date.now() - started > MAX_MS) {
         setError(
-          lang === 'th'
+          isThaiLocale(lang)
             ? 'ใช้เวลานานเกินไป กรุณาตรวจสอบอีเมลหรือติดต่อเรา'
             : 'This is taking too long. Please check your email or contact us.'
         );
@@ -147,7 +147,7 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
           return;
         }
         if (data.status === 'payment_failed') {
-          setError(lang === 'th' ? 'การชำระเงินไม่สำเร็จ' : 'Payment was not successful.');
+          setError(isThaiLocale(lang) ? 'การชำระเงินไม่สำเร็จ' : 'Payment was not successful.');
           return;
         }
       } catch {
@@ -190,15 +190,15 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
           🎉
         </div>
         <h1 style={{ fontSize: '1.75rem', fontWeight: 600, color: 'var(--text, #1e1e1e)', marginBottom: '0.75rem', fontFamily: 'var(--font-serif)' }}>
-          {lang === 'th' ? 'ชำระเงินสำเร็จ!' : 'Payment Successful!'}
+          {isThaiLocale(lang) ? 'ชำระเงินสำเร็จ!' : 'Payment Successful!'}
         </h1>
         <p style={{ color: 'var(--text-muted, #666)', fontSize: '1rem', letterSpacing: '0.02em' }}>
-          {lang === 'th' 
+          {isThaiLocale(lang) 
             ? 'ขอบคุณสำหรับคำสั่งซื้อของคุณ' 
             : 'Thank you for your order.'}
         </p>
         <p style={{ color: 'var(--text-muted, #999)', fontSize: '0.85rem', marginTop: '1rem', animation: 'pulse 2s infinite' }}>
-          {lang === 'th' 
+          {isThaiLocale(lang) 
             ? 'กำลังพากลับไปยังหน้ารายละเอียดคำสั่งซื้อ...' 
             : 'Redirecting you to the order details...'}
         </p>
@@ -218,7 +218,7 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
               letterSpacing: '0.02em',
             }}
           >
-            {lang === 'th'
+            {isThaiLocale(lang)
               ? `จะเปลี่ยนหน้าใน ${redirectSecondsLeft} วินาที`
               : `Redirecting in ${redirectSecondsLeft} second${redirectSecondsLeft === 1 ? '' : 's'}`}
           </div>
@@ -296,14 +296,14 @@ export function OrderThankYouClient({ lang }: { lang: Locale }) {
                 transition: 'all 0.2s',
               }}
             >
-              {lang === 'th' ? 'กลับไปที่ตะกร้า' : 'Back to cart'}
+              {isThaiLocale(lang) ? 'กลับไปที่ตะกร้า' : 'Back to cart'}
             </button>
           </>
         ) : (
           <>
             <div className="spinner"></div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text)' }} role="status" aria-live="polite">
-              {lang === 'th' ? 'กำลังยืนยันการชำระเงิน…' : 'Confirming your payment…'}
+              {isThaiLocale(lang) ? 'กำลังยืนยันการชำระเงิน…' : 'Confirming your payment…'}
             </h2>
             <style dangerouslySetInnerHTML={{__html: `
               .spinner {

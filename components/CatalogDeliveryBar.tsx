@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import type { Locale } from '@/lib/i18n';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import {
   getBangkokYmd,
   getSameDayDeliveryPhaseBangkok,
@@ -36,7 +36,7 @@ const DELIVERY_END_TIME = '20:00';
 
 function formatDeliveryDate(ymd: string, lang: Locale): string {
   const date = new Date(`${ymd}T12:00:00+07:00`);
-  return date.toLocaleDateString(lang === 'th' ? 'th-TH' : 'en-GB', {
+  return date.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
     timeZone: 'Asia/Bangkok',
     weekday: 'short',
     day: 'numeric',
@@ -176,18 +176,18 @@ export function CatalogDeliveryBar({
           </span>
           <label className="catalog-delivery-location-wrap">
             <span className="sr-only">
-              {lang === 'th' ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
+              {isThaiLocale(lang) ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
             </span>
             <select
               className="catalog-delivery-location-select"
               value={locationValue}
               onChange={handleLocationChange}
-              aria-label={lang === 'th' ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
+              aria-label={isThaiLocale(lang) ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
             >
               <option value="CHIANG_MAI">Chiang Mai</option>
               {MARKETS.map((m) => (
                 <option key={m.destinationId} value={m.destinationId}>
-                  {lang === 'th' ? m.customerFacingNameTh : m.customerFacingNameEn}
+                  {isThaiLocale(lang) ? m.customerFacingNameTh : m.customerFacingNameEn}
                 </option>
               ))}
             </select>
@@ -196,7 +196,7 @@ export function CatalogDeliveryBar({
         <div
           className="catalog-delivery-clock"
           title={
-            lang === 'th'
+            isThaiLocale(lang)
               ? 'เวลาท้องถิ่น (เชียงใหม่)'
               : 'Local time (Asia/Bangkok)'
           }
@@ -204,7 +204,7 @@ export function CatalogDeliveryBar({
           <time dateTime={now?.toISOString()} suppressHydrationWarning>
             {now ? formatBangkokTime(now, lang) : '--:--'}
           </time>
-          <span>{lang === 'th' ? 'เวลาท้องถิ่น' : 'local'}</span>
+          <span>{isThaiLocale(lang) ? 'เวลาท้องถิ่น' : 'local'}</span>
         </div>
       </div>
 

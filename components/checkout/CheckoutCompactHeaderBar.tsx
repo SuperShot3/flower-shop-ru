@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { CheckoutStickyHeaderPayload } from '@/contexts/CheckoutStickyHeaderContext';
-import { type Locale, translations } from '@/lib/i18n';
+import {type Locale, translations, isThaiLocale} from '@/lib/i18n';
 import { formatBangkokDate, formatBangkokTime } from '@/lib/deliveryHours';
 
 const CLOCK_TICK_MS = 1_000;
@@ -23,7 +23,7 @@ export function CheckoutCompactHeaderBar({
 
   const locationLabel = translations[lang].catalog.localTimeBangkok ?? 'Chiang Mai';
   const clockTitle =
-    lang === 'th' ? 'เวลาท้องถิ่น (เชียงใหม่)' : 'Local time in Chiang Mai (Asia/Bangkok)';
+    isThaiLocale(lang) ? 'เวลาท้องถิ่น (เชียงใหม่)' : 'Local time in Chiang Mai (Asia/Bangkok)';
 
   return (
     <div className="checkout-compact-header" role="region" aria-label="Order summary">

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 export type CountryCodeEntry = { id: string; code: string; label: string };
 
@@ -12,9 +12,9 @@ export function countryDialFlag(label: string): string {
 export function countryDialGroupLabels(lang: Locale): { popular: string; all: string } {
   return {
     popular:
-      lang === 'th' ? 'ประเทศยอดนิยม' : lang === 'ru' ? 'Популярные' : 'Popular',
+      isThaiLocale(lang) ? 'ประเทศยอดนิยม' : lang === 'ru' ? 'Популярные' : 'Popular',
     all:
-      lang === 'th'
+      isThaiLocale(lang)
         ? 'ประเทศอื่น ๆ (เรียงตามตัวอักษร)'
         : lang === 'ru'
           ? 'Все страны (A-Z)'

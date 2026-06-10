@@ -5,11 +5,7 @@
 import { createClient, type SanityClient } from '@sanity/client';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import imageUrlBuilder from '@sanity/image-url';
-import {
-  buildCatalogImageRecord,
-  type CatalogSupabaseClient,
-  uploadBufferToCatalog,
-} from '@/lib/catalog/storage';
+import { buildCatalogImageRecord, uploadBufferToCatalog } from '@/lib/catalog/storage';
 import type { CatalogStoredImage } from '@/lib/catalog/types';
 
 export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] { heroImage, heroCarouselImages }`;
@@ -42,7 +38,6 @@ async function downloadUrl(url: string): Promise<Buffer> {
 }
 
 async function migrateSanityImages(
-  supabase: CatalogSupabaseClient,
   projectId: string,
   dataset: string,
   entityFolder: string,
@@ -70,13 +65,13 @@ async function migrateSanityImages(
 
     if (!dryRun) {
       const buffer = await downloadUrl(url);
-      await uploadBufferToCatalog(supabase, storagePath, buffer, contentTypeForPath(storagePath));
+      await uploadBufferToCatalog(storagePath, buffer, contentTypeForPath(storagePath));
     }
 
     out.push(
       dryRun
         ? { storage_path: storagePath, alt, sort_order: i, is_primary: i === 0 }
-        : buildCatalogImageRecord(supabase, storagePath, {
+        : buildCatalogImageRecord(storagePath, {
             alt,
             format: 'source',
             is_primary: img.isPrimary === true || i === 0,
@@ -121,8 +116,6 @@ export async function importHeroFromSanity(
     };
   }
 
-  const catalogSupabase = supabase as CatalogSupabaseClient;
-
   const { data: existingSettings } = await supabase
     .from('catalog_site_settings')
     .select('hero_image, hero_carousel_images')
@@ -134,7 +127,6 @@ export async function importHeroFromSanity(
 
   const heroImages = siteSettings.heroImage
     ? await migrateSanityImages(
-        catalogSupabase,
         projectId,
         dataset,
         'site-settings',
@@ -147,7 +139,6 @@ export async function importHeroFromSanity(
     : [];
 
   const carouselImages = await migrateSanityImages(
-    catalogSupabase,
     projectId,
     dataset,
     'site-settings',

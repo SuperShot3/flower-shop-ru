@@ -16,7 +16,7 @@ import { OrderPendingConfirmation } from '@/components/OrderPendingConfirmation'
 import { useCart } from '@/contexts/CartContext';
 import { trackGenerateLead } from '@/lib/analytics';
 import { CHECKOUT_SUBMISSION_TOKEN_SESSION_KEY } from '@/lib/checkout/submissionToken';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import type { Order } from '@/lib/orders';
 
@@ -223,7 +223,7 @@ export function ConfirmationPendingClient({
         <div className="container">
           <h1 className="confirmation-pending-title">{t.orderCreated}</h1>
           <p className="confirmation-pending-text">
-            {lang === 'th' ? 'การชำระเงินล้มเหลว กรุณาลองอีกครั้งจากตะกร้า' : 'Payment failed. Please try again from your cart.'}
+            {isThaiLocale(lang) ? 'การชำระเงินล้มเหลว กรุณาลองอีกครั้งจากตะกร้า' : 'Payment failed. Please try again from your cart.'}
           </p>
           <Link href={`/${lang}/cart`} className="confirmation-pending-link">
             {tNav.cart}
@@ -240,7 +240,7 @@ export function ConfirmationPendingClient({
         <div className="container">
           <h1 className="confirmation-pending-title">{t.orderCreated}</h1>
           <p className="confirmation-pending-text">
-            {lang === 'th' ? 'การชำระเงินสำเร็จ กำลังดำเนินการออเดอร์ของคุณ...' : 'Payment confirmed, finalizing your order…'}
+            {isThaiLocale(lang) ? 'การชำระเงินสำเร็จ กำลังดำเนินการออเดอร์ของคุณ...' : 'Payment confirmed, finalizing your order…'}
           </p>
         </div>
         <style jsx>{confirmationPendingStyles}</style>

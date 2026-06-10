@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Flower5Icon } from '@/components/icons/Flower5Icon';
-import { translations, type Locale } from '@/lib/i18n';
+import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import styles from './product-pdp.module.css';
 
 const ICON_TICK = (
@@ -54,7 +54,7 @@ export function ProductTrustStrip({
         ) : (
           <>
             {ICON_TICK}
-            <span className={styles.trustStripTitle}>{lang === 'th' ? 'จัดส่ง' : 'Delivery'}</span>
+            <span className={styles.trustStripTitle}>{isThaiLocale(lang) ? 'จัดส่ง' : 'Delivery'}</span>
             <span className={styles.trustStripSub}>{destinationSub ?? ''}</span>
           </>
         )}

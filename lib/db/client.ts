@@ -2,6 +2,8 @@ import 'server-only';
 
 import { Pool, type QueryResultRow } from 'pg';
 
+export type { QueryResultRow };
+
 let pool: Pool | null = null;
 
 export function isDatabaseConfigured(): boolean {

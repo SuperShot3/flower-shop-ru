@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode, type TouchEvent } from 'react';
 import Image from 'next/image';
 import type { Locale } from '@/lib/i18n';
-import { translations } from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import type { DeliveryFormValues } from '@/components/DeliveryForm';
 import {
@@ -38,7 +38,7 @@ function formatDestinationLabel(
   profile: CheckoutDeliveryProfile,
   lang: Locale
 ): string {
-  return lang === 'th' ? profile.labels.th : profile.labels.en;
+  return isThaiLocale(lang) ? profile.labels.th : profile.labels.en;
 }
 
 function primaryBouquetIndex(items: CartItem[]): number {
@@ -233,7 +233,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
       >
         <div className="co-card">
           {items.map((item, index) => {
-            const name = lang === 'th' ? item.nameTh : item.nameEn;
+            const name = isThaiLocale(lang) ? item.nameTh : item.nameEn;
             const qty = item.quantity ?? 1;
             const unit =
               item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {});
@@ -303,7 +303,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
         <div className="co-card co-card--pad">
           {deliveryProfile.variant === 'expansion' && (
             <div className="co-field">
-              <label className="co-label">{lang === 'th' ? 'พื้นที่จัดส่ง' : 'Delivery area'}</label>
+              <label className="co-label">{isThaiLocale(lang) ? 'พื้นที่จัดส่ง' : 'Delivery area'}</label>
               <input type="text" readOnly className="co-input" value={destLabel} />
             </div>
           )}
@@ -322,7 +322,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
               <option value="">{tBuyNow.selectDistrict}</option>
               {zones.map((z) => (
                 <option key={z.id} value={z.id}>
-                  {lang === 'th' ? z.labelTh : z.labelEn} — {'\u0E3F'}
+                  {isThaiLocale(lang) ? z.labelTh : z.labelEn} — {'\u0E3F'}
                   {(getZoneFee(delivery.deliveryDestination, z.id) ?? z.feeThb).toLocaleString()}
                 </option>
               ))}
@@ -578,7 +578,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
           )}
           {items.map((item, index) => {
             if (!isNonBouquetCartLine(item)) return null;
-            const name = lang === 'th' ? item.nameTh : item.nameEn;
+            const name = isThaiLocale(lang) ? item.nameTh : item.nameEn;
             const qty = item.quantity ?? 1;
             const unit =
               item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {});
