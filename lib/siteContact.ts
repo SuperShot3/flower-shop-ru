@@ -1,2 +1,2 @@
-/** Public support inbox. */
-export const SUPPORT_EMAIL = 'support@example.ru';
+/** Public support inbox (MVP — update when dedicated mailbox exists). */
+export const SUPPORT_EMAIL = 'k.v.polovnikov@gmail.com';

@@ -1,5 +1,5 @@
 ---
-description: Rules for checkout, orders, Stripe payment flow, and customer order pages
+description: Rules for checkout, orders, and payment flow
 globs:
   - "app/**/checkout/**"
   - "app/order/**"
@@ -11,17 +11,17 @@ globs:
 alwaysApply: false
 ---
 
-Before editing checkout, orders, Stripe, payment confirmation, or customer order pages, read:
+Before editing checkout, orders, or customer order pages, read:
 
 - `/ai_context/04_CHECKOUT_ORDERS_STRIPE.md`
 - `/ai_context/03_SECURITY_RULES.md`
 
-Critical rules:
+**Russia MVP:** Online payment is **disabled** (`lib/checkout/paymentAvailability.ts`). Do not enable Stripe. YooKassa comes later.
+
+Critical rules (apply to any future payment provider):
 
 - Never trust client-side prices, totals, delivery fees, discounts, payment status, order status, user role, or ownership.
-- Stripe is the source of truth for payment confirmation (`payment_status` / PaymentIntent `succeeded`).
-- Fulfill via `fulfillPaidStripeCheckoutSession` (webhook, `order-status`, sync).
-- Cart flow: checkout draft → Stripe session → **create order only after confirmed payment**.
-- Do not re-enable public unpaid order creation from cart unless intentionally redesigned.
+- Create cart orders **only after** server-confirmed payment.
 - Customer order pages and `/api/orders/*` must not expose private order data without a valid `public_token`.
-- Webhook must remain idempotent (`stripe_events`).
+
+Legacy Stripe code in `app/api/stripe/` is Thailand reference — do not wire to Russia production env.

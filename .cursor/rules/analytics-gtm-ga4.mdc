@@ -1,5 +1,5 @@
 ---
-description: Rules for GTM, GA4, Google Ads, and purchase conversion tracking
+description: Rules for analytics and conversion tracking
 globs:
   - "lib/analytics/**"
   - "lib/analytics.ts"
@@ -9,14 +9,10 @@ globs:
 alwaysApply: false
 ---
 
-Before editing analytics, GTM, GA4, Google Ads, or conversion tracking, read:
+Before editing analytics or conversion tracking, read:
 
 - `/ai_context/05_ANALYTICS_GTM_GA4_ADS.md`
 
-Critical rules:
+**Russia (EKB Flowers):** Use **Yandex Metrica** (`NEXT_PUBLIC_YANDEX_METRICA_ID`). Do **not** set `NEXT_PUBLIC_GTM_ID` — forbidden in Russia env.
 
-- `purchase` must fire only after confirmed paid order (`order-status` returns `purchase` payload).
-- App pushes to `dataLayer` only — no direct `gtag` in app code; GTM forwards to GA4/Ads.
-- Do not duplicate GA4 or Google Ads purchase events (one browser `purchase` pipeline only; no server-side GA4 purchase).
-- Funnel events (`add_to_cart`, `begin_checkout`, messenger clicks) are secondary to `purchase`.
-- `view_item` should usually be GA4-only in GTM configuration.
+**Legacy Thailand:** GTM → GA4 via `dataLayer` only. `purchase` after confirmed Stripe payment. Not used in Russia MVP.

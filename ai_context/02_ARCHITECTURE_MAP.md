@@ -1,4 +1,4 @@
-# Architecture map
+# Architecture map — EKB Flowers
 
 Where code lives in the Next.js App Router monorepo.
 
@@ -6,10 +6,10 @@ Where code lives in the Next.js App Router monorepo.
 
 | Path | Purpose |
 |------|---------|
-| `app/[lang]/` | Localized storefront (`en`, `th`) |
+| `app/[lang]/` | Localized storefront (`en`, `th` — RU locale TBD) |
 | `app/order/[orderId]/` | Customer order status (token in query) |
 | `app/admin/` | Staff dashboard + login |
-| `app/api/` | Route handlers (Stripe, orders, admin, cron) |
+| `app/api/` | Route handlers (admin, health; Stripe legacy) |
 | `app/task/[token]/` | Supplier task (neutral links) |
 | `content/` | MDX info articles, guides |
 
@@ -17,26 +17,24 @@ Where code lives in the Next.js App Router monorepo.
 
 | Area | Path |
 |------|------|
-| Home | `(main)/` or locale root |
+| Home | locale root |
 | Catalog | `catalog/`, `(markets)/[market]/catalog/` |
 | Product | `catalog/[slug]/` |
 | Cart | `cart/` |
 | Checkout | `checkout/complete`, `checkout/success`, `checkout/confirmation-pending` |
 | Info / SEO | `info/[slug]/`, guides |
-| Partner apply (portal retired) | `partner/apply` |
-| Static pages | `refund-replacement`, etc. |
-
-Layouts: `app/[lang]/layout.tsx`, market layouts under `(markets)/`.
+| Partner apply | `partner/apply` |
+| Static pages | `privacy`, `terms`, `contact`, etc. |
 
 ## APIs (`app/api/`)
 
 | Prefix | Purpose |
 |--------|---------|
-| `stripe/` | Checkout session, webhook, order-status, sync |
+| `stripe/` | **Legacy (Thailand)** — do not use in Russia production |
 | `orders/` | Public order fetch (token-gated) |
 | `admin/` | Authenticated admin mutations |
 | `bouquets/` | Catalog helpers |
-| `cron/` | Scheduled jobs (e.g. reminders) |
+| `cron/` | Scheduled jobs |
 | `health/` | Health checks |
 
 ## Admin (`app/admin/`)
@@ -44,73 +42,64 @@ Layouts: `app/[lang]/layout.tsx`, market layouts under `(markets)/`.
 | Area | Path |
 |------|------|
 | Login | `login/` |
-| Dashboard shell | `(dashboard)/layout.tsx`, `AdminDashboardShell.tsx` |
+| Dashboard shell | `(dashboard)/layout.tsx` |
 | Orders | `(dashboard)/orders/` |
-| Accounting | `(dashboard)/accounting/` |
-| Expenses | `(dashboard)/expenses/` |
-| Emails | `(dashboard)/emails/` |
-| Products / moderation | `(dashboard)/products/`, `moderation/` |
+| Products / moderation | `(dashboard)/products/` |
+| Partners | `(dashboard)/partners/applications` |
 
-Shared UI: `app/admin/components/`.
-
-## Core `lib/` modules
+## Core `lib/` modules (Russia path)
 
 | Module | Role |
 |--------|------|
-| `lib/orders/` | Order router, Supabase store, types, lifecycle |
-| `lib/checkout/` | Drafts, fulfill Stripe, submission token |
-| `lib/stripe/` | Server client, metadata, post-payment hooks |
-| `lib/analytics/`, `lib/analytics.ts` | dataLayer events (GA4/Ads via GTM only) |
-| `lib/email/` | Templates, render, outbox, Resend send |
-| `lib/accounting/` | Income, expenses sync, transfers, ledger |
-| `lib/expenses/` | Expense queries, bills |
-| `lib/supabase/` | Server client, admin/partner queries, order adapter |
-| `lib/bouquets.ts`, `lib/catalog.ts`, `lib/catalogReads.ts` | Catalog reads (Supabase) |
-| `lib/catalogWrite.ts`, `lib/catalogAdmin.ts` | Catalog writes + admin moderation |
-| `lib/delivery/` | Zones, markets, fees, hours |
+| `lib/db/client.ts` | Postgres pool (`DATABASE_URL`) |
+| `lib/db/catalogRead.ts` | Catalog reads from Postgres |
+| `lib/catalog.ts`, `lib/catalogReads.ts` | Storefront catalog facade |
+| `lib/catalog/storage.ts` | Image URLs; Blob upload (MVP) |
+| `lib/checkout/paymentAvailability.ts` | Payment disabled until YooKassa |
+| `lib/env/validateRussiaEnv.ts` | Block Thailand runtime env vars |
+| `lib/delivery/` | Zones, markets, fees |
 | `lib/adminRbac.ts` | Admin permissions |
 | `lib/i18n.ts` | Locale types/helpers |
+
+## Legacy Thailand modules (do not wire to Russia prod)
+
+| Module | Notes |
+|--------|-------|
+| `lib/supabase/*` | Still in tree; migrate callers to `lib/db/*` |
+| `lib/stripe/*`, `app/api/stripe/*` | Stripe — forbidden in Russia env |
+| `lib/orders/supabaseStore.ts` | Thailand order store |
 
 ## Auth
 
 | File | Role |
 |------|------|
-| `auth.ts` | NextAuth config (admin) |
+| `auth.ts` | NextAuth (admin) — migrating to Postgres `admin_users` |
 | `middleware.ts` | Protects `/admin` |
 
-## Data stores
+## Data stores (MVP)
 
 | Store | Used for |
 |-------|----------|
-| Supabase | Orders, admin, catalog (`catalog_*` tables + `catalog` storage bucket), email outbox, partner applications, expenses, accounting |
-| Stripe | Payments |
-| Supabase Storage | Receipts, proofs buckets |
-| Vercel Blob | Optional legacy orders; custom order reference images |
+| **Neon Postgres** | Catalog, partner applications, admin users (target) |
+| **Vercel Blob** | Catalog image files (MVP) |
+| Stripe / Supabase | **Not used** in Russia runtime |
 
-## Components worth knowing
+## Data stores (post-VPS)
 
-| Component | Role |
-|-----------|------|
-| `components/GoogleAnalytics.tsx` | GTM + consent |
-| `components/ui/overlay-reveal.tsx` | Inline open animation (delivery date calendar, optional fields) |
-| `components/ui/dropdown-menu.tsx` | Radix dropdown; uses `ui-popover-content` open animation |
-| Header / cart / catalog cards | Under `components/` or colocated in `app/` |
-
-**Overlay animations:** See `.cursor/rules/ui-overlay-animations.mdc` — `ui-popover-content` for floating menus; `OverlayReveal` for inline panels. Tokens in `app/globals.css` (`--ui-overlay-ease`, etc.).
+See [docs/deploy-vps.md](../docs/deploy-vps.md) — Postgres + disk on Timeweb VPS.
 
 ## Config
 
 | File | Role |
 |------|------|
-| `next.config.js` | Next config, `transpilePackages` (e.g. heic2any) |
-| `.env.example` | Env documentation |
-| `supabase/migrations/` | SQL migrations |
+| `next.config.js` | Next config, `transpilePackages` |
+| `.env.example` | Russia env documentation |
+| `db/migrations/` | Postgres schema (not `supabase/migrations/` for Russia prod) |
+| `docker-compose.yml` | Local / future VPS Postgres |
 
 ## Cross-cutting flows
 
-See topic context files:
-
-- Payments → [04_CHECKOUT_ORDERS_STRIPE.md](04_CHECKOUT_ORDERS_STRIPE.md)
 - Security → [03_SECURITY_RULES.md](03_SECURITY_RULES.md)
+- Payments (legacy + plan) → [04_CHECKOUT_ORDERS_STRIPE.md](04_CHECKOUT_ORDERS_STRIPE.md)
 - Analytics → [05_ANALYTICS_GTM_GA4_ADS.md](05_ANALYTICS_GTM_GA4_ADS.md)
 - Admin → [06_ADMIN_ACCOUNTING_EMAIL.md](06_ADMIN_ACCOUNTING_EMAIL.md)

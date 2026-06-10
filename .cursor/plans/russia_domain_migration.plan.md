@@ -139,7 +139,7 @@ Execute in **`flower_shop_ru/` only:**
 - [ ] Update `next.config.js`: no `supabase.co`, no `sanity.io` in `images.remotePatterns`
 - [ ] Update `lib/orders.ts` `getBaseUrl()`: remove `VERCEL_URL` fallback
 - [ ] Replace `InternalTrafficBootstrap` cookie domain logic for Russia TLD
-- [ ] Add `README_RU.md`: “This repo is independent from lannabloom.shop — do not merge env or deploy to Vercel”
+- [x] `README.md` — EKB Flowers MVP setup (single README; no duplicate)
 - [ ] Add `.env.export.local` to `.gitignore`
 - [ ] Confirm `flower_shop/` git status unchanged after all Russia work
 

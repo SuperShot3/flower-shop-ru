@@ -1,5 +1,5 @@
 ---
-description: Main project instructions for Lanna Bloom
+description: Main project instructions for EKB Flowers (Russia)
 alwaysApply: true
 ---
 
@@ -10,10 +10,12 @@ Before working on this repository, read:
 
 Do not rely on assumptions or memory. Inspect the actual code before editing.
 
-This is the **Lanna Bloom** flower and gift delivery project.
+This is **EKB Flowers** — Russia storefront at [ekb-flowers.ru](https://www.ekb-flowers.ru). **Isolated** from Thailand Lanna Bloom ([lannabloom.shop](https://lannabloom.shop)).
 
-Main stack: Next.js, Vercel, Supabase, Sanity, Stripe, Resend, GTM, GA4, Google Ads.
+**MVP stack:** Next.js on Vercel, Neon Postgres, Vercel Blob, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
 
-Preserve security, payment, analytics, and order lifecycle rules.
+**Forbidden in Russia runtime env:** `SUPABASE_*`, `STRIPE_*`, `NEXT_PUBLIC_GTM_ID`, `RESEND_API_KEY`.
+
+**Later:** Timeweb VPS — see `docs/deploy-vps.md`.
 
 For product or blog copy, use `.cursor/skills/flower-content-writer/` or `.cursor/skills/blog-content-writer/` instead of expanding rules.

@@ -1,36 +1,39 @@
-# Checkout, orders, and Stripe
+# Checkout and orders — EKB Flowers
 
-How money and orders flow in production. **Source of truth is code**, not README.
+> **Russia MVP:** Online checkout is **disabled** (`lib/checkout/paymentAvailability.ts`, `canCheckout()` → `false`). Payments via **YooKassa** are planned; Stripe must not be enabled in this repo.
+>
+> The sections below describe the **Thailand / Stripe** implementation still present in the codebase. Use as a reference for trust boundaries when building YooKassa — not as active Russia production flow.
 
-## Order storage
+## Russia payment plan (future)
 
-- **Primary:** Supabase (`ORDERS_PRIMARY_STORE=supabase` when configured).
+| Step | Detail |
+|------|--------|
+| Provider | YooKassa |
+| Flow | Create payment → redirect → webhook `payment.succeeded` → fulfill order |
+| Trust | Server confirms payment before creating order (mirror Thailand Stripe model) |
+| Prerequisite | Russian legal entity (ИП/ООО) for production onboarding |
+
+## Order storage (target — Postgres)
+
+- Router: `lib/orders/router.ts`
+- Russia target: Postgres via `lib/db/*` (migration in progress from `lib/orders/supabaseStore.ts`)
+
+## MVP behavior
+
+- Cart and checkout UI may render for UX testing.
+- Pay button shows “payment being set up” — no charge.
+- Do not set `STRIPE_*` env vars.
+
+---
+
+## Legacy: Thailand Stripe flow (reference only)
+
+### Order storage (Thailand)
+
+- **Primary:** Supabase (`ORDERS_PRIMARY_STORE=supabase`).
 - Router: `lib/orders/router.ts` → `lib/orders/supabaseStore.ts`.
-- Legacy Blob fallback only if `ORDERS_READ_FALLBACK=blob` (migration scenario).
 
-## Cart checkout flow (create order after payment)
-
-```mermaid
-sequenceDiagram
-  participant Browser
-  participant API as create-checkout-session
-  participant Draft as checkout_drafts
-  participant Stripe
-  participant Fulfill as fulfillStripeCheckout
-  participant DB as orders
-
-  Browser->>API: POST cart payload
-  API->>API: Recompute totals server-side
-  API->>Draft: Save checkout draft
-  API->>Stripe: Create Checkout Session
-  Stripe-->>Browser: Redirect to pay
-  Browser->>Stripe: Pay
-  Stripe-->>Browser: success_url /lanna-order-thank-you
-  Browser->>API: GET order-status session_id
-  API->>Fulfill: If paid in Stripe
-  Fulfill->>DB: createOrder from draft
-  Fulfill->>DB: mark paid + hooks
-```
+### Cart checkout flow (create order after payment)
 
 Key files:
 
@@ -38,64 +41,17 @@ Key files:
 |------|------|
 | Create session | `app/api/stripe/create-checkout-session/route.ts` |
 | Draft storage | `lib/checkout/checkoutDrafts.ts` |
-| Line items for Stripe | `lib/checkout/buildStripeCheckoutSessionBody.ts`, `lib/stripe/checkoutStripeLineItems.ts` |
-| After payment | `lib/checkout/fulfillStripeCheckout.ts` — `fulfillPaidStripeCheckoutSession` |
+| Fulfill | `lib/checkout/fulfillStripeCheckout.ts` |
 | Webhook | `app/api/stripe/webhook/route.ts` |
-| Poll / thank-you page | `app/api/stripe/order-status/route.ts`, `app/lanna-order-thank-you/`, `components/checkout/OrderThankYouClient.tsx` |
-| Sync fallback | `app/api/stripe/sync-checkout-session/route.ts` |
+| Order status poll | `app/api/stripe/order-status/route.ts` |
 
-**Invariant:** Cart flow logs *"checkout draft saved (order created after payment)"* — do **not** re-enable creating unpaid public orders from cart unless explicitly redesigned.
+### Rules (still valid for any future payment provider)
 
-## Order-page flow (pay existing order)
+- Never trust client totals.
+- Create cart orders **after** confirmed payment only.
+- Webhooks must be idempotent.
+- Customer order pages require `public_token`.
 
-- Unpaid order may exist first; customer pays via `create-checkout-session-for-order`.
-- `fulfillPaidStripeCheckoutSession` marks existing order paid instead of creating from draft.
+## Deep dive (Thailand)
 
-## Payment confirmation
-
-Stripe is authoritative:
-
-- `session.payment_status === 'paid'` OR PaymentIntent `succeeded`.
-- Fulfillment triggers: `stripe_webhook`, `sync_checkout`, `order_status`.
-
-After mark paid, `runStripePostPaymentSuccessHooks` (`lib/stripe/postStripePaymentSuccess.ts`) runs:
-
-- Supabase payment sync
-- Customer confirmation email
-- Admin new-order notification
-- GA4 `purchase` is browser-only via GTM (see analytics context)
-- Income / accounting side effects
-
-## Idempotency
-
-- Webhook events deduped in `stripe_events`.
-- `fulfillPaidStripeCheckoutSession` returns early if order already paid for session/token.
-- Stripe session create uses idempotency keys (`lib/stripe/idempotency.ts`).
-- `submission_token` on checkout pairs client + server (`lib/checkout/submissionToken.ts`).
-
-## Public order access
-
-- Each order has `public_token` in Supabase.
-- Customer links: `/order/{orderId}?token=...` — token required for API and page data.
-- `getOrderPublicToken`, `getOrderByIdWithPublicToken` in `lib/orders/`.
-
-## Fulfillment vs payment status
-
-- Stripe paths update **payment** fields only.
-- **Fulfillment status** (preparing, dispatched, delivered, etc.) is admin-controlled and not overwritten by webhook.
-
-## Metadata
-
-- Draft metadata on session: `checkout_draft_id`, `submission_token`, etc. (`lib/stripe/metadata.ts`).
-- After order creation, order id backfilled to Stripe session/PaymentIntent/charge for reporting.
-
-## Do not
-
-- Trust client-sent `grandTotal`, `deliveryFee`, or discount amounts for Stripe line items.
-- Expose full order JSON without `public_token`.
-- Fire GA4 `purchase` from webhook as the primary path (browser + GTM is canonical — see [05_ANALYTICS_GTM_GA4_ADS.md](05_ANALYTICS_GTM_GA4_ADS.md)).
-
-## Deep dive
-
-- [docs/ORDERS_SUPABASE.md](../docs/ORDERS_SUPABASE.md)
-- [docs/ORDERS_VERCEL.md](../docs/ORDERS_VERCEL.md) — env / deployment notes for order links
+- [docs/ORDERS_SUPABASE.md](../docs/ORDERS_SUPABASE.md) — Thailand order store

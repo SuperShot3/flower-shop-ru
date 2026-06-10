@@ -1,6 +1,6 @@
 /**
- * Fail fast when Thailand / Vercel runtime credentials are present.
- * Russia storefront must use VPS Postgres only — never Thailand Supabase or Stripe.
+ * Fail fast when Thailand runtime credentials are present.
+ * Russia storefront uses Neon/VPS Postgres + this repo's own Vercel Blob — never Thailand Supabase or Stripe.
  */
 
 const FORBIDDEN_RUNTIME_VARS = [
@@ -12,7 +12,6 @@ const FORBIDDEN_RUNTIME_VARS = [
   'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
   'STRIPE_WEBHOOK_SECRET',
   'NEXT_PUBLIC_GTM_ID',
-  'BLOB_READ_WRITE_TOKEN',
   'RESEND_API_KEY',
 ] as const;
 
