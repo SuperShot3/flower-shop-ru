@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { BouquetCard } from '@/components/BouquetCard';
 import { ProductCard } from '@/components/ProductCard';
-import type { PopularCatalogItem } from '@/lib/sanity';
+import type { PopularCatalogItem } from '@/lib/catalogListLogic';
 import type { Locale } from '@/lib/i18n';
 
 const PAGE_SIZE = 8;

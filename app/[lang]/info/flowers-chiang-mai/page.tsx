@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPopularBouquetsFromSanity } from '@/lib/sanity';
+import { getCatalogPopularBouquets } from '@/lib/catalogReads';
 import { getBaseUrl } from '@/lib/orders';
 import { isValidLocale, locales, translations, type Locale } from '@/lib/i18n';
 import { BouquetCard } from '@/components/BouquetCard';
@@ -51,7 +51,7 @@ export default async function FlowersChiangMaiGuidePage({
   const locale = lang as Locale;
   const t = translations[locale].guides.flowersChiangMai;
   const tHome = translations[locale].home;
-  const bouquets = await getPopularBouquetsFromSanity(POPULAR_LIMIT);
+  const bouquets = await getCatalogPopularBouquets(POPULAR_LIMIT);
   const catalogHref = `/${lang}/catalog`;
 
   return (

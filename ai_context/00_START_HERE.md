@@ -14,7 +14,7 @@ Read this file before substantive work. Use topic files below for depth; use `do
 |-------|------------|
 | App | Next.js 14 App Router, React 18, TypeScript |
 | Hosting | **Vercel** Hobby (separate project from Thailand) |
-| Database | **Neon** Postgres (`DATABASE_URL`) — catalog, partners, orders (later) |
+| Database | **Supabase** Postgres via `DATABASE_URL` — catalog, partners, orders (later) |
 | Catalog images | **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`) until VPS migration |
 | Domain | `ekb-flowers.ru` at REG.RU → DNS to Vercel |
 | Payments | **Disabled** — `lib/checkout/paymentAvailability.ts` |
@@ -68,7 +68,7 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Variable | Purpose |
 |----------|---------|
 | `NEXT_PUBLIC_APP_URL` | `https://www.ekb-flowers.ru` |
-| `DATABASE_URL` | Neon or local Postgres |
+| `DATABASE_URL` | Supabase Postgres (Vercel) or local Docker Postgres |
 | `BLOB_READ_WRITE_TOKEN` | Vercel Blob — **this project's store only** |
 | `AUTH_SECRET` | Admin NextAuth |
 | `ADMIN_SEED_EMAIL` | `k.v.polovnikov@gmail.com` (seed script) |

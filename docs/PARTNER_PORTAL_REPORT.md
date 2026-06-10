@@ -21,7 +21,7 @@
 | `app/[lang]/partner/dashboard/[partnerId]/bouquets/actions.ts` | createBouquet, updateBouquet server actions |
 | `app/[lang]/partner/dashboard/[partnerId]/bouquets/BouquetForm.tsx` | Bouquet form component |
 | `lib/sanityWrite.ts` | createPartner, createBouquet, updateBouquet, uploadImageToSanity |
-| `lib/sanity.ts` | getPartnerById, getBouquetsByPartnerId, getBouquetById |
+| `lib/sanity.ts` | getPartnerById, getBouquetsByPartnerId, getCatalogBouquetById |
 | `sanity/schemas/partner.ts` | Partner: shopName, contactName, phoneNumber, lineOrWhatsapp, shopAddress, city, status |
 | `sanity/schemas/bouquet.ts` | Bouquet: slug, nameEn/Th, composition, category, partner ref, status, images, sizes |
 

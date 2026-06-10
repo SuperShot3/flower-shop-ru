@@ -364,7 +364,7 @@ export async function ensureCatalogProductImagesFromInline(
     revision_id: null,
     storage_path: image.storage_path.trim(),
     public_url: image.public_url ?? catalogPublicUrl(image.storage_path.trim()),
-    source_type: 'migrated_from_sanity' as CatalogImageSourceType,
+    source_type: 'migrated_from_import' as CatalogImageSourceType,
     alt_en: cleanText(image.alt),
     alt_th: null,
     is_primary: index === primaryIndex,

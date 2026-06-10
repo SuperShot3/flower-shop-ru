@@ -56,7 +56,7 @@ export interface CreateCatalogPartnerInput {
   shopAddress?: string;
   city?: string;
   supabaseUserId?: string;
-  legacySanityId?: string;
+  legacyImportId?: string;
 }
 
 export interface UpdateCatalogPartnerProfileInput {
@@ -94,7 +94,7 @@ export interface CreateCatalogBouquetInput {
   excludedDeliveryDestinations?: string[];
   images: CatalogImageUploadInput[];
   sizes: CatalogBouquetSizeInput[];
-  legacySanityId?: string;
+  legacyImportId?: string;
 }
 
 export interface CreateCatalogProductInput {
@@ -110,7 +110,7 @@ export interface CreateCatalogProductInput {
   cost?: number;
   images: CatalogImageUploadInput[];
   excludedDeliveryDestinations?: string[];
-  legacySanityId?: string;
+  legacyImportId?: string;
 }
 
 /** Upload processed product image variants to Storage `catalog` bucket. */
@@ -161,7 +161,7 @@ export async function createCatalogPartner(input: CreateCatalogPartnerInput): Pr
       city: (input.city || PRIMARY_SERVICE_CITY_EN).trim(),
       status: input.supabaseUserId ? 'approved' : 'pending_review',
       supabase_user_id: input.supabaseUserId?.trim() || null,
-      legacy_sanity_id: input.legacySanityId ?? null,
+      legacy_sanity_id: input.legacyImportId ?? null, // DB column name (Thailand export compatibility)
     })
     .select('id')
     .single();
@@ -227,7 +227,7 @@ export async function createCatalogBouquet(input: CreateCatalogBouquetInput): Pr
       presentation_formats: input.presentationFormats ?? [],
       excluded_delivery_destinations: input.excludedDeliveryDestinations ?? [],
       images: input.images,
-      legacy_sanity_id: input.legacySanityId ?? null,
+      legacy_sanity_id: input.legacyImportId ?? null, // DB column name (Thailand export compatibility)
     })
     .select('id')
     .single();
@@ -258,7 +258,7 @@ export async function createCatalogProduct(input: CreateCatalogProductInput): Pr
       moderation_status: 'submitted',
       excluded_delivery_destinations: input.excludedDeliveryDestinations ?? [],
       images: input.images,
-      legacy_sanity_id: input.legacySanityId ?? null,
+      legacy_sanity_id: input.legacyImportId ?? null, // DB column name (Thailand export compatibility)
     })
     .select('id')
     .single();
@@ -539,7 +539,7 @@ async function ensureUniqueCatalogSlug(baseSlug: string): Promise<string> {
   }
 }
 
-/** Built-in partner for admin-created non-flower products (no Sanity partner ref). */
+/** Built-in partner for admin-created non-flower products (no external partner ref). */
 export async function ensureCatalogSystemPartner(): Promise<string> {
   const supabase = requireSupabase();
   const { data: existing } = await supabase

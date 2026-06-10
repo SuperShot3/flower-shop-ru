@@ -555,7 +555,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     });
   }, [checkoutDeliveryProfile.destinationId, items, lang]);
 
-  // Backfill missing cart thumbnails after Sanity → Supabase cutover (or older persisted carts).
+  // Backfill missing cart thumbnails after catalog storage migration (or older persisted carts).
   useEffect(() => {
     if (items.length === 0) return;
     if (imageBackfillInFlightRef.current) return;

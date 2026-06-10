@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { BouquetCard } from '@/components/BouquetCard';
 import { ProductCard } from '@/components/ProductCard';
 import {
-  getBalloonBySlugFromSanity,
-  getBouquetBySlugFromSanity,
-  getPlushyToyBySlugFromSanity,
-  getProductBySlugFromSanity,
-} from '@/lib/sanity';
+  getCatalogBalloonBySlug,
+  getCatalogBouquetBySlug,
+  getCatalogPlushyToyBySlug,
+  getCatalogProductBySlug,
+} from '@/lib/catalogReads';
 import styles from './article.module.css';
 
 export async function CatalogProductCard({
@@ -28,9 +28,9 @@ export async function CatalogProductCard({
 
   // Prefer standalone catalog documents first, then fall back to partner products.
   const product =
-    (await getPlushyToyBySlugFromSanity(trimmed)) ??
-    (await getBalloonBySlugFromSanity(trimmed)) ??
-    (await getProductBySlugFromSanity(trimmed));
+    (await getCatalogPlushyToyBySlug(trimmed)) ??
+    (await getCatalogBalloonBySlug(trimmed)) ??
+    (await getCatalogProductBySlug(trimmed));
   if (product) {
     if (variant === 'article-catalog-button') {
       const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
@@ -70,7 +70,7 @@ export async function CatalogProductCard({
     );
   }
 
-  const bouquet = await getBouquetBySlugFromSanity(trimmed);
+  const bouquet = await getCatalogBouquetBySlug(trimmed);
   if (bouquet) {
     if (variant === 'article-catalog-button') {
       const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;

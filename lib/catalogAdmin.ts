@@ -70,7 +70,7 @@ async function loadPartner(
   return (data as CatalogPartnerRow) ?? null;
 }
 
-/** Resolve catalog bouquet id from UUID or legacy Sanity document id. */
+/** Resolve catalog bouquet id from UUID or legacy Catalog document id. */
 export async function resolveCatalogBouquetId(idOrLegacy: string): Promise<string | null> {
   const key = idOrLegacy.trim();
   if (!key) return null;
@@ -283,7 +283,7 @@ export async function getPendingBouquetsFromCatalog(): Promise<Bouquet[]> {
   return mapBouquetRowsToBouquets((data ?? []) as CatalogBouquetRow[]);
 }
 
-/** All bouquets in Supabase (e.g. after Sanity import — most are `approved`). */
+/** All bouquets in Supabase (e.g. after catalog import — most are `approved`). */
 export async function getAllBouquetsFromCatalog(): Promise<Bouquet[]> {
   const supabase = requireSupabase();
   const { data, error } = await supabase

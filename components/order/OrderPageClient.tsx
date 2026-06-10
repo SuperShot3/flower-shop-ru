@@ -32,7 +32,7 @@ import {
 const CART_STORAGE_KEY = 'lanna-bloom-cart';
 const CART_FORM_STORAGE_KEY = 'lanna-bloom-cart-form';
 
-function isLegacySanityImageUrl(url: string | undefined): boolean {
+function isLegacyRemoteImageUrl(url: string | undefined): boolean {
   const raw = (url ?? '').trim();
   if (!raw) return false;
   return raw.includes('cdn.sanity.io') || raw.includes('sanity.io');
@@ -572,7 +572,7 @@ export function OrderPageClient({
           {(order.items ?? []).map((item, i) => (
             <div key={i} className="order-redesign-item-row">
               <div className="order-redesign-item-img">
-                {item.imageUrl && !isLegacySanityImageUrl(item.imageUrl) ? (
+                {item.imageUrl && !isLegacyRemoteImageUrl(item.imageUrl) ? (
                   <Image
                     src={item.imageUrl}
                     alt=""

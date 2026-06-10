@@ -22,6 +22,10 @@ out
 # orders (JSON store; do not commit order data)
 data/orders.json
 
+# one-time Thailand catalog export (images + manifest)
+data/catalog/
+data/catalog-mirror-manifest.json
+
 # security audit (internal-only)
 SECURITY_AUDIT.md
 

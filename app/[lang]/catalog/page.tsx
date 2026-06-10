@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
-  getBalloonsFilteredFromSanity,
-  getBouquetsCatalogData,
-  getPlushyToysFilteredFromSanity,
-  getProductsFilteredFromSanity,
+  getCatalogBalloonsFiltered,
+  getCatalogBouquetsCatalogData,
+  getCatalogPlushyToysFiltered,
+  getCatalogProductsFiltered,
   type CatalogProduct,
-} from '@/lib/sanity';
+} from '@/lib/catalogReads';
 import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { CatalogWithFilters } from '@/components/CatalogWithFilters';
@@ -15,7 +15,7 @@ import { parseCatalogSearchParams } from '@/lib/catalogFilterParams';
 import type { Bouquet } from '@/lib/bouquets';
 import { getBaseUrl } from '@/lib/orders';
 
-// Revalidate catalog every 60 seconds so new flowers from Sanity appear without rebuild
+// Revalidate catalog every 60 seconds so new flowers appear without rebuild
 export const revalidate = 60;
 
 const BALLOONS_SEO_TITLE = 'Balloons Delivery in Chiang Mai';
@@ -81,7 +81,7 @@ export default async function CatalogPage({
   let products: CatalogProduct[] = [];
 
   if (topCategory === 'flowers') {
-    const data = await getBouquetsCatalogData({
+    const data = await getCatalogBouquetsCatalogData({
       ...filterParams,
       catalogDeliveryDestination: 'CHIANG_MAI',
     });
@@ -90,8 +90,8 @@ export default async function CatalogPage({
   } else if (topCategory === 'plushy_toys') {
     const sort = filterParams.sort || 'newest';
     const [standaloneToys, productToys] = await Promise.all([
-      getPlushyToysFilteredFromSanity({ sort }),
-      getProductsFilteredFromSanity({
+      getCatalogPlushyToysFiltered({ sort }),
+      getCatalogProductsFiltered({
         categoryKey: 'plushy_toys',
         sort,
         catalogDeliveryDestination: 'CHIANG_MAI',
@@ -101,8 +101,8 @@ export default async function CatalogPage({
   } else if (topCategory === 'balloons') {
     const sort = filterParams.sort || 'newest';
     const [standaloneBalloons, productBalloons] = await Promise.all([
-      getBalloonsFilteredFromSanity({ sort }),
-      getProductsFilteredFromSanity({
+      getCatalogBalloonsFiltered({ sort }),
+      getCatalogProductsFiltered({
         categoryKey: 'balloons',
         sort,
         catalogDeliveryDestination: 'CHIANG_MAI',
@@ -110,7 +110,7 @@ export default async function CatalogPage({
     ]);
     products = [...standaloneBalloons, ...productBalloons];
   } else if (PRODUCT_CATEGORIES.includes(topCategory as (typeof PRODUCT_CATEGORIES)[number])) {
-    products = await getProductsFilteredFromSanity({
+    products = await getCatalogProductsFiltered({
       categoryKey: topCategory,
       sort: filterParams.sort || 'newest',
       catalogDeliveryDestination: 'CHIANG_MAI',

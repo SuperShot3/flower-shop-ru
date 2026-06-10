@@ -9,7 +9,7 @@ This repository is **independent** from [lannabloom.shop](https://lannabloom.sho
 | Area | MVP (now) | Later |
 |------|-----------|--------|
 | Hosting | [Vercel](https://vercel.com) Hobby (free) | [Timeweb VPS](docs/deploy-vps.md) when catalog + sales are ready |
-| Database | [Neon](https://neon.tech) Postgres (free) | Postgres on VPS |
+| Database | [Supabase](https://supabase.com) Postgres via Vercel (free) | Postgres on VPS |
 | Images | [Vercel Blob](https://vercel.com/docs/storage/vercel-blob) (free tier) | VPS disk `/var/www/catalog/` |
 | Payments | Disabled in UI | YooKassa |
 | Partners / catalog | Partner apply form; catalog grows as partners join | Admin uploads, full catalog |
@@ -40,7 +40,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Apply the catalog schema once (Neon SQL editor or local Postgres):
+Apply the catalog schema once (Supabase SQL editor or local Postgres):
 
 ```bash
 # local Docker Postgres example:
@@ -54,7 +54,7 @@ Copy [`.env.example`](.env.example) → `.env.local`. Minimum for MVP:
 | Variable | Purpose |
 |----------|---------|
 | `NEXT_PUBLIC_APP_URL` | `https://www.ekb-flowers.ru` |
-| `DATABASE_URL` | Neon or local Postgres connection string |
+| `DATABASE_URL` | Supabase Postgres pooler URL or local Docker Postgres |
 | `AUTH_SECRET` | Random 32+ char secret for admin login |
 | `ADMIN_SEED_EMAIL` | `k.v.polovnikov@gmail.com` (first admin user) |
 | `BLOB_READ_WRITE_TOKEN` | Vercel Blob (catalog images on Vercel deploy) |
@@ -66,7 +66,7 @@ Do **not** copy `.env.local` from the Thailand `flower_shop` repo.
 1. Push this repo to GitHub: [github.com/SuperShot3/flower-shop-ru](https://github.com/SuperShot3/flower-shop-ru)
 2. [Vercel](https://vercel.com) → **Add New Project** → import `flower-shop-ru` (new project, not Thailand).
 3. Add the same env vars as `.env.local` in Vercel → Settings → Environment Variables.
-4. Create a **Neon** database, run `db/migrations/001_catalog_schema.sql`, set `DATABASE_URL`.
+4. Vercel → **Storage** → connect **Supabase** Postgres, run `db/migrations/001_catalog_schema.sql` in SQL editor, confirm `DATABASE_URL`.
 5. Vercel → Storage → **Blob** → connect store → set `BLOB_READ_WRITE_TOKEN`.
 6. Vercel → Settings → **Domains** → add `ekb-flowers.ru` and `www.ekb-flowers.ru`.
 7. In REG.RU DNS, point records to Vercel (values shown in the Domains UI), for example:
@@ -82,11 +82,13 @@ SSL is issued automatically by Vercel after DNS propagates.
 
 ## One-time migration from Thailand (optional)
 
-When you need real bouquet data, run from your Mac only using `.env.export.local` (gitignored):
+When you need real bouquet data, run from your Mac only using `.env.export.local` (gitignored). Full step-by-step guide: **[docs/export-catalog-from-thailand.md](docs/export-catalog-from-thailand.md)**
 
 ```bash
-npm run mirror-catalog          # images → data/catalog/
-npm run import-catalog-pg       # rows → Postgres (DATABASE_URL)
+npm run mirror-catalog:dry-run    # preview image paths
+npm run mirror-catalog            # download images (+ Vercel Blob if token set)
+npm run import-catalog-pg:dry-run # preview row counts
+npm run import-catalog-pg         # insert bouquets into Russia Postgres
 ```
 
 Uses `SUPABASE_EXPORT_*` — never deploy export credentials to Vercel or VPS.

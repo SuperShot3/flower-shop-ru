@@ -6,7 +6,7 @@ import { ProductOrderBlock } from '@/components/ProductOrderBlock';
 import { ProductAboutSection } from '@/components/pdp/ProductAboutSection';
 import { ProductShareLink } from '@/components/ProductShareLink';
 import type { Bouquet } from '@/lib/bouquets';
-import type { CatalogProduct } from '@/lib/sanity';
+import type { CatalogProduct } from '@/lib/catalog/types';
 import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import { trackViewItem } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';

@@ -140,7 +140,7 @@ export function BouquetReviewClient({ bouquet }: BouquetReviewClientProps) {
             <div className="admin-product-detail-action-card">
               <h3 className="admin-product-detail-action-card-title">Review actions</h3>
               <p className="admin-hint">
-                Only owner/admin roles can approve this bouquet. Approval changes its Sanity status to approved and makes it
+                Only owner/admin roles can approve this bouquet. Approval changes its catalog status to approved and makes it
                 available to catalog queries.
               </p>
               <input
@@ -244,7 +244,7 @@ export function BouquetReviewClient({ bouquet }: BouquetReviewClientProps) {
             </div>
 
             <div className="admin-product-detail-section">
-              <h3>Sanity details</h3>
+              <h3>Catalog details</h3>
               <ul className="admin-product-detail-attrs">
                 <li>ID: {bouquet.id}</li>
                 <li>Slug: {bouquet.slug}</li>

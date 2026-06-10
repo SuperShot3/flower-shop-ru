@@ -1,7 +1,7 @@
 // app/sitemap.ts
 import type { MetadataRoute } from 'next';
 import { getBaseUrl } from '@/lib/orders';
-import { getBouquetsFromSanity } from '@/lib/sanity';
+import { getCatalogBouquets } from '@/lib/catalogReads';
 import { locales } from '@/lib/i18n';
 import { articles } from '@/app/[lang]/info/_data/articles';
 import { getCollectionLandingPages } from '@/lib/landingPages/collectionLandingPages';
@@ -119,7 +119,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let bouquets: BouquetForSitemap[] = [];
   try {
-    bouquets = (await getBouquetsFromSanity()) as BouquetForSitemap[];
+    bouquets = (await getCatalogBouquets()) as BouquetForSitemap[];
   } catch {
     bouquets = [];
   }

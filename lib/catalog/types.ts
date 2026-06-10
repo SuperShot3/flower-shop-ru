@@ -160,7 +160,7 @@ export type CatalogRevisionStatus =
   | 'needs_changes'
   | 'published'
   | 'archived';
-export type CatalogImageSourceType = 'uploaded' | 'ai_generated' | 'migrated_from_sanity';
+export type CatalogImageSourceType = 'uploaded' | 'ai_generated' | 'migrated_from_import';
 export type CatalogCollectionPlacement =
   | 'homepage_popular'
   | 'bouquet_add_ons'
@@ -273,7 +273,7 @@ export type CatalogAuditEventRow = {
 export type CatalogPortrait = CatalogStoredImage;
 
 /**
- * Bouquet pricing JSONB — mirrors Sanity fields before mapping to sellable options.
+ * Bouquet pricing JSONB — stored shape before mapping to sellable options.
  * @see supabase/migrations/20260526120000_catalog_tables.sql
  */
 export type CatalogBouquetPricing = {
@@ -423,5 +423,5 @@ export type CatalogSiteSettingsRow = {
   updated_at: string;
 };
 
-/** Legacy Sanity id for the built-in partner used for admin-owned catalog products. */
+/** Legacy import id for the built-in partner used for admin-owned catalog products. */
 export const CATALOG_SYSTEM_PARTNER_LEGACY_ID = '__lanna_bloom_catalog__';

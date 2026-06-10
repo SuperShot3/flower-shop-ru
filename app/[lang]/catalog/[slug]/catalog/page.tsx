@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import {
-  getBouquetsCatalogData,
-  getProductsFilteredFromSanity,
+  getCatalogBouquetsCatalogData,
+  getCatalogProductsFiltered,
   type CatalogProduct,
-} from '@/lib/sanity';
+} from '@/lib/catalogReads';
 import { isValidLocale, type Locale } from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { CatalogWithFilters } from '@/components/CatalogWithFilters';
@@ -48,7 +48,7 @@ export default async function MarketCatalogPageViaSlug({
   let products: CatalogProduct[] = [];
 
   if (topCategory === 'flowers') {
-    const data = await getBouquetsCatalogData({
+    const data = await getCatalogBouquetsCatalogData({
       ...filterParams,
       catalogDeliveryDestination: market.destinationId,
     });
@@ -58,7 +58,7 @@ export default async function MarketCatalogPageViaSlug({
     // Expansion market restriction: keep chips visible, show coming soon (empty list).
     products = [];
   } else {
-    products = await getProductsFilteredFromSanity({
+    products = await getCatalogProductsFiltered({
       categoryKey: topCategory,
       sort: filterParams.sort || 'newest',
     });

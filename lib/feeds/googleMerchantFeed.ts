@@ -6,7 +6,7 @@ import {
   getProductDisplayCategory,
   type DisplayCategory,
 } from '@/lib/catalogCategories';
-import type { CatalogProduct } from '@/lib/sanity';
+import type { CatalogProduct } from '@/lib/catalog/types';
 
 export const FEED_BRAND = 'Lanna Bloom';
 export const FEED_DESTINATION = 'CHIANG_MAI' as const;
@@ -126,7 +126,7 @@ export function formatFeedPrice(amountThb: number): string {
   return `${amountThb.toFixed(2)} THB`;
 }
 
-/** Prefer high-res Sanity CDN URLs for Merchant Center image quality. */
+/** Prefer high-res catalog image URLs for Merchant Center image quality. */
 export function highResFeedImageUrl(url: string): string {
   if (!url || url.startsWith('data:')) return '';
   try {

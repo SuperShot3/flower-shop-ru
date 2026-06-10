@@ -1,5 +1,7 @@
 # Lanna Bloom — Page Structure, UI Layout & UX
 
+> **Deprecated Thailand fork doc.** EKB Flowers (Russia) uses **Supabase Postgres + Storage** only — no Sanity CMS. See `README.md` and `ai_context/00_START_HERE.md`.
+
 ## 1. Page Structure
 
 | Route | Purpose |
@@ -72,7 +74,7 @@
 **Data / lib:**
 - **lib/i18n.ts** — Locales (EN, TH), all UI strings including partner and buyNow/delivery.
 - **lib/bouquets.ts** — Bouquet/BouquetSize types; used by front-end and Sanity mapping.
-- **lib/sanity.ts** — Sanity read client; `getBouquetsFromSanity`, `getBouquetBySlugFromSanity`, `getPartnerById`, `getBouquetsByPartnerId`, `getPartnerBySupabaseUserId`, `getProductsForModeration`, etc. Image URL builder.
+- **lib/sanity.ts** — Sanity read client; `getCatalogBouquets`, `getCatalogBouquetBySlug`, `getPartnerById`, `getBouquetsByPartnerId`, `getPartnerBySupabaseUserId`, `getProductsForModeration`, etc. Image URL builder.
 - **lib/sanityWrite.ts** — Sanity write client (server-only); `createPartner` (accepts supabaseUserId), `uploadImageToSanity`, `createBouquet`, `updateBouquet`, `createProduct`, `updateProductModerationStatus`. Requires `SANITY_API_WRITE_TOKEN`.
 - **lib/supabase/** — Supabase client; `partner_applications` CRUD; partner auth (session).
 - **lib/delivery-areas.ts** — Chiang Mai districts (EN/TH); `CITY_EN`, `CITY_TH`, `CHIANG_MAI_DISTRICTS`, postal-code search helper.

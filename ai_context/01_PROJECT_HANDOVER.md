@@ -61,7 +61,7 @@ No self-serve partner portal in MVP.
 
 | Phase | Hosting | DB | Images |
 |-------|---------|-----|--------|
-| **Now (MVP)** | Vercel | Neon Postgres | Vercel Blob |
+| **Now (MVP)** | Vercel | Supabase Postgres | Vercel Blob |
 | **Later** | Timeweb VPS | Postgres on VPS | `/var/www/catalog/` |
 
 Domain DNS at REG.RU → Vercel. Ignore REG.RU shared hosting FTP/MySQL for this app.

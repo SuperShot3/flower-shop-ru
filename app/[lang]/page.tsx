@@ -6,7 +6,7 @@ import { PopularSectionSkeleton } from '@/components/PopularSectionSkeleton';
 import { ExperienceSection } from '@/components/ExperienceSection';
 import { PartnersCarousel } from '@/components/PartnersCarousel';
 import { ReviewsSection } from '@/components/reviews/ReviewsSection';
-import { getHeroImageFromSanity, getHeroCarouselImagesFromSanity } from '@/lib/sanity';
+import { getCatalogHeroImage, getCatalogHeroCarouselImages } from '@/lib/catalogReads';
 import { getBaseUrl } from '@/lib/orders';
 import {isValidLocale, defaultLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { Suspense } from 'react';
@@ -45,8 +45,8 @@ export default async function HomePage({
 }) {
   const lang = isValidLocale(params.lang) ? params.lang : defaultLocale;
   const [heroImageUrl, carouselImages] = await Promise.all([
-    getHeroImageFromSanity(),
-    getHeroCarouselImagesFromSanity(),
+    getCatalogHeroImage(),
+    getCatalogHeroCarouselImages(),
   ]);
   return (
     <>

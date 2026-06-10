@@ -4,7 +4,7 @@
  * Partners do NOT create new categories — platform-defined only.
  */
 
-/** Top-level catalog categories (flowers = bouquets, others = Sanity products) */
+/** Top-level catalog categories (flowers = bouquets, others = catalog_products) */
 export const CATALOG_TOP_CATEGORIES = [
   'flowers',
   'plushy_toys',
@@ -18,7 +18,7 @@ export type CatalogTopCategory = (typeof CATALOG_TOP_CATEGORIES)[number];
 
 
 
-/** Non-flower product categories (must match Sanity product.category options) */
+/** Non-flower product categories (must match catalog_products.category values) */
 export const PRODUCT_CATEGORIES = [
   'balloons',
   'plushy_toys',
@@ -90,7 +90,7 @@ const FORMAT_TO_DISPLAY: Array<[string, DisplayCategory]> = [
   ['bouquet', 'Bouquets'],
 ];
 
-/** Maps Sanity `product.category` value → human-readable label. */
+/** Maps catalog_products.category value → human-readable label. */
 export const PRODUCT_CATEGORY_LABEL: Record<string, DisplayCategory> = {
   balloons: 'Balloons',
   gifts: 'Gifts & Sets',

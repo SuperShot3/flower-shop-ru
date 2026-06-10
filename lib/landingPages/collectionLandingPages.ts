@@ -134,7 +134,7 @@ const commonFaq = {
     },
     {
       q: 'Can I add a teddy bear, balloons, or a gift set?',
-      a: 'Yes. Available add-ons come from our Sanity product catalog and can be added to your cart with the bouquet.',
+      a: 'Yes. Available add-ons come from our product catalog and can be added to your cart with the bouquet.',
     },
     {
       q: 'Can I include a message card?',
@@ -148,7 +148,7 @@ const commonFaq = {
     },
     {
       q: 'เพิ่มตุ๊กตา ลูกโป่ง หรือชุดของขวัญได้ไหม?',
-      a: 'ได้ สินค้าเสริมที่มีอยู่จะดึงจาก Sanity product catalog และสามารถเพิ่มลงตะกร้าพร้อมช่อดอกไม้ได้',
+      a: 'ได้ สินค้าเสริมที่มีอยู่จะดึงจาก product catalog และสามารถเพิ่มลงตะกร้าพร้อมช่อดอกไม้ได้',
     },
     {
       q: 'ใส่การ์ดข้อความได้ไหม?',
@@ -222,7 +222,7 @@ export const roseColorLandings = [
         deliveryNote: 'Order before 2:00 PM for same-day delivery when available.',
         collectionTitle: 'White Roses Collection',
         collectionIntro:
-          'A focused selection of white rose bouquets from our Sanity catalog, filtered for rose type and white color.',
+          'A focused selection of white rose bouquets from our catalog, filtered for rose type and white color.',
         addOnsTitle: 'Also perfect with your bouquet',
         addOnsIntro: 'Complete the gift with available teddy bears, balloons, or gift sets from our product catalog.',
         trustItems: trustItems.en,
@@ -233,7 +233,7 @@ export const roseColorLandings = [
         faq: commonFaq.en,
         emptyTitle: 'White roses are being updated',
         emptyText:
-          'We could not find approved white rose bouquets in Sanity right now. Please browse all roses while the collection is updated.',
+          'We could not find approved white rose bouquets in the catalog right now. Please browse all roses while the collection is updated.',
       },
       th: {
         seoTitle: 'กุหลาบขาวในเชียงใหม่ | Lanna Bloom',
@@ -247,7 +247,7 @@ export const roseColorLandings = [
         deliveryNote: 'สั่งก่อน 14:00 น. เพื่อจัดส่งวันเดียวเมื่อสินค้าพร้อมจำหน่าย',
         collectionTitle: 'คอลเลกชันกุหลาบขาว',
         collectionIntro:
-          'รายการช่อกุหลาบขาวจาก Sanity catalog โดยกรองจากชนิดดอกกุหลาบและสีขาว',
+          'รายการช่อกุหลาบขาวจาก catalog โดยกรองจากชนิดดอกกุหลาบและสีขาว',
         addOnsTitle: 'ของเสริมที่เข้ากับช่อดอกไม้',
         addOnsIntro: 'เติมเต็มของขวัญด้วยตุ๊กตา ลูกโป่ง หรือชุดของขวัญจาก product catalog',
         trustItems: trustItems.th,
@@ -258,7 +258,7 @@ export const roseColorLandings = [
         faq: commonFaq.th,
         emptyTitle: 'กำลังอัปเดตกุหลาบขาว',
         emptyText:
-          'ตอนนี้ยังไม่พบช่อกุหลาบขาวที่อนุมัติแล้วใน Sanity โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
+          'ตอนนี้ยังไม่พบช่อกุหลาบขาวที่อนุมัติแล้วในแคตตาล็อก โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
       },
     }),
   },
@@ -281,7 +281,7 @@ export const roseColorLandings = [
         deliveryNote: 'Order before 2:00 PM for same-day delivery when available.',
         collectionTitle: 'Pink Roses Collection',
         collectionIntro:
-          'A focused selection of pink rose bouquets from our Sanity catalog, filtered for rose type and pink color.',
+          'A focused selection of pink rose bouquets from our catalog, filtered for rose type and pink color.',
         addOnsTitle: 'Also perfect with your bouquet',
         addOnsIntro: 'Complete the gift with available teddy bears, balloons, or gift sets from our product catalog.',
         trustItems: trustItems.en,
@@ -292,7 +292,7 @@ export const roseColorLandings = [
         faq: commonFaq.en,
         emptyTitle: 'Pink roses are being updated',
         emptyText:
-          'We could not find approved pink rose bouquets in Sanity right now. Please browse all roses while the collection is updated.',
+          'We could not find approved pink rose bouquets in the catalog right now. Please browse all roses while the collection is updated.',
       },
       th: {
         seoTitle: 'กุหลาบชมพูในเชียงใหม่ | Lanna Bloom',
@@ -306,7 +306,7 @@ export const roseColorLandings = [
         deliveryNote: 'สั่งก่อน 14:00 น. เพื่อจัดส่งวันเดียวเมื่อสินค้าพร้อมจำหน่าย',
         collectionTitle: 'คอลเลกชันกุหลาบชมพู',
         collectionIntro:
-          'รายการช่อกุหลาบชมพูจาก Sanity catalog โดยกรองจากชนิดดอกกุหลาบและสีชมพู',
+          'รายการช่อกุหลาบชมพูจาก catalog โดยกรองจากชนิดดอกกุหลาบและสีชมพู',
         addOnsTitle: 'ของเสริมที่เข้ากับช่อดอกไม้',
         addOnsIntro: 'เติมเต็มของขวัญด้วยตุ๊กตา ลูกโป่ง หรือชุดของขวัญจาก product catalog',
         trustItems: trustItems.th,
@@ -317,7 +317,7 @@ export const roseColorLandings = [
         faq: commonFaq.th,
         emptyTitle: 'กำลังอัปเดตกุหลาบชมพู',
         emptyText:
-          'ตอนนี้ยังไม่พบช่อกุหลาบชมพูที่อนุมัติแล้วใน Sanity โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
+          'ตอนนี้ยังไม่พบช่อกุหลาบชมพูที่อนุมัติแล้วในแคตตาล็อก โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
       },
     }),
   },
@@ -340,7 +340,7 @@ export const roseColorLandings = [
         deliveryNote: 'Order before 2:00 PM for same-day delivery when available.',
         collectionTitle: 'Red Roses Collection',
         collectionIntro:
-          'A focused selection of red rose bouquets from our Sanity catalog, filtered for rose type and red color.',
+          'A focused selection of red rose bouquets from our catalog, filtered for rose type and red color.',
         addOnsTitle: 'Also perfect with your bouquet',
         addOnsIntro: 'Complete the gift with available teddy bears, balloons, or gift sets from our product catalog.',
         trustItems: trustItems.en,
@@ -351,7 +351,7 @@ export const roseColorLandings = [
         faq: commonFaq.en,
         emptyTitle: 'Red roses are being updated',
         emptyText:
-          'We could not find approved red rose bouquets in Sanity right now. Please browse all roses while the collection is updated.',
+          'We could not find approved red rose bouquets in the catalog right now. Please browse all roses while the collection is updated.',
       },
       th: {
         seoTitle: 'กุหลาบแดงในเชียงใหม่ | Lanna Bloom',
@@ -365,7 +365,7 @@ export const roseColorLandings = [
         deliveryNote: 'สั่งก่อน 14:00 น. เพื่อจัดส่งวันเดียวเมื่อสินค้าพร้อมจำหน่าย',
         collectionTitle: 'คอลเลกชันกุหลาบแดง',
         collectionIntro:
-          'รายการช่อกุหลาบแดงจาก Sanity catalog โดยกรองจากชนิดดอกกุหลาบและสีแดง',
+          'รายการช่อกุหลาบแดงจาก catalog โดยกรองจากชนิดดอกกุหลาบและสีแดง',
         addOnsTitle: 'ของเสริมที่เข้ากับช่อดอกไม้',
         addOnsIntro: 'เติมเต็มของขวัญด้วยตุ๊กตา ลูกโป่ง หรือชุดของขวัญจาก product catalog',
         trustItems: trustItems.th,
@@ -376,7 +376,7 @@ export const roseColorLandings = [
         faq: commonFaq.th,
         emptyTitle: 'กำลังอัปเดตกุหลาบแดง',
         emptyText:
-          'ตอนนี้ยังไม่พบช่อกุหลาบแดงที่อนุมัติแล้วใน Sanity โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
+          'ตอนนี้ยังไม่พบช่อกุหลาบแดงที่อนุมัติแล้วในแคตตาล็อก โปรดดูช่อกุหลาบทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
       },
     }),
   },
@@ -405,7 +405,7 @@ const orchidFaq = {
     },
     {
       q: 'Can I add a teddy bear, balloons, or a gift set?',
-      a: 'Yes. Available add-ons come from our Sanity product catalog and can be added to your cart with the bouquet.',
+      a: 'Yes. Available add-ons come from our product catalog and can be added to your cart with the bouquet.',
     },
     {
       q: 'Can I include a message card?',
@@ -419,7 +419,7 @@ const orchidFaq = {
     },
     {
       q: 'เพิ่มตุ๊กตา ลูกโป่ง หรือชุดของขวัญได้ไหม?',
-      a: 'ได้ สินค้าเสริมที่มีอยู่จะดึงจาก Sanity product catalog และสามารถเพิ่มลงตะกร้าพร้อมช่อดอกไม้ได้',
+      a: 'ได้ สินค้าเสริมที่มีอยู่จะดึงจาก product catalog และสามารถเพิ่มลงตะกร้าพร้อมช่อดอกไม้ได้',
     },
     {
       q: 'ใส่การ์ดข้อความได้ไหม?',
@@ -499,7 +499,7 @@ const orchidsHubCopy = withLocaleFallback({
       'All orchid arrangements available for Chiang Mai delivery from our catalog—browse styles below and order online.',
     emptyTitle: 'Orchids are being updated',
     emptyText:
-      'We could not find approved orchid products in Sanity right now. Please browse the full catalog while the collection is updated.',
+      'We could not find approved orchid products in the catalog right now. Please browse the full catalog while the collection is updated.',
   },
   th: {
     seoTitle: 'กล้วยไม้ในเชียงใหม่ | Lanna Bloom',
@@ -571,7 +571,7 @@ const orchidsHubCopy = withLocaleFallback({
       'กล้วยไม้ทั้งหมดที่จัดส่งได้ในเชียงใหม่จากคอลเลกชันของเรา—เลือกสไตล์ด้านล่างและสั่งออนไลน์',
     emptyTitle: 'กำลังอัปเดตกล้วยไม้',
     emptyText:
-      'ตอนนี้ยังไม่พบกล้วยไม้ที่อนุมัติแล้วใน Sanity โปรดดูแคตตาล็อกทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
+      'ตอนนี้ยังไม่พบกล้วยไม้ที่อนุมัติแล้วในแคตตาล็อก โปรดดูแคตตาล็อกทั้งหมดระหว่างรออัปเดตคอลเลกชัน',
   },
 } satisfies Record<'en' | 'th', CollectionHubCopy>);
 

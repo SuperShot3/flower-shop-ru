@@ -15,7 +15,7 @@ import { trackAddToCart } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
 import { FloristCard } from '@/components/FloristCard';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
-import type { CatalogProduct } from '@/lib/sanity';
+import type { CatalogProduct } from '@/lib/catalog/types';
 import { getPreferredBouquetSize } from '@/lib/favorites';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
 import { useOrderGiftCardMessage } from '@/hooks/useOrderGiftCardMessage';

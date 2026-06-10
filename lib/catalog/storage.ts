@@ -5,7 +5,7 @@ import type { CatalogStoredImage } from '@/lib/catalog/types';
 
 export const CATALOG_BUCKET = 'catalog';
 
-function isSanityCdnUrl(url: string): boolean {
+function isLegacyRemoteCdnUrl(url: string): boolean {
   const raw = url.trim();
   if (!raw) return false;
   try {
@@ -30,7 +30,7 @@ export function catalogPublicUrl(storagePath: string): string {
 
 export function storedImagePublicUrl(image: CatalogStoredImage): string {
   const publicUrl = image.public_url?.trim();
-  if (publicUrl && !isSanityCdnUrl(publicUrl)) return publicUrl;
+  if (publicUrl && !isLegacyRemoteCdnUrl(publicUrl)) return publicUrl;
   if (!image.storage_path) return publicUrl ?? '';
   return catalogPublicUrl(image.storage_path);
 }

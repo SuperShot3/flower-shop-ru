@@ -33,7 +33,7 @@ export function ProductGallery({
   images: string[];
   imageAlts?: string[];
   name: string;
-  /** Sanity document id - used for shared element view-transition-name */
+  /** Catalog document id - used for shared element view-transition-name */
   productId?: string;
   activeIndex?: number;
   onActiveChange?: (index: number) => void;

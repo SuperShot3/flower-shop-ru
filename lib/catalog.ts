@@ -110,10 +110,10 @@ export type { CatalogFilterParams, PopularCatalogItem } from '@/lib/catalogListL
 
 const HERO_IMAGE_FALLBACK = '/HeroImage/heroimage.webp';
 
-/** Feature flag: public storefront reads from Supabase when set. */
+/** Storefront catalog reads Postgres when DATABASE_URL is set. */
 
 export function isCatalogReadFromSupabase(): boolean {
-  return isDatabaseConfigured() && process.env.CATALOG_READ_SOURCE !== 'sanity';
+  return isDatabaseConfigured();
 }
 
 function requireDatabase(): void {
@@ -255,7 +255,7 @@ export async function getBouquetBySlugFromCatalog(
 
 export async function getBouquetByLegacySanityId(legacyId: string): Promise<Bouquet | null> {
   requireDatabase();
-  const row = await catalogDb.fetchBouquetByLegacySanityId(legacyId);
+  const row = await catalogDb.fetchBouquetByLegacyImportId(legacyId);
   if (!row) return null;
   const partner = row.partner_id ? await catalogDb.fetchPartnerById(row.partner_id) : null;
   return mapBouquetRowWithImages(row, partner);

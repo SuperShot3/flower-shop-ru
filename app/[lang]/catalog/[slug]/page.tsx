@@ -6,25 +6,25 @@ import { buildBouquetProductJsonLd } from '@/lib/seo/productJsonLd';
 import { ProductPageClient } from './ProductPageClient';
 import { ProductDetailClient } from './ProductDetailClient';
 import {
-  getBalloonBySlugFromSanity,
-  getBouquetBySlugFromSanity,
-  getBouquetsFromSanity,
-  getPlushyToyBySlugFromSanity,
-  getPopularBouquetsFromSanity,
-  getProductBySlugFromSanity,
-  getProductsFilteredFromSanity,
-} from '@/lib/sanity';
+  getCatalogBalloonBySlug,
+  getCatalogBouquetBySlug,
+  getCatalogBouquets,
+  getCatalogPlushyToyBySlug,
+  getCatalogPopularBouquets,
+  getCatalogProductBySlug,
+  getCatalogProductsFiltered,
+} from '@/lib/catalogReads';
 import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
 import MarketCatalogPageViaSlug from './catalog/page';
 import { getReviewStatsAsync } from '@/lib/reviews';
 
-// Revalidate product pages every 60 seconds so Sanity updates appear without rebuild
+// Revalidate product pages every 60 seconds so catalog updates appear without rebuild
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const bouquets = await getBouquetsFromSanity();
+  const bouquets = await getCatalogBouquets();
   return locales.flatMap((lang) =>
     bouquets.map((b) => ({ lang, slug: b.slug }))
   );
@@ -40,7 +40,7 @@ export async function generateMetadata({
   if (!isValidLocale(params.lang)) return {};
   if (getMarketByPathSlug(params.slug)) return {};
 
-  const bouquet = await getBouquetBySlugFromSanity(params.slug);
+  const bouquet = await getCatalogBouquetBySlug(params.slug);
   if (!bouquet) return {};
 
   const isTh = isThaiLocale(params.lang);
@@ -78,10 +78,10 @@ export default async function ProductPage({
     return MarketCatalogPageViaSlug({ params, searchParams });
   }
 
-  const bouquet = await getBouquetBySlugFromSanity(params.slug);
+  const bouquet = await getCatalogBouquetBySlug(params.slug);
   if (bouquet) {
     const reviewStats = await getReviewStatsAsync();
-    const gifts = await getProductsFilteredFromSanity({ categoryKey: 'gifts' });
+    const gifts = await getCatalogProductsFiltered({ categoryKey: 'gifts' });
     const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
     const description = isThaiLocale(lang) ? bouquet.descriptionTh : bouquet.descriptionEn;
     const composition = isThaiLocale(lang) ? bouquet.compositionTh : bouquet.compositionEn;
@@ -127,13 +127,13 @@ export default async function ProductPage({
     );
   }
 
-  const plushyToy = await getPlushyToyBySlugFromSanity(params.slug);
+  const plushyToy = await getCatalogPlushyToyBySlug(params.slug);
   if (plushyToy) {
     const name = isThaiLocale(lang) && plushyToy.nameTh ? plushyToy.nameTh : plushyToy.nameEn;
     const description = (isThaiLocale(lang) ? plushyToy.descriptionTh : plushyToy.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
-    const suggestedBouquets = await getPopularBouquetsFromSanity(8);
+    const suggestedBouquets = await getCatalogPopularBouquets(8);
 
     return (
       <div className="product-page">
@@ -160,13 +160,13 @@ export default async function ProductPage({
     );
   }
 
-  const balloon = await getBalloonBySlugFromSanity(params.slug);
+  const balloon = await getCatalogBalloonBySlug(params.slug);
   if (balloon) {
     const name = isThaiLocale(lang) && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
     const description = (isThaiLocale(lang) ? balloon.descriptionTh : balloon.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog?topCategory=balloons`;
-    const suggestedBouquets = await getPopularBouquetsFromSanity(8);
+    const suggestedBouquets = await getCatalogPopularBouquets(8);
 
     return (
       <div className="product-page">
@@ -193,9 +193,9 @@ export default async function ProductPage({
     );
   }
 
-  const product = await getProductBySlugFromSanity(params.slug);
+  const product = await getCatalogProductBySlug(params.slug);
   if (product) {
-    const gifts = await getProductsFilteredFromSanity({ categoryKey: 'gifts' });
+    const gifts = await getCatalogProductsFiltered({ categoryKey: 'gifts' });
     const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
     const description = (isThaiLocale(lang) ? product.descriptionTh : product.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;

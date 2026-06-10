@@ -67,7 +67,7 @@ export async function fetchBouquetBySlug(
   return row;
 }
 
-export async function fetchBouquetByLegacySanityId(legacyId: string): Promise<CatalogBouquetRow | null> {
+export async function fetchBouquetByLegacyImportId(legacyId: string): Promise<CatalogBouquetRow | null> {
   return queryOne<CatalogBouquetRow>(
     `SELECT * FROM catalog_bouquets WHERE legacy_sanity_id = $1 LIMIT 1`,
     [legacyId]

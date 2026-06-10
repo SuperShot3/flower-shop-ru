@@ -5,7 +5,7 @@
 
 import { isThaiLocale, type Locale } from '@/lib/i18n';
 
-/** Legacy Sanity size keys; optional on hybrid options for cart backward compat */
+/** Legacy size keys; optional on hybrid options for cart backward compat */
 export type SizeKey = 's' | 'm' | 'l' | 'xl';
 
 export interface BouquetSellableOption {

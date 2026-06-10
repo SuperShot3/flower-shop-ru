@@ -16,7 +16,7 @@ type AdminProduct = ModerationProduct & { slug?: string };
 
 type ProductModerationClientProps = {
   initialBouquets: Bouquet[];
-  /** Full bouquet list for Catalog tab (imported Sanity items are usually approved). */
+  /** Full bouquet list for Catalog tab (imported catalog items are usually approved). */
   catalogBouquets?: Bouquet[];
   initialProducts: ModerationProduct[];
   allProducts: AdminProduct[];
@@ -328,7 +328,7 @@ export function ProductModerationClient({
         productFilter === 'all' &&
         allProducts.length === 0 && (
           <p className="admin-empty">
-            No catalog items yet. Run <code>npm run import-catalog</code> to copy Sanity data into Supabase.
+            No catalog items yet. Run <code>catalog import scripts</code> to import catalog data into Postgres.
           </p>
         )}
       {section === 'moderation' && productFilter === 'all' && allProducts.length === 0 && (

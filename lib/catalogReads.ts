@@ -1,5 +1,5 @@
 /**
- * Storefront catalog reads — Supabase by default (CATALOG_READ_SOURCE=sanity for rollback).
+ * Storefront catalog reads — Postgres (Supabase connection via DATABASE_URL).
  */
 import 'server-only';
 
@@ -32,8 +32,7 @@ import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 
 function catalogReadNotConfigured(): never {
   throw new Error(
-    'CATALOG_READ_SOURCE=sanity is no longer supported — catalog reads use Supabase. ' +
-      'Run npm run import-catalog and remove CATALOG_READ_SOURCE=sanity from env.'
+    'Missing DATABASE_URL — set Postgres connection string (Supabase pooler URL on Vercel).'
   );
 }
 
@@ -158,3 +157,6 @@ export async function getCatalogProductById(productId: string) {
   if (!isCatalogReadFromSupabase()) catalogReadNotConfigured();
   return getProductByIdFromCatalog(productId);
 }
+
+export type { CatalogProduct } from '@/lib/catalog/types';
+export type { CatalogFilterParams, PopularCatalogItem } from '@/lib/catalogListLogic';

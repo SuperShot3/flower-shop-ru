@@ -7,7 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 -- Partners
 CREATE TABLE IF NOT EXISTS public.catalog_partners (
   id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  legacy_sanity_id    text UNIQUE,
+  legacy_sanity_id    text UNIQUE, -- legacy import id (Thailand export column name)
   shop_name           text NOT NULL,
   contact_name        text NOT NULL,
   phone_number        text NOT NULL,

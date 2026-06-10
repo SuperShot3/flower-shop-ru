@@ -10,7 +10,7 @@ import type { CatalogProductImageRow } from '@/lib/catalog/types';
 
 export type VariantImageSet = { urls: string[]; alts: string[] };
 
-function isSanityCdnUrl(url: string): boolean {
+function isLegacyRemoteCdnUrl(url: string): boolean {
   const raw = url.trim();
   if (!raw) return false;
   try {
@@ -32,7 +32,7 @@ function rowsToUrls(rows: CatalogProductImageRow[]): VariantImageSet {
       continue;
     }
     const publicUrl = row.public_url?.trim();
-    urls.push(publicUrl && !isSanityCdnUrl(publicUrl) ? publicUrl : catalogPublicUrl(row.storage_path));
+    urls.push(publicUrl && !isLegacyRemoteCdnUrl(publicUrl) ? publicUrl : catalogPublicUrl(row.storage_path));
     alts.push(row.alt_en?.trim() || row.alt_th?.trim() || '');
   }
   return { urls, alts };
