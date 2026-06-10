@@ -20,7 +20,7 @@ function pointsAtThailandSupabase(value: string): boolean {
 }
 
 export function getForbiddenRuntimeEnvVars(): string[] {
-  const forbidden = FORBIDDEN_RUNTIME_VARS.filter((name) => {
+  const forbidden: string[] = FORBIDDEN_RUNTIME_VARS.filter((name) => {
     const value = process.env[name]?.trim();
     return Boolean(value);
   });
