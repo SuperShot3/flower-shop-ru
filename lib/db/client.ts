@@ -6,6 +6,22 @@ export type { QueryResultRow };
 
 let pool: Pool | null = null;
 
+/**
+ * pg 8.x treats sslmode=require as verify-full unless uselibpqcompat=true.
+ * Managed poolers (Supabase, Neon) need libpq semantics to avoid self-signed cert errors in Node.
+ */
+function normalizeConnectionString(connectionString: string): string {
+  const isLocal = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test(connectionString);
+  if (isLocal || /sslmode=disable/i.test(connectionString)) {
+    return connectionString;
+  }
+  if (/uselibpqcompat=true/i.test(connectionString)) {
+    return connectionString;
+  }
+  const sep = connectionString.includes('?') ? '&' : '?';
+  return `${connectionString}${sep}uselibpqcompat=true`;
+}
+
 export function isDatabaseConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL?.trim());
 }
@@ -18,7 +34,7 @@ export function getPool(): Pool {
 
   if (!pool) {
     pool = new Pool({
-      connectionString,
+      connectionString: normalizeConnectionString(connectionString),
       max: 10,
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 10_000,

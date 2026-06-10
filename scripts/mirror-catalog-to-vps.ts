@@ -71,6 +71,87 @@ async function uploadBufferToVercelBlob(
   return result.url;
 }
 
+function resolveBlobStoreId(): string | undefined {
+  return (
+    process.env.BLOB_STORE_ID?.trim() ||
+    process.env.BLOB_RU_STORE_ID?.trim() ||
+    undefined
+  );
+}
+
+function logBlobEnvDiagnostics(shouldUploadBlob: boolean): void {
+  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  const storeId = resolveBlobStoreId();
+  const oidc = process.env.VERCEL_OIDC_TOKEN?.trim();
+
+  if (!shouldUploadBlob) return;
+
+  console.log('[mirror-catalog] Blob auth env:');
+  console.log('  BLOB_READ_WRITE_TOKEN:', token ? 'set (vercel_blob_rw_…)' : 'missing');
+  console.log('  BLOB_STORE_ID:', process.env.BLOB_STORE_ID?.trim() ? 'set' : 'missing');
+  console.log('  BLOB_RU_STORE_ID:', process.env.BLOB_RU_STORE_ID?.trim() ? 'set (custom alias — SDK ignores unless mapped)' : 'missing');
+  console.log('  VERCEL_OIDC_TOKEN:', oidc ? 'set' : 'missing');
+
+  if (!token && storeId && !oidc) {
+    console.warn(
+      '[mirror-catalog] BLOB_RU_STORE_ID / BLOB_STORE_ID alone is not enough for local uploads.',
+      'You need BLOB_READ_WRITE_TOKEN (starts with vercel_blob_rw_) from the Blob store settings,',
+      'or run: vercel link && vercel env pull  (sets BLOB_STORE_ID + VERCEL_OIDC_TOKEN).'
+    );
+  }
+
+  if (storeId && !process.env.BLOB_STORE_ID?.trim() && process.env.BLOB_RU_STORE_ID?.trim()) {
+    console.warn(
+      '[mirror-catalog] Tip: @vercel/blob expects BLOB_STORE_ID on Vercel deploys.',
+      'Keep Vercel env name as BLOB_STORE_ID, or duplicate: BLOB_STORE_ID=<same value as BLOB_RU_STORE_ID>.'
+    );
+  }
+}
+
+function isPrivateStorePublicAccessError(message: string): boolean {
+  return message.includes('private store') && message.includes('public access');
+}
+
+function isPublicStorePrivateAccessError(message: string): boolean {
+  return message.includes('public store') && message.includes('private access');
+}
+
+/** Fail fast before uploading hundreds of images when token/store access mode mismatch. */
+async function assertBlobStoreCompatible(token: string, access: 'public' | 'private'): Promise<void> {
+  const probePath = `.mirror-catalog-probe-${Date.now()}.txt`;
+  try {
+    await uploadBufferToVercelBlob(probePath, Buffer.from('ok'), token, access);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+
+    if (access === 'public' && isPrivateStorePublicAccessError(message)) {
+      throw new Error(
+        [
+          'Your BLOB_READ_WRITE_TOKEN is for a PRIVATE Vercel Blob store, but catalog images need a PUBLIC store.',
+          'Vercel does not allow changing access mode after creation.',
+          '',
+          'Fix:',
+          '  1. Vercel → flower-shop-ru → Storage → Create → Blob → choose Public',
+          '  2. Connect the new store to the project',
+          '  3. Copy the new BLOB_READ_WRITE_TOKEN into .env.local / .env.export.local',
+          '  4. Set BLOB_UPLOAD_ACCESS=public (or remove it — public is default)',
+          '  5. Re-run: npm run mirror-catalog',
+          '',
+          'Workaround (DB only, no production images): npm run mirror-catalog -- --skip-blob',
+        ].join('\n')
+      );
+    }
+
+    if (access === 'private' && isPublicStorePrivateAccessError(message)) {
+      throw new Error(
+        'Your Blob store is Public but BLOB_UPLOAD_ACCESS=private. Set BLOB_UPLOAD_ACCESS=public or remove it.'
+      );
+    }
+
+    throw err;
+  }
+}
+
 async function main() {
   const supabaseUrl = requireExportEnv('SUPABASE_EXPORT_URL');
   const outputDir = process.env.MIRROR_OUTPUT_DIR?.trim() || path.join(process.cwd(), 'data', 'catalog');
@@ -89,6 +170,7 @@ async function main() {
   console.log('[mirror-catalog] Output dir:', outputDir);
   console.log('[mirror-catalog] Public base URL:', publicBase);
   console.log('[mirror-catalog] Upload to Vercel Blob:', shouldUploadBlob);
+  logBlobEnvDiagnostics(shouldUploadBlob);
   if (shouldUploadBlob) {
     console.log('[mirror-catalog] Blob access mode:', blobAccess);
     if (blobAccess === 'private') {
@@ -103,6 +185,12 @@ async function main() {
   }
   console.log('[mirror-catalog] Include pending bouquets:', INCLUDE_PENDING);
   console.log('[mirror-catalog] Dry run:', DRY_RUN);
+
+  if (shouldUploadBlob && blobToken && !DRY_RUN) {
+    console.log('[mirror-catalog] Probing Vercel Blob store access…');
+    await assertBlobStoreCompatible(blobToken, blobAccess);
+    console.log('[mirror-catalog] Blob store OK for access:', blobAccess);
+  }
 
   const supabase = await createThailandSupabaseClient();
 
