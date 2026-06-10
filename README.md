@@ -134,3 +134,4 @@ npm start
 4. Optional: add a custom domain in Vercel and set `NEXT_PUBLIC_APP_URL` to that domain.
 
 For detailed order storage setup and “Order not found” troubleshooting, see **docs/ORDERS_VERCEL.md**.
+# flower-shop-ru
