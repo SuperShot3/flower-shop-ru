@@ -108,6 +108,26 @@ export function productKindFromBouquetRow(row: ThailandBouquetRow): string {
   return pricingTypeToProductKind(row.pricing_type);
 }
 
+/** Russia Postgres uses pricing_type (product_kind was dropped in bootstrap). */
+export function pricingTypeFromBouquetRow(row: ThailandBouquetRow): string {
+  if (
+    row.pricing_type === 'single_price' ||
+    row.pricing_type === 'size_based' ||
+    row.pricing_type === 'stem_count'
+  ) {
+    return row.pricing_type;
+  }
+  const kind = productKindFromBouquetRow(row);
+  switch (kind) {
+    case 'single_stem_count':
+      return 'stem_count';
+    case 'fixed_bouquet':
+      return 'size_based';
+    default:
+      return 'single_price';
+  }
+}
+
 export function collectStoragePathsFromStoredImages(
   images: CatalogStoredImage[] | null | undefined,
   paths: Set<string>

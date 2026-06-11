@@ -1,29 +1,18 @@
 import 'server-only';
 
 import { Pool, type QueryResultRow } from 'pg';
-import { resolveDatabaseUrl } from '@/lib/db/resolveDatabaseUrl';
+import { normalizeConnectionString, resolveDatabaseUrl } from '@/lib/db/resolveDatabaseUrl';
 
-export { resolveDatabaseUrl, requireDatabaseUrl } from '@/lib/db/resolveDatabaseUrl';
+export {
+  normalizeConnectionString,
+  resolveDatabaseUrl,
+  requireDatabaseUrl,
+  requireNormalizedDatabaseUrl,
+} from '@/lib/db/resolveDatabaseUrl';
 
 export type { QueryResultRow };
 
 let pool: Pool | null = null;
-
-/**
- * pg 8.x treats sslmode=require as verify-full unless uselibpqcompat=true.
- * Managed poolers (Supabase, Neon) need libpq semantics to avoid self-signed cert errors in Node.
- */
-function normalizeConnectionString(connectionString: string): string {
-  const isLocal = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test(connectionString);
-  if (isLocal || /sslmode=disable/i.test(connectionString)) {
-    return connectionString;
-  }
-  if (/uselibpqcompat=true/i.test(connectionString)) {
-    return connectionString;
-  }
-  const sep = connectionString.includes('?') ? '&' : '?';
-  return `${connectionString}${sep}uselibpqcompat=true`;
-}
 
 export function isDatabaseConfigured(): boolean {
   return Boolean(resolveDatabaseUrl());

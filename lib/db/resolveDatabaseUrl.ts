@@ -22,3 +22,23 @@ export function requireDatabaseUrl(): string {
   }
   return url;
 }
+
+/**
+ * pg 8.x treats sslmode=require as verify-full unless uselibpqcompat=true.
+ * Managed poolers (Supabase, Neon) need libpq semantics to avoid self-signed cert errors in Node.
+ */
+export function normalizeConnectionString(connectionString: string): string {
+  const isLocal = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test(connectionString);
+  if (isLocal || /sslmode=disable/i.test(connectionString)) {
+    return connectionString;
+  }
+  if (/uselibpqcompat=true/i.test(connectionString)) {
+    return connectionString;
+  }
+  const sep = connectionString.includes('?') ? '&' : '?';
+  return `${connectionString}${sep}uselibpqcompat=true`;
+}
+
+export function requireNormalizedDatabaseUrl(): string {
+  return normalizeConnectionString(requireDatabaseUrl());
+}

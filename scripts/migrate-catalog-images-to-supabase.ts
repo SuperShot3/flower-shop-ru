@@ -19,9 +19,10 @@ import { config } from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import { Pool } from 'pg';
 
-import { CATALOG_BUCKET } from '../lib/catalog/storage';
+import { normalizeConnectionString } from '../lib/db/resolveDatabaseUrl';
 import { isThailandSupabaseCredential } from '../lib/env/validateRussiaEnv';
 import {
+  CATALOG_BUCKET,
   MANIFEST_PATH,
   mapWithConcurrency,
   normalizeStoragePath,
@@ -58,7 +59,7 @@ function resolveDatabaseUrl(): string {
   if (isThailandSupabaseCredential(url)) {
     throw new Error('POSTGRES_URL points at Thailand Supabase.');
   }
-  return url;
+  return normalizeConnectionString(url);
 }
 
 function supabasePublicUrl(supabaseUrl: string, storagePath: string): string {

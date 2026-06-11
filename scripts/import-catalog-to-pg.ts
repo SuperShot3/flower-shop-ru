@@ -20,7 +20,7 @@ import {
   fetchThailandBouquets,
   fetchThailandPartnersByIds,
   loadExportEnv,
-  productKindFromBouquetRow,
+  pricingTypeFromBouquetRow,
   readManifest,
   requireExportEnv,
   rewriteStoredImage,
@@ -50,7 +50,7 @@ const BOUQUET_COLUMNS = [
   'description_th',
   'composition_en',
   'composition_th',
-  'product_kind',
+  'pricing_type',
   'pricing',
   'status',
   'featured_popular',
@@ -107,8 +107,26 @@ const IMAGE_COLUMNS = [
   'deleted_at',
 ] as const;
 
-function pickColumns(row: Record<string, unknown>, columns: readonly string[]): unknown[] {
-  return columns.map((col) => row[col] ?? null);
+const JSONB_COLUMNS: Record<string, ReadonlySet<string>> = {
+  catalog_partners: new Set(['portrait']),
+  catalog_bouquets: new Set(['pricing', 'images']),
+  catalog_product_images: new Set(['metadata']),
+};
+
+function pickColumns(
+  table: string,
+  row: Record<string, unknown>,
+  columns: readonly string[]
+): unknown[] {
+  const jsonbCols = JSONB_COLUMNS[table];
+  return columns.map((col) => {
+    const value = row[col] ?? null;
+    if (value == null) return null;
+    if (jsonbCols?.has(col) && typeof value === 'object') {
+      return JSON.stringify(value);
+    }
+    return value;
+  });
 }
 
 function mapPartnerRow(row: ThailandPartnerRow, manifest: ReturnType<typeof readManifest>) {
@@ -124,7 +142,7 @@ function mapPartnerRow(row: ThailandPartnerRow, manifest: ReturnType<typeof read
 function mapBouquetRow(row: ThailandBouquetRow, manifest: ReturnType<typeof readManifest>) {
   return {
     ...row,
-    product_kind: productKindFromBouquetRow(row),
+    pricing_type: pricingTypeFromBouquetRow(row),
     images: rewriteStoredImages(row.images, manifest),
     excluded_delivery_destinations: row.excluded_delivery_destinations ?? [],
   };
@@ -163,7 +181,7 @@ async function upsertRows(
     .map((c) => `${c} = EXCLUDED.${c}`)
     .join(', ');
 
-  const params = rows.flatMap((row) => pickColumns(row, columns));
+  const params = rows.flatMap((row) => pickColumns(table, row, columns));
   await db.query(
     `INSERT INTO ${table} (${colList})
      VALUES ${valuePlaceholders}
@@ -176,8 +194,8 @@ async function upsertRows(
 async function main() {
   requireExportEnv('SUPABASE_EXPORT_URL');
   requireExportEnv('SUPABASE_EXPORT_SERVICE_ROLE_KEY');
-  const { requireDatabaseUrl } = await import('../lib/db/resolveDatabaseUrl');
-  const databaseUrl = requireDatabaseUrl();
+  const { requireNormalizedDatabaseUrl } = await import('../lib/db/resolveDatabaseUrl');
+  const databaseUrl = requireNormalizedDatabaseUrl();
 
   console.log('[import-catalog] Dry run:', DRY_RUN);
   console.log('[import-catalog] Include pending bouquets:', INCLUDE_PENDING);
@@ -285,6 +303,7 @@ async function main() {
     await client.query('COMMIT');
     console.log('[import-catalog] Import complete.');
     console.log('[import-catalog] Next: npm run dev — verify bouquets on the storefront.');
+    console.log('[import-catalog] If the site still shows an empty catalog, clear .next/cache locally or redeploy on Vercel (ISR cache).');
   } catch (err) {
     await client.query('ROLLBACK');
     throw err;
