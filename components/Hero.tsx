@@ -13,8 +13,6 @@ import { getMarketByPathSlug, isMarketPathSlug } from '@/lib/delivery/markets';
 import { readMarketSession } from '@/lib/delivery/marketSession';
 import { GoogleReviewsBadge } from '@/components/GoogleReviewsBadge';
 
-const DEFAULT_HERO_IMAGE = 'public/HeroImage/heroimage.webp';
-
 const FALLBACK_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1563241527-3004b7becc23?auto=format&fit=crop&q=80&w=800&h=1000',
   'https://images.unsplash.com/photo-1561181286-d3fee7d55ef6?auto=format&fit=crop&q=80&w=800&h=1000',
@@ -57,17 +55,19 @@ function HeroExpressDeliveryCard({
 }
 
 function buildHeroCarouselImages(
-  heroImageUrl?: string,
+  heroImageUrl?: string | null,
   carouselImages?: string[]
 ): HeroCarouselImage[] {
-  const sourceImages =
-    carouselImages && carouselImages.length > 0
-      ? carouselImages
-      : heroImageUrl
-        ? [heroImageUrl]
-        : FALLBACK_HERO_IMAGES;
+  if (carouselImages && carouselImages.length > 0) {
+    return carouselImages.map((src) => ({ src, alt: HERO_IMAGE_ALT }));
+  }
 
-  return sourceImages.map((src) => ({ src, alt: HERO_IMAGE_ALT }));
+  // Matches admin copy: fallback hero only when carousel is empty; otherwise stock placeholders.
+  if (heroImageUrl) {
+    return [{ src: heroImageUrl, alt: HERO_IMAGE_ALT }];
+  }
+
+  return FALLBACK_HERO_IMAGES.map((src) => ({ src, alt: HERO_IMAGE_ALT }));
 }
 
 function HeroVisualBlock({
@@ -142,7 +142,7 @@ export function Hero({
   browseCollectionHref,
 }: {
   lang: Locale;
-  heroImageUrl?: string;
+  heroImageUrl?: string | null;
   carouselImages?: string[];
   /** Optional page-specific H1 override (keeps same hero design). */
   titleOverride?: React.ReactNode;
@@ -168,8 +168,7 @@ export function Hero({
     : `/${lang}/catalog`;
   const primaryCtaHref = browseCollectionHref ?? catalogHref;
   const howToHref = `/${lang}/info/how-to-order-flower-delivery-chiang-mai`;
-  const imageSrc = heroImageUrl || DEFAULT_HERO_IMAGE;
-  const heroCarouselImages = buildHeroCarouselImages(imageSrc, carouselImages);
+  const heroCarouselImages = buildHeroCarouselImages(heroImageUrl, carouselImages);
   const isHomeLanding =
     !titleOverride &&
     (pathname === '/' ||

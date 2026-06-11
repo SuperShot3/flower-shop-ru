@@ -108,8 +108,6 @@ export type {
 
 export type { CatalogFilterParams, PopularCatalogItem } from '@/lib/catalogListLogic';
 
-const HERO_IMAGE_FALLBACK = '/HeroImage/heroimage.webp';
-
 /** Storefront catalog reads Postgres when POSTGRES_URL is set. */
 
 export function isCatalogReadFromSupabase(): boolean {
@@ -685,19 +683,19 @@ export async function getPartnerFromCatalog(partnerId: string): Promise<Partner 
   return mapPartnerRowToPartner(data);
 }
 
-async function fetchHeroImageUncached(): Promise<string> {
+async function fetchHeroImageUncached(): Promise<string | null> {
   requireDatabase();
   const data = await catalogDb.fetchSiteSettings();
   const hero = data?.hero_image as CatalogStoredImage | null;
   if (hero?.storage_path && isStorefrontCatalogImage(hero)) {
     return storedImagePublicUrl(hero);
   }
-  return HERO_IMAGE_FALLBACK;
+  return null;
 }
 
 const loadHeroImage = cacheSupabaseCatalog('hero-image', fetchHeroImageUncached);
 
-export async function getHeroImageFromCatalog(): Promise<string> {
+export async function getHeroImageFromCatalog(): Promise<string | null> {
   return loadHeroImage();
 }
 

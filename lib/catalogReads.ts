@@ -60,7 +60,7 @@ export async function getCatalogBouquetById(bouquetId: string): Promise<Bouquet 
   return getBouquetByIdFromCatalog(bouquetId);
 }
 
-export async function getCatalogHeroImage(): Promise<string> {
+export async function getCatalogHeroImage(): Promise<string | null> {
   if (!isCatalogReadFromSupabase()) catalogReadNotConfigured();
   return getHeroImageFromCatalog();
 }
