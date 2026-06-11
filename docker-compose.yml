@@ -1,4 +1,4 @@
-# Production stack for Timeweb VPS — Postgres + Next.js on one server.
+# Optional local dev — Postgres + Next.js (production uses Vercel + Supabase).
 # Usage: docker compose --env-file .env.production up -d
 
 services:

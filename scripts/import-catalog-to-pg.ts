@@ -133,7 +133,7 @@ function mapBouquetRow(row: ThailandBouquetRow, manifest: ReturnType<typeof read
 function mapImageRow(row: ThailandProductImageRow, manifest: ReturnType<typeof readManifest>) {
   const storagePath = row.storage_path.trim();
   const mapping = manifest.mappings[storagePath.replace(/^\/+/, '')];
-  const publicUrl = mapping?.blobUrl ?? mapping?.publicUrl ?? row.public_url;
+  const publicUrl = mapping?.storageUrl ?? mapping?.blobUrl ?? mapping?.publicUrl ?? row.public_url;
   return {
     ...row,
     storage_path: storagePath.replace(/^\/+/, ''),

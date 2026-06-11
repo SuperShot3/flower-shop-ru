@@ -19,8 +19,9 @@ Before editing APIs, auth, orders, or checkout, read:
 Critical rules (EKB Flowers / Russia):
 
 - Never trust client-side prices, totals, delivery fees, discounts, payment status, order status, user role, or ownership.
-- **Do not** add `SUPABASE_*`, `STRIPE_*`, or Thailand credentials to Russia runtime env — `validateRussiaEnv` blocks them.
-- `DATABASE_URL` and `BLOB_READ_WRITE_TOKEN` are server-only — never `NEXT_PUBLIC_*`.
+- **Do not** add Thailand `SUPABASE_*`, `STRIPE_*`, or Thailand credentials to Russia runtime env — `validateRussiaEnv` blocks them.
+- Russia runtime **requires** `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` for admin and storage.
+- `POSTGRES_URL` and Supabase keys are server-only — never `NEXT_PUBLIC_*` unless anon key is explicitly needed client-side (not MVP).
 - Customer order APIs require a valid `public_token`; invalid token → 404.
 - Admin routes require NextAuth; verify RBAC on admin mutations. Seed admin: `k.v.polovnikov@gmail.com`.
 

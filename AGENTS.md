@@ -17,10 +17,9 @@ Read the relevant context file for the task:
 
 ## MVP stack (current)
 
-- **Vercel** + **Supabase Postgres** + **Vercel Blob** (free tier)
+- **Vercel** + **Supabase Postgres** + **Supabase Storage**
 - Domain **ekb-flowers.ru** (REG.RU) → DNS to Vercel
 - Payments **disabled**; YooKassa later
-- **Timeweb VPS** — post-MVP ([docs/deploy-vps.md](docs/deploy-vps.md))
 
 Do not rely on assumptions or memory. Inspect the actual code before editing.
 

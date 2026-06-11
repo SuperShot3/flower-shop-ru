@@ -15,8 +15,12 @@ const FORBIDDEN_RUNTIME_VARS = [
 
 const POSTGRES_ENV_KEYS = ['POSTGRES_URL', 'POSTGRES_PRISMA_URL', 'DATABASE_URL'] as const;
 
-function pointsAtThailandSupabase(value: string): boolean {
+export function isThailandSupabaseCredential(value: string): boolean {
   return value.includes(THAILAND_SUPABASE_PROJECT_REF);
+}
+
+function pointsAtThailandSupabase(value: string): boolean {
+  return isThailandSupabaseCredential(value);
 }
 
 export function getForbiddenRuntimeEnvVars(): string[] {

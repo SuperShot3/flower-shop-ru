@@ -193,11 +193,16 @@ const nextConfig = {
           return [];
         }
       })(),
-      {
-        protocol: 'https',
-        hostname: 'storage.yandexcloud.net',
-        pathname: '/**',
-      },
+      ...(function supabaseStorageRemotePatterns() {
+        const raw = process.env.SUPABASE_URL?.trim() || '';
+        try {
+          const host = new URL(raw).hostname;
+          if (!host) return [];
+          return [{ protocol: 'https', hostname: host, pathname: '/storage/v1/object/public/**' }];
+        } catch {
+          return [];
+        }
+      })(),
     ],
   },
 };

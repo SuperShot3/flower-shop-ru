@@ -1,3 +1,6 @@
+-- DEPRECATED: use db/bootstrap/06_catalog.sql via `npm run db:bootstrap:apply`
+-- (full schema: orders, admin, accounting, RLS). This file is catalog-only MVP.
+--
 -- EKB Flowers — catalog MVP schema (Postgres via DATABASE_URL).
 -- Launch city: Yekaterinburg only (expand to more cities later).
 -- No Supabase auth.users FK; no RLS (app uses DATABASE_URL directly).

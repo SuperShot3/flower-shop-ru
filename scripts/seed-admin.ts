@@ -1,10 +1,14 @@
 /**
  * One-time script to seed the first admin user.
- * Run: ADMIN_SEED_EMAIL=k.v.polovnikov@gmail.com ADMIN_SEED_PASSWORD=yourpassword npx tsx scripts/seed-admin.ts
- * Requires: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+ * Run: npm run seed-admin
+ * Requires: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ADMIN_SEED_EMAIL, ADMIN_SEED_PASSWORD in .env.local
  */
 import { createClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
+
+import { loadLocalEnv } from './load-local-env';
+
+loadLocalEnv();
 
 const url = process.env.SUPABASE_URL?.trim();
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();

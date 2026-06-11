@@ -84,10 +84,6 @@ Where code lives in the Next.js App Router monorepo.
 | **Vercel Blob** | Catalog image files (MVP) |
 | Legacy `lib/supabase/*` client / Stripe routes | Not wired for MVP storefront |
 
-## Data stores (post-VPS)
-
-See [docs/deploy-vps.md](../docs/deploy-vps.md) — Postgres + disk on Timeweb VPS.
-
 ## Config
 
 | File | Role |
@@ -95,7 +91,7 @@ See [docs/deploy-vps.md](../docs/deploy-vps.md) — Postgres + disk on Timeweb V
 | `next.config.js` | Next config, `transpilePackages` |
 | `.env.example` | Russia env documentation |
 | `db/migrations/` | Postgres schema (not `supabase/migrations/` for Russia prod) |
-| `docker-compose.yml` | Local / future VPS Postgres |
+| `docker-compose.yml` | Optional local Postgres for dev |
 
 ## Cross-cutting flows
 

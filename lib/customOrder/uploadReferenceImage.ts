@@ -1,5 +1,8 @@
 import 'server-only';
 
+import { CATALOG_BUCKET, supabaseStoragePublicUrl } from '@/lib/catalog/storage';
+import { getSupabaseAdmin } from '@/lib/supabase/server';
+
 export const CUSTOM_ORDER_REFERENCE_IMAGE_MAX_BYTES = 4 * 1024 * 1024;
 export const CUSTOM_ORDER_REFERENCE_IMAGE_RETENTION_DAYS = 30;
 export const ALLOWED_CUSTOM_ORDER_REFERENCE_IMAGE_TYPES = [
@@ -8,6 +11,8 @@ export const ALLOWED_CUSTOM_ORDER_REFERENCE_IMAGE_TYPES = [
   'image/webp',
   'image/gif',
 ] as const;
+
+const CUSTOM_ORDER_REFS_PREFIX = 'custom-order-refs';
 
 type AllowedReferenceImageType = (typeof ALLOWED_CUSTOM_ORDER_REFERENCE_IMAGE_TYPES)[number];
 
@@ -67,33 +72,36 @@ export async function getValidCustomOrderReferenceImageContentType(
 }
 
 /**
- * Upload a reference image for a custom order to Vercel Blob.
- * Returns public URL, or null if BLOB_READ_WRITE_TOKEN is not set / upload fails.
+ * Upload a reference image for a custom order to Supabase Storage (`catalog` bucket).
+ * Returns public URL, or null if Supabase is not configured / upload fails.
  */
 export async function uploadCustomOrderReferenceImage(
   file: File,
   uploadKey: string
 ): Promise<{ url: string } | null> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
-  if (!token || file.size === 0) return null;
+  const supabase = getSupabaseAdmin();
+  if (!supabase || file.size === 0) return null;
   if (file.size > CUSTOM_ORDER_REFERENCE_IMAGE_MAX_BYTES) return null;
   const contentType = await getValidCustomOrderReferenceImageContentType(file);
   if (!contentType) return null;
 
   const safeName = file.name.replace(/[^\w.\-()]/g, '_').slice(0, 120) || 'image';
   const yyyyMm = new Date().toISOString().slice(0, 7);
-  const path = `custom-order-refs/${yyyyMm}/${uploadKey}/${Date.now()}-${safeName}`;
+  const storagePath = `${CUSTOM_ORDER_REFS_PREFIX}/${yyyyMm}/${uploadKey}/${Date.now()}-${safeName}`;
 
   try {
-    const { put } = await import('@vercel/blob');
-    const blob = await put(path, file, {
-      access: 'public',
-      token,
+    const arrayBuffer = await file.arrayBuffer();
+    const { error } = await supabase.storage.from(CATALOG_BUCKET).upload(storagePath, arrayBuffer, {
       contentType,
+      upsert: false,
     });
-    return { url: blob.url };
+    if (error) {
+      console.error('[customOrder] Storage upload failed:', error.message);
+      return null;
+    }
+    return { url: supabaseStoragePublicUrl(CATALOG_BUCKET, storagePath) };
   } catch (e) {
-    console.error('[customOrder] Blob upload failed:', e);
+    console.error('[customOrder] Storage upload failed:', e);
     return null;
   }
 }
@@ -101,29 +109,46 @@ export async function uploadCustomOrderReferenceImage(
 export async function deleteCustomOrderReferenceImagesOlderThan(
   cutoff: Date
 ): Promise<{ scanned: number; deleted: number }> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
-  if (!token) return { scanned: 0, deleted: 0 };
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return { scanned: 0, deleted: 0 };
 
-  const { del, list } = await import('@vercel/blob');
-  let cursor: string | undefined;
+  let offset = 0;
+  const limit = 1000;
   let scanned = 0;
   let deleted = 0;
 
-  do {
-    const result = await list({ prefix: 'custom-order-refs/', limit: 1000, cursor, token });
-    scanned += result.blobs.length;
-
-    const expiredUrls = result.blobs
-      .filter((blob) => blob.uploadedAt.getTime() < cutoff.getTime())
-      .map((blob) => blob.url);
-
-    if (expiredUrls.length > 0) {
-      await del(expiredUrls, { token });
-      deleted += expiredUrls.length;
+  while (true) {
+    const { data, error } = await supabase.storage.from(CATALOG_BUCKET).list(CUSTOM_ORDER_REFS_PREFIX, {
+      limit,
+      offset,
+      sortBy: { column: 'created_at', order: 'asc' },
+    });
+    if (error) {
+      console.error('[customOrder] Storage list failed:', error.message);
+      break;
     }
 
-    cursor = result.cursor;
-  } while (cursor);
+    const files = data ?? [];
+    if (!files.length) break;
+    scanned += files.length;
+
+    const expiredPaths = files
+      .filter((file) => file.name && file.created_at)
+      .filter((file) => new Date(file.created_at!).getTime() < cutoff.getTime())
+      .map((file) => `${CUSTOM_ORDER_REFS_PREFIX}/${file.name}`);
+
+    if (expiredPaths.length) {
+      const { error: removeError } = await supabase.storage.from(CATALOG_BUCKET).remove(expiredPaths);
+      if (removeError) {
+        console.error('[customOrder] Storage delete failed:', removeError.message);
+        break;
+      }
+      deleted += expiredPaths.length;
+    }
+
+    if (files.length < limit) break;
+    offset += limit;
+  }
 
   return { scanned, deleted };
 }

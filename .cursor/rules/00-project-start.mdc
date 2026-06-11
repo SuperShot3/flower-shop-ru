@@ -12,10 +12,8 @@ Do not rely on assumptions or memory. Inspect the actual code before editing.
 
 This is **EKB Flowers** — Russia storefront at [ekb-flowers.ru](https://www.ekb-flowers.ru).
 
-**MVP stack:** Next.js on Vercel, Supabase Postgres (`POSTGRES_URL`), Vercel Blob, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
+**MVP stack:** Next.js on Vercel, Supabase Postgres (`POSTGRES_URL`), Supabase Storage, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
 
 **Runtime env guard:** `lib/env/validateRussiaEnv.ts` — see `ai_context/03_SECURITY_RULES.md`.
-
-**Later:** Timeweb VPS — see `docs/deploy-vps.md`.
 
 For product or blog copy, use `.cursor/skills/flower-content-writer/` or `.cursor/skills/blog-content-writer/` instead of expanding rules.

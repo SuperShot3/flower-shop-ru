@@ -19,6 +19,8 @@ export type CatalogMirrorMapping = {
   localPath: string;
   publicUrl: string;
   blobUrl?: string;
+  /** Supabase Storage public URL (Russia migration). */
+  storageUrl?: string;
   skipped?: boolean;
   error?: string;
 };
@@ -27,7 +29,7 @@ export type CatalogMirrorManifest = {
   generatedAt: string;
   sourceSupabaseUrl: string;
   publicBase: string;
-  uploadTarget: 'local' | 'vercel-blob';
+  uploadTarget: 'local' | 'vercel-blob' | 'supabase-storage';
   stats: {
     bouquets: number;
     partners: number;
@@ -150,7 +152,7 @@ export function rewriteStoredImage(
 ): CatalogStoredImage {
   const storagePath = normalizeStoragePath(img.storage_path);
   const mapping = manifest.mappings[storagePath];
-  const publicUrl = mapping?.blobUrl ?? mapping?.publicUrl ?? img.public_url;
+  const publicUrl = mapping?.storageUrl ?? mapping?.blobUrl ?? mapping?.publicUrl ?? img.public_url;
   return {
     ...img,
     storage_path: storagePath,

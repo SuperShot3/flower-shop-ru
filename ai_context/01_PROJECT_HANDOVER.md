@@ -16,10 +16,10 @@ Business and product context for the **Russia** storefront ([ekb-flowers.ru](htt
 | Site live on `ekb-flowers.ru` | YooKassa live payments |
 | Partner **apply** form | Partner dashboard / self-serve uploads |
 | Empty or minimal catalog | Full catalog migration from Thailand |
-| Static/legal pages | VPS migration |
+| Static/legal pages | — |
 | Admin login for staff | Accounting/email automation |
 
-**Goal now:** show a credible storefront URL while recruiting florist partners. Add partner images to catalog as they sign up. Move to Timeweb VPS when ready to sell at scale.
+**Goal now:** show a credible storefront URL while recruiting florist partners. Add partner images to catalog as they sign up. Scale on Vercel + Supabase; add YooKassa when ready to sell.
 
 ## Customer experience (MVP)
 
@@ -59,10 +59,12 @@ No self-serve partner portal in MVP.
 
 ## Infrastructure
 
-| Phase | Hosting | DB | Images |
-|-------|---------|-----|--------|
-| **Now (MVP)** | Vercel | Supabase Postgres | Vercel Blob |
-| **Later** | Timeweb VPS | Postgres on VPS | `/var/www/catalog/` |
+| Layer | Technology |
+|-------|------------|
+| Hosting | Vercel |
+| Database | Supabase Postgres (`POSTGRES_URL`) |
+| Images | Supabase Storage (`catalog` bucket); interim Vercel Blob during migration |
+| Payments (later) | YooKassa |
 
 Domain DNS at REG.RU → Vercel. Ignore REG.RU shared hosting FTP/MySQL for this app.
 
@@ -74,4 +76,3 @@ Domain DNS at REG.RU → Vercel. Ignore REG.RU shared hosting FTP/MySQL for this
 ## Deep dive
 
 - [README.md](../README.md) — deploy and env setup
-- [docs/deploy-vps.md](../docs/deploy-vps.md) — post-MVP VPS runbook

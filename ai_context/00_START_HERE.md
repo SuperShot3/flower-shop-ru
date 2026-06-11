@@ -15,19 +15,11 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | App | Next.js 14 App Router, React 18, TypeScript |
 | Hosting | **Vercel** Hobby |
 | Database | **Supabase** Postgres via `POSTGRES_URL` — catalog, partners, orders (later) |
-| Catalog images | **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`) until VPS migration |
+| Catalog images | **Supabase Storage** (`catalog` bucket) |
 | Domain | `ekb-flowers.ru` at REG.RU → DNS to Vercel |
 | Payments | **Disabled** — `lib/checkout/paymentAvailability.ts` |
 | Analytics | **Yandex Metrica** (`NEXT_PUBLIC_YANDEX_METRICA_ID`) — not GTM/GA4 |
 | Admin auth | NextAuth (`/admin`) — seed `k.v.polovnikov@gmail.com` |
-
-## Stack (later — when selling)
-
-| Layer | Technology |
-|-------|------------|
-| Hosting | Timeweb VPS + Docker — see [docs/deploy-vps.md](../docs/deploy-vps.md) |
-| Database | Postgres on VPS |
-| Images | VPS disk `/var/www/catalog/` (nginx) |
 
 ## Context index
 
@@ -45,7 +37,7 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Topic | Primary locations |
 |-------|-------------------|
 | Catalog reads | `lib/catalog.ts`, `lib/db/catalogRead.ts`, `lib/catalogReads.ts` |
-| Catalog images | `lib/catalog/storage.ts`, Vercel Blob (MVP) |
+| Catalog images | `lib/catalog/storage.ts`, Supabase Storage `catalog` bucket |
 | Partner apply | `app/[lang]/partner/apply/` |
 | Checkout UI | `app/[lang]/cart/`, `app/[lang]/checkout/` |
 | Payment gate | `lib/checkout/paymentAvailability.ts` |
@@ -53,7 +45,8 @@ Read this file before substantive work. Use topic files below for depth; use `do
 | Admin login | `auth.ts`, `app/admin/login/` |
 | Russia env guard | `lib/env/validateRussiaEnv.ts`, `instrumentation.ts` |
 | DB client | `lib/db/client.ts` |
-| Schema | `db/migrations/001_catalog_schema.sql` |
+| Schema (fresh DB) | `db/bootstrap/` (7 files) — `npm run db:bootstrap:apply` — see `docs/DATABASE_BOOTSTRAP.md` |
+| Schema (legacy history) | `supabase/migrations/` (68 incremental; do not squash on live DBs) |
 
 ## Env vars (names only — see `.env.example`)
 
@@ -63,7 +56,9 @@ Read this file before substantive work. Use topic files below for depth; use `do
 |----------|---------|
 | `NEXT_PUBLIC_APP_URL` | `https://www.ekb-flowers.ru` |
 | `POSTGRES_URL` | Supabase Postgres pooler URL (Vercel integration or `.env.local`) |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob — catalog images |
+| `SUPABASE_URL` | Russia Supabase project URL — admin client + Storage |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only — admin bypass RLS, storage uploads |
+| `SUPABASE_ANON_KEY` | Server-only — customer order reads via `x-order-token` RLS |
 | `AUTH_SECRET` | Admin NextAuth |
 | `ADMIN_SEED_EMAIL` | `k.v.polovnikov@gmail.com` (seed script) |
 | `ADMIN_SEED_PASSWORD` | Set locally; never commit |
@@ -80,5 +75,4 @@ Read this file before substantive work. Use topic files below for depth; use `do
 
 ## Deep dive (`docs/`)
 
-- [docs/deploy-vps.md](../docs/deploy-vps.md) — future Timeweb VPS
 - [README.md](../README.md) — setup and Vercel deploy checklist

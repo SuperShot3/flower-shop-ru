@@ -13,7 +13,7 @@ At startup, `instrumentation.ts` calls `assertRussiaRuntimeEnv()`. These vars mu
 | `NEXT_PUBLIC_GTM_ID` | Thailand analytics — use Yandex Metrica |
 | `RESEND_API_KEY` | Thailand email — defer or RU SMTP later |
 
-**Allowed for Russia MVP:** `POSTGRES_URL`, `BLOB_READ_WRITE_TOKEN` (this repo's **own** Vercel Blob store), `AUTH_SECRET`, `NEXT_PUBLIC_APP_URL`.
+**Allowed for Russia MVP:** `POSTGRES_URL`, `SUPABASE_URL` (Russia project only), `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`, `AUTH_SECRET`, `NEXT_PUBLIC_APP_URL`.
 
 Run `npm run check-isolation` to scan for Thailand domain/IDs in source.
 
@@ -32,7 +32,7 @@ Run `npm run check-isolation` to scan for Thailand domain/IDs in source.
 | Secret | Rule |
 |--------|------|
 | `POSTGRES_URL` | Server-only. Never `NEXT_PUBLIC_*`. |
-| `BLOB_READ_WRITE_TOKEN` | Server-only. Russia Vercel project Blob only — not Thailand store. |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` / `SUPABASE_ANON_KEY` | Server-only. Russia project only — Thailand ref blocked. |
 | `AUTH_SECRET` | Admin session signing only. |
 | `ADMIN_SEED_PASSWORD` | Local/CI seed only — never commit. |
 
