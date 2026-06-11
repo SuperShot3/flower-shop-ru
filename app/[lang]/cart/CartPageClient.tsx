@@ -15,6 +15,7 @@ import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import type { ContactPreferenceOption } from '@/lib/orders';
 import type { CartItem } from '@/contexts/CartContext';
+import { isUsableCartImageUrl } from '@/lib/cart/cartImageUrl';
 import {
   trackBeginCheckout,
   trackViewCart,
@@ -555,14 +556,14 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     });
   }, [checkoutDeliveryProfile.destinationId, items, lang]);
 
-  // Backfill missing cart thumbnails after catalog storage migration (or older persisted carts).
+  // Backfill missing or broken cart thumbnails after catalog storage migration (or older persisted carts).
   useEffect(() => {
     if (items.length === 0) return;
     if (imageBackfillInFlightRef.current) return;
 
     const missing = items
       .map((item, index) => ({ item, index }))
-      .filter(({ item }) => !item.imageUrl);
+      .filter(({ item }) => !isUsableCartImageUrl(item.imageUrl));
     if (missing.length === 0) return;
 
     let cancelled = false;
@@ -585,7 +586,10 @@ export function CartPageClient({ lang }: { lang: Locale }) {
             const res = await fetch(url);
             if (!res.ok) return { type, id, imageUrl: null as string | null };
             const data = (await res.json().catch(() => ({}))) as { imageUrl?: string | null };
-            const imageUrl = typeof data.imageUrl === 'string' && data.imageUrl.trim() ? data.imageUrl.trim() : null;
+            const imageUrl =
+              typeof data.imageUrl === 'string' && isUsableCartImageUrl(data.imageUrl)
+                ? data.imageUrl.trim()
+                : null;
             return { type, id, imageUrl };
           })
         );
@@ -1304,7 +1308,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           <div className="cart-page-header">
             <h1 className="cart-page-title">{t.yourCart}</h1>
             <span className="cart-page-count">
-              {(t as { cartItemsEmptyLabel?: string }).cartItemsEmptyLabel ?? 'Empty'}
+              {(t as { cartItemsEmptyLabel?: string }).cartItemsEmptyLabel ?? t.cartEmpty}
             </span>
           </div>
 
@@ -1664,12 +1668,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         )}
         {cartDestinationBouquetInvalid && items.length > 0 && (
           <p className="cart-expansion-block-notice" role="alert">
-            {String(
-              (t as { destinationBouquetConflict?: string }).destinationBouquetConflict ??
-                (isThaiLocale(lang)
-                  ? 'มีช่อในตะกร้าที่จัดส่งในพื้นที่นี้ไม่ได้'
-                  : 'Some bouquets in your bag are not available for this delivery region.')
-            )}
+            {String(t.destinationBouquetConflict)}
           </p>
         )}
         <CartCheckoutView

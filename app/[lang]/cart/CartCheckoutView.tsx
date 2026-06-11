@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import type { Locale } from '@/lib/i18n';
 import { useCheckoutStickyHeader } from '@/contexts/CheckoutStickyHeaderContext';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, isThaiLocale, localeDateFormat} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import {
   isDeliveryTimeSlotSelectableForDate,
@@ -34,7 +34,7 @@ function formatCheckoutStickySchedule(
   else if (date === tomorrowStr) dateLabel = tomorrowLabel;
   else {
     const d = new Date(`${date}T12:00:00+07:00`);
-    dateLabel = d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
+    dateLabel = d.toLocaleDateString(localeDateFormat(lang), {
       timeZone: 'Asia/Bangkok',
       weekday: 'short',
       day: 'numeric',

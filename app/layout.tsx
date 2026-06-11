@@ -15,9 +15,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Lanna Bloom | Flower & gift delivery Chiang Mai',
+  title: 'Ланна Блум | Доставка цветов в Екатеринбурге',
   description:
-    'Premium flower and gift delivery in Chiang Mai, Thailand. Order online with secure checkout — same-day delivery when available. Bouquet delivery in selected Thailand destinations.',
+    'Премиальная доставка цветов в Екатеринбурге. Закажите свежие букеты онлайн — доставка сегодня в рабочие часы.',
   icons: {
     icon: [
       { url: '/favicon_io/favicon.ico', sizes: 'any' },
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   },
   manifest: '/favicon_io/site.webmanifest',
   openGraph: {
-    title: 'Lanna Bloom | Flower & gift delivery Chiang Mai',
+    title: 'Ланна Блум | Доставка цветов в Екатеринбурге',
     description:
-      'Premium flower and gift delivery in Chiang Mai, Thailand. Order online with secure checkout — same-day delivery when available.',
+      'Премиальная доставка цветов в Екатеринбурге. Закажите свежие букеты онлайн — доставка сегодня в рабочие часы.',
   },
 };
 

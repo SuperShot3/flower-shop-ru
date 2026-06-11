@@ -15,15 +15,10 @@ import {
   applyOrderGiftCardMessageToItems,
   clipOrderGiftCardMessage,
 } from '@/lib/cart/orderGiftCardMessage';
+import { isUsableCartImageUrl, sanitizeCartImageUrl } from '@/lib/cart/cartImageUrl';
 
 const CART_STORAGE_KEY = 'lanna-bloom-cart';
 const ORDER_GIFT_MESSAGE_KEY = 'lanna-bloom-order-gift-message';
-
-function isLegacyRemoteImageUrl(url: string | undefined): boolean {
-  const raw = (url ?? '').trim();
-  if (!raw) return false;
-  return raw.includes('cdn.sanity.io') || raw.includes('sanity.io');
-}
 
 export interface CartItem {
   /** 'bouquet' | 'product' | 'plushyToy' | 'balloon' — default 'bouquet' for backward compat */
@@ -71,11 +66,10 @@ function loadFromStorage(): CartItem[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw) as CartItem[];
     if (!Array.isArray(parsed)) return [];
-    // Post-migration hardening: if a persisted cart line still points at Sanity CDN,
-    // drop the URL rather than rendering broken legacy images after cutover.
+    // Drop broken legacy / relative storage URLs so checkout can backfill from Postgres.
     return parsed.map((item) => ({
       ...item,
-      imageUrl: isLegacyRemoteImageUrl(item.imageUrl) ? undefined : item.imageUrl,
+      imageUrl: sanitizeCartImageUrl(item.imageUrl),
     }));
   } catch {
     return [];
@@ -153,13 +147,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (matchIndex >= 0) {
         const next = [...prev];
         const existing = next[matchIndex];
+        const imageUrl = isUsableCartImageUrl(existing.imageUrl)
+          ? existing.imageUrl
+          : sanitizeCartImageUrl(item.imageUrl) ?? existing.imageUrl;
         next[matchIndex] = {
           ...existing,
           quantity: (existing.quantity ?? 1) + qty,
+          imageUrl,
         };
         return next;
       }
-      return [...prev, { ...itemWithQty, quantity: qty }];
+      return [
+        ...prev,
+        {
+          ...itemWithQty,
+          quantity: qty,
+          imageUrl: sanitizeCartImageUrl(item.imageUrl),
+        },
+      ];
     });
   }, []);
 

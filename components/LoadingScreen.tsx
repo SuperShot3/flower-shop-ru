@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { getBrandName } from '@/lib/i18n';
 
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -103,7 +104,7 @@ export function LoadingScreen() {
         <div className="loading-screen-logo">
           <Image
             src="/logo_full_master.png"
-            alt="Lanna Bloom"
+            alt={getBrandName()}
             width={120}
             height={100}
             priority

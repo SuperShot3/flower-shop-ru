@@ -100,7 +100,7 @@ export function Footer({ lang }: { lang: Locale }) {
                 className="w-10 h-10 shrink-0 object-contain rounded-full bg-transparent"
               />
               <span className="font-[family-name:var(--font-family-display)] text-2xl font-semibold tracking-tight text-[#1A3C34]">
-                Lanna Bloom
+                {translations[lang].nav.brandName}
               </span>
             </Link>
             <p className="text-stone-500 text-sm leading-relaxed mb-6">{t.tagline}</p>

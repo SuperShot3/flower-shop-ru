@@ -16,7 +16,7 @@ import {
 } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import type { Locale } from '@/lib/i18n';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import { translations, isThaiLocale } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 function ymdToDate(ymd: string): Date {
@@ -58,11 +58,10 @@ export function DeliveryDatePicker({
   id,
   compact = false,
 }: DeliveryDatePickerProps) {
+  const tPremium = translations[lang].premiumCheckout;
   const locale = dateFnsLocale(lang);
   const weekdays = WEEKDAY_LABELS_3[lang] ?? WEEKDAY_LABELS_3.en;
-  const deliveryOnLabel =
-    translations[lang].premiumCheckout?.deliveryOnLabel ??
-    translations.en.premiumCheckout.deliveryOnLabel;
+  const deliveryOnLabel = tPremium.deliveryOnLabel;
 
   const today = startOfDay(new Date());
   const safeMinDate = minDate ? ymdToDate(minDate) : today;
@@ -104,7 +103,7 @@ export function DeliveryDatePicker({
     selectedDate &&
     format(
       selectedDate,
-      isThaiLocale(lang) ? 'EEEEที่ d MMM yyyy' : 'EEE, MMM d, yyyy',
+      lang === 'ru' ? 'EEE, d MMM yyyy' : isThaiLocale(lang) ? 'EEEEที่ d MMM yyyy' : 'EEE, MMM d, yyyy',
       { locale }
     );
 
@@ -112,7 +111,7 @@ export function DeliveryDatePicker({
     <div
       id={id}
       role="dialog"
-      aria-label={isThaiLocale(lang) ? 'เลือกวันจัดส่ง' : 'Choose delivery date'}
+      aria-label={tPremium.datePickerDialogAria}
       className={cn(
         'relative w-full border border-border bg-background shadow-sm',
         compact
@@ -141,7 +140,7 @@ export function DeliveryDatePicker({
             'flex shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30',
             compact ? 'h-7 w-7' : 'h-9 w-9'
           )}
-          aria-label={isThaiLocale(lang) ? 'เดือนก่อนหน้า' : 'Previous month'}
+          aria-label={tPremium.datePickerPrevMonthAria}
         >
           <ChevronLeft className={compact ? 'h-4 w-4' : 'h-5 w-5'} aria-hidden />
         </button>
@@ -174,7 +173,7 @@ export function DeliveryDatePicker({
             'flex shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground',
             compact ? 'h-7 w-7' : 'h-9 w-9'
           )}
-          aria-label={isThaiLocale(lang) ? 'เดือนถัดไป' : 'Next month'}
+          aria-label={tPremium.datePickerNextMonthAria}
         >
           <ChevronRight className={compact ? 'h-4 w-4' : 'h-5 w-5'} aria-hidden />
         </button>

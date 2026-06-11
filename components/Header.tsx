@@ -270,7 +270,7 @@ export function Header({
                 className="w-10 h-10 shrink-0 object-contain rounded-full bg-transparent"
               />
               <span className="font-[family-name:var(--font-family-display)] text-[clamp(1rem,4vw,1.5rem)] font-semibold tracking-tight text-[#1A3C34] leading-none truncate max-w-[45vw] sm:max-w-none">
-                Lanna Bloom
+                {t.brandName}
               </span>
             </Link>
             {!isMobile && (

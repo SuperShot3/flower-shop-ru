@@ -8,7 +8,7 @@ import { PartnersCarousel } from '@/components/PartnersCarousel';
 import { ReviewsSection } from '@/components/reviews/ReviewsSection';
 import { getCatalogHeroImage, getCatalogHeroCarouselImages } from '@/lib/catalogReads';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, defaultLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, defaultLocale, locales, type Locale, isThaiLocale, getBrandName} from '@/lib/i18n';
 import { Suspense } from 'react';
 
 /** Regenerate every 60s so popular catalog items shuffle on each update */
@@ -22,6 +22,14 @@ export async function generateMetadata({
   if (!isValidLocale(params.lang)) return {};
   const base = getBaseUrl();
   const canonical = `${base}/${params.lang}`;
+  if (params.lang === 'ru') {
+    return {
+      title: 'Ланна Блум | Доставка цветов в Екатеринбурге',
+      description:
+        'Премиальная доставка цветов в Екатеринбурге. Закажите свежие букеты онлайн — доставка сегодня в рабочие часы.',
+      alternates: { canonical },
+    };
+  }
   if (isThaiLocale(params.lang)) {
     return {
       title: 'Lanna Bloom | ส่งดอกไม้และของขวัญ เชียงใหม่',
@@ -31,7 +39,7 @@ export async function generateMetadata({
     };
   }
   return {
-    title: 'Lanna Bloom | Flower & gift delivery Chiang Mai',
+    title: `${getBrandName('en')} | Flower & gift delivery Chiang Mai`,
     description:
       'Premium flower and gift delivery in Chiang Mai, Thailand. Order online with secure checkout — same-day delivery when available. Bouquet delivery in Phuket, Hua Hin, Koh Samui, Krabi & Ao Nang, and Pattaya.',
     alternates: { canonical },

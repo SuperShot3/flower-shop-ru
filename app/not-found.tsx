@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { defaultLocale } from '@/lib/i18n';
+import { defaultLocale, getBrandName } from '@/lib/i18n';
 
 export default function NotFound() {
+  const brandName = getBrandName(defaultLocale);
   return (
     <>
       <div className="nf-page">
@@ -14,7 +15,7 @@ export default function NotFound() {
 
         <nav className="nf-nav">
           <Link href={`/${defaultLocale}`} className="nf-logo">
-            Lanna Bloom
+            {brandName}
           </Link>
           <Link href={`/${defaultLocale}`} className="nf-home-link">
             ← Back to shop

@@ -18,10 +18,11 @@ import { SelectionTile, SuggestionChip } from '@/components/checkout/premium/Sel
 import { RecipientOptInToggle } from '@/components/checkout/premium/RecipientOptInToggle';
 import { ReferralCodeBox } from '@/components/ReferralCodeBox';
 import { TrustBadges } from '@/components/TrustBadges';
-import { getZonesForDestination, getZoneFee } from '@/lib/delivery/zones';
+import { getZonesForDestination, getZoneFee, zoneLabel } from '@/lib/delivery/zones';
 import type { CheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
 import type { CheckoutSectionId } from '@/lib/checkout/premiumCheckoutValidation';
 import { isNonBouquetCartLine } from '@/lib/cart/cartPriceBreakdown';
+import { shouldUnoptimizeCartImageUrl, isUsableCartImageUrl } from '@/lib/cart/cartImageUrl';
 import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { formatThb } from '@/lib/costsUtils';
@@ -240,9 +241,17 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
             const display = applyExpansionItemMarkupThb(unit, delivery.deliveryDestination) * qty;
             return (
               <div key={`${item.bouquetId}-${index}`} className="co-product-row">
-                {item.imageUrl ? (
+                {item.imageUrl && isUsableCartImageUrl(item.imageUrl) ? (
                   <div className="co-product-row__img">
-                    <Image src={item.imageUrl} alt="" width={88} height={88} sizes="88px" className="co-product-row__photo" />
+                    <Image
+                      src={item.imageUrl}
+                      alt=""
+                      width={88}
+                      height={88}
+                      sizes="88px"
+                      className="co-product-row__photo"
+                      unoptimized={shouldUnoptimizeCartImageUrl(item.imageUrl)}
+                    />
                   </div>
                 ) : (
                   <div className="co-product-row__img co-product-row__img--ph" aria-hidden />
@@ -303,7 +312,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
         <div className="co-card co-card--pad">
           {deliveryProfile.variant === 'expansion' && (
             <div className="co-field">
-              <label className="co-label">{isThaiLocale(lang) ? 'พื้นที่จัดส่ง' : 'Delivery area'}</label>
+              <label className="co-label">{t.deliveryAreaLabel}</label>
               <input type="text" readOnly className="co-input" value={destLabel} />
             </div>
           )}
@@ -322,7 +331,7 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
               <option value="">{tBuyNow.selectDistrict}</option>
               {zones.map((z) => (
                 <option key={z.id} value={z.id}>
-                  {isThaiLocale(lang) ? z.labelTh : z.labelEn} — {'\u0E3F'}
+                  {zoneLabel(delivery.deliveryDestination, z.id, lang) ?? z.labelEn} — {'\u0E3F'}
                   {(getZoneFee(delivery.deliveryDestination, z.id) ?? z.feeThb).toLocaleString()}
                 </option>
               ))}

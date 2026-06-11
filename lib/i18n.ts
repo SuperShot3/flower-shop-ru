@@ -14,9 +14,23 @@ export function isThaiLocale(lang: Locale | string): boolean {
   return lang === 'th';
 }
 
+/** BCP 47 tag for date/number formatting in UI. */
+export function localeDateFormat(lang: Locale | string): string {
+  if (lang === 'ru') return 'ru-RU';
+  if (isThaiLocale(lang)) return 'th-TH';
+  return 'en-GB';
+}
+
+/** Storefront brand name for header, footer, and metadata. */
+export function getBrandName(lang: Locale = defaultLocale): string {
+  const nav = translations[lang]?.nav as { brandName?: string } | undefined;
+  return nav?.brandName ?? 'Lanna Bloom';
+}
+
 const baseTranslations = {
   en: {
     nav: {
+      brandName: 'Lanna Bloom',
       home: 'Home',
       catalog: 'Catalog',
       occasions: 'Occasions',
@@ -596,12 +610,19 @@ const baseTranslations = {
       policyRefundLink: 'refund policy',
       destinationBouquetConflict:
         'Some bouquets in your bag are not available for the delivery region you selected. Remove those lines or change your delivery region.',
+      cartItemsEmptyLabel: 'Empty',
+      cartLoading: 'Loading cart…',
+      searching: 'Searching…',
     },
     premiumCheckout: {
       pageTitle: 'Complete your flower delivery',
       pageSubtitle: 'A few details and we’ll prepare your bouquet.',
       changeLink: 'Change',
       deliveryRegionLabel: 'delivery',
+      deliveryAreaLabel: 'Delivery area',
+      datePickerDialogAria: 'Choose delivery date',
+      datePickerPrevMonthAria: 'Previous month',
+      datePickerNextMonthAria: 'Next month',
       whereDeliverTitle: 'Where should we deliver the flowers?',
       addressPlaceholder:
         'House no., soi, subdistrict, district, province — full address (Thai or English)',
@@ -1838,6 +1859,10 @@ const baseTranslations = {
       pageSubtitle: 'อีกไม่กี่ขั้นตอน เราจะจัดช่อให้คุณ',
       changeLink: 'เปลี่ยน',
       deliveryRegionLabel: 'จัดส่ง',
+      deliveryAreaLabel: 'พื้นที่จัดส่ง',
+      datePickerDialogAria: 'เลือกวันจัดส่ง',
+      datePickerPrevMonthAria: 'เดือนก่อนหน้า',
+      datePickerNextMonthAria: 'เดือนถัดไป',
       whereDeliverTitle: 'จัดส่งดอกไม้ที่ไหน?',
       addressPlaceholder:
         'บ้านเลขที่ ซอย ตำบล อำเภอ จังหวัด — ที่อยู่เต็ม (ภาษาไทยหรืออังกฤษ)',
@@ -2496,6 +2521,7 @@ const russianTranslations = {
   ...baseTranslations.en,
   nav: {
     ...baseTranslations.en.nav,
+    brandName: 'Ланна Блум',
     home: 'Главная',
     catalog: 'Каталог',
     occasions: 'Поводы',
@@ -2514,16 +2540,16 @@ const russianTranslations = {
     search: 'Поиск',
     customOrder: 'Индивидуальный заказ',
     dbdVerified: 'DBD Verified',
-    flowerDeliveryChiangMai: 'Доставка цветов в Чиангмае',
-    roseBouquetsChiangMai: 'Букеты роз в Чиангмае',
-    sameDayFlowerDeliveryChiangMai: 'Доставка сегодня в Чиангмае',
+    flowerDeliveryChiangMai: 'Доставка цветов в Екатеринбурге',
+    roseBouquetsChiangMai: 'Букеты роз в Екатеринбурге',
+    sameDayFlowerDeliveryChiangMai: 'Доставка сегодня в Екатеринбурге',
     birthdayFlowerGiftGuide: 'Цветы на день рождения',
     themeSwitchToLight: 'Переключить на светлую тему',
     themeSwitchToDark: 'Переключить на тёмную тему',
   },
   delivery: {
     ...baseTranslations.en.delivery,
-    title: 'Доставка в Чиангмае',
+    title: 'Доставка в Екатеринбурге',
     line1: 'Доставка включена в каждый заказ.',
     line2: 'Доставка в тот же день доступна в рабочие часы.',
     line3: 'Время доставки: 09:00–20:00 (ночной доставки нет).',
@@ -2539,16 +2565,17 @@ const russianTranslations = {
   },
   hero: {
     ...baseTranslations.en.hero,
-    bigHeadlineLine1: 'Интернет-магазин цветов Lanna Bloom',
-    bigHeadlineLine2: 'Доставка сегодня в Чиангмае, Таиланд',
+    bigHeadlineLine1: 'Интернет-магазин цветов Ланна Блум',
+    bigHeadlineLine2: 'Доставка сегодня в Екатеринбурге',
     headline: 'Свежие цветы с доставкой и любовью',
     subline: 'Букеты ручной работы для каждого момента',
     cta: 'Выбрать букет',
-    trustLine: 'Доставка сегодня по Чиангмаю',
-    badge: 'Отобранные флористы Таиланда',
-    headlineNew: 'Доставка цветов в Чиангмае',
+    trustLine: 'Доставка сегодня по Екатеринбургу',
+    badge: 'Отобранные флористы Екатеринбурга',
+    headlineNew: 'Цветы в Екатеринбурге',
+    headlineAccent: '',
     sublineNew:
-      'Закажите свежие цветы онлайн с быстрой доставкой на день рождения, годовщину и другие важные моменты.',
+      'Закажите свежие цветы онлайн с доставкой на день рождения, годовщину и другие важные моменты.',
     ctaBrowse: 'Смотреть коллекцию',
     ctaHowItWorks: 'Как это работает',
     shopByOccasion: 'Выбрать по поводу',
@@ -2571,11 +2598,11 @@ const russianTranslations = {
   },
   experience: {
     ...baseTranslations.en.experience,
-    title: 'Опыт Lanna Bloom',
+    title: 'Опыт Ланна Блум',
     subtitle:
       'Мы соединяем талантливых местных флористов и покупателей через удобный маркетплейс.',
     step1Title: '1. Выберите букет',
-    step1Desc: 'Смотрите уникальные дизайны от лучших локальных флористов Чиангмая.',
+    step1Desc: 'Смотрите уникальные дизайны от лучших локальных флористов Екатеринбурга.',
     step2Title: '2. Ручная сборка',
     step2Desc: 'Ваш заказ получает партнёр-флорист и начинает собирать букет из свежих цветов.',
     step3Title: '3. Локальная доставка',
@@ -2584,12 +2611,12 @@ const russianTranslations = {
   partners: {
     ...baseTranslations.en.partners,
     title: 'Наши локальные партнёры',
-    subtitle: 'Поддерживаем независимые цветочные студии в Чиангмае.',
+    subtitle: 'Поддерживаем независимые цветочные студии в Екатеринбурге.',
   },
   footer: {
     ...baseTranslations.en.footer,
     tagline:
-      'Премиальная доставка цветов в Чиангмае. Отобранные, собранные вручную и доставленные с заботой.',
+      'Премиальная доставка цветов в Екатеринбурге. Отобранные, собранные вручную и доставленные с заботой.',
     shop: 'Магазин',
     popularBouquets: 'Популярные букеты',
     occasions: 'Поводы',
@@ -2613,7 +2640,7 @@ const russianTranslations = {
     newsletterAlreadySubscribed: 'Вы уже подписаны.',
     newsletterError: 'Что-то пошло не так. Попробуйте ещё раз.',
     newsletterInvalidEmail: 'Введите корректный email.',
-    copyright: '© 2026 Lanna Bloom. Все права защищены.',
+    copyright: '© 2026 Ланна Блум. Все права защищены.',
     privacyPolicy: 'Политика конфиденциальности',
     termsOfService: 'Условия использования',
     refundPolicy: 'Политика возврата',
@@ -3045,6 +3072,106 @@ const russianTranslations = {
     policyRefundLink: 'политикой возврата',
     destinationBouquetConflict:
       'Некоторые букеты в корзине недоступны для выбранного региона доставки. Удалите их или измените регион.',
+    quantity: 'Количество',
+    decreaseQuantity: 'Уменьшить количество',
+    increaseQuantity: 'Увеличить количество',
+    lineIdLabel: 'LINE ID',
+    lineIdPlaceholder: 'например LannaBloom',
+    lineIdHint:
+      'Укажите LINE ID профиля: буквы, цифры, точка, подчёркивание или дефис (4–64 символа). Не вводите @ и не вставляйте ссылки — мы сами откроем LINE.',
+    lineIdInvalid:
+      'Введите только текст LINE ID (буквы, цифры, . _ -). Без @ и без ссылок.',
+    marketingEmailConsentLabel:
+      'Присылать мне иногда предложения и приглашение оставить отзыв (необязательно)',
+    mayFreeDeliveryDiscountLabel: 'Бесплатная доставка в мае',
+    stickyDeliveryFree: 'Бесплатно',
+    stickyDeliverySelectArea: 'Выберите район',
+    stickyPolicyApplies: 'К заказам применяются правила доставки и возврата.',
+    stickyGiftMessageOptional: 'Текст на открытке необязателен',
+    mayFreeDeliveryProgressHint:
+      'Добавьте ещё на ฿{amount} цветов для бесплатной доставки в мае',
+    promoCannotCombineMay:
+      'Эту акцию нельзя совмещать с другими скидками. Удалите код, чтобы получить бесплатную доставку, или оставьте код.',
+    cartItemsEmptyLabel: 'Пусто',
+    cartLoading: 'Загрузка корзины…',
+    searching: 'Поиск…',
+  },
+  premiumCheckout: {
+    ...baseTranslations.en.premiumCheckout,
+    pageTitle: 'Оформление доставки цветов',
+    pageSubtitle: 'Ещё несколько деталей — и мы подготовим ваш букет.',
+    changeLink: 'Изменить',
+    deliveryRegionLabel: 'доставка',
+    deliveryAreaLabel: 'Район доставки',
+    datePickerDialogAria: 'Выберите дату доставки',
+    datePickerPrevMonthAria: 'Предыдущий месяц',
+    datePickerNextMonthAria: 'Следующий месяц',
+    whereDeliverTitle: 'Куда доставить цветы?',
+    addressPlaceholder:
+      'Дом, улица, район, город — полный адрес (на русском или английском)',
+    deliveryNoteForDriverLabel: 'Детали для курьера',
+    deliveryNoteForDriverPlaceholder: 'Квартира, этаж, подъезд, код домофона, ориентир у ворот',
+    deliveryNoteForDriverHint:
+      'Помогает курьеру найти вас — номер квартиры, подъезд или код домофона при необходимости.',
+    deliveryDateTitle: 'Дата доставки',
+    todayTile: 'Сегодня',
+    tomorrowTile: 'Завтра',
+    chooseDateTile: 'Выбрать дату',
+    deliveryOnLabel: 'Доставка',
+    deliveryTimeTitle: 'Время доставки',
+    morningTile: 'Утро',
+    morningSub: '9:00–12:00',
+    afternoonTile: 'День',
+    afternoonSub: '12:00–15:00',
+    eveningTile: 'Вечер',
+    eveningSub: '15:00–18:00',
+    recipientTitle: 'Кто получит цветы?',
+    recipientDetailsToggle: 'Заказ для другого человека?',
+    recipientDetailsSectionTitle: 'Контакты получателя',
+    surpriseToggle: 'Это сюрприз',
+    surpriseHelper: 'Если понадобится подтверждение доставки, сначала свяжемся с вами.',
+    giftMessageTitle: 'Добавить текст на открытку?',
+    giftMessagePlaceholder: 'Напишите текст для открытки к букету',
+    giftChipBirthday: 'С днём рождения',
+    giftChipLove: 'С любовью',
+    giftChipThanks: 'Спасибо',
+    giftChipCongrats: 'Поздравляю',
+    giftChipThinking: 'Думаю о тебе',
+    noCardMessage: 'Без текста на открытке',
+    clearGiftMessage: 'Очистить',
+    deliveryNotesTitle: 'Примечания к доставке',
+    deliveryNotesPlaceholder: 'Номер квартиры, здание, этаж или особые указания',
+    noteChipReception: 'Оставить у консьержа',
+    noteChipCallBefore: 'Позвонить перед доставкой',
+    noteChipNoCallRecipient: 'Не звонить получателю',
+    noteChipSurprise: 'Сюрприз-доставка',
+    senderTitle: 'Ваши контактные данные',
+    paySecurely: 'Оплатить онлайн безопасно',
+    continueBtn: 'Продолжить',
+    payNowBtn: 'Оплатить',
+    bouquetSubtotal: 'Букет',
+    addonsSubtotal: 'Дополнения',
+    otherItemsSubtotal: 'Другие товары',
+    deliveryLine: 'Доставка',
+    discountLine: 'Скидка',
+    totalLine: 'Итого',
+    freeDelivery: 'Бесплатно',
+    addonsTitle: 'Сделайте подарок особенным',
+    addonAdd: 'Добавить',
+    addonAdded: 'Добавлено',
+    pleaseAddDeliveryAddress: 'Укажите адрес доставки',
+    pleaseChooseDeliveryDate: 'Выберите дату доставки',
+    pleaseChooseDeliveryTime: 'Выберите время доставки',
+    pleaseSelectDeliveryArea: 'Выберите район доставки',
+    pleaseAddRecipientName: 'Укажите имя получателя',
+    pleaseAddRecipientPhone: 'Укажите телефон получателя',
+    pleaseAddYourName: 'Укажите ваше имя',
+    pleaseAddYourPhone: 'Укажите ваш телефон',
+    pleaseAddYourEmail: 'Введите корректный email',
+    pleaseChooseContact: 'Выберите, как с вами связаться',
+    pleaseAddLineId: 'Укажите ваш LINE ID',
+    invalidMapsLink: 'Вставьте корректную ссылку Google Maps',
+    clearDeliveryNotes: 'Очистить',
   },
   acceptedPayments: 'Способы оплаты',
   trustBadges: {
@@ -3161,7 +3288,7 @@ const russianTranslations = {
     refreshStatus: 'Обновить статус',
     deliveryWindowNote: 'Время доставки приблизительное (±30 мин).',
     noNeedToContactUs: 'Связываться не нужно — мы подготовим и доставим ваш заказ.',
-    contactLannaBloom: 'Связаться с Lanna Bloom',
+    contactLannaBloom: 'Связаться с Ланна Блум',
     copyAll: 'Скопировать всё',
     makePayment: 'Оплатить',
     tabNew: 'Новый',
@@ -3198,7 +3325,7 @@ const russianTranslations = {
     amountPaid: 'Оплачено',
     method: 'Способ',
     reference: 'Номер операции',
-    flowerDeliveryChiangMai: 'Доставка цветов · Чиангмай',
+    flowerDeliveryChiangMai: 'Доставка цветов · Екатеринбург',
     wrappingStandard: 'Стандарт',
     wrappingFree: 'Бесплатно',
     wrappingPremium: 'Премиум',
@@ -3226,17 +3353,17 @@ const russianTranslations = {
     phoneLabel: 'Телефон',
     emailLabel: 'Email',
     callWhatsApp: 'Звонок / WhatsApp:',
-    shopLocation: 'Локация магазина (Чиангмай)',
+    shopLocation: 'Локация магазина (Екатеринбург)',
     businessHours: 'Время работы',
     daily: 'Ежедневно:',
-    deliveryArea: 'Доставляем по Чиангмаю. Доставка сегодня зависит от времени и расстояния.',
-    dbdVerified: 'DBD Verified (Таиланд)',
+    deliveryArea: 'Доставляем по Екатеринбургу. Доставка сегодня зависит от времени и расстояния.',
+    dbdVerified: 'Проверенный онлайн-магазин',
     dbdExplanation:
-      'Lanna Bloom — DBD Verified онлайн-бизнес в Таиланде. Эта проверка поддерживает прозрачность и доверие при онлайн-заказах.',
-    dbdVerifyLink: 'Проверить на DBD',
+      'Ланна Блум — проверенный интернет-магазин цветов в Екатеринбурге. Мы поддерживаем прозрачность и доверие при онлайн-заказах.',
+    dbdVerifyLink: 'Подробнее',
     partnerHeading: 'Стать партнёром',
     partnerIntro:
-      'Мы приглашаем цветочные магазины, мастеров подарков и локальных производителей Чиангмая присоединиться к платформе.',
+      'Мы приглашаем цветочные магазины, мастеров подарков и локальных производителей Екатеринбурга присоединиться к платформе.',
     partnerApply: 'Подать заявку партнёра',
     partnerHowItWorks: 'Как работает партнёрство',
   },
@@ -3247,7 +3374,7 @@ const russianTranslations = {
     deliveryCity: 'Город доставки',
     deliveryZone: 'Зона доставки',
     selectDeliveryZone: 'Выберите зону доставки',
-    currentCity: 'Чиангмай, Таиланд',
+    currentCity: 'Екатеринбург',
     chooseOtherCity: 'Другой район?',
     chooseOtherCityLink: 'Свяжитесь с нами',
     deliveryAddress: 'Адрес доставки',
@@ -3302,7 +3429,7 @@ const russianTranslations = {
       'После отправки заказ будет создан в нашей системе. Статус можно отслеживать на странице заказа.',
     fileTooLarge: 'Выберите изображение меньше 4 MB.',
     fileTypeNotAllowed: 'Выберите JPG, PNG, WebP или GIF.',
-    waSubjectLine: 'Индивидуальный заказ букета — Lanna Bloom',
+    waSubjectLine: 'Индивидуальный заказ букета — Ланна Блум',
     phoneHintDuplicateThai66: '66 указано дважды — используйте один полный номер (например 66952572645).',
     phoneHintThSkipLeadingZeroFull: 'Уберите первый 0 или используйте 66…',
     phoneHintTooShortFull: 'Нужно 9–16 цифр.',
@@ -3318,9 +3445,9 @@ const russianTranslations = {
     ...baseTranslations.en.guides,
     hub: {
       ...baseTranslations.en.guides.hub,
-      metaTitle: 'Гайды по цветам | Lanna Bloom',
+      metaTitle: 'Гайды по цветам | Ланна Блум',
       metaDescription:
-        'Идеи букетов на день рождения и гайды по доставке цветов в Чиангмае — выбирайте уверенно и заказывайте онлайн.',
+        'Идеи букетов на день рождения и гайды по доставке цветов в Екатеринбурге — выбирайте уверенно и заказывайте онлайн.',
       h1: 'Гайды',
       intro:
         'Советы по поводам и локальной доставке в одном месте. Откройте любой гид ниже или читайте статьи в инфо-разделе.',
@@ -3330,9 +3457,9 @@ const russianTranslations = {
       birthdayFlowerGiftExcerpt:
         'Сравните четыре настроения букета — от ярких закатных тонов до классических роз — и переходите к покупке.',
       flowersChiangMaiExcerpt:
-        'Закажите свежие букеты онлайн с доставкой по Чиангмаю. Доставка сегодня в рабочие часы.',
+        'Закажите свежие букеты онлайн с доставкой по Екатеринбургу. Доставка сегодня в рабочие часы.',
       roseBouquetsChiangMaiExcerpt:
-        'Букеты роз для годовщины, благодарности и романтики с доставкой по Чиангмаю.',
+        'Букеты роз для годовщины, благодарности и романтики с доставкой по Екатеринбургу.',
       sameDayFlowerDeliveryChiangMaiExcerpt:
         'Нужны цветы сегодня? Доставка в тот же день доступна в рабочие часы при раннем заказе.',
     },

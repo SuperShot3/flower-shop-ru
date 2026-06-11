@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 
 interface OrderLookupSummary {
@@ -158,7 +158,7 @@ export function OrderLookupSection({ lang, emptyCart }: { lang: Locale; emptyCar
             </button>
 
             <button type="submit" className="cart-btn-primary" disabled={loading}>
-              {loading ? (isThaiLocale(lang) ? 'กำลังค้นหา...' : 'Searching...') : t.findOrder}
+              {loading ? t.searching : t.findOrder}
             </button>
           </div>
         </div>
@@ -169,7 +169,7 @@ export function OrderLookupSection({ lang, emptyCart }: { lang: Locale; emptyCar
           {loading && (
             <div className="cart-track-order-list-overlay" aria-hidden>
               <span className="cart-track-order-list-overlay-text">
-                {isThaiLocale(lang) ? 'กำลังค้นหา...' : 'Searching...'}
+                {t.searching}
               </span>
             </div>
           )}
