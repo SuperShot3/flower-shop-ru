@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { CatalogProduct } from '@/lib/catalog/types';
-import type { Locale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import {translations, isThaiLocale} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
@@ -16,9 +17,9 @@ import { useCart } from '@/contexts/CartContext';
 import { getDefaultAddOns } from '@/components/AddOnsSection';
 import { buildCatalogItemHref } from '@/lib/delivery/marketRoute';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 import {
-  applyCatalogDiscountThb,
+  applyCatalogDiscount,
   effectiveCatalogUnitPriceWithExpansion,
 } from '@/lib/catalogDiscount';
 import { CatalogDiscountBadge } from '@/components/CatalogDiscountBadge';
@@ -94,10 +95,10 @@ export function ProductCard({
   const router = useRouter();
   const { addItem } = useCart();
   const checkoutProfile = useCheckoutDeliveryProfile(lang);
-  const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+  const name = catalogLocalizedName(product, lang);
   const href = buildCatalogItemHref({ lang, slug: product.slug, pathname });
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
-  const discountedBase = applyCatalogDiscountThb(finalPrice, product.discountPercent);
+  const discountedBase = applyCatalogDiscount(finalPrice, product.discountPercent);
   const displayFromPrice = effectiveCatalogUnitPriceWithExpansion(
     finalPrice,
     product.discountPercent,
@@ -278,7 +279,7 @@ export function ProductCard({
             bouquetId: product.id,
             slug: product.slug,
             nameEn: product.nameEn,
-            nameTh: product.nameTh ?? product.nameEn,
+            nameRu: product.nameRu ?? product.nameEn,
             imageUrl: imgSrc || undefined,
             size: {
               optionId: 'product_default',
@@ -293,7 +294,7 @@ export function ProductCard({
           1
         );
         trackAddToCart({
-          currency: 'THB',
+          currency: 'RUB',
           value: displayUnitPrice,
           items: [
             {
@@ -327,7 +328,7 @@ export function ProductCard({
           bouquetId: product.id,
           slug: product.slug,
           nameEn: product.nameEn,
-          nameTh: product.nameTh ?? product.nameEn,
+          nameRu: product.nameRu ?? product.nameEn,
           imageUrl: imgSrc || undefined,
           size: {
             optionId: `product_${product.id}_${selected.id}`,
@@ -342,7 +343,7 @@ export function ProductCard({
         1
       );
       trackAddToCart({
-        currency: 'THB',
+        currency: 'RUB',
         value: displaySelectedPrice,
         items: [
           {
@@ -398,7 +399,7 @@ export function ProductCard({
         className="pcard-link"
         data-ga-select-item="catalog"
         onClick={handleLinkClickGuarded}
-        aria-label={`${name} — ${t.from} ฿${displayFromPrice.toLocaleString()}`}
+        aria-label={`${name} — ${t.from} ₽${displayFromPrice.toLocaleString()}`}
       >
         <div
           className="pcard-image-wrap"
@@ -456,7 +457,7 @@ export function ProductCard({
           </div>
           <div className="pcard-price">
             <CatalogDiscountPrice
-              basePriceThb={finalPrice}
+              basePrice={finalPrice}
               discountPercent={product.discountPercent}
               destinationId={checkoutProfile.destinationId}
               fromLabel={t.from}
@@ -563,7 +564,7 @@ export function ProductCard({
                         </span>
                       </label>
                       <span className="pcard-option-price">
-                        ฿{effectiveCatalogUnitPriceWithExpansion(
+                        ₽{effectiveCatalogUnitPriceWithExpansion(
                           row.price,
                           product.discountPercent,
                           checkoutProfile.destinationId

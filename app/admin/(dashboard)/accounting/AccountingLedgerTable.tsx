@@ -7,7 +7,7 @@ import type { LedgerResult, LedgerRow } from '@/types/ledger';
 type SortMode = 'date-asc' | 'date-desc' | 'amount-desc' | 'amount-asc';
 type SubView = 'all' | 'income' | 'expense' | 'transfer' | 'withdrawal' | 'missing';
 
-function fmt(amount: number, currency = 'THB') {
+function fmt(amount: number, currency = 'RUB') {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency,

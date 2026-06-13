@@ -1,6 +1,6 @@
 import type { Bouquet } from '@/lib/bouquets';
 import { bouquetIsAvailableForDestination } from '@/lib/bouquetDestinationAvailability';
-import { applyCatalogDiscountThb } from '@/lib/catalogDiscount';
+import { applyCatalogDiscount } from '@/lib/catalogDiscount';
 import {
   getBouquetDisplayCategory,
   getProductDisplayCategory,
@@ -11,7 +11,7 @@ import type { CatalogProduct } from '@/lib/catalog/types';
 export const FEED_BRAND = 'Lanna Bloom';
 export const FEED_DESTINATION = 'CHIANG_MAI' as const;
 /** Flat standard delivery for Chiang Mai feed (no region code — invalid for TH in Merchant Center). */
-export const FEED_SHIPPING = 'TH::Standard:350.00 THB';
+export const FEED_SHIPPING = 'TH::Standard:350.00 RUB';
 
 const DEFAULT_BASE_URL = 'https://lannabloom.shop';
 
@@ -123,7 +123,7 @@ export function sanitiseFeedField(value: string): string {
 }
 
 export function formatFeedPrice(amountThb: number): string {
-  return `${amountThb.toFixed(2)} THB`;
+  return `${amountThb.toFixed(2)} RUB`;
 }
 
 /** Prefer high-res catalog image URLs for Merchant Center image quality. */
@@ -263,7 +263,7 @@ export function buildGoogleMerchantFeed(input: GoogleMerchantFeedInput): GoogleM
         continue;
       }
 
-      const priceThb = applyCatalogDiscountThb(option.price ?? 0, bouquet.discountPercent);
+      const priceThb = applyCatalogDiscount(option.price ?? 0, bouquet.discountPercent);
       if (priceThb <= 0) {
         skip(skipped, {
           id: sku,
@@ -340,7 +340,7 @@ export function buildGoogleMerchantFeed(input: GoogleMerchantFeedInput): GoogleM
       continue;
     }
 
-    const priceThb = applyCatalogDiscountThb(toy.price ?? 0, toy.discountPercent);
+    const priceThb = applyCatalogDiscount(toy.price ?? 0, toy.discountPercent);
     if (priceThb <= 0) {
       skip(skipped, { id: sku, productType: 'plushy_toy', reason: 'missing_price' });
       continue;
@@ -409,7 +409,7 @@ export function buildGoogleMerchantFeed(input: GoogleMerchantFeedInput): GoogleM
       continue;
     }
 
-    const priceThb = applyCatalogDiscountThb(balloon.price ?? 0, balloon.discountPercent);
+    const priceThb = applyCatalogDiscount(balloon.price ?? 0, balloon.discountPercent);
     if (priceThb <= 0) {
       skip(skipped, { id: sku, productType: 'balloon', reason: 'missing_price' });
       continue;

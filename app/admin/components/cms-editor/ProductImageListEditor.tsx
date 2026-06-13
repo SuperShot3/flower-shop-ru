@@ -63,7 +63,7 @@ export function ProductImageListEditor({
   function openEdit(image: AdminCatalogProductImage) {
     setEditingId(image.id);
     setEditAltEn(image.altEn);
-    setEditAltTh(image.altTh);
+    setEditAltTh(image.altRu);
   }
 
   function openPreview(image: AdminCatalogProductImage) {
@@ -234,13 +234,13 @@ export function ProductImageListEditor({
         open={editingId !== null}
         title="Edit image details"
         altEn={editAltEn}
-        altTh={editAltTh}
+        altRu={editAltTh}
         onAltEnChange={setEditAltEn}
         onAltThChange={setEditAltTh}
         onSave={() => {
           const image = scoped.find((i) => i.id === editingId);
           if (!image) return;
-          void onSaveAlt({ ...image, altEn: editAltEn, altTh: editAltTh });
+          void onSaveAlt({ ...image, altEn: editAltEn, altRu: editAltTh });
           setEditingId(null);
         }}
         onClose={() => setEditingId(null)}

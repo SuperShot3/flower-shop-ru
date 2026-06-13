@@ -134,7 +134,7 @@ export function ProductModerationClient({
                 <div className="admin-moderation-card-info">
                   <strong>{b.nameEn}</strong>
                   <p className="admin-moderation-card-meta">
-                    ฿{b.sizes?.[0]?.price ?? 0}+
+                    ₽{b.sizes?.[0]?.price ?? 0}+
                     {section === 'catalog' && b.status && (
                       <span className={`admin-moderation-status-badge status-${b.status}`}>
                         {BOUQUET_STATUS_LABELS[b.status] ?? b.status}
@@ -234,7 +234,7 @@ export function ProductModerationClient({
                 <div className="admin-moderation-card-info">
                   <strong>{p.nameEn}</strong>
                   <p className="admin-moderation-card-meta">
-                    {p.category} · ฿{p.price}
+                    {p.category} · ₽{p.price}
                     {productFilter === 'all' && (
                       <span className={`admin-moderation-status-badge status-${p.moderationStatus}`}>
                         {STATUS_LABELS[p.moderationStatus] ?? p.moderationStatus}

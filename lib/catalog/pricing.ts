@@ -21,11 +21,11 @@ export type LegacyProductKind =
 
 export const SIZE_KEYS: SizeKey[] = ['s', 'm', 'l', 'xl'];
 
-export const DEFAULT_SIZE_LABELS: Record<SizeKey, { en: string; th: string }> = {
-  s: { en: 'Small', th: 'เล็ก' },
-  m: { en: 'Medium', th: 'กลาง' },
-  l: { en: 'Large', th: 'ใหญ่' },
-  xl: { en: 'Extra large', th: 'ใหญ่พิเศษ' },
+export const DEFAULT_SIZE_LABELS: Record<SizeKey, { en: string; ru: string }> = {
+  s: { en: 'Small', ru: 'Малый' },
+  m: { en: 'Medium', ru: 'Средний' },
+  l: { en: 'Large', ru: 'Большой' },
+  xl: { en: 'Extra large', ru: 'Очень большой' },
 };
 
 export type CatalogSizePricingRow = {
@@ -33,7 +33,7 @@ export type CatalogSizePricingRow = {
   enabled?: boolean;
   price?: number;
   labelEn?: string;
-  labelTh?: string;
+  labelRu?: string;
   label?: string;
   description?: string;
   preparationTime?: number;
@@ -46,7 +46,7 @@ export type CatalogStemPricingRow = {
   stemCount: number;
   price: number;
   labelEn?: string;
-  labelTh?: string;
+  labelRu?: string;
   preparationTime?: number;
   availability?: boolean;
 };
@@ -115,7 +115,7 @@ export function normalizePricingJson(
             stemCount: o.stemCount ?? 0,
             price: o.price ?? 0,
             labelEn: o.labelEn,
-            labelTh: o.labelTh,
+            labelRu: o.labelRu,
             preparationTime: o.preparationTime,
             availability: o.availability ?? true,
           }));
@@ -126,7 +126,7 @@ export function normalizePricingJson(
           stemCount: o.stemCount ?? 0,
           price: o.price ?? 0,
           labelEn: o.labelEn,
-          labelTh: o.labelTh,
+          labelRu: o.labelRu,
           preparationTime: o.preparationTime,
           availability: o.availability ?? true,
         })),
@@ -144,7 +144,7 @@ export function normalizePricingJson(
         enabled: s.enabled ?? ((s.price ?? 0) > 0 || s.availability !== false),
         price: s.price,
         labelEn: s.labelEn ?? (s.label && !/^(s|m|l|xl)$/i.test(s.label) ? s.label : undefined),
-        labelTh: s.labelTh,
+        labelRu: s.labelRu,
         label: s.label,
         description: s.description,
         preparationTime: s.preparationTime,
@@ -189,7 +189,7 @@ function mapFixedVariantsToSizes(
       enabled: v.availability !== false,
       price: v.price ?? 0,
       labelEn: v.nameEn,
-      labelTh: v.nameTh,
+      labelRu: v.nameRu,
       availability: v.availability ?? true,
       legacyOptionId: `fixed_${vk}`,
     };
@@ -211,11 +211,11 @@ export function ensureFourSizeSlots(rows: CatalogSizePricingRow[]): CatalogSizeP
   );
 }
 
-function sizeDisplayLabel(row: CatalogSizePricingRow, lang: Locale | 'th'): string {
-  if (isThaiLocale(lang) && row.labelTh?.trim()) return row.labelTh.trim();
+function sizeDisplayLabel(row: CatalogSizePricingRow, lang: Locale): string {
+  if (lang === 'ru' && row.labelRu?.trim()) return row.labelRu.trim();
   if (row.labelEn?.trim()) return row.labelEn.trim();
   if (row.label?.trim() && !/^(s|m|l|xl)$/i.test(row.label)) return row.label.trim();
-  return isThaiLocale(lang) ? DEFAULT_SIZE_LABELS[row.key].th : DEFAULT_SIZE_LABELS[row.key].en;
+  return lang === 'ru' ? DEFAULT_SIZE_LABELS[row.key].ru : DEFAULT_SIZE_LABELS[row.key].en;
 }
 
 export function buildSellableOptionsFromPricing(
@@ -231,8 +231,8 @@ export function buildSellableOptionsFromPricing(
       {
         optionId: 'single_default',
         price,
-        label: isThaiLocale(lang) ? 'มาตรฐาน' : 'Standard',
-        labelTh: 'มาตรฐาน',
+        label: lang === 'ru' ? 'Стандарт' : 'Standard',
+        labelRu: 'Стандарт',
         availability: true,
       },
     ];
@@ -246,8 +246,8 @@ export function buildSellableOptionsFromPricing(
         optionId: `stem_${o.stemCount}_${i}`,
         stemCount: o.stemCount,
         price: o.price ?? 0,
-        label: labelSingleStemCount('en', o.stemCount, o.labelEn, o.labelTh),
-        labelTh: labelSingleStemCount('th', o.stemCount, o.labelEn, o.labelTh),
+        label: labelSingleStemCount(lang, o.stemCount, o.labelEn, o.labelRu),
+        labelRu: labelSingleStemCount('ru', o.stemCount, o.labelEn, o.labelRu),
         preparationTime: o.preparationTime,
         availability: o.availability ?? true,
       }));
@@ -262,8 +262,8 @@ export function buildSellableOptionsFromPricing(
         optionId,
         key: s.key,
         price: s.price ?? 0,
-        label: sizeDisplayLabel(s, 'en'),
-        labelTh: sizeDisplayLabel(s, 'th'),
+        label: sizeDisplayLabel(s, lang),
+        labelRu: sizeDisplayLabel(s, 'ru'),
         description: s.description ?? '',
         preparationTime: s.preparationTime,
         availability: s.availability ?? true,
@@ -286,14 +286,14 @@ export function buildSellableOptionsFromLegacyKind(
       .map((v, i) => {
         const vk = v.variantKey ?? `v${i}`;
         const nameEn = v.nameEn ?? '';
-        const nameTh = v.nameTh ?? '';
+        const nameRu = v.nameRu ?? '';
         return {
           optionId: `fixed_${vk}`,
           price: v.price ?? 0,
           label:
             nameEn ||
             friendlyLegacyLabel(undefined, `${v.stemMin ?? ''}-${v.stemMax ?? ''}`),
-          labelTh: nameTh || nameEn,
+          labelRu: nameRu || nameEn,
           stemMin: v.stemMin,
           stemMax: v.stemMax,
           preparationTime: v.preparationTime,
@@ -307,8 +307,8 @@ export function buildSellableOptionsFromLegacyKind(
       return {
         optionId: `custom_${i}_${mp}`,
         price: mp,
-        label: t.labelEn?.trim() || `Custom from ฿${mp}`,
-        labelTh: t.labelTh?.trim() || t.labelEn?.trim() || `Custom from ฿${mp}`,
+        label: t.labelEn?.trim() || `Custom from ₽${mp}`,
+        labelRu: t.labelRu?.trim() || t.labelEn?.trim() || `Custom from ₽${mp}`,
         preparationTime: t.preparationTime,
         availability: t.availability ?? true,
       };
@@ -329,7 +329,7 @@ export function buildSellableOptionsFromLegacyKind(
         key,
         price: s.price ?? 0,
         label: friendly,
-        labelTh: friendly,
+        labelRu: friendly,
         description: s.description ?? '',
         preparationTime: s.preparationTime,
         availability: s.availability ?? true,
@@ -387,7 +387,7 @@ export function pricingPayloadForSave(
         stemCount: o.stemCount,
         price: o.price,
         labelEn: o.labelEn,
-        labelTh: o.labelTh,
+        labelRu: o.labelRu,
         preparationTime: o.preparationTime,
         availability: o.availability ?? true,
       })),
@@ -399,7 +399,7 @@ export function pricingPayloadForSave(
       enabled: s.enabled ?? false,
       price: s.price,
       labelEn: s.labelEn,
-      labelTh: s.labelTh,
+      labelRu: s.labelRu,
       label: s.label,
       description: s.description,
       preparationTime: s.preparationTime,

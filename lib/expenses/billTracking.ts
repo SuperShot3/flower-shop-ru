@@ -20,7 +20,7 @@ function formatDbOrderItem(oi: {
 }): string {
   const title = oi.bouquet_title?.trim() || itemTypeLabel(oi.item_type);
   const size = oi.size?.trim() ? ` · ${oi.size}` : '';
-  const p = oi.price != null && String(oi.price) !== '' ? ` · ${oi.price} THB` : '';
+  const p = oi.price != null && String(oi.price) !== '' ? ` · ${oi.price} RUB` : '';
   return `${title}${size}${p}`;
 }
 
@@ -88,7 +88,7 @@ export async function resolveBillLinesTarget(
       .eq('order_id', oid)
       .maybeSingle();
     const d = deliveryCostFromRow(orderRow);
-    const label = d > 0 ? `Payment to driver · ${d} THB` : 'Payment to driver (linked order)';
+    const label = d > 0 ? `Payment to driver · ${d} RUB` : 'Payment to driver (linked order)';
     return [{ line_id: 'order:delivery', label, vendor_bill_applicable: false }];
   }
 

@@ -490,7 +490,7 @@ export function OrderPageClient({
               <div className="order-redesign-paid-details">
                 <div className="order-redesign-totals-row">
                   <span>{t.amountPaid}</span>
-                  <span>฿{grandTotal.toLocaleString()}</span>
+                  <span>₽{grandTotal.toLocaleString()}</span>
                 </div>
                 <div className="order-redesign-totals-row">
                   <span>{t.method}</span>
@@ -589,28 +589,28 @@ export function OrderPageClient({
                 <div className="order-redesign-item-name">{item.bouquetTitle}</div>
                 <div className="order-redesign-item-sub">{item.size}</div>
               </div>
-              <div className="order-redesign-item-price">฿{item.price.toLocaleString()}</div>
+              <div className="order-redesign-item-price">₽{item.price.toLocaleString()}</div>
             </div>
           ))}
 
           <div className="order-redesign-totals">
             <div className="order-redesign-totals-row">
               <span>{t.bouquetPrice}</span>
-              <span>฿{(order.pricing?.itemsTotal ?? 0).toLocaleString()}</span>
+              <span>₽{(order.pricing?.itemsTotal ?? 0).toLocaleString()}</span>
             </div>
             <div className="order-redesign-totals-row">
               <span>{t.deliveryFee}</span>
-              <span>฿{(order.pricing?.deliveryFee ?? 0).toLocaleString()}</span>
+              <span>₽{(order.pricing?.deliveryFee ?? 0).toLocaleString()}</span>
             </div>
             {order.referralDiscount != null && order.referralDiscount > 0 && (
               <div className="order-redesign-totals-row">
                 <span>{t.discount}</span>
-                <span>-฿{order.referralDiscount.toLocaleString()}</span>
+                <span>-₽{order.referralDiscount.toLocaleString()}</span>
               </div>
             )}
             <div className="order-redesign-totals-row total">
               <span>{t.total}</span>
-              <span>฿{grandTotal.toLocaleString()}</span>
+              <span>₽{grandTotal.toLocaleString()}</span>
             </div>
           </div>
 

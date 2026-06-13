@@ -640,7 +640,7 @@ export async function createIncomeRecord(
       source_type:       input.source_type,
       amount:            input.amount,
       processing_fee_amount: fee,
-      currency:          input.currency ?? 'THB',
+      currency:          input.currency ?? 'RUB',
       payment_method:    input.payment_method,
       money_location:    input.money_location,
       income_status:     input.income_status ?? 'confirmed',
@@ -711,7 +711,7 @@ export async function upsertOrderIncomeRecord(
       source_type:       'order',
       amount:            input.amount,
       processing_fee_amount: fee,
-      currency:          input.currency ?? 'THB',
+      currency:          input.currency ?? 'RUB',
       payment_method:    input.payment_method,
       money_location:    input.money_location,
       income_status:     'confirmed',
@@ -1366,6 +1366,6 @@ export async function getAccountingOverview(filter: OverviewPeriodFilter = {}) {
     withdrawalsYtd,
     expensesMissingReceiptCount,
     incomeMissingProofCount,
-    currency: 'THB',
+    currency: 'RUB',
   };
 }

@@ -93,7 +93,7 @@ export async function sendOrderNotificationEmail(order: Order, detailsUrl: strin
 
   const itemsList = order.items
     .map((i) => {
-      let line = `• ${escapeHtml(i.bouquetTitle)} — ${escapeHtml(i.size)} — ฿${i.price.toLocaleString()}`;
+      let line = `• ${escapeHtml(i.bouquetTitle)} — ${escapeHtml(i.size)} — ₽${i.price.toLocaleString()}`;
       if (i.addOns?.wrappingOption) line += ` (Wrapping: ${escapeHtml(i.addOns.wrappingOption)})`;
       if (i.addOns?.cardMessage) line += ` — Card: ${escapeHtml(i.addOns.cardMessage)}`;
       if (i.addOns?.balloonText) line += ` — Balloon text: ${escapeHtml(i.addOns.balloonText)}`;
@@ -119,7 +119,7 @@ export async function sendOrderNotificationEmail(order: Order, detailsUrl: strin
   <h2 style="font-size: 1rem;">Delivery</h2>
   <p>Date & time: ${escapeHtml(order.delivery.preferredTimeSlot || '—')}<br/>
   Address: ${escapeHtml(order.delivery.address)}</p>
-  ${order.delivery.deliveryGoogleMapsUrl ? `<p><a href="${escapeHtml(order.delivery.deliveryGoogleMapsUrl)}">Open in Google Maps</a></p>` : ''}
+  ${order.delivery.deliveryGoogleMapsUrl ? `<p><a href="${escapeHtml(order.delivery.deliveryGoogleMapsUrl)}">Open in Yandex Maps</a></p>` : ''}
 
   ${(order.delivery.recipientName || order.delivery.recipientPhone) ? `
   <h2 style="font-size: 1rem;">Recipient</h2>
@@ -147,10 +147,10 @@ export async function sendOrderNotificationEmail(order: Order, detailsUrl: strin
   <p>${itemsList}</p>
 
   <h2 style="font-size: 1rem;">Price summary</h2>
-  <p>Bouquet: ฿${order.pricing.itemsTotal.toLocaleString()}<br/>
-  Delivery fee: ฿${order.pricing.deliveryFee.toLocaleString()}<br/>
-  ${order.referralDiscount != null && order.referralDiscount > 0 ? `Discount: -฿${order.referralDiscount.toLocaleString()}<br/>` : ''}
-  <strong>Total: ฿${order.pricing.grandTotal.toLocaleString()}</strong></p>
+  <p>Bouquet: ₽${order.pricing.itemsTotal.toLocaleString()}<br/>
+  Delivery fee: ₽${order.pricing.deliveryFee.toLocaleString()}<br/>
+  ${order.referralDiscount != null && order.referralDiscount > 0 ? `Discount: -₽${order.referralDiscount.toLocaleString()}<br/>` : ''}
+  <strong>Total: ₽${order.pricing.grandTotal.toLocaleString()}</strong></p>
 
   <h2 style="font-size: 1rem;">Sender</h2>
   <p>${order.customerName ? escapeHtml(order.customerName) : '—'}<br/>
@@ -189,7 +189,7 @@ export async function sendCustomerConfirmationEmail(order: Order, detailsUrl: st
 
   const itemsList = order.items
     .map((i) => {
-      let line = `• ${escapeHtml(i.bouquetTitle)} — ${escapeHtml(i.size)} — ฿${i.price.toLocaleString()}`;
+      let line = `• ${escapeHtml(i.bouquetTitle)} — ${escapeHtml(i.size)} — ₽${i.price.toLocaleString()}`;
       if (i.addOns?.wrappingOption) line += ` (Wrapping: ${escapeHtml(i.addOns.wrappingOption)})`;
       if (i.addOns?.cardMessage) line += ` — Card: ${escapeHtml(i.addOns.cardMessage)}`;
       if (i.addOns?.balloonText) line += ` — Balloon text: ${escapeHtml(i.addOns.balloonText)}`;
@@ -199,7 +199,7 @@ export async function sendCustomerConfirmationEmail(order: Order, detailsUrl: st
 
   const discountLine =
     order.referralDiscount != null && order.referralDiscount > 0
-      ? `<br/>Discount: -฿${order.referralDiscount.toLocaleString()}`
+      ? `<br/>Discount: -₽${order.referralDiscount.toLocaleString()}`
       : '';
   const vars = buildOrderTemplateVariables(order);
   const greeting = escapeHtml(vars.customer_name || 'there');
@@ -233,15 +233,15 @@ export async function sendCustomerConfirmationEmail(order: Order, detailsUrl: st
       <h2 style="font-size: 16px; margin: 0 0 8px 0; color: #2c2415;">Delivery</h2>
       <p style="margin: 0 0 6px 0;"><strong>Date &amp; time:</strong> ${safeDeliveryDate}</p>
       <p style="margin: 0;"><strong>Address:</strong> ${safeDeliveryAddress}</p>
-      ${order.delivery.deliveryGoogleMapsUrl ? `<p style="margin: 10px 0 0 0;"><a href="${escapeHtml(order.delivery.deliveryGoogleMapsUrl)}" target="_blank" rel="noopener noreferrer" style="color: #967a4d; font-weight: 600; text-decoration: none;">Open in Google Maps</a></p>` : ''}
+      ${order.delivery.deliveryGoogleMapsUrl ? `<p style="margin: 10px 0 0 0;"><a href="${escapeHtml(order.delivery.deliveryGoogleMapsUrl)}" target="_blank" rel="noopener noreferrer" style="color: #967a4d; font-weight: 600; text-decoration: none;">Open in Yandex Maps</a></p>` : ''}
     </div>
 
     <div style="background: #faf7ef; border: 1px solid #eadfcd; border-radius: 10px; padding: 14px 16px; margin: 20px 0;">
       <h2 style="font-size: 16px; margin: 0 0 8px 0; color: #2c2415;">Order summary</h2>
       <p style="margin: 0 0 12px 0;">${itemsList}</p>
-      <p style="margin: 0;">Bouquet: ฿${order.pricing.itemsTotal.toLocaleString()}<br/>
-      Delivery fee: ฿${order.pricing.deliveryFee.toLocaleString()}${discountLine}<br/>
-      <strong>Total: ฿${order.pricing.grandTotal.toLocaleString()}</strong></p>
+      <p style="margin: 0;">Bouquet: ₽${order.pricing.itemsTotal.toLocaleString()}<br/>
+      Delivery fee: ₽${order.pricing.deliveryFee.toLocaleString()}${discountLine}<br/>
+      <strong>Total: ₽${order.pricing.grandTotal.toLocaleString()}</strong></p>
     </div>
 
     <p style="font-size: 15px; margin: 20px 0 0 0;">If you have any questions, please reply to this email or contact us via LINE, WhatsApp, or the contact details on our website.</p>
@@ -265,16 +265,16 @@ Date & time: ${order.delivery.preferredTimeSlot || '—'}
 Address: ${order.delivery.address}
 
 Items
-${order.items.map((i) => `${i.bouquetTitle} — ${i.size} — ฿${i.price.toLocaleString()}`).join('\n')}
+${order.items.map((i) => `${i.bouquetTitle} — ${i.size} — ₽${i.price.toLocaleString()}`).join('\n')}
 
 Price summary
-Bouquet: ฿${order.pricing.itemsTotal.toLocaleString()}
-Delivery fee: ฿${order.pricing.deliveryFee.toLocaleString()}${
+Bouquet: ₽${order.pricing.itemsTotal.toLocaleString()}
+Delivery fee: ₽${order.pricing.deliveryFee.toLocaleString()}${
   order.referralDiscount != null && order.referralDiscount > 0
-    ? `\nDiscount: -฿${order.referralDiscount.toLocaleString()}`
+    ? `\nDiscount: -₽${order.referralDiscount.toLocaleString()}`
     : ''
 }
-Total: ฿${order.pricing.grandTotal.toLocaleString()}
+Total: ₽${order.pricing.grandTotal.toLocaleString()}
 
 If you have any questions, please reply to this email or contact us via LINE, WhatsApp, or the contact details on our website.
 
@@ -318,7 +318,7 @@ export async function sendCustomerPaymentFailedEmail(
   if (!apiKey || !from) return true;
 
   const grandTotal = order.pricing?.grandTotal ?? order.amountTotal ?? 0;
-  const amountLabel = `฿${grandTotal.toLocaleString()}`;
+  const amountLabel = `₽${grandTotal.toLocaleString()}`;
   const safeRetryUrl = escapeHtml(retryUrl);
   const safeOrderId = escapeHtml(order.orderId);
   const greetName = order.customerName?.trim() ? escapeHtml(order.customerName.trim()) : null;
@@ -342,7 +342,7 @@ export async function sendCustomerPaymentFailedEmail(
   <h2 style="font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.5rem;">วิธีชำระเงินให้สำเร็จ</h2>
   <ul style="padding-left: 1.2rem;">
     <li><strong>ใช้บัตรอื่น</strong> — ลองใช้บัตรเครดิตหรือเดบิตใบอื่น</li>
-    <li><strong>ใช้พร้อมเพย์ (PromptPay)</strong> — สแกน QR ผ่านแอปธนาคารไทย ชำระได้ทันที (สำหรับสกุลเงิน THB)</li>
+    <li><strong>ใช้พร้อมเพย์ (PromptPay)</strong> — สแกน QR ผ่านแอปธนาคารไทย ชำระได้ทันที (สำหรับสกุลเงิน RUB)</li>
   </ul>
 
   <p style="margin-top: 1.25rem;">
@@ -369,7 +369,7 @@ export async function sendCustomerPaymentFailedEmail(
   <h2 style="font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.5rem;">How to complete your payment</h2>
   <ul style="padding-left: 1.2rem;">
     <li><strong>Use a different card</strong> — try another credit or debit card.</li>
-    <li><strong>Pay with PromptPay</strong> — scan the QR with any Thai banking app, pay instantly (THB only).</li>
+    <li><strong>Pay with PromptPay</strong> — scan the QR with any Thai banking app, pay instantly (RUB only).</li>
   </ul>
 
   <p style="margin-top: 1.25rem;">
@@ -385,8 +385,8 @@ export async function sendCustomerPaymentFailedEmail(
 `.trim();
 
   const text = isTh
-    ? `การชำระเงินสำหรับคำสั่งซื้อ ${order.orderId} (${amountLabel}) ยังไม่สำเร็จ\n\nวิธีชำระเงินให้สำเร็จ:\n• ใช้บัตรอื่น\n• ใช้พร้อมเพย์ผ่านแอปธนาคารไทย (THB เท่านั้น)\n\nชำระเงินอีกครั้ง: ${retryUrl}\n\nหากต้องการความช่วยเหลือ กรุณาตอบกลับอีเมลนี้ หรือติดต่อทาง LINE / WhatsApp\n— Lanna Bloom`
-    : `Your payment of ${amountLabel} for order ${order.orderId} didn't complete.\n\nHow to complete your payment:\n• Use a different card\n• Pay with PromptPay via any Thai banking app (THB only)\n\nRetry payment: ${retryUrl}\n\nReply to this email or contact us via LINE / WhatsApp if you need help.\n— Lanna Bloom`;
+    ? `การชำระเงินสำหรับคำสั่งซื้อ ${order.orderId} (${amountLabel}) ยังไม่สำเร็จ\n\nวิธีชำระเงินให้สำเร็จ:\n• ใช้บัตรอื่น\n• ใช้พร้อมเพย์ผ่านแอปธนาคารไทย (RUB เท่านั้น)\n\nชำระเงินอีกครั้ง: ${retryUrl}\n\nหากต้องการความช่วยเหลือ กรุณาตอบกลับอีเมลนี้ หรือติดต่อทาง LINE / WhatsApp\n— Lanna Bloom`
+    : `Your payment of ${amountLabel} for order ${order.orderId} didn't complete.\n\nHow to complete your payment:\n• Use a different card\n• Pay with PromptPay via any Thai banking app (RUB only)\n\nRetry payment: ${retryUrl}\n\nReply to this email or contact us via LINE / WhatsApp if you need help.\n— Lanna Bloom`;
 
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({

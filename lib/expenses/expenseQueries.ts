@@ -418,7 +418,7 @@ export async function createExpense(
     .from(TABLE)
     .insert({
       amount:            input.amount,
-      currency:          input.currency ?? 'THB',
+      currency:          input.currency ?? 'RUB',
       date:              input.date,
       category:          input.category,
       description:       input.description,

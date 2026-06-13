@@ -1,7 +1,6 @@
 /**
  * Build JSON body for POST /api/stripe/create-checkout-session from cart UI state.
  * Shape must match validateStripePayload in app/api/stripe/create-checkout-session/route.ts.
- * When `contactPreference` includes `line`, include `lineId` (normalized plain ID); the API requires it.
  */
 
 import type { Locale } from '@/lib/i18n';
@@ -15,7 +14,6 @@ import { getZoneFee, isSupportedZone } from '@/lib/delivery/zones';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { normalizeBalloonText } from '@/lib/balloonCustomization';
 import { clipCheckoutField } from '@/lib/checkout/checkoutFieldLimits';
-import { normalizeLineUserId } from '@/lib/lineUserId';
 
 function mapWrappingForStripe(
   pref: CartItem['addOns']['wrappingPreference']
@@ -78,8 +76,6 @@ export function buildStripeCheckoutSessionRequestBody(params: {
   customerEmail?: string;
   marketingEmailConsent?: boolean;
   contactPreference: ContactPreferenceOption[];
-  /** Required in API when `contactPreference` includes `line`. */
-  lineId?: string;
   submissionToken: string;
   recipientName?: string;
   recipientPhone?: string;
@@ -99,7 +95,6 @@ export function buildStripeCheckoutSessionRequestBody(params: {
     customerEmail,
     marketingEmailConsent,
     contactPreference,
-    lineId,
     submissionToken,
     recipientName,
     recipientPhone,
@@ -181,10 +176,6 @@ export function buildStripeCheckoutSessionRequestBody(params: {
 
   if (marketingEmailConsent === true) {
     body.marketingEmailConsent = true;
-  }
-
-  if (contactPreference.includes('line')) {
-    body.lineId = normalizeLineUserId(lineId ?? '');
   }
 
   if (resolvedDiscount && referralDiscount > 0) {

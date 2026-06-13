@@ -234,7 +234,7 @@ export function StickyCheckoutBar({
           onClick={handleExpand}
           aria-label={labels.showCheckout ?? (isThaiLocale(lang) ? 'แสดงชำระเงิน' : 'Show checkout')}
         >
-          <span className="sticky-checkout-bar__peek-total">฿{summary.total.toLocaleString()}</span>
+          <span className="sticky-checkout-bar__peek-total">₽{summary.total.toLocaleString()}</span>
           <svg className="sticky-checkout-bar__peek-chevron" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden>
             <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -324,18 +324,18 @@ export function StickyCheckoutBar({
               ) : summary.deliveryFeeGross != null && summary.deliveryFeeGross > summary.deliveryFee ? (
                 <>
                   <span className="sticky-checkout-bar__price-meta-was">
-                    ฿{summary.deliveryFeeGross.toLocaleString()}
+                    ₽{summary.deliveryFeeGross.toLocaleString()}
                   </span>{' '}
                   <span className="sticky-checkout-bar__price-meta-free">
                     {labels.deliveryFree ?? 'Free'}
                   </span>
                 </>
               ) : (
-                <span>฿{summary.deliveryFee.toLocaleString()}</span>
+                <span>₽{summary.deliveryFee.toLocaleString()}</span>
               )}
             </div>
             <div className="sticky-checkout-bar__total-amount">
-              ฿{summary.total.toLocaleString()}
+              ₽{summary.total.toLocaleString()}
             </div>
           </div>
 

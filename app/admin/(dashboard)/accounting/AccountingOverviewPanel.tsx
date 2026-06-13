@@ -90,7 +90,7 @@ function ledgerChannelsForDisplay(ledger: MoneyLocationTotal[]): MoneyLocationTo
 function fmt(amount: number) {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
-    currency: 'THB',
+    currency: 'RUB',
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(amount);

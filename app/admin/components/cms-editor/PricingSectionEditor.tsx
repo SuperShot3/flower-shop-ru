@@ -74,7 +74,7 @@ function sizeRowTitle(row: CatalogSizePricingRow): string {
 function sizeRowSubtitle(row: CatalogSizePricingRow): string | null {
   const price = row.price ?? 0;
   if (!row.enabled) return null;
-  const parts: string[] = [`฿${price}`];
+  const parts: string[] = [`₽${price}`];
   if (row.description?.trim()) parts.push(row.description.trim());
   return parts.join(' · ');
 }
@@ -84,8 +84,8 @@ function stemRowTitle(tier: CatalogStemPricingRow): string {
 }
 
 function stemRowSubtitle(tier: CatalogStemPricingRow): string | null {
-  const parts: string[] = [`฿${tier.price ?? 0}`, `${tier.stemCount} stems`];
-  if (tier.labelTh?.trim()) parts.push(tier.labelTh.trim());
+  const parts: string[] = [`₽${tier.price ?? 0}`, `${tier.stemCount} stems`];
+  if (tier.labelRu?.trim()) parts.push(tier.labelRu.trim());
   return parts.join(' · ');
 }
 
@@ -119,7 +119,7 @@ function BouquetSizeEditModal({
 }: SizeModalProps) {
   const [draftKey, setDraftKey] = useState<SizeKey>('s');
   const [labelEn, setLabelEn] = useState('');
-  const [labelTh, setLabelTh] = useState('');
+  const [labelRu, setLabelRu] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [preparationTime, setPreparationTime] = useState('');
@@ -135,7 +135,7 @@ function BouquetSizeEditModal({
     const key = row?.key ?? availableKeys[0] ?? 's';
     setDraftKey(key);
     setLabelEn(row?.labelEn ?? row?.label ?? key.toUpperCase());
-    setLabelTh(row?.labelTh ?? '');
+    setLabelRu(row?.labelRu ?? '');
     setPrice(row?.price != null ? String(row.price) : '');
     setDescription(row?.description ?? '');
     setPreparationTime(
@@ -157,7 +157,7 @@ function BouquetSizeEditModal({
     onSave(key, {
       enabled: true,
       labelEn: labelEn.trim() || key.toUpperCase(),
-      labelTh: labelTh.trim() || undefined,
+      labelRu: labelRu.trim() || undefined,
       price: Number(price) || 0,
       description: description.trim() || undefined,
       preparationTime: preparationTime ? Number(preparationTime) : undefined,
@@ -203,16 +203,16 @@ function BouquetSizeEditModal({
         />
       </label>
       <label className="admin-cms-field">
-        <span className="admin-cms-field-label">Label (TH)</span>
+        <span className="admin-cms-field-label">Label (RU)</span>
         <input
           className="admin-cms-input"
-          value={labelTh}
-          onChange={(e) => setLabelTh(e.target.value)}
-          placeholder={DEFAULT_SIZE_LABELS[activeKey].th}
+          value={labelRu}
+          onChange={(e) => setLabelRu(e.target.value)}
+          placeholder={DEFAULT_SIZE_LABELS[activeKey].ru}
         />
       </label>
       <label className="admin-cms-field">
-        <span className="admin-cms-field-label">Price (THB)</span>
+        <span className="admin-cms-field-label">Price (₽)</span>
         <input
           type="number"
           min={0}
@@ -291,7 +291,7 @@ function StemTierEditModal({
 }: StemModalProps) {
   const [stemCount, setStemCount] = useState('12');
   const [labelEn, setLabelEn] = useState('');
-  const [labelTh, setLabelTh] = useState('');
+  const [labelRu, setLabelRu] = useState('');
   const [price, setPrice] = useState('');
   const [preparationTime, setPreparationTime] = useState('');
   const [availability, setAvailability] = useState(true);
@@ -306,7 +306,7 @@ function StemTierEditModal({
     const n = tier?.stemCount ?? 12;
     setStemCount(String(n));
     setLabelEn(tier?.labelEn ?? `${n} roses`);
-    setLabelTh(tier?.labelTh ?? '');
+    setLabelRu(tier?.labelRu ?? '');
     setPrice(tier?.price != null ? String(tier.price) : '');
     setPreparationTime(
       tier?.preparationTime != null ? String(tier.preparationTime) : ''
@@ -323,7 +323,7 @@ function StemTierEditModal({
       stemCount: n,
       price: Number(price) || 0,
       labelEn: labelEn.trim() || `${n} roses`,
-      labelTh: labelTh.trim() || undefined,
+      labelRu: labelRu.trim() || undefined,
       preparationTime: preparationTime ? Number(preparationTime) : undefined,
       availability,
     });
@@ -366,15 +366,15 @@ function StemTierEditModal({
         />
       </label>
       <label className="admin-cms-field">
-        <span className="admin-cms-field-label">Label (TH)</span>
+        <span className="admin-cms-field-label">Label (RU)</span>
         <input
           className="admin-cms-input"
-          value={labelTh}
-          onChange={(e) => setLabelTh(e.target.value)}
+          value={labelRu}
+          onChange={(e) => setLabelRu(e.target.value)}
         />
       </label>
       <label className="admin-cms-field">
-        <span className="admin-cms-field-label">Price (THB)</span>
+        <span className="admin-cms-field-label">Price (₽)</span>
         <input
           type="number"
           min={0}
@@ -514,7 +514,7 @@ export function PricingSectionEditor({
 
       {pricingType === 'single_price' ? (
         <label className="admin-cms-field">
-          <span className="admin-cms-field-label">Price (THB)</span>
+          <span className="admin-cms-field-label">Price (₽)</span>
           <input
             type="number"
             min={0}

@@ -31,9 +31,9 @@ export type CatalogDraftSummary = {
 
 export type CatalogProductDraftPayload = {
   nameEn?: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   price?: number;
   occasion?: string[];
   excludedDeliveryDestinations?: string[];
@@ -41,11 +41,11 @@ export type CatalogProductDraftPayload = {
 
 export type CatalogBouquetDraftPayload = {
   nameEn?: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   compositionEn?: string;
-  compositionTh?: string;
+  compositionRu?: string;
   featuredPopular?: boolean;
   colors?: string[];
   flowerTypes?: string[];
@@ -152,7 +152,7 @@ async function cloneLiveImagesToRevision(
     source_type: image.source_type,
     original_image_id: image.id,
     alt_en: image.alt_en,
-    alt_th: image.alt_th,
+    alt_ru: image.alt_ru,
     is_primary: image.is_primary,
     sort_order: image.sort_order,
     metadata: image.metadata ?? {},
@@ -319,7 +319,7 @@ async function promoteRevisionImagesToLive(
     source_type: image.source_type,
     original_image_id: image.original_image_id,
     alt_en: image.alt_en,
-    alt_th: image.alt_th,
+    alt_ru: image.alt_ru,
     is_primary: image.is_primary,
     sort_order: image.sort_order,
     metadata: image.metadata ?? {},
@@ -338,9 +338,9 @@ async function promoteRevisionImagesToLive(
 function parseProductDraftPayload(payload: Record<string, unknown>): UpdateCatalogProductByAdminInput {
   const input: UpdateCatalogProductByAdminInput = {};
   if (typeof payload.nameEn === 'string') input.nameEn = payload.nameEn;
-  if (typeof payload.nameTh === 'string') input.nameTh = payload.nameTh;
+  if (typeof payload.nameRu === 'string') input.nameRu = payload.nameRu;
   if (typeof payload.descriptionEn === 'string') input.descriptionEn = payload.descriptionEn;
-  if (typeof payload.descriptionTh === 'string') input.descriptionTh = payload.descriptionTh;
+  if (typeof payload.descriptionRu === 'string') input.descriptionRu = payload.descriptionRu;
   if (typeof payload.price === 'number' && Number.isFinite(payload.price)) {
     input.price = payload.price;
   }
@@ -356,11 +356,11 @@ function parseProductDraftPayload(payload: Record<string, unknown>): UpdateCatal
 function parseBouquetDraftPayload(payload: Record<string, unknown>): UpdateCatalogBouquetByAdminInput {
   const input: UpdateCatalogBouquetByAdminInput = {};
   if (typeof payload.nameEn === 'string') input.nameEn = payload.nameEn;
-  if (typeof payload.nameTh === 'string') input.nameTh = payload.nameTh;
+  if (typeof payload.nameRu === 'string') input.nameRu = payload.nameRu;
   if (typeof payload.descriptionEn === 'string') input.descriptionEn = payload.descriptionEn;
-  if (typeof payload.descriptionTh === 'string') input.descriptionTh = payload.descriptionTh;
+  if (typeof payload.descriptionRu === 'string') input.descriptionRu = payload.descriptionRu;
   if (typeof payload.compositionEn === 'string') input.compositionEn = payload.compositionEn;
-  if (typeof payload.compositionTh === 'string') input.compositionTh = payload.compositionTh;
+  if (typeof payload.compositionRu === 'string') input.compositionRu = payload.compositionRu;
   if (typeof payload.featuredPopular === 'boolean') input.featuredPopular = payload.featuredPopular;
   if (Array.isArray(payload.colors)) input.colors = payload.colors.map((v) => String(v)).filter(Boolean);
   if (Array.isArray(payload.flowerTypes)) {
@@ -470,9 +470,9 @@ export function applyProductDraftToDetail<T extends Record<string, unknown>>(
     draftRevisionId: draft.id,
     draftUpdatedAt: draft.updated_at,
     ...(typeof p.nameEn === 'string' && { nameEn: p.nameEn }),
-    ...(typeof p.nameTh === 'string' && { nameTh: p.nameTh }),
+    ...(typeof p.nameRu === 'string' && { nameRu: p.nameRu }),
     ...(typeof p.descriptionEn === 'string' && { descriptionEn: p.descriptionEn }),
-    ...(typeof p.descriptionTh === 'string' && { descriptionTh: p.descriptionTh }),
+    ...(typeof p.descriptionRu === 'string' && { descriptionRu: p.descriptionRu }),
     ...(typeof p.price === 'number' && { price: p.price }),
     ...(Array.isArray(p.occasion) && { occasion: p.occasion.join(', ') }),
     ...(Array.isArray(p.excludedDeliveryDestinations) && {
@@ -495,11 +495,11 @@ export function applyBouquetDraftToDetail<T extends Record<string, unknown>>(
     draftRevisionId: draft.id,
     draftUpdatedAt: draft.updated_at,
     ...(typeof p.nameEn === 'string' && { nameEn: p.nameEn }),
-    ...(typeof p.nameTh === 'string' && { nameTh: p.nameTh }),
+    ...(typeof p.nameRu === 'string' && { nameRu: p.nameRu }),
     ...(typeof p.descriptionEn === 'string' && { descriptionEn: p.descriptionEn }),
-    ...(typeof p.descriptionTh === 'string' && { descriptionTh: p.descriptionTh }),
+    ...(typeof p.descriptionRu === 'string' && { descriptionRu: p.descriptionRu }),
     ...(typeof p.compositionEn === 'string' && { compositionEn: p.compositionEn }),
-    ...(typeof p.compositionTh === 'string' && { compositionTh: p.compositionTh }),
+    ...(typeof p.compositionRu === 'string' && { compositionRu: p.compositionRu }),
     ...(typeof p.featuredPopular === 'boolean' && { featuredPopular: p.featuredPopular }),
     ...(Array.isArray(p.colors) && { colors: p.colors }),
     ...(Array.isArray(p.flowerTypes) && { flowerTypes: p.flowerTypes }),

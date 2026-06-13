@@ -75,12 +75,12 @@ export function AdminProductDetailClient({ product }: Props) {
   const pending = getProductPending(product.id);
 
   const [nameEn, setNameEn] = useState(() => pending?.nameEn ?? product.nameEn);
-  const [nameTh, setNameTh] = useState(() => pending?.nameTh ?? product.nameTh ?? '');
+  const [nameRu, setNameTh] = useState(() => pending?.nameRu ?? product.nameRu ?? '');
   const [descriptionEn, setDescriptionEn] = useState(
     () => pending?.descriptionEn ?? product.descriptionEn ?? ''
   );
-  const [descriptionTh, setDescriptionTh] = useState(
-    () => pending?.descriptionTh ?? product.descriptionTh ?? ''
+  const [descriptionRu, setDescriptionTh] = useState(
+    () => pending?.descriptionRu ?? product.descriptionRu ?? ''
   );
   const [price, setPrice] = useState(() => pending?.price ?? String(product.price));
   const [occasion, setOccasion] = useState<string[]>(
@@ -102,9 +102,9 @@ export function AdminProductDetailClient({ product }: Props) {
   useEffect(() => {
     if (getProductPending(product.id)) return;
     setNameEn(product.nameEn);
-    setNameTh(product.nameTh ?? '');
+    setNameTh(product.nameRu ?? '');
     setDescriptionEn(product.descriptionEn ?? '');
-    setDescriptionTh(product.descriptionTh ?? '');
+    setDescriptionTh(product.descriptionRu ?? '');
     setPrice(String(product.price));
     setOccasion(parseOccasion(product.occasion));
     setAvailableMarkets(availableMarketsFromExcluded(product.excludedDeliveryDestinations));
@@ -118,9 +118,9 @@ export function AdminProductDetailClient({ product }: Props) {
   const savedSnapshot = useMemo(
     () => ({
       nameEn: product.nameEn,
-      nameTh: product.nameTh ?? '',
+      nameRu: product.nameRu ?? '',
       descriptionEn: product.descriptionEn ?? '',
-      descriptionTh: product.descriptionTh ?? '',
+      descriptionRu: product.descriptionRu ?? '',
       price: String(product.price),
       occasion: parseOccasion(product.occasion).join('|'),
       markets: availableMarketsFromExcluded(product.excludedDeliveryDestinations).join('|'),
@@ -131,18 +131,18 @@ export function AdminProductDetailClient({ product }: Props) {
   const hasUnsavedChanges = useMemo(() => {
     return (
       nameEn !== savedSnapshot.nameEn ||
-      nameTh !== savedSnapshot.nameTh ||
+      nameRu !== savedSnapshot.nameRu ||
       descriptionEn !== savedSnapshot.descriptionEn ||
-      descriptionTh !== savedSnapshot.descriptionTh ||
+      descriptionRu !== savedSnapshot.descriptionRu ||
       price !== savedSnapshot.price ||
       occasion.join('|') !== savedSnapshot.occasion ||
       availableMarkets.join('|') !== savedSnapshot.markets
     );
   }, [
     nameEn,
-    nameTh,
+    nameRu,
     descriptionEn,
-    descriptionTh,
+    descriptionRu,
     price,
     occasion,
     availableMarkets,
@@ -163,9 +163,9 @@ export function AdminProductDetailClient({ product }: Props) {
     }
     setProductPending(product.id, {
       nameEn,
-      nameTh,
+      nameRu,
       descriptionEn,
-      descriptionTh,
+      descriptionRu,
       price,
       occasion,
       availableMarkets,
@@ -175,9 +175,9 @@ export function AdminProductDetailClient({ product }: Props) {
     product.id,
     setProductPending,
     nameEn,
-    nameTh,
+    nameRu,
     descriptionEn,
-    descriptionTh,
+    descriptionRu,
     price,
     occasion,
     availableMarkets,
@@ -193,9 +193,9 @@ export function AdminProductDetailClient({ product }: Props) {
     const formData = new FormData();
     formData.set('productId', product.id);
     formData.set('nameEn', nameEn);
-    formData.set('nameTh', nameTh);
+    formData.set('nameRu', nameRu);
     formData.set('descriptionEn', descriptionEn);
-    formData.set('descriptionTh', descriptionTh);
+    formData.set('descriptionRu', descriptionRu);
     formData.set('price', price);
     formData.set('occasion', JSON.stringify(occasion));
     formData.set(
@@ -381,7 +381,7 @@ export function AdminProductDetailClient({ product }: Props) {
               formData.set('productId', product.id);
               formData.set('file', file);
               formData.set('altEn', nameEn);
-              formData.set('altTh', nameTh);
+              formData.set('altRu', nameRu);
               const result = await uploadProductImageAction(formData);
               setLoading(null);
               if (result.error) setError(result.error);
@@ -393,7 +393,7 @@ export function AdminProductDetailClient({ product }: Props) {
               formData.set('productId', product.id);
               formData.set('imageId', image.id);
               formData.set('altEn', image.altEn);
-              formData.set('altTh', image.altTh);
+              formData.set('altRu', image.altRu);
               const result = await updateProductImageAltAction(formData);
               setLoading(null);
               if (result.error) setError(result.error);
@@ -407,7 +407,7 @@ export function AdminProductDetailClient({ product }: Props) {
               formData.set('productId', product.id);
               formData.set('file', file);
               formData.set('altEn', image.altEn || nameEn);
-              formData.set('altTh', image.altTh || nameTh);
+              formData.set('altRu', image.altRu || nameRu);
               const upload = await uploadProductImageAction(formData);
               if (upload.error) {
                 setLoading(null);
@@ -475,8 +475,8 @@ export function AdminProductDetailClient({ product }: Props) {
               <input className="admin-cms-input" value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
             </label>
             <label className="admin-cms-field">
-              <span className="admin-cms-field-label">Name (TH)</span>
-              <input className="admin-cms-input" value={nameTh} onChange={(e) => setNameTh(e.target.value)} />
+              <span className="admin-cms-field-label">Name (RU)</span>
+              <input className="admin-cms-input" value={nameRu} onChange={(e) => setNameTh(e.target.value)} />
             </label>
             <label className="admin-cms-field">
               <span className="admin-cms-field-label">Description (EN)</span>
@@ -488,16 +488,16 @@ export function AdminProductDetailClient({ product }: Props) {
               />
             </label>
             <label className="admin-cms-field">
-              <span className="admin-cms-field-label">Description (TH)</span>
+              <span className="admin-cms-field-label">Description (RU)</span>
               <textarea
                 className="admin-cms-input"
                 rows={3}
-                value={descriptionTh}
+                value={descriptionRu}
                 onChange={(e) => setDescriptionTh(e.target.value)}
               />
             </label>
             <label className="admin-cms-field">
-              <span className="admin-cms-field-label">Price (฿)</span>
+              <span className="admin-cms-field-label">Price (₽)</span>
               <input
                 type="number"
                 min={0}

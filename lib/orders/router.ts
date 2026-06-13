@@ -72,7 +72,7 @@ export async function updateOrderPaymentStatus(
     amountTotal?: number;
     currency?: string;
     paidAt?: string;
-    /** Stripe balance_transaction fee in major units (e.g. THB); syncs `orders.payment_fee`. */
+    /** Stripe balance_transaction fee in major units (e.g. RUB); syncs `orders.payment_fee`. */
     paymentFeeMajor?: number;
   }
 ): Promise<Order | null> {

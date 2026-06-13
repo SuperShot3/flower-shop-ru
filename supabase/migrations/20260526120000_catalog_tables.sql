@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS public.catalog_partners (
   line_or_whatsapp    text,
   shop_address        text,
   shop_bio_en         text,
-  shop_bio_th         text,
+  shop_bio_ru         text,
   portrait            jsonb,
   city                text NOT NULL DEFAULT 'Chiang Mai',
   status              text NOT NULL DEFAULT 'pending_review'
@@ -43,13 +43,13 @@ CREATE TABLE IF NOT EXISTS public.catalog_bouquets (
   legacy_sanity_id                text UNIQUE,
   partner_id                      uuid REFERENCES public.catalog_partners(id) ON DELETE SET NULL,
   slug_en                         text NOT NULL,
-  slug_th                         text,
+  slug_ru                         text,
   name_en                         text NOT NULL,
-  name_th                         text NOT NULL DEFAULT '',
+  name_ru                         text NOT NULL DEFAULT '',
   description_en                  text NOT NULL DEFAULT '',
-  description_th                  text NOT NULL DEFAULT '',
+  description_ru                  text NOT NULL DEFAULT '',
   composition_en                  text NOT NULL DEFAULT '',
-  composition_th                  text NOT NULL DEFAULT '',
+  composition_ru                  text NOT NULL DEFAULT '',
   product_kind                    text NOT NULL DEFAULT 'legacy'
     CHECK (product_kind IN (
       'legacy', 'single_stem_count', 'fixed_bouquet', 'customizable_bouquet'
@@ -91,9 +91,9 @@ CREATE INDEX IF NOT EXISTS catalog_bouquets_featured_popular_idx
   ON public.catalog_bouquets (featured_popular)
   WHERE featured_popular = true;
 
-CREATE INDEX IF NOT EXISTS catalog_bouquets_slug_th_idx
-  ON public.catalog_bouquets (slug_th)
-  WHERE slug_th IS NOT NULL;
+CREATE INDEX IF NOT EXISTS catalog_bouquets_slug_ru_idx
+  ON public.catalog_bouquets (slug_ru)
+  WHERE slug_ru IS NOT NULL;
 
 -- =============================================================================
 -- 3. Products (non-flower)
@@ -103,11 +103,11 @@ CREATE TABLE IF NOT EXISTS public.catalog_products (
   legacy_sanity_id                text UNIQUE,
   partner_id                      uuid NOT NULL REFERENCES public.catalog_partners(id) ON DELETE RESTRICT,
   slug_en                         text NOT NULL,
-  slug_th                         text,
+  slug_ru                         text,
   name_en                         text NOT NULL,
-  name_th                         text NOT NULL DEFAULT '',
+  name_ru                         text NOT NULL DEFAULT '',
   description_en                  text NOT NULL DEFAULT '',
-  description_th                  text NOT NULL DEFAULT '',
+  description_ru                  text NOT NULL DEFAULT '',
   category                        text NOT NULL,
   price                           numeric(12,2) NOT NULL CHECK (price >= 0),
   cost                            numeric(12,2) CHECK (cost IS NULL OR cost >= 0),
@@ -150,9 +150,9 @@ CREATE INDEX IF NOT EXISTS catalog_products_moderation_status_idx
 CREATE INDEX IF NOT EXISTS catalog_products_category_idx
   ON public.catalog_products (category);
 
-CREATE INDEX IF NOT EXISTS catalog_products_slug_th_idx
-  ON public.catalog_products (slug_th)
-  WHERE slug_th IS NOT NULL;
+CREATE INDEX IF NOT EXISTS catalog_products_slug_ru_idx
+  ON public.catalog_products (slug_ru)
+  WHERE slug_ru IS NOT NULL;
 
 -- =============================================================================
 -- 4. Homepage media (siteSettings singleton)

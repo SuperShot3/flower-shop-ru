@@ -13,7 +13,7 @@ const PM_LABEL          = Object.fromEntries(INCOME_PAYMENT_METHODS.map((m) => [
 const LOC_LABEL         = Object.fromEntries(MONEY_LOCATIONS.map((l) => [l.value, l.label]));
 
 function fmt(amount: number) {
-  return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(amount);
+  return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(amount);
 }
 function fmtDateTime(iso: string) {
   return new Date(iso).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });

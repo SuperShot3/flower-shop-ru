@@ -17,7 +17,8 @@ import {
 } from '@/lib/catalogFilterParams';
 import { useFlowerFilterSheetOpen } from '@/contexts/FlowerFilterSheetOpenContext';
 import { optionDisplayLabel } from '@/lib/bouquetOptions';
-import type { Locale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import {translations, isThaiLocale} from '@/lib/i18n';
 import type { Bouquet } from '@/lib/bouquets';
 import type { CatalogFilterParams } from '@/lib/catalogListLogic';
@@ -50,7 +51,7 @@ const LIST_NAME_CATALOG = 'catalog';
 
 function bouquetsToAnalyticsItems(bouquets: Bouquet[], lang: Locale): AnalyticsItem[] {
   return bouquets.map((b, i) => {
-    const name = isThaiLocale(lang) ? b.nameTh : b.nameEn;
+    const name = catalogLocalizedName(b, lang);
     const minPrice = b.sizes?.length ? Math.min(...b.sizes.map((s) => s.price)) : 0;
     return {
       item_id: b.id,
@@ -92,7 +93,7 @@ export function CatalogWithFilters({
   const filteredBouquets = useMemo(() => {
     if (!hasNameQuery || bouquets.length === 0) return bouquets;
     return bouquets.filter((bouquet) => {
-      const localizedName = (isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn) ?? '';
+      const localizedName = catalogLocalizedName(bouquet, lang) ?? '';
       return localizedName.toLocaleLowerCase().includes(normalizedQuery);
     });
   }, [bouquets, hasNameQuery, lang, normalizedQuery]);
@@ -100,7 +101,7 @@ export function CatalogWithFilters({
   const filteredProducts = useMemo(() => {
     if (!hasNameQuery || products.length === 0) return products;
     return products.filter((product) => {
-      const localizedName = (isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn) ?? '';
+      const localizedName = (catalogLocalizedName(product, lang)) ?? '';
       return localizedName.toLocaleLowerCase().includes(normalizedQuery);
     });
   }, [products, hasNameQuery, lang, normalizedQuery]);
@@ -132,7 +133,7 @@ export function CatalogWithFilters({
     } else if (products.length > 0) {
       trackViewItemList(LIST_NAME_CATALOG, products.map((p, i) => ({
         item_id: p.id,
-        item_name: (isThaiLocale(lang) && p.nameTh ? p.nameTh : p.nameEn) || '',
+        item_name: (catalogLocalizedName(p, lang)) || '',
         item_category: getProductDisplayCategory(p),
         price: computeFinalPrice(p.cost ?? p.price, p.commissionPercent),
         quantity: 1,

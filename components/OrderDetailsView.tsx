@@ -198,9 +198,10 @@ export function OrderDetailsView({
 
   const contactPreferenceLabels: Record<ContactPreferenceStored, string> = {
     phone: tCart.contactPhone,
-    line: tCart.contactLine,
     whatsapp: tCart.contactWhatsApp,
-    telegram: 'Telegram',
+    telegram: tCart.contactTelegram ?? 'Telegram',
+    max: tCart.contactMax ?? 'MAX',
+    line: tCart.contactLine,
   };
 
   const { date: deliveryDate, time: preferredTime } = parsePreferredTimeSlot(
@@ -259,7 +260,7 @@ export function OrderDetailsView({
     lines.push('');
     lines.push(t.item + ':');
     order.items.forEach((item) => {
-      lines.push(`• ${item.bouquetTitle} — ${item.size} — ฿${item.price.toLocaleString()}`);
+      lines.push(`• ${item.bouquetTitle} — ${item.size} — ₽${item.price.toLocaleString()}`);
       if (item.addOns?.cardType) {
         const cardLabel = item.addOns.cardType === 'premium' ? 'Premium' : 'Free';
         lines.push(`  ${t.cardType}: ${cardLabel}`);
@@ -277,12 +278,12 @@ export function OrderDetailsView({
     });
     lines.push('');
     lines.push(t.totalsHeading + ':');
-    lines.push(`${t.bouquetPrice}: ฿${order.pricing.itemsTotal.toLocaleString()}`);
-    lines.push(`${t.deliveryFee}: ฿${order.pricing.deliveryFee.toLocaleString()}`);
+    lines.push(`${t.bouquetPrice}: ₽${order.pricing.itemsTotal.toLocaleString()}`);
+    lines.push(`${t.deliveryFee}: ₽${order.pricing.deliveryFee.toLocaleString()}`);
     if (order.referralDiscount != null && order.referralDiscount > 0) {
-      lines.push(`${t.discount ?? 'Discount'}: -฿${order.referralDiscount.toLocaleString()}`);
+      lines.push(`${t.discount ?? 'Discount'}: -₽${order.referralDiscount.toLocaleString()}`);
     }
-    lines.push(`${t.total}: ฿${order.pricing.grandTotal.toLocaleString()}`);
+    lines.push(`${t.total}: ₽${order.pricing.grandTotal.toLocaleString()}`);
     if (
       order.customerName ||
       order.phone ||
@@ -523,7 +524,7 @@ export function OrderDetailsView({
                 )}
                 <div className="order-details-item-text">
                   <p className="order-details-item-main">
-                    <strong>{item.bouquetTitle}</strong> — {item.size} — ฿{item.price.toLocaleString()}
+                    <strong>{item.bouquetTitle}</strong> — {item.size} — ₽{item.price.toLocaleString()}
                   </p>
                   <div className="order-details-item-addons">
                     {item.addOns?.cardType != null && (
@@ -592,19 +593,19 @@ export function OrderDetailsView({
       <div className="order-details-section">
         <h2 className="order-details-heading">{t.totalsHeading}</h2>
         <p className="order-details-totals-line">
-          {t.bouquetPrice}: ฿{order.pricing.itemsTotal.toLocaleString()}
+          {t.bouquetPrice}: ₽{order.pricing.itemsTotal.toLocaleString()}
         </p>
         <p className="order-details-totals-line">
-          {t.deliveryFee}: ฿{order.pricing.deliveryFee.toLocaleString()}
+          {t.deliveryFee}: ₽{order.pricing.deliveryFee.toLocaleString()}
         </p>
         {order.referralDiscount != null && order.referralDiscount > 0 && (
           <p className="order-details-totals-line order-details-discount">
-            {t.discount ?? 'Discount'}: -฿{order.referralDiscount.toLocaleString()}
+            {t.discount ?? 'Discount'}: -₽{order.referralDiscount.toLocaleString()}
           </p>
         )}
         <p className="order-details-totals-grand">
           <strong>
-            {t.total}: ฿{order.pricing.grandTotal.toLocaleString()}
+            {t.total}: ₽{order.pricing.grandTotal.toLocaleString()}
           </strong>
         </p>
       </div>

@@ -1,25 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import {
-  getLineContactUrl,
-  getWhatsAppContactUrl,
-} from '@/lib/messenger';
+import { getWhatsAppContactUrl } from '@/lib/messenger';
 import { translations } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
-import { LineIcon, WhatsAppIcon } from '@/components/icons';
-
-const MAP_EMBED_SRC =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d135191.1219770273!2d98.84911349726562!3d18.790684900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3aa55e42373d%3A0x21d25773d6402e79!2sFlorist%20Market%20Mueang%20Chiang%20Mai!5e1!3m2!1sen!2sth!4v1770516315547!5m2!1sen!2sth';
+import { getYandexMapsEmbedSrc } from '@/lib/yandexMapsUrl';
+import { WhatsAppIcon } from '@/components/icons';
 
 export function ContactPageClient({ lang }: { lang: Locale }) {
   const t = translations[lang].contact;
   const tLocation = translations[lang].location;
-
-  const channels = [
-    { id: 'line' as const, label: t.line, href: getLineContactUrl(), Icon: LineIcon, color: '#00B900' },
-    { id: 'whatsapp' as const, label: t.whatsapp, href: getWhatsAppContactUrl(), Icon: WhatsAppIcon, color: '#25D366' },
-  ];
 
   return (
     <div className="contact-page">
@@ -31,19 +20,16 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
           <h2 className="contact-heading">{t.fastestWay}</h2>
           <p className="contact-label">{t.messageUs}</p>
           <div className="contact-channels">
-            {channels.map(({ label, href, Icon, color }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-channel-link"
-                style={{ color }}
-              >
-                <Icon size={22} />
-                <span>{label}</span>
-              </a>
-            ))}
+            <a
+              href={getWhatsAppContactUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-channel-link"
+              style={{ color: '#25D366' }}
+            >
+              <WhatsAppIcon size={22} />
+              <span>{t.whatsapp}</span>
+            </a>
           </div>
         </section>
 
@@ -65,24 +51,25 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
         <section className="contact-section">
           <h2 className="contact-heading">{t.emailLabel}</h2>
           <p className="contact-text">
-            <a
-              href="mailto:support@lannabloom.shop"
-              className="contact-phone-link"
-            >
-              support@lannabloom.shop
+            <a href={`mailto:${t.emailDisplay}`} className="contact-phone-link">
+              {t.emailDisplay}
             </a>
           </p>
+          <p className="contact-text contact-text-muted">{t.emailHint}</p>
         </section>
 
         <section className="contact-section">
-          <h2 className="contact-heading">{t.shopLocation}</h2>
+          <h2 className="contact-heading">{t.serviceAreaHeading}</h2>
           <p className="contact-address">{t.address}</p>
         </section>
 
         <section className="contact-section">
           <h2 className="contact-heading">{t.businessHours}</h2>
           <p className="contact-text">
-            {t.daily} {t.hoursValue}
+            <strong>{t.supportHoursLabel}</strong> {t.supportHoursValue}
+          </p>
+          <p className="contact-text">
+            <strong>{t.deliveryHoursLabel}</strong> {t.deliveryHoursValue}
           </p>
         </section>
 
@@ -90,44 +77,8 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
           <p className="contact-text">{t.deliveryArea}</p>
         </section>
 
-        <section className="contact-section contact-section-partner">
-          <h2 className="contact-heading">{t.partnerHeading}</h2>
-          <p className="contact-text">{t.partnerIntro}</p>
-          <div className="contact-partner-links">
-            <Link href={`/${lang}/partner/how-it-works`} className="contact-partner-link contact-partner-link--secondary">
-              {t.partnerHowItWorks} →
-            </Link>
-            <Link
-              href={`/${lang}/partner/apply`}
-              className="contact-partner-link"
-            >
-              {t.partnerApply} →
-            </Link>
-          </div>
-        </section>
-
-        <section className="contact-section contact-section-dbd">
-          <h2 className="contact-heading">{t.dbdVerified}</h2>
-          <div className="contact-dbd-wrap">
-            <img
-              src="https://dbdregistered.dbd.go.th/api/public/banner?param=867714DAF3E4ED6944FA5672C4E6D1C4A2114631CF57F4DB847153673BC31A6B"
-              alt="DBD Verified badge (Thailand Department of Business Development)"
-              className="contact-dbd-img"
-              loading="lazy"
-              decoding="async"
-              width={76}
-              height={76}
-            />
-          </div>
-          <p className="contact-text">{t.dbdExplanation}</p>
-          <a
-            href="https://dbdregistered.dbd.go.th/api/public/shopinfo?param=867714DAF3E4ED6944FA5672C4E6D1C4A2114631CF57F4DB847153673BC31A6B"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-dbd-link"
-          >
-            {t.dbdVerifyLink}
-          </a>
+        <section className="contact-section">
+          <p className="contact-text">{t.orderHelp}</p>
         </section>
 
         <section id="location" className="contact-section contact-section-location">
@@ -136,14 +87,14 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
           <p className="contact-address">{tLocation.address}</p>
           <div className="contact-map-wrap">
             <iframe
-              src={MAP_EMBED_SRC}
+              src={getYandexMapsEmbedSrc(lang)}
               width="600"
               height="450"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Map"
+              title={tLocation.mapTitle}
               className="contact-map"
             />
           </div>
@@ -187,6 +138,10 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
           margin: 0 0 12px;
           line-height: 1.6;
         }
+        .contact-text-muted {
+          color: var(--text-muted);
+          font-size: 0.95rem;
+        }
         .contact-address {
           font-size: 1rem;
           color: var(--text-muted);
@@ -222,71 +177,6 @@ export function ContactPageClient({ lang }: { lang: Locale }) {
           text-decoration: underline;
         }
         .contact-phone-link:hover {
-          color: #967a4d;
-        }
-        .contact-section-partner {
-          padding: 20px;
-          background: var(--pastel-cream);
-          border-radius: var(--radius-sm);
-          border: 1px solid var(--border);
-        }
-        .contact-partner-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px 20px;
-          margin-top: 8px;
-          align-items: baseline;
-        }
-        .contact-partner-link {
-          display: inline-block;
-          font-size: 1rem;
-          font-weight: 600;
-          color: #967a4d;
-          text-decoration: underline;
-        }
-        .contact-partner-link--secondary {
-          font-weight: 500;
-          color: var(--text-muted);
-          text-decoration: underline;
-        }
-        .contact-partner-link--secondary:hover {
-          color: #967a4d;
-        }
-        .contact-partner-link:hover {
-          color: #7d6340;
-        }
-        .contact-section-dbd {
-          padding-top: 8px;
-        }
-        .contact-dbd-wrap {
-          display: inline-flex;
-          background: #fff;
-          border-radius: 8px;
-          padding: 4px;
-          box-shadow: var(--shadow);
-          margin-bottom: 12px;
-        }
-        .contact-dbd-img {
-          width: 76px;
-          height: 76px;
-          object-fit: contain;
-          display: block;
-        }
-        @media (max-width: 639px) {
-          .contact-dbd-img {
-            width: 56px;
-            height: 56px;
-          }
-        }
-        .contact-dbd-link {
-          display: inline-block;
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--accent);
-          text-decoration: underline;
-          margin-top: 4px;
-        }
-        .contact-dbd-link:hover {
           color: #967a4d;
         }
         .contact-map-wrap {

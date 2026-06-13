@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS public.catalog_partners (
   line_or_whatsapp    text,
   shop_address        text,
   shop_bio_en         text,
-  shop_bio_th         text,
+  shop_bio_ru         text,
   portrait            jsonb,
   city                text NOT NULL DEFAULT 'Chiang Mai',
   status              text NOT NULL DEFAULT 'pending_review'
@@ -57,13 +57,13 @@ CREATE TABLE IF NOT EXISTS public.catalog_bouquets (
   legacy_sanity_id                text UNIQUE,
   partner_id                      uuid REFERENCES public.catalog_partners(id) ON DELETE SET NULL,
   slug_en                         text NOT NULL,
-  slug_th                         text,
+  slug_ru                         text,
   name_en                         text NOT NULL,
-  name_th                         text NOT NULL DEFAULT '',
+  name_ru                         text NOT NULL DEFAULT '',
   description_en                  text NOT NULL DEFAULT '',
-  description_th                  text NOT NULL DEFAULT '',
+  description_ru                  text NOT NULL DEFAULT '',
   composition_en                  text NOT NULL DEFAULT '',
-  composition_th                  text NOT NULL DEFAULT '',
+  composition_ru                  text NOT NULL DEFAULT '',
   product_kind                    text NOT NULL DEFAULT 'legacy'
     CHECK (product_kind IN (
       'legacy', 'single_stem_count', 'fixed_bouquet', 'customizable_bouquet'
@@ -105,9 +105,9 @@ CREATE INDEX IF NOT EXISTS catalog_bouquets_featured_popular_idx
   ON public.catalog_bouquets (featured_popular)
   WHERE featured_popular = true;
 
-CREATE INDEX IF NOT EXISTS catalog_bouquets_slug_th_idx
-  ON public.catalog_bouquets (slug_th)
-  WHERE slug_th IS NOT NULL;
+CREATE INDEX IF NOT EXISTS catalog_bouquets_slug_ru_idx
+  ON public.catalog_bouquets (slug_ru)
+  WHERE slug_ru IS NOT NULL;
 
 -- =============================================================================
 -- 3. Products (non-flower)
@@ -117,11 +117,11 @@ CREATE TABLE IF NOT EXISTS public.catalog_products (
   legacy_sanity_id                text UNIQUE,
   partner_id                      uuid NOT NULL REFERENCES public.catalog_partners(id) ON DELETE RESTRICT,
   slug_en                         text NOT NULL,
-  slug_th                         text,
+  slug_ru                         text,
   name_en                         text NOT NULL,
-  name_th                         text NOT NULL DEFAULT '',
+  name_ru                         text NOT NULL DEFAULT '',
   description_en                  text NOT NULL DEFAULT '',
-  description_th                  text NOT NULL DEFAULT '',
+  description_ru                  text NOT NULL DEFAULT '',
   category                        text NOT NULL,
   price                           numeric(12,2) NOT NULL CHECK (price >= 0),
   cost                            numeric(12,2) CHECK (cost IS NULL OR cost >= 0),
@@ -164,9 +164,9 @@ CREATE INDEX IF NOT EXISTS catalog_products_moderation_status_idx
 CREATE INDEX IF NOT EXISTS catalog_products_category_idx
   ON public.catalog_products (category);
 
-CREATE INDEX IF NOT EXISTS catalog_products_slug_th_idx
-  ON public.catalog_products (slug_th)
-  WHERE slug_th IS NOT NULL;
+CREATE INDEX IF NOT EXISTS catalog_products_slug_ru_idx
+  ON public.catalog_products (slug_ru)
+  WHERE slug_ru IS NOT NULL;
 
 -- =============================================================================
 -- 4. Homepage media (siteSettings singleton)
@@ -189,7 +189,7 @@ ON CONFLICT (id) DO NOTHING;
 CREATE TABLE IF NOT EXISTS public.catalog_slug_registry (
   id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   slug          text NOT NULL,
-  locale        text NOT NULL CHECK (locale IN ('en', 'th')),
+  locale        text NOT NULL CHECK (locale IN ('en', 'ru')),
   entity_type   text NOT NULL CHECK (entity_type IN ('bouquet', 'product')),
   entity_id     uuid NOT NULL,
   created_at    timestamptz NOT NULL DEFAULT now(),
@@ -265,9 +265,9 @@ CREATE TABLE IF NOT EXISTS public.catalog_product_revisions (
     )),
   payload               jsonb NOT NULL DEFAULT '{}'::jsonb,
   seo_title_en          text,
-  seo_title_th          text,
+  seo_title_ru          text,
   seo_description_en    text,
-  seo_description_th    text,
+  seo_description_ru    text,
   seo_keywords          text[] NOT NULL DEFAULT '{}',
   og_image_path         text,
   moderation_note       text,
@@ -307,7 +307,7 @@ CREATE TABLE IF NOT EXISTS public.catalog_product_images (
     CHECK (source_type IN ('uploaded', 'ai_generated', 'migrated_from_sanity')),
   original_image_id     uuid REFERENCES public.catalog_product_images(id) ON DELETE SET NULL,
   alt_en                text,
-  alt_th                text,
+  alt_ru                text,
   is_primary            boolean NOT NULL DEFAULT false,
   sort_order            integer NOT NULL DEFAULT 0,
   metadata              jsonb NOT NULL DEFAULT '{}'::jsonb,
@@ -471,11 +471,11 @@ CREATE TABLE IF NOT EXISTS public.catalog_collections (
   title_en              text NOT NULL,
   title_th              text NOT NULL DEFAULT '',
   description_en        text NOT NULL DEFAULT '',
-  description_th        text NOT NULL DEFAULT '',
+  description_ru        text NOT NULL DEFAULT '',
   seo_title_en          text,
-  seo_title_th          text,
+  seo_title_ru          text,
   seo_description_en    text,
-  seo_description_th    text,
+  seo_description_ru    text,
   fallback_mode         text NOT NULL DEFAULT 'automatic'
     CHECK (fallback_mode IN ('automatic', 'empty', 'category', 'popular')),
   is_active             boolean NOT NULL DEFAULT true,
@@ -623,6 +623,6 @@ ALTER TABLE public.catalog_slug_registry
   DROP CONSTRAINT IF EXISTS catalog_slug_registry_locale_check;
 ALTER TABLE public.catalog_slug_registry
   ADD CONSTRAINT catalog_slug_registry_locale_check
-  CHECK (locale IN ('en', 'th', 'ru'));
+  CHECK (locale IN ('en', 'ru'));
 
 

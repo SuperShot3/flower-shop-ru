@@ -59,7 +59,7 @@ export function mapPartnerRowToPartner(row: CatalogPartnerRow): Partner {
     lineOrWhatsapp: row.line_or_whatsapp ?? undefined,
     shopAddress: row.shop_address ?? undefined,
     shopBioEn: row.shop_bio_en ?? undefined,
-    shopBioTh: row.shop_bio_th ?? undefined,
+    shopBioRu: row.shop_bio_ru ?? undefined,
     portraitUrl: row.portrait?.storage_path
       ? storedImagePublicUrl(row.portrait)
       : undefined,
@@ -92,18 +92,18 @@ export function mapBouquetRowToBouquet(
       ? imageContext.mainImages
       : inline;
 
-  const fallbackText = row.description_en || row.description_th || row.name_en || row.name_th;
+  const fallbackText = row.description_en || row.description_ru || row.name_en || row.name_ru;
   const fallbackImageAlts = withFallbackImageAlts(main.urls, main.alts, fallbackText);
 
   return {
     id: row.id,
     slug,
     nameEn: row.name_en,
-    nameTh: row.name_th,
+    nameRu: row.name_ru,
     descriptionEn: row.description_en,
-    descriptionTh: row.description_th,
+    descriptionRu: row.description_ru,
     compositionEn: row.composition_en,
-    compositionTh: row.composition_th,
+    compositionRu: row.composition_ru,
     pricingType,
     colors: row.colors?.length ? row.colors : [],
     flowerTypes: row.flower_types?.length ? row.flower_types : [],
@@ -118,7 +118,7 @@ export function mapBouquetRowToBouquet(
     partnerName: partner?.shop_name,
     partnerCity: partner?.city,
     partnerShopBioEn: partner?.shop_bio_en ?? undefined,
-    partnerShopBioTh: partner?.shop_bio_th ?? undefined,
+    partnerShopBioRu: partner?.shop_bio_ru ?? undefined,
     partnerPortraitUrl: partner?.portrait?.storage_path
       ? storedImagePublicUrl(partner.portrait)
       : undefined,
@@ -126,9 +126,9 @@ export function mapBouquetRowToBouquet(
     featuredPopular: row.featured_popular,
     discountPercent: normalizeCatalogDiscountPercent(row.discount_percent ?? undefined),
     seoTitleEn: row.seo_title_en,
-    seoTitleTh: row.seo_title_th,
+    seoTitleRu: row.seo_title_ru,
     seoDescriptionEn: row.seo_description_en,
-    seoDescriptionTh: row.seo_description_th,
+    seoDescriptionRu: row.seo_description_ru,
   };
 }
 
@@ -145,23 +145,23 @@ export function mapProductRowToCatalogProduct(
   const slug = localeSlug ?? row.slug_en;
   const overrides = row.admin_overrides;
   const nameEn = overrides?.nameEn?.trim() || row.name_en;
-  const nameTh = overrides?.nameTh?.trim() || row.name_th || undefined;
+  const nameRu = overrides?.nameRu?.trim() || row.name_ru || undefined;
   const descriptionEn = overrides?.descriptionEn?.trim() || row.description_en || undefined;
-  const descriptionTh = overrides?.descriptionTh?.trim() || row.description_th || undefined;
+  const descriptionRu = overrides?.descriptionRu?.trim() || row.description_ru || undefined;
   const { urls, alts } = imageUrlsFromStored(row.images);
   const fallbackImageAlts = withFallbackImageAlts(
     urls,
     alts,
-    descriptionEn ?? descriptionTh ?? nameEn ?? nameTh ?? ''
+    descriptionEn ?? descriptionRu ?? nameEn ?? nameRu ?? ''
   );
 
   return {
     id: row.id,
     slug,
     nameEn,
-    nameTh: nameTh || undefined,
+    nameRu: nameRu || undefined,
     descriptionEn,
-    descriptionTh,
+    descriptionRu,
     category: row.category,
     catalogKind: catalogKindFromCategory(row.category),
     sizeLabel: row.structured_attributes?.sizeLabel,

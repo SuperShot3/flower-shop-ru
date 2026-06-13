@@ -27,7 +27,7 @@ export interface CartItem {
   bouquetId: string;
   slug: string;
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   /** First image URL for cart thumbnail (optional, for items added before this field existed). */
   imageUrl?: string;
   size: BouquetSize;

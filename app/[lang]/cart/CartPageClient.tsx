@@ -11,7 +11,8 @@ import {
   isDeliveryTimeSlotSelectableForDate,
   type DeliveryFormValues,
 } from '@/components/DeliveryForm';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import type { ContactPreferenceOption } from '@/lib/orders';
 import type { CartItem } from '@/contexts/CartContext';
@@ -32,13 +33,12 @@ import { getStoredReferral, clearReferral } from '@/lib/referral';
 import { resolveOrderDiscount } from '@/lib/promo/resolveOrderDiscount';
 import {
   isMay2026FreeDeliveryActive,
-  MAY_FREE_DELIVERY_MIN_ITEMS_THB,
+  MAY_FREE_DELIVERY_MIN_ITEMS_RUB,
   qualifiesForMay2026FreeDelivery,
 } from '@/lib/promo/campaigns';
 import { ReferralCodeBox } from '@/components/ReferralCodeBox';
 import { CartCheckoutView } from '@/app/[lang]/cart/CartCheckoutView';
 import { PhoneCountrySelect } from '@/components/checkout/PhoneCountrySelect';
-import { LineIdFieldReveal } from '@/components/checkout/LineIdFieldReveal';
 import { RecipientOptInToggle } from '@/components/checkout/premium/RecipientOptInToggle';
 import type { CountryCodeEntry } from '@/lib/checkout/phoneCountryDial';
 import {
@@ -57,9 +57,13 @@ import {
   clipCheckoutField,
   sanitizeDeliveryFormValues,
 } from '@/lib/checkout/checkoutFieldLimits';
+import {
+  DEFAULT_CHECKOUT_COUNTRY_CODE,
+  normalizeCheckoutCountryCode,
+} from '@/lib/market/defaultCity';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { bouquetIsAvailableForDestination } from '@/lib/bouquetDestinationAvailability';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 import {
   cartPriceBreakdown,
   cartValue,
@@ -77,11 +81,6 @@ import {
   normalizeNationalPhoneOnBlur,
   nationalDigitsValidForCheckout,
 } from '@/lib/phoneFieldHints';
-import {
-  isValidLineUserId,
-  normalizeLineUserId,
-  sanitizeLineUserIdInput,
-} from '@/lib/lineUserId';
 
 function cartViolatesExpansionRules(
   cartItems: CartItem[],
@@ -138,16 +137,16 @@ function formatCartItemSizePriceLine(
 ): string {
   const qty = item.quantity ?? 1;
   const unitWithAddOns = item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {});
-  const unitDisplayPrice = applyExpansionItemMarkupThb(unitWithAddOns, deliveryDestination);
+  const unitDisplayPrice = applyExpansionItemMarkup(unitWithAddOns, deliveryDestination);
   const lineDisplayPrice = unitDisplayPrice * qty;
   const label = (item.size.label || '').trim() || '—';
   if (isNonBouquetCartLine(item)) {
-    return `${label} — ฿${unitDisplayPrice.toLocaleString()}`;
+    return `${label} — ₽${unitDisplayPrice.toLocaleString()}`;
   }
   if (qty > 1) {
-    return `${item.size.label} × ${qty} — ฿${lineDisplayPrice.toLocaleString()}`;
+    return `${item.size.label} × ${qty} — ₽${lineDisplayPrice.toLocaleString()}`;
   }
-  return `${item.size.label} — ฿${unitDisplayPrice.toLocaleString()}`;
+  return `${item.size.label} — ₽${unitDisplayPrice.toLocaleString()}`;
 }
 
 function buildAddOnsSummaryLines(item: CartItem, t: { balloonTextLabel?: string }): string[] {
@@ -155,7 +154,7 @@ function buildAddOnsSummaryLines(item: CartItem, t: { balloonTextLabel?: string 
   return balloonText ? [`${balloonTextLabel(t)}: "${balloonText}"`] : [];
 }
 
-const CONTACT_OPTIONS: ContactPreferenceOption[] = ['phone', 'line', 'whatsapp'];
+const CONTACT_OPTIONS: ContactPreferenceOption[] = ['phone', 'whatsapp', 'telegram', 'max'];
 
 const CART_FORM_STORAGE_KEY = 'lanna-bloom-cart-form';
 
@@ -178,7 +177,6 @@ type StoredCartForm = {
   recipientCountryCode: string;
   recipientPhoneNational: string;
   contactPreference: ContactPreferenceOption[];
-  lineId?: string;
   isOrderingForSomeoneElse?: boolean;
   surpriseDelivery?: boolean;
   marketingEmailConsent?: boolean;
@@ -196,11 +194,13 @@ function loadCartFormFromStorage(): StoredCartForm | null {
       ...parsed,
       customerName: clipCheckoutField(parsed.customerName ?? '', 'customerName'),
       customerEmail: clipCheckoutField(parsed.customerEmail ?? '', 'customerEmail'),
+      countryCode: normalizeCheckoutCountryCode(parsed.countryCode),
       phoneNational: clipCheckoutField(
         (parsed.phoneNational ?? '').replace(/\D/g, ''),
         'phoneNational'
       ),
       recipientName: clipCheckoutField(parsed.recipientName ?? '', 'recipientName'),
+      recipientCountryCode: normalizeCheckoutCountryCode(parsed.recipientCountryCode),
       recipientPhoneNational: clipCheckoutField(
         (parsed.recipientPhoneNational ?? '').replace(/\D/g, ''),
         'recipientPhoneNational'
@@ -257,7 +257,6 @@ function isContactValid(
   countryCode: string,
   phoneNational: string,
   contactPreference: ContactPreferenceOption[],
-  lineId: string,
   customerEmail: string,
   isOrderingForSomeoneElse: boolean,
   recipientName: string,
@@ -270,10 +269,6 @@ function isContactValid(
   if (phoneNational.replace(/\D/g, '').length > CHECKOUT_FIELD_LIMITS.phoneNational) return false;
   if (!nationalDigitsValidForCheckout(countryCode, phoneNational)) return false;
   if (contactPreference.length === 0) return false;
-  if (contactPreference.includes('line')) {
-    const norm = normalizeLineUserId(lineId);
-    if (!isValidLineUserId(norm)) return false;
-  }
   const emailTrim = customerEmail.trim();
   if (emailTrim) {
     if (emailTrim.length > CHECKOUT_FIELD_LIMITS.customerEmail) return false;
@@ -299,18 +294,14 @@ function isContactValid(
  * a code, e.g. US/CA both use "1", which is fine for the server).
  */
 const POPULAR_COUNTRY_CODES: CountryCodeEntry[] = [
-  { id: 'TH', code: '66', label: '🇹🇭 Thailand (+66)' },
-  { id: 'MM', code: '95', label: '🇲🇲 Myanmar (+95)' },
-  { id: 'LA', code: '856', label: '🇱🇦 Laos (+856)' },
-  { id: 'KH', code: '855', label: '🇰🇭 Cambodia (+855)' },
-  { id: 'VN', code: '84', label: '🇻🇳 Vietnam (+84)' },
-  { id: 'MY', code: '60', label: '🇲🇾 Malaysia (+60)' },
-  { id: 'SG', code: '65', label: '🇸🇬 Singapore (+65)' },
-  { id: 'ID', code: '62', label: '🇮🇩 Indonesia (+62)' },
-  { id: 'PH', code: '63', label: '🇵🇭 Philippines (+63)' },
+  { id: 'RU', code: '7', label: '🇷🇺 Russia (+7)' },
+  { id: 'BY', code: '375', label: '🇧🇾 Belarus (+375)' },
+  { id: 'KZ', code: '7', label: '🇰🇿 Kazakhstan (+7)' },
+  { id: 'UA', code: '380', label: '🇺🇦 Ukraine (+380)' },
   { id: 'US', code: '1', label: '🇺🇸 United States (+1)' },
   { id: 'GB', code: '44', label: '🇬🇧 United Kingdom (+44)' },
-  { id: 'JP', code: '81', label: '🇯🇵 Japan (+81)' },
+  { id: 'DE', code: '49', label: '🇩🇪 Germany (+49)' },
+  { id: 'TH', code: '66', label: '🇹🇭 Thailand (+66)' },
 ];
 
 /** Alphabetical by country name. IDs of countries already in "Popular" are omitted. */
@@ -511,13 +502,13 @@ function cartItemsToAnalytics(
 ): AnalyticsItem[] {
   return items.flatMap((item, index) => {
     const qty = item.quantity ?? 1;
-    const unitPrice = applyExpansionItemMarkupThb(
+    const unitPrice = applyExpansionItemMarkup(
       item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {}),
       deliveryDestination
     );
     return Array.from({ length: qty }, (_, i) => ({
       item_id: item.bouquetId,
-      item_name: isThaiLocale(lang) ? item.nameTh : item.nameEn,
+      item_name: catalogLocalizedName(item, lang),
       price: unitPrice,
       quantity: 1,
       index: index + i,
@@ -550,7 +541,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     }
     // begin_checkout: funnel start when user reaches cart (e.g. "Go to cart"); deduped per session in lib/analytics.
     trackBeginCheckout({
-      currency: 'THB',
+      currency: 'RUB',
       value,
       items: analyticsItems,
     });
@@ -635,6 +626,23 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     const validDistrict =
       d.deliveryDistrict &&
       [
+        'ORDZHONIKIDZEVSKY',
+        'ZHELEZNODOROZHNY',
+        'VERKH_ISETSKY',
+        'KIROVSKY',
+        'LENINSKY',
+        'OKTYABRSKY',
+        'CHKALOVSKY',
+        'AKADEMICHESKY',
+        'VIZ',
+        'SOLNECHNY',
+        'UKTUS',
+        'VERKHNYAYA_PYSHMA',
+        'PERVOURALSK',
+        'BEREZOVSKY',
+        'ARAMIL',
+        'UNKNOWN',
+        // Legacy Thailand keys (migrate via chiangMaiZoneIdFromLegacyDistrict alias)
         'MUEANG',
         'SARAPHI',
         'SAN_SAI',
@@ -646,22 +654,17 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         'SAMOENG',
         'MAE_TAENG',
         'LAMPHUN',
-        'UNKNOWN',
       ].includes(d.deliveryDistrict)
         ? d.deliveryDistrict
         : '';
-    const legacyZone = chiangMaiZoneIdFromLegacyDistrict(
-      validDistrict,
-      d.deliveryDistrict === 'MUEANG' && !!d.isMueangCentral
-    );
+    const legacyZone = chiangMaiZoneIdFromLegacyDistrict(validDistrict, false);
     const storedDest = (d as { deliveryDestination?: string }).deliveryDestination;
     const allowed: OrderDeliveryDestinationId[] = [
       'CHIANG_MAI',
-      'PATTAYA',
-      'PHUKET',
-      'KRABI',
-      'SAMUI',
-      'HUA_HIN',
+      'VERKHNYAYA_PYSHMA',
+      'PERVOURALSK',
+      'BEREZOVSKY',
+      'ARAMIL',
     ];
     const deliveryDestination =
       typeof storedDest === 'string' && (allowed as string[]).includes(storedDest)
@@ -717,7 +720,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       deliveryDestination,
       deliveryZoneId,
       deliveryDistrict: validDistrict,
-      isMueangCentral: d.deliveryDistrict === 'MUEANG' && !!d.isMueangCentral,
+      isMueangCentral: false,
     };
   });
 
@@ -755,10 +758,14 @@ export function CartPageClient({ lang }: { lang: Locale }) {
   const [marketingEmailConsent, setMarketingEmailConsent] = useState(
     () => loadCartFormFromStorage()?.marketingEmailConsent === true
   );
-  const [countryCode, setCountryCode] = useState(() => loadCartFormFromStorage()?.countryCode ?? '66');
+  const [countryCode, setCountryCode] = useState(
+    () => loadCartFormFromStorage()?.countryCode ?? DEFAULT_CHECKOUT_COUNTRY_CODE
+  );
   const [phoneNational, setPhoneNational] = useState(() => loadCartFormFromStorage()?.phoneNational ?? '');
   const [recipientName, setRecipientName] = useState(() => loadCartFormFromStorage()?.recipientName ?? '');
-  const [recipientCountryCode, setRecipientCountryCode] = useState(() => loadCartFormFromStorage()?.recipientCountryCode ?? '66');
+  const [recipientCountryCode, setRecipientCountryCode] = useState(
+    () => loadCartFormFromStorage()?.recipientCountryCode ?? DEFAULT_CHECKOUT_COUNTRY_CODE
+  );
   const [recipientPhoneNational, setRecipientPhoneNational] = useState(() => loadCartFormFromStorage()?.recipientPhoneNational ?? '');
   const [isOrderingForSomeoneElse, setIsOrderingForSomeoneElse] = useState(() => loadCartFormFromStorage()?.isOrderingForSomeoneElse ?? false);
   const [surpriseDelivery, setSurpriseDelivery] = useState(() => loadCartFormFromStorage()?.surpriseDelivery ?? false);
@@ -769,9 +776,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       CONTACT_OPTIONS.includes(o)
     );
   });
-  const [lineId, setLineId] = useState(() =>
-    sanitizeLineUserIdInput(loadCartFormFromStorage()?.lineId ?? '')
-  );
   const [noCardMessage, setNoCardMessage] = useState(false);
   const [highlightSection, setHighlightSection] = useState<CheckoutSectionId | null>(null);
   const sectionRefs = {
@@ -817,18 +821,11 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       recipientCountryCode,
       recipientPhoneNational,
       contactPreference,
-      lineId,
       isOrderingForSomeoneElse,
       surpriseDelivery,
       marketingEmailConsent,
     });
-  }, [items.length, delivery, customerName, customerEmail, countryCode, phoneNational, recipientName, recipientCountryCode, recipientPhoneNational, contactPreference, lineId, isOrderingForSomeoneElse, surpriseDelivery, marketingEmailConsent]);
-
-  useEffect(() => {
-    if (!contactPreference.includes('line') && lineId) {
-      setLineId('');
-    }
-  }, [contactPreference, lineId]);
+  }, [items.length, delivery, customerName, customerEmail, countryCode, phoneNational, recipientName, recipientCountryCode, recipientPhoneNational, contactPreference, isOrderingForSomeoneElse, surpriseDelivery, marketingEmailConsent]);
 
   useEffect(() => {
     if (!addShippingInfoFiredRef.current && items.length > 0 && delivery.addressLine.trim().length >= 10) {
@@ -836,7 +833,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       const analyticsItems = cartItemsToAnalytics(items, lang, delivery.deliveryDestination);
       trackAddShippingInfo({
         shippingTier: 'standard',
-        currency: 'THB',
+        currency: 'RUB',
         value: cartValue(items, delivery.deliveryDestination),
         items: analyticsItems,
       });
@@ -910,7 +907,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     mayCampaignActive && !appliedReferralCode && mayCampaignQualifies;
   const mayCampaignProgressRemaining =
     mayCampaignActive && !mayCampaignQualifies
-      ? Math.max(0, MAY_FREE_DELIVERY_MIN_ITEMS_THB - itemsTotalVal)
+      ? Math.max(0, MAY_FREE_DELIVERY_MIN_ITEMS_RUB - itemsTotalVal)
       : 0;
   const waivesDeliveryFee =
     deliveryFeeVal > 0 && (isCampaignDiscount || isManualFreeDelivery);
@@ -929,7 +926,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     countryCode,
     phoneNational,
     contactPreference,
-    lineId,
     customerEmail,
   });
   const isPaymentUnlocked =
@@ -987,15 +983,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     }
     if (contactPreference.length === 0) {
       return fmt(String(tC.preferredContact ?? 'Contact method'));
-    }
-    if (contactPreference.includes('line')) {
-      const norm = normalizeLineUserId(lineId);
-      if (!norm) {
-        return fmt(String((tC as { lineIdLabel?: string }).lineIdLabel ?? 'LINE ID'));
-      }
-      if (!isValidLineUserId(norm)) {
-        return String((tC as { lineIdInvalid?: string }).lineIdInvalid ?? 'Enter a valid LINE ID (plain text only).');
-      }
     }
     if (customerEmail.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail.trim())) {
       return fmt(String(tC.emailLabel ?? 'Email'));
@@ -1092,6 +1079,15 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     );
   };
 
+  const handleOrderingForSomeoneElseChange = (next: boolean) => {
+    setIsOrderingForSomeoneElse(next);
+    if (!next) {
+      setSurpriseDelivery(false);
+      return;
+    }
+    setRecipientCountryCode((cc) => normalizeCheckoutCountryCode(cc));
+  };
+
   const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, PHONE_MAX_DIGITS);
     setPhoneNational(digitsOnly);
@@ -1132,7 +1128,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       const analyticsItems = cartItemsToAnalytics(items, lang, delivery.deliveryDestination);
       trackAddPaymentInfo({
         paymentType: 'card',
-        currency: 'THB',
+        currency: 'RUB',
         value: grandTotalVal,
         items: analyticsItems,
       });
@@ -1147,7 +1143,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         customerEmail: customerEmail.trim() || undefined,
         ...(marketingEmailConsent ? { marketingEmailConsent: true } : {}),
         contactPreference,
-        lineId: lineId.trim(),
         submissionToken: checkoutSubmissionToken,
         recipientName: isOrderingForSomeoneElse ? recipientName.trim() : undefined,
         recipientPhone: isOrderingForSomeoneElse ? recipientPhoneDigits : undefined,
@@ -1201,7 +1196,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       countryCode,
       phoneNational,
       contactPreference,
-      lineId,
       customerEmail,
       recipientName,
       recipientCountryCode,
@@ -1371,10 +1365,14 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     const recipientPhoneHint = getNationalPhoneHint(recipientCountryCode, recipientPhoneNational);
     const senderHintText = tc[senderPhoneHint.messageKey] ?? senderPhoneHint.messageKey;
     const recipientHintText = tc[recipientPhoneHint.messageKey] ?? recipientPhoneHint.messageKey;
-    const lineNorm = normalizeLineUserId(lineId);
-    const linePreferenceSelected = contactPreference.includes('line');
-    const lineIdFormatError =
-      linePreferenceSelected && lineNorm.length > 0 && !isValidLineUserId(lineNorm);
+    const tcExt = t as Record<string, string | undefined>;
+    const contactChipLabel = (option: ContactPreferenceOption): string => {
+      if (option === 'phone') return t.contactPhone;
+      if (option === 'whatsapp') return t.contactWhatsApp;
+      if (option === 'telegram') return tcExt.contactTelegram ?? 'Telegram';
+      if (option === 'max') return tcExt.contactMax ?? 'MAX';
+      return option;
+    };
 
     return (
     <div className={rootClass}>
@@ -1452,10 +1450,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           <div className={premium ? 'co-chips' : 'cart-contact-chips'}>
             {CONTACT_OPTIONS.map((option) => {
               const isSelected = contactPreference.includes(option);
-              const label =
-                option === 'phone' ? t.contactPhone
-                : option === 'line' ? t.contactLine
-                : t.contactWhatsApp;
+              const label = contactChipLabel(option);
               return (
                 <label
                   key={option}
@@ -1476,43 +1471,6 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           </div>
         </fieldset>
       </div>
-      <LineIdFieldReveal open={linePreferenceSelected}>
-        <div className={fieldClass}>
-          <label className={labelClass} htmlFor={`${idPrefix}cart-line-id`}>
-            {(t as { lineIdLabel?: string }).lineIdLabel ?? 'LINE ID'}{' '}
-            <span className={reqClass} aria-hidden>*</span>
-          </label>
-          <input
-            id={`${idPrefix}cart-line-id`}
-            type="text"
-            value={lineId}
-            onChange={(e) => setLineId(sanitizeLineUserIdInput(e.target.value))}
-            placeholder={(t as { lineIdPlaceholder?: string }).lineIdPlaceholder ?? 'e.g. LannaBloom'}
-            className={inputClass}
-            autoComplete="username"
-            maxLength={64}
-            disabled={!linePreferenceSelected}
-            tabIndex={linePreferenceSelected ? undefined : -1}
-            aria-required
-            aria-invalid={linePreferenceSelected && !isValidLineUserId(lineNorm)}
-            aria-describedby={`${idPrefix}cart-line-id-hint${lineIdFormatError ? ` ${idPrefix}cart-line-id-error` : ''}`}
-          />
-          <p id={`${idPrefix}cart-line-id-hint`} className="cart-field-hint">
-            {(t as { lineIdHint?: string }).lineIdHint ??
-              'Use your LINE profile ID: letters, numbers, dot, underscore, or hyphen (4–64 characters). Do not type @ or paste links—we build the LINE link for you.'}
-          </p>
-          {lineIdFormatError && (
-            <p
-              id={`${idPrefix}cart-line-id-error`}
-              className="cart-field-hint cart-line-id-error"
-              role="alert"
-            >
-              {(t as { lineIdInvalid?: string }).lineIdInvalid ??
-                'Enter plain LINE ID text only (no links, no @). Example: LannaBloom.'}
-            </p>
-          )}
-        </div>
-      </LineIdFieldReveal>
       <div className={fieldClass}>
         <label className={labelClass} htmlFor={`${idPrefix}cart-email`}>
           {t.emailLabel ?? 'Email'}
@@ -1552,10 +1510,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         <RecipientOptInToggle
           variant="cart"
           selected={isOrderingForSomeoneElse}
-          onSelectedChange={(next) => {
-            setIsOrderingForSomeoneElse(next);
-            if (!next) setSurpriseDelivery(false);
-          }}
+          onSelectedChange={handleOrderingForSomeoneElseChange}
           toggleLabel={tPremium.recipientDetailsToggle}
         >
           <div className="cart-contact-field">
@@ -1686,7 +1641,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           surpriseDelivery={surpriseDelivery}
           onSurpriseDeliveryChange={setSurpriseDelivery}
           orderingForSomeoneElse={isOrderingForSomeoneElse}
-          onOrderingForSomeoneElseChange={setIsOrderingForSomeoneElse}
+          onOrderingForSomeoneElseChange={handleOrderingForSomeoneElseChange}
           cardMessage={giftCardMessage}
           onCardMessageChange={setGiftCardMessage}
           noCardMessage={noCardMessage}
@@ -1721,12 +1676,12 @@ export function CartPageClient({ lang }: { lang: Locale }) {
             if (!removed) return;
             const lineVal = removed.size.price * (removed.quantity ?? 1);
             trackRemoveFromCart({
-              currency: 'THB',
+              currency: 'RUB',
               value: lineVal,
               items: [
                 {
                   item_id: removed.bouquetId,
-                  item_name: isThaiLocale(lang) ? removed.nameTh : removed.nameEn,
+                  item_name: catalogLocalizedName(removed, lang),
                   price: removed.size.price,
                   quantity: removed.quantity ?? 1,
                   index: 0,
@@ -1743,12 +1698,12 @@ export function CartPageClient({ lang }: { lang: Locale }) {
             if (nextQty < 1) {
               const lineVal = item.size.price * (item.quantity ?? 1);
               trackRemoveFromCart({
-                currency: 'THB',
+                currency: 'RUB',
                 value: lineVal,
                 items: [
                   {
                     item_id: item.bouquetId,
-                    item_name: isThaiLocale(lang) ? item.nameTh : item.nameEn,
+                    item_name: catalogLocalizedName(item, lang),
                     price: item.size.price,
                     quantity: item.quantity ?? 1,
                     index: 0,

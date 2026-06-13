@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { href: '/admin/orders', label: 'Orders', icon: 'shopping_bag' },
   { href: '/admin/emails', label: 'Emails', icon: 'mail' },
   { href: '/admin/accounting/overview', label: 'Accounting', icon: 'account_balance_wallet' },
-  { href: '/admin/partners/applications', label: 'Partners', icon: 'group' },
+  { href: '/admin/partners', label: 'Partners', icon: 'group' },
   { href: '/admin/products', label: 'Products', icon: 'inventory_2' },
   { href: '/admin/reviews', label: 'Reviews', icon: 'reviews' },
 ] as const;

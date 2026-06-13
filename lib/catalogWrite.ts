@@ -35,12 +35,12 @@ async function upsertSlugRegistry(
   entityType: 'bouquet' | 'product',
   entityId: string,
   slugEn: string,
-  slugTh: string
+  slugRu: string
 ): Promise<void> {
   const supabase = requireSupabase();
   const rows = [
     { slug: slugEn, locale: 'en' as const, entity_type: entityType, entity_id: entityId },
-    { slug: slugTh, locale: 'th' as const, entity_type: entityType, entity_id: entityId },
+    { slug: slugRu, locale: 'ru' as const, entity_type: entityType, entity_id: entityId },
   ];
   const { error } = await supabase.from('catalog_slug_registry').upsert(rows, {
     onConflict: 'slug,locale',
@@ -59,13 +59,29 @@ export interface CreateCatalogPartnerInput {
   legacyImportId?: string;
 }
 
+export interface CatalogPartnerCrmInput {
+  shopName: string;
+  contactName: string;
+  phoneNumber: string;
+  telegram?: string;
+  whatsapp?: string;
+  shopAddress?: string;
+  district?: string;
+  stockCategories?: string[];
+  flowersInStock?: string[];
+  internalNotes?: string;
+  selfDeliver?: boolean;
+  deliveryZones?: string;
+  prepTimeNote?: string;
+}
+
 export interface UpdateCatalogPartnerProfileInput {
   phoneNumber: string;
   lineOrWhatsapp?: string;
   shopAddress?: string;
   city?: string;
   shopBioEn?: string;
-  shopBioTh?: string;
+  shopBioRu?: string;
 }
 
 export interface CatalogBouquetSizeInput {
@@ -80,13 +96,13 @@ export interface CatalogBouquetSizeInput {
 export interface CreateCatalogBouquetInput {
   partnerId: string;
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   slugEn?: string;
-  slugTh?: string;
+  slugRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   compositionEn?: string;
-  compositionTh?: string;
+  compositionRu?: string;
   colors?: string[];
   flowerTypes?: string[];
   occasion?: string[];
@@ -100,11 +116,11 @@ export interface CreateCatalogBouquetInput {
 export interface CreateCatalogProductInput {
   partnerId: string;
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   slugEn?: string;
-  slugTh?: string;
+  slugRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   category: string;
   price: number;
   cost?: number;
@@ -159,7 +175,7 @@ export async function createCatalogPartner(input: CreateCatalogPartnerInput): Pr
       line_or_whatsapp: input.lineOrWhatsapp?.trim() || null,
       shop_address: input.shopAddress?.trim() || null,
       city: (input.city || PRIMARY_SERVICE_CITY_EN).trim(),
-      status: input.supabaseUserId ? 'approved' : 'pending_review',
+      status: 'approved',
       supabase_user_id: input.supabaseUserId?.trim() || null,
       legacy_sanity_id: input.legacyImportId ?? null, // DB column name (Thailand export compatibility)
     })
@@ -183,9 +199,71 @@ export async function updateCatalogPartnerProfile(
       shop_address: input.shopAddress?.trim() || null,
       city: input.city?.trim() || PRIMARY_SERVICE_CITY_EN,
       shop_bio_en: input.shopBioEn?.trim() || null,
-      shop_bio_th: input.shopBioTh?.trim() || null,
+      shop_bio_ru: input.shopBioRu?.trim() || null,
       updated_at: new Date().toISOString(),
     })
+    .eq('id', partnerId);
+
+  if (error) throw new Error(error.message);
+}
+
+function catalogPartnerCrmPatch(input: CatalogPartnerCrmInput): Record<string, unknown> {
+  return {
+    shop_name: input.shopName.trim(),
+    contact_name: input.contactName.trim(),
+    phone_number: input.phoneNumber.trim(),
+    telegram: input.telegram?.trim() || null,
+    whatsapp: input.whatsapp?.trim() || null,
+    shop_address: input.shopAddress?.trim() || null,
+    district: input.district?.trim() || null,
+    stock_categories: input.stockCategories ?? [],
+    flowers_in_stock: input.flowersInStock ?? [],
+    internal_notes: input.internalNotes?.trim() || null,
+    self_deliver: input.selfDeliver === true,
+    delivery_zones: input.deliveryZones?.trim() || null,
+    prep_time_note: input.prepTimeNote?.trim() || null,
+    city: PRIMARY_SERVICE_CITY_EN,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export async function createCatalogPartnerCrm(input: CatalogPartnerCrmInput): Promise<string> {
+  const supabase = requireSupabase();
+  const { data, error } = await supabase
+    .from('catalog_partners')
+    .insert({
+      ...catalogPartnerCrmPatch(input),
+      status: 'approved',
+      supabase_user_id: null,
+    })
+    .select('id')
+    .single();
+
+  if (error || !data) throw new Error(error?.message ?? 'Failed to create catalog partner');
+  return data.id;
+}
+
+export async function updateCatalogPartnerCrm(
+  partnerId: string,
+  input: CatalogPartnerCrmInput
+): Promise<void> {
+  const supabase = requireSupabase();
+  const { error } = await supabase
+    .from('catalog_partners')
+    .update(catalogPartnerCrmPatch(input))
+    .eq('id', partnerId);
+
+  if (error) throw new Error(error.message);
+}
+
+export async function setCatalogPartnerStatus(
+  partnerId: string,
+  status: 'approved' | 'disabled'
+): Promise<void> {
+  const supabase = requireSupabase();
+  const { error } = await supabase
+    .from('catalog_partners')
+    .update({ status, updated_at: new Date().toISOString() })
     .eq('id', partnerId);
 
   if (error) throw new Error(error.message);
@@ -194,20 +272,20 @@ export async function updateCatalogPartnerProfile(
 export async function createCatalogBouquet(input: CreateCatalogBouquetInput): Promise<string> {
   const supabase = requireSupabase();
   const slugEn = slugFromName(input.slugEn || input.nameEn);
-  const slugTh = slugFromName(input.slugTh || input.nameEn);
+  const slugRu = slugFromName(input.slugRu || input.nameEn);
 
   const { data, error } = await supabase
     .from('catalog_bouquets')
     .insert({
       partner_id: input.partnerId,
       slug_en: slugEn,
-      slug_th: slugTh,
+      slug_ru: slugRu,
       name_en: input.nameEn.trim(),
-      name_th: (input.nameTh || '').trim(),
+      name_ru: (input.nameRu || '').trim(),
       description_en: (input.descriptionEn || '').trim(),
-      description_th: (input.descriptionTh || '').trim(),
+      description_ru: (input.descriptionRu || '').trim(),
       composition_en: (input.compositionEn || '').trim(),
-      composition_th: (input.compositionTh || '').trim(),
+      composition_ru: (input.compositionRu || '').trim(),
       pricing_type: 'single_price',
       pricing: {
         price: input.sizes[0]?.price ?? 0,
@@ -233,25 +311,25 @@ export async function createCatalogBouquet(input: CreateCatalogBouquetInput): Pr
     .single();
 
   if (error || !data) throw new Error(error?.message ?? 'Failed to create catalog bouquet');
-  await upsertSlugRegistry('bouquet', data.id, slugEn, slugTh);
+  await upsertSlugRegistry('bouquet', data.id, slugEn, slugRu);
   return data.id;
 }
 
 export async function createCatalogProduct(input: CreateCatalogProductInput): Promise<string> {
   const supabase = requireSupabase();
   const slugEn = slugFromName(input.slugEn || input.nameEn);
-  const slugTh = slugFromName(input.slugTh || input.nameEn);
+  const slugRu = slugFromName(input.slugRu || input.nameEn);
 
   const { data, error } = await supabase
     .from('catalog_products')
     .insert({
       partner_id: input.partnerId,
       slug_en: slugEn,
-      slug_th: slugTh,
+      slug_ru: slugRu,
       name_en: input.nameEn.trim(),
-      name_th: (input.nameTh || '').trim(),
+      name_ru: (input.nameRu || '').trim(),
       description_en: (input.descriptionEn || '').trim(),
-      description_th: (input.descriptionTh || '').trim(),
+      description_ru: (input.descriptionRu || '').trim(),
       category: input.category,
       price: Number(input.price),
       cost: input.cost != null ? Number(input.cost) : null,
@@ -264,17 +342,17 @@ export async function createCatalogProduct(input: CreateCatalogProductInput): Pr
     .single();
 
   if (error || !data) throw new Error(error?.message ?? 'Failed to create catalog product');
-  await upsertSlugRegistry('product', data.id, slugEn, slugTh);
+  await upsertSlugRegistry('product', data.id, slugEn, slugRu);
   return data.id;
 }
 
 export type UpdateCatalogBouquetByAdminInput = {
   nameEn?: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   compositionEn?: string;
-  compositionTh?: string;
+  compositionRu?: string;
   featuredPopular?: boolean;
   discountPercent?: number | null;
   pricingType?: import('@/lib/catalog/pricing').PricingType;
@@ -310,11 +388,11 @@ export async function updateCatalogBouquetByAdmin(
   if (input.pricing != null) patch.pricing = input.pricing;
 
   if (input.nameEn != null) patch.name_en = input.nameEn.trim();
-  if (input.nameTh != null) patch.name_th = input.nameTh.trim();
+  if (input.nameRu != null) patch.name_ru = input.nameRu.trim();
   if (input.descriptionEn != null) patch.description_en = input.descriptionEn.trim();
-  if (input.descriptionTh != null) patch.description_th = input.descriptionTh.trim();
+  if (input.descriptionRu != null) patch.description_ru = input.descriptionRu.trim();
   if (input.compositionEn != null) patch.composition_en = input.compositionEn.trim();
-  if (input.compositionTh != null) patch.composition_th = input.compositionTh.trim();
+  if (input.compositionRu != null) patch.composition_ru = input.compositionRu.trim();
   if (input.featuredPopular != null) patch.featured_popular = input.featuredPopular;
   if (input.colors != null) patch.colors = input.colors;
   if (input.flowerTypes != null) patch.flower_types = input.flowerTypes;
@@ -443,12 +521,12 @@ export type CatalogWriteImageInput = {
 
 export type CreateAdminCatalogBouquetInput = {
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   slug?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   compositionEn?: string;
-  compositionTh?: string;
+  compositionRu?: string;
   price: number;
   images: CatalogWriteImageInput[];
   colors?: string[];
@@ -464,10 +542,10 @@ export type CreateAdminCatalogBouquetInput = {
 
 export type CreateAdminCatalogProductInput = {
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   slug?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   category: string;
   price: number;
   images: CatalogWriteImageInput[];
@@ -480,17 +558,17 @@ export type CreateAdminCatalogProductInput = {
 
 export type UpdateCatalogProductByAdminInput = {
   nameEn?: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   price?: number;
   occasion?: string[];
   excludedDeliveryDestinations?: DeliveryDestinationId[];
   adminOverrides?: {
     nameEn?: string | null;
-    nameTh?: string | null;
+    nameRu?: string | null;
     descriptionEn?: string | null;
-    descriptionTh?: string | null;
+    descriptionRu?: string | null;
   };
   adminChangeSummary?: string | null;
   adminLastEditedBy?: string | null;
@@ -554,7 +632,7 @@ export async function ensureCatalogSystemPartner(): Promise<string> {
     .from('catalog_partners')
     .insert({
       legacy_sanity_id: CATALOG_SYSTEM_PARTNER_LEGACY_ID,
-      shop_name: 'Lanna Bloom',
+      shop_name: 'EKB Flowers',
       contact_name: 'Catalog',
       phone_number: '0000000000',
       city: PRIMARY_SERVICE_CITY_EN,
@@ -581,13 +659,13 @@ export async function createAdminReviewBouquetInCatalog(
     .insert({
       partner_id: null,
       slug_en: slug,
-      slug_th: slug,
+      slug_ru: slug,
       name_en: input.nameEn.trim(),
-      name_th: (input.nameTh || '').trim(),
+      name_ru: (input.nameRu || '').trim(),
       description_en: (input.descriptionEn || '').trim(),
-      description_th: (input.descriptionTh || '').trim(),
+      description_ru: (input.descriptionRu || '').trim(),
       composition_en: (input.compositionEn || '').trim(),
-      composition_th: (input.compositionTh || '').trim(),
+      composition_ru: (input.compositionRu || '').trim(),
       pricing_type: 'single_price',
       pricing: {
         price,
@@ -642,11 +720,11 @@ export async function createAdminReviewProductInCatalog(
     .insert({
       partner_id: partnerId,
       slug_en: slug,
-      slug_th: slug,
+      slug_ru: slug,
       name_en: input.nameEn.trim(),
-      name_th: (input.nameTh || '').trim(),
+      name_ru: (input.nameRu || '').trim(),
       description_en: (input.descriptionEn || '').trim(),
-      description_th: (input.descriptionTh || '').trim(),
+      description_ru: (input.descriptionRu || '').trim(),
       category: input.category,
       price,
       cost: price,
@@ -714,9 +792,9 @@ export async function updateCatalogProductByAdmin(
 
   const patch: Record<string, unknown> = {
     ...(input.nameEn != null && { name_en: input.nameEn.trim() }),
-    ...(input.nameTh != null && { name_th: input.nameTh.trim() }),
+    ...(input.nameRu != null && { name_ru: input.nameRu.trim() }),
     ...(input.descriptionEn != null && { description_en: input.descriptionEn.trim() }),
-    ...(input.descriptionTh != null && { description_th: input.descriptionTh.trim() }),
+    ...(input.descriptionRu != null && { description_ru: input.descriptionRu.trim() }),
     ...(input.price != null && Number.isFinite(input.price) && { price: input.price }),
     ...(input.excludedDeliveryDestinations != null && {
       excluded_delivery_destinations: input.excludedDeliveryDestinations,

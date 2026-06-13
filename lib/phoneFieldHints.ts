@@ -16,6 +16,7 @@ export type NationalPhoneMessageKey =
   | 'phoneHintNeutralNational'
   | 'phoneHintNationalHasCountryCode'
   | 'phoneHintThSkipLeadingZero'
+  | 'phoneHintRuSkipLeadingEight'
   | 'phoneHintTooShortNational'
   | 'phoneHintTooLongNational'
   | 'phoneHintInlineDigitsOnly'
@@ -119,6 +120,9 @@ export function getNationalPhoneHint(countryCode: string, nationalDigits: string
   if (countryCode === '66' && d.startsWith('0')) {
     return { tone: 'tip', messageKey: 'phoneHintThSkipLeadingZero' };
   }
+  if (countryCode === '7' && d.startsWith('8') && d.length >= 10) {
+    return { tone: 'tip', messageKey: 'phoneHintRuSkipLeadingEight' };
+  }
   if (d.length < CHECKOUT_NATIONAL_MIN) {
     return { tone: 'warn', messageKey: 'phoneHintTooShortNational' };
   }
@@ -143,6 +147,9 @@ export function normalizeNationalPhoneOnBlur(nationalDigits: string, countryCode
   }
   d = d.slice(0, CHECKOUT_NATIONAL_MAX);
   if (countryCode === '66' && d.startsWith('0') && d.length >= 10) {
+    d = d.slice(1);
+  }
+  if (countryCode === '7' && d.startsWith('8') && d.length === 11) {
     d = d.slice(1);
   }
   return d.slice(0, CHECKOUT_NATIONAL_MAX);

@@ -14,11 +14,15 @@ export function FloristCard({
   lang,
   partnerName = 'Local Artisan',
   partnerImage,
-  studioName = 'Chiang Mai',
-  quote = "We source our flowers daily from local markets to ensure maximum freshness and fragrance in every arrangement.",
+  studioName,
+  quote,
 }: FloristCardProps) {
   const t = translations[lang].product ?? {};
   const meetFlorist = (t as { meetFlorist?: string }).meetFlorist ?? 'Meet the Florist';
+  const resolvedStudio =
+    studioName ?? (t as { floristDefaultStudio?: string }).floristDefaultStudio ?? 'Chiang Mai';
+  const resolvedQuote =
+    quote ?? (t as { floristDefaultQuote?: string }).floristDefaultQuote ?? '';
 
   return (
     <div className="p-6 rounded-2xl bg-stone-50 border border-stone-100">
@@ -45,11 +49,11 @@ export function FloristCard({
             {meetFlorist}
           </h4>
           <p className="text-xs text-stone-500">
-            {partnerName}, {studioName}
+            {partnerName}, {resolvedStudio}
           </p>
         </div>
       </div>
-      <p className="text-xs text-stone-600 italic">{quote}</p>
+      <p className="text-xs text-stone-600 italic">{resolvedQuote}</p>
     </div>
   );
 }

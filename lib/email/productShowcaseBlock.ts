@@ -87,7 +87,7 @@ export function buildOrderLineProductShowcase(
   const size = (first?.size ?? '').trim();
   const price =
     first?.price != null && !Number.isNaN(first.price)
-      ? `฿${first.price.toLocaleString()}`
+      ? `₽${first.price.toLocaleString()}`
       : '';
 
   const imageBlock = img

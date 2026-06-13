@@ -23,7 +23,7 @@ interface ItemsListProps {
 
 function formatAmount(n: number | null | undefined): string {
   if (n == null) return 'N/A';
-  return `฿${Number(n).toLocaleString()}`;
+  return `₽${Number(n).toLocaleString()}`;
 }
 
 function getWrappingLabel(opt: string | null | undefined): string {

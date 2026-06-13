@@ -15,7 +15,8 @@ import {
   getCatalogProductsFiltered,
 } from '@/lib/catalogReads';
 import { isDatabaseConfigured } from '@/lib/db/client';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n'
+import { catalogLocalizedComposition, catalogLocalizedDescription, catalogLocalizedName } from '@/lib/catalogLocale';
 import { translations } from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
 import MarketCatalogPageViaSlug from './catalog/page';
@@ -46,13 +47,13 @@ export async function generateMetadata({
   if (!bouquet) return {};
 
   const isTh = isThaiLocale(params.lang);
-  const name = isTh ? bouquet.nameTh : bouquet.nameEn;
+  const name = isTh ? bouquet.nameRu : bouquet.nameEn;
   const title =
-    (isTh ? bouquet.seoTitleTh : bouquet.seoTitleEn)?.trim() ||
+    (isTh ? bouquet.seoTitleRu : bouquet.seoTitleEn)?.trim() ||
     `${name} | Flower delivery Chiang Mai | Lanna Bloom`;
   const description =
-    (isTh ? bouquet.seoDescriptionTh : bouquet.seoDescriptionEn)?.trim() ||
-    (isTh ? bouquet.descriptionTh : bouquet.descriptionEn).trim().slice(0, 160) ||
+    (isTh ? bouquet.seoDescriptionRu : bouquet.seoDescriptionEn)?.trim() ||
+    (isTh ? bouquet.descriptionRu : bouquet.descriptionEn).trim().slice(0, 160) ||
     (isTh
       ? `สั่ง${name} พร้อมจัดส่งในเชียงใหม่`
       : `Order ${name} with flower delivery in Chiang Mai.`);
@@ -84,16 +85,16 @@ export default async function ProductPage({
   if (bouquet) {
     const reviewStats = await getReviewStatsAsync();
     const gifts = await getCatalogProductsFiltered({ categoryKey: 'gifts' });
-    const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
-    const description = isThaiLocale(lang) ? bouquet.descriptionTh : bouquet.descriptionEn;
-    const composition = isThaiLocale(lang) ? bouquet.compositionTh : bouquet.compositionEn;
+    const name = catalogLocalizedName(bouquet, lang);
+    const description = catalogLocalizedDescription(bouquet, lang as Locale);
+    const composition = catalogLocalizedComposition(bouquet, lang as Locale);
     const t = translations[lang as Locale].product;
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
     const pageUrl = `${getBaseUrl()}/${lang}/catalog/${bouquet.slug}`;
     const productJsonLd = buildBouquetProductJsonLd(
       bouquet,
-      isThaiLocale(lang) ? 'th' : 'en',
+      lang as Locale,
       pageUrl
     );
 
@@ -131,8 +132,8 @@ export default async function ProductPage({
 
   const plushyToy = await getCatalogPlushyToyBySlug(params.slug);
   if (plushyToy) {
-    const name = isThaiLocale(lang) && plushyToy.nameTh ? plushyToy.nameTh : plushyToy.nameEn;
-    const description = (isThaiLocale(lang) ? plushyToy.descriptionTh : plushyToy.descriptionEn) || '';
+    const name = catalogLocalizedName(plushyToy, lang);
+    const description = (isThaiLocale(lang) ? plushyToy.descriptionRu : plushyToy.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
     const suggestedBouquets = await getCatalogPopularBouquets(8);
@@ -164,8 +165,8 @@ export default async function ProductPage({
 
   const balloon = await getCatalogBalloonBySlug(params.slug);
   if (balloon) {
-    const name = isThaiLocale(lang) && balloon.nameTh ? balloon.nameTh : balloon.nameEn;
-    const description = (isThaiLocale(lang) ? balloon.descriptionTh : balloon.descriptionEn) || '';
+    const name = catalogLocalizedName(balloon, lang);
+    const description = (isThaiLocale(lang) ? balloon.descriptionRu : balloon.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog?topCategory=balloons`;
     const suggestedBouquets = await getCatalogPopularBouquets(8);
@@ -198,8 +199,8 @@ export default async function ProductPage({
   const product = await getCatalogProductBySlug(params.slug);
   if (product) {
     const gifts = await getCatalogProductsFiltered({ categoryKey: 'gifts' });
-    const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
-    const description = (isThaiLocale(lang) ? product.descriptionTh : product.descriptionEn) || '';
+    const name = catalogLocalizedName(product, lang);
+    const description = (isThaiLocale(lang) ? product.descriptionRu : product.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
 

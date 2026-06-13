@@ -8,7 +8,7 @@ export interface DeliveryLocationValue {
   googleMapsUrl: string;
 }
 
-const CHIANG_MAI_CENTER: [number, number] = [18.7883, 98.9853];
+const EKB_CENTER: [number, number] = [56.8389, 60.6057];
 const ZOOM = 13;
 const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
@@ -51,7 +51,7 @@ function MapInner({
 
   return (
     <MapContainer
-      center={CHIANG_MAI_CENTER}
+      center={EKB_CENTER}
       zoom={ZOOM}
       className="delivery-location-map-inner"
       style={{ height: '100%', width: '100%' }}

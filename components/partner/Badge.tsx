@@ -2,7 +2,7 @@
 
 type BadgeProps = {
   status: 'pending' | 'approved' | 'active' | 'rejected' | 'submitted' | 'needs_changes';
-  labelTh?: string;
+  labelRu?: string;
   labelEn?: string;
 };
 
@@ -15,11 +15,11 @@ const STATUS_CLASS: Record<string, string> = {
   needs_changes: 'needs_changes',
 };
 
-export function Badge({ status, labelTh, labelEn }: BadgeProps) {
+export function Badge({ status, labelRu, labelEn }: BadgeProps) {
   const cls = STATUS_CLASS[status] || 'pending';
   return (
     <span className={`partner-badge partner-badge--${cls}`}>
-      {labelTh ?? status}
+      {labelRu ?? status}
       {labelEn && <span className="partner-badge-en">{labelEn}</span>}
     </span>
   );

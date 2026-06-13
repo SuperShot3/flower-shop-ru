@@ -33,7 +33,7 @@ function rowsToUrls(rows: CatalogProductImageRow[]): VariantImageSet {
     }
     const publicUrl = row.public_url?.trim();
     urls.push(publicUrl && !isLegacyRemoteCdnUrl(publicUrl) ? publicUrl : catalogPublicUrl(row.storage_path));
-    alts.push(row.alt_en?.trim() || row.alt_th?.trim() || '');
+    alts.push(row.alt_en?.trim() || row.alt_ru?.trim() || '');
   }
   return { urls, alts };
 }

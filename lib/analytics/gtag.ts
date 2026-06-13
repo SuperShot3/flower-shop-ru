@@ -11,7 +11,7 @@
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
-    /** Set by `GoogleAnalytics` inline script immediately after `gtag('consent', 'default', …)`. */
+    /** Legacy GTM consent flag (unused in Russia — Yandex Metrica only). */
     __lannaConsentDefaultsApplied?: boolean;
     google_tag_manager?: Record<string, unknown>;
   }
@@ -211,7 +211,7 @@ export function trackCheckoutPurchase(params: {
 
   const normalizedOrderId = normalizeOrderId(params.orderId);
   const value = toAnalyticsNumber(params.value);
-  const currency = (params.currency ?? 'THB').trim() || 'THB';
+  const currency = (params.currency ?? 'RUB').trim() || 'THB';
 
   if (!normalizedOrderId || !Number.isFinite(value) || value <= 0) {
     if (isDev) {

@@ -1,7 +1,7 @@
 import { getFeaturedReviewsAsync, getReviewStatsAsync } from '@/lib/reviews';
 import { GOOGLE_REVIEW_URL, GOOGLE_PLACE_URL } from '@/lib/reviewsConfig';
 import type { Locale } from '@/lib/i18n';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import { translations } from '@/lib/i18n';
 
 interface ReviewsSectionProps {
   lang: Locale;
@@ -21,10 +21,8 @@ export async function ReviewsSection({
   const t = translations[lang].reviews;
 
   const displayTitle = title ?? t.title;
-  const featuredQuote =
-    reviews[0]?.text ||
-    "I ordered a bouquet for my mother's birthday and it was delivered within 45 minutes. The flowers were fresher than anything I've seen in the markets. Truly premium service.";
-  const quoteTitle = stats.count > 0 ? `"Best flower service in Chiang Mai"` : displayTitle;
+  const featuredQuote = reviews[0]?.text || t.featuredQuoteFallback;
+  const quoteTitle = stats.count > 0 ? t.featuredQuoteTitle : displayTitle;
 
   return (
     <section
@@ -67,17 +65,15 @@ export async function ReviewsSection({
           <div className="home-reveal-item flex items-center gap-3">
             <span className="material-symbols-outlined text-[#C5A059] text-3xl">verified</span>
             <div className="text-left">
-              <p className="font-bold text-sm">{isThaiLocale(lang) ? 'การจัดส่งที่ไว้ใจได้' : 'Verified delivery'}</p>
-              <p className="text-xs text-stone-400">
-                {isThaiLocale(lang) ? 'คุณภาพที่คุณวางใจได้' : 'Quality you can trust'}
-              </p>
+              <p className="font-bold text-sm">{t.trustVerifiedTitle}</p>
+              <p className="text-xs text-stone-400">{t.trustVerifiedSub}</p>
             </div>
           </div>
           <div className="home-reveal-item flex items-center gap-3">
             <span className="material-symbols-outlined text-[#C5A059] text-3xl">bolt</span>
             <div className="text-left">
-              <p className="font-bold text-sm">Fast Delivery</p>
-              <p className="text-xs text-stone-400">Chiang Mai Inner City</p>
+              <p className="font-bold text-sm">{t.trustFastDeliveryTitle}</p>
+              <p className="text-xs text-stone-400">{t.trustFastDeliverySub}</p>
             </div>
           </div>
           <div className="home-reveal-item flex items-center gap-3">
@@ -85,8 +81,8 @@ export async function ReviewsSection({
               support_agent
             </span>
             <div className="text-left">
-              <p className="font-bold text-sm">Local Support</p>
-              <p className="text-xs text-stone-400">English & Thai</p>
+              <p className="font-bold text-sm">{t.trustLocalSupportTitle}</p>
+              <p className="text-xs text-stone-400">{t.trustLocalSupportSub}</p>
             </div>
           </div>
         </div>

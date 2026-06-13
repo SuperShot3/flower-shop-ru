@@ -6,25 +6,25 @@
 import { detectDistrictFromAddress } from '@/lib/deliveryFees';
 import type { OrderDeliveryDestinationId } from '@/lib/orders';
 import {
-  chiangMaiZoneIdFromLegacyDistrict,
+  ekbZoneIdFromLegacyDistrict,
   findZoneDef,
   getZonesForDestination,
   isSupportedZone,
 } from '@/lib/delivery/zones';
 
-const CHIANG_MAI_BOUNDS = {
-  south: 18.55,
-  north: 19.05,
-  west: 98.75,
-  east: 99.15,
+const EKB_BOUNDS = {
+  south: 56.68,
+  north: 56.92,
+  west: 60.42,
+  east: 60.78,
 };
 
-/** Nimman / Old City–ish central box (soft heuristic only). */
-const CM_CENTRAL_BOUNDS = {
-  south: 18.76,
-  north: 18.82,
-  west: 98.95,
-  east: 99.02,
+/** Historical city centre (rough heuristic for address-only inference). */
+const EKB_CENTRAL_BOUNDS = {
+  south: 56.82,
+  north: 56.855,
+  west: 60.57,
+  east: 60.64,
 };
 
 function inBounds(
@@ -55,7 +55,7 @@ function zoneFromPostcodeAllowlist(
 
 export type ResolveDeliveryZoneInput = {
   deliveryDestination: OrderDeliveryDestinationId;
-  /** Customer-selected zone (hint only for non–Chiang Mai or when inference fails). */
+  /** Customer-selected zone (hint only when inference fails). */
   clientZoneId: string;
   address?: string;
   formattedAddress?: string;
@@ -85,22 +85,19 @@ export function resolveDeliveryZoneFromPlace(input: ResolveDeliveryZoneInput): s
   if (deliveryDestination === 'CHIANG_MAI') {
     const detected = text ? detectDistrictFromAddress(text) : null;
     if (detected) {
-      const isCentral =
-        detected === 'MUEANG' &&
-        typeof input.lat === 'number' &&
-        typeof input.lng === 'number' &&
-        inBounds(input.lat, input.lng, CM_CENTRAL_BOUNDS);
-      const zoneId = chiangMaiZoneIdFromLegacyDistrict(detected, isCentral);
+      const zoneId = ekbZoneIdFromLegacyDistrict(detected);
       if (zoneId && isSupportedZone('CHIANG_MAI', zoneId)) return zoneId;
     }
 
     if (typeof input.lat === 'number' && typeof input.lng === 'number') {
-      if (!inBounds(input.lat, input.lng, CHIANG_MAI_BOUNDS)) {
-        if (isSupportedZone('CHIANG_MAI', 'cm-unknown')) return 'cm-unknown';
-      } else if (inBounds(input.lat, input.lng, CM_CENTRAL_BOUNDS)) {
-        return 'cm-mueang-central';
-      } else if (isSupportedZone('CHIANG_MAI', 'cm-mueang-non-central')) {
-        return 'cm-mueang-non-central';
+      if (!inBounds(input.lat, input.lng, EKB_BOUNDS)) {
+        if (isSupportedZone('CHIANG_MAI', 'ekb-unknown')) return 'ekb-unknown';
+      } else if (inBounds(input.lat, input.lng, EKB_CENTRAL_BOUNDS)) {
+        if (isSupportedZone('CHIANG_MAI', 'ekb-zheleznodorozhny')) {
+          return 'ekb-zheleznodorozhny';
+        }
+      } else if (isSupportedZone('CHIANG_MAI', 'ekb-unknown')) {
+        return 'ekb-unknown';
       }
     }
   }

@@ -314,7 +314,7 @@ export function FlowerFilterPanel({
           />
         </div>
         <div className="flower-filter-price-inputs">
-          <span className="flower-filter-baht">฿</span>
+          <span className="flower-filter-baht">₽</span>
           <input
             type="number"
             min={0}
@@ -326,7 +326,7 @@ export function FlowerFilterPanel({
             onKeyDown={(e) => e.key === 'Enter' && applyPrice()}
           />
           <span className="flower-filter-dash">–</span>
-          <span className="flower-filter-baht">฿</span>
+          <span className="flower-filter-baht">₽</span>
           <input
             type="number"
             min={0}

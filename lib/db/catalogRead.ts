@@ -1,4 +1,5 @@
-import { isThaiLocale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n';
+import { catalogSlugColumn } from '@/lib/catalogLocale';
 import 'server-only';
 
 import { fetchAllPages } from '@/lib/db/pagination';
@@ -49,9 +50,9 @@ export async function loadPartnersByIds(ids: string[]): Promise<Map<string, Cata
 
 export async function fetchBouquetBySlug(
   slug: string,
-  locale: 'en' | 'th'
+  locale: Locale
 ): Promise<CatalogBouquetRow | null> {
-  const col = isThaiLocale(locale) ? 'slug_th' : 'slug_en';
+  const col = catalogSlugColumn(locale);
   let row = await queryOne<CatalogBouquetRow>(
     `SELECT * FROM catalog_bouquets WHERE ${col} = $1 AND status = 'approved' LIMIT 1`,
     [slug]
@@ -59,7 +60,7 @@ export async function fetchBouquetBySlug(
 
   if (!row && locale === 'en') {
     row = await queryOne<CatalogBouquetRow>(
-      `SELECT * FROM catalog_bouquets WHERE slug_th = $1 AND status = 'approved' LIMIT 1`,
+      `SELECT * FROM catalog_bouquets WHERE slug_ru = $1 AND status = 'approved' LIMIT 1`,
       [slug]
     );
   }
@@ -83,9 +84,9 @@ export async function fetchBouquetById(bouquetId: string): Promise<CatalogBouque
 
 export async function fetchProductBySlug(
   slug: string,
-  locale: 'en' | 'th'
+  locale: Locale
 ): Promise<CatalogProductRow | null> {
-  const col = isThaiLocale(locale) ? 'slug_th' : 'slug_en';
+  const col = catalogSlugColumn(locale);
   return queryOne<CatalogProductRow>(
     `SELECT * FROM catalog_products WHERE ${col} = $1 AND moderation_status = 'live' LIMIT 1`,
     [slug]
@@ -109,6 +110,53 @@ export async function fetchPartnerById(partnerId: string): Promise<CatalogPartne
   return queryOne<CatalogPartnerRow>(
     `SELECT * FROM catalog_partners WHERE id = $1 LIMIT 1`,
     [partnerId]
+  );
+}
+
+export type CatalogPartnerListFilters = {
+  district?: string;
+  search?: string;
+  /** When omitted, returns approved + disabled (excludes legacy pending_review). */
+  status?: 'approved' | 'disabled' | 'all';
+};
+
+export async function listCatalogPartnersForAdmin(
+  filters: CatalogPartnerListFilters = {}
+): Promise<CatalogPartnerRow[]> {
+  const conditions: string[] = [];
+  const params: unknown[] = [];
+  let i = 1;
+
+  if (filters.status && filters.status !== 'all') {
+    conditions.push(`status = $${i++}`);
+    params.push(filters.status);
+  } else {
+    conditions.push(`status IN ('approved', 'disabled')`);
+  }
+
+  if (filters.district) {
+    conditions.push(`district = $${i++}`);
+    params.push(filters.district);
+  }
+
+  if (filters.search?.trim()) {
+    const q = `%${filters.search.trim()}%`;
+    conditions.push(
+      `(shop_name ILIKE $${i} OR shop_address ILIKE $${i} OR contact_name ILIKE $${i})`
+    );
+    params.push(q);
+    i += 1;
+  }
+
+  const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+
+  return queryRows<CatalogPartnerRow>(
+    `SELECT * FROM catalog_partners
+     ${where}
+     ORDER BY
+       CASE WHEN status = 'approved' THEN 0 ELSE 1 END,
+       shop_name ASC`,
+    params
   );
 }
 

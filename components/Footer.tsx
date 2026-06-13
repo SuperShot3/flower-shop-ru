@@ -153,12 +153,14 @@ export function Footer({ lang }: { lang: Locale }) {
               <p className="font-semibold text-stone-700 text-sm mb-3">{t.deliveryAreas}</p>
               <ul className="space-y-2 text-sm text-stone-500">
                 <li>
-                  <Link
-                    href={`/${lang}/flower-delivery-thailand`}
+                  <a
+                    href={`https://lannabloom.shop/${isThaiLocale(lang) ? 'th' : 'en'}/flower-delivery-thailand`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#C5A059] transition-colors font-medium text-stone-600"
                   >
                     {t.flowerDeliveryThailand}
-                  </Link>
+                  </a>
                 </li>
                 {FOOTER_DELIVERY_ORDER_LINKS.map(({ destinationId, href }) => (
                   <li key={destinationId}>
@@ -189,11 +191,6 @@ export function Footer({ lang }: { lang: Locale }) {
                   className="hover:text-[#C5A059] transition-colors"
                 >
                   {t.deliveryGuide}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/partner/apply`} className="hover:text-[#C5A059] transition-colors">
-                  {t.partnerFlorists}
                 </Link>
               </li>
               <li>

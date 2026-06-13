@@ -19,7 +19,7 @@ export default function MarketLayout({
     destinationId: entry.destinationId,
     pathSlug: entry.pathSlug,
     labelEn: entry.customerFacingNameEn,
-    labelTh: entry.customerFacingNameTh,
+    labelRu: entry.customerFacingNameRu,
   };
 
   return (
@@ -27,7 +27,7 @@ export default function MarketLayout({
       destinationId={entry.destinationId}
       pathSlug={entry.pathSlug}
       labelEn={entry.customerFacingNameEn}
-      labelTh={entry.customerFacingNameTh}
+      labelRu={entry.customerFacingNameRu}
     >
       <DeliveryMarketSessionBridge market={market} />
       {children}

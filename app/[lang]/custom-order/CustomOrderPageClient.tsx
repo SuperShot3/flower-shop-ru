@@ -120,8 +120,8 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
     () =>
       getZonesForDestination(selectedDestination).map((zone) => ({
         value: zone.id,
-        label: isThaiLocale(lang) ? zone.labelTh : zone.labelEn,
-        fee: getZoneFee(selectedDestination, zone.id) ?? zone.feeThb,
+        label: isThaiLocale(lang) ? zone.labelRu : zone.labelEn,
+        fee: getZoneFee(selectedDestination, zone.id) ?? zone.feeRub,
       })),
     [lang, selectedDestination]
   );
@@ -341,7 +341,7 @@ export function CustomOrderPageClient({ lang }: { lang: Locale }) {
                 </option>
                 {zoneOptions.map((option) => (
                   <option key={option.value} value={option.value}>
-                    {option.label} — ฿{option.fee.toLocaleString()}
+                    {option.label} — ₽{option.fee.toLocaleString()}
                   </option>
                 ))}
               </select>

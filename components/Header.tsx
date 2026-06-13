@@ -518,7 +518,7 @@ function DeliveryProvincePicker({
       </option>
       {MARKETS.map((market) => (
         <option key={market.destinationId} value={market.destinationId}>
-          {isThaiLocale(lang) ? market.customerFacingNameTh : market.customerFacingNameEn}
+          {lang === 'ru' ? market.customerFacingNameRu : market.customerFacingNameEn}
         </option>
       ))}
     </select>

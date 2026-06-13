@@ -39,7 +39,7 @@ export function AccountingShellClient({
   const [transferOpen, setTransferOpen] = useState(false);
   const [withdrawalOpen, setWithdrawalOpen] = useState(false);
   const [transferAmount, setTransferAmount] = useState('');
-  const [transferCurrency, setTransferCurrency] = useState('THB');
+  const [transferCurrency, setTransferCurrency] = useState('RUB');
   const [transferDate, setTransferDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [transferFrom, setTransferFrom] = useState('stripe');
   const [transferTo, setTransferTo] = useState('bank');
@@ -276,7 +276,7 @@ export function AccountingShellClient({
               className="admin-input"
               value={withdrawalAmount}
               onChange={(e) => setWithdrawalAmount(e.target.value)}
-              placeholder="Amount (THB)"
+              placeholder="Amount (RUB)"
               min="0"
               step="0.01"
               inputMode="decimal"
@@ -548,7 +548,7 @@ export function AccountingShellClient({
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                       amount: amt,
-                      currency: transferCurrency.trim() || 'THB',
+                      currency: transferCurrency.trim() || 'RUB',
                       transfer_date: transferDate,
                       from_location: transferFrom,
                       to_location: transferTo,

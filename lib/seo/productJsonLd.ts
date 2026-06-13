@@ -1,8 +1,9 @@
-import { isThaiLocale } from '@/lib/i18n';
+import { catalogLocalizedDescription, catalogLocalizedName } from '@/lib/catalogLocale';
+import type { Locale } from '@/lib/i18n';
 import type { Bouquet } from '@/lib/bouquets';
 import { getBaseUrl } from '@/lib/orders';
 
-function lowestAvailablePriceThb(bouquet: Bouquet): number {
+function lowestAvailablePrice(bouquet: Bouquet): number {
   const prices = bouquet.sizes
     .filter((s) => s.availability !== false)
     .map((s) => s.price)
@@ -20,12 +21,12 @@ function productImages(bouquet: Bouquet, base: string): string[] {
 
 export function buildBouquetProductJsonLd(
   bouquet: Bouquet,
-  lang: 'en' | 'th',
+  lang: Locale,
   pageUrl: string
 ): Record<string, unknown> {
   const base = getBaseUrl();
-  const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
-  const description = (isThaiLocale(lang) ? bouquet.descriptionTh : bouquet.descriptionEn).trim().slice(0, 500);
+  const name = catalogLocalizedName(bouquet, lang);
+  const description = catalogLocalizedDescription(bouquet, lang).trim().slice(0, 500);
   const images = productImages(bouquet, base);
 
   return {
@@ -36,18 +37,18 @@ export function buildBouquetProductJsonLd(
     ...(images.length ? { image: images } : {}),
     brand: {
       '@type': 'Brand',
-      name: 'Lanna Bloom',
+      name: 'EKB Flowers',
     },
     offers: {
       '@type': 'Offer',
       url: pageUrl,
-      priceCurrency: 'THB',
-      price: lowestAvailablePriceThb(bouquet),
+      priceCurrency: 'RUB',
+      price: lowestAvailablePrice(bouquet),
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'Organization',
-        name: 'Lanna Bloom',
+        name: 'EKB Flowers',
       },
     },
   };

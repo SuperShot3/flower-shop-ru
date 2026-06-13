@@ -6,7 +6,8 @@
  * - Contact-only mode: set NEXT_PUBLIC_LINE_OA_ADD_FRIEND_LINK to your shareable LINE link
  *   (e.g. line.me/ti/p/... or lin.ee/...).
  */
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { isValidLineUserId, normalizeLineUserId } from '@/lib/lineUserId';
 
@@ -98,7 +99,7 @@ export function buildOrderMessage(
 /** Item shape for cart order message (avoids importing full CartContext in lib). */
 export interface CartOrderItem {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   size: { label: string; price: number };
   addOns: {
     cardType: 'free' | 'beautiful' | null;
@@ -126,7 +127,7 @@ export function buildCartOrderMessage(
   const { cart: tCart, buyNow: tBuyNow } = translations[lang];
   const lines: string[] = [String(tCart.orderSummary)];
   items.forEach((item, i) => {
-    const name = isThaiLocale(lang) ? item.nameTh : item.nameEn;
+    const name = catalogLocalizedName(item, lang);
     const itemLine = String(tCart.itemLine)
       .replace('{name}', name)
       .replace('{size}', item.size.label)

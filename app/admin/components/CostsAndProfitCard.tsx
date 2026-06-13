@@ -606,7 +606,7 @@ export function CostsAndProfitCard({
         </h3>
         <div className="admin-costs-grid">
           <div className="admin-costs-input-group">
-            <label htmlFor="delivery-cost">Delivery (฿)</label>
+            <label htmlFor="delivery-cost">Delivery (₽)</label>
             {canEdit ? (
               <input
                 id="delivery-cost"
@@ -624,7 +624,7 @@ export function CostsAndProfitCard({
             )}
           </div>
           <div className="admin-costs-input-group">
-            <label htmlFor="payment-fee">Other fee (฿)</label>
+            <label htmlFor="payment-fee">Other fee (₽)</label>
             {canEdit ? (
               <input
                 id="payment-fee"

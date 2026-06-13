@@ -9,9 +9,10 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  if (!isValidLocale(lang)) return { title: 'Lanna Bloom' };
+  if (!isValidLocale(lang)) return { title: 'Ланна Блум' };
   const t = translations[lang as Locale].contact;
-  return { title: `${t.title} | Lanna Bloom` };
+  const brand = lang === 'ru' ? 'Ланна Блум' : 'Lanna Bloom';
+  return { title: `${t.title} | ${brand}` };
 }
 
 export default async function ContactPage({

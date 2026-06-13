@@ -80,18 +80,18 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
   const pending = getBouquetPending(bouquet.id);
 
   const [nameEn, setNameEn] = useState(() => pending?.nameEn ?? bouquet.nameEn);
-  const [nameTh, setNameTh] = useState(() => pending?.nameTh ?? bouquet.nameTh);
+  const [nameRu, setNameTh] = useState(() => pending?.nameRu ?? bouquet.nameRu);
   const [descriptionEn, setDescriptionEn] = useState(
     () => pending?.descriptionEn ?? bouquet.descriptionEn
   );
-  const [descriptionTh, setDescriptionTh] = useState(
-    () => pending?.descriptionTh ?? bouquet.descriptionTh
+  const [descriptionRu, setDescriptionTh] = useState(
+    () => pending?.descriptionRu ?? bouquet.descriptionRu
   );
   const [compositionEn, setCompositionEn] = useState(
     () => pending?.compositionEn ?? bouquet.compositionEn
   );
-  const [compositionTh, setCompositionTh] = useState(
-    () => pending?.compositionTh ?? bouquet.compositionTh
+  const [compositionRu, setCompositionTh] = useState(
+    () => pending?.compositionRu ?? bouquet.compositionRu
   );
   const [pricingType, setPricingType] = useState<PricingType>(
     () => pending?.pricingType ?? serverPricing.pricingType
@@ -139,11 +139,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
   useEffect(() => {
     if (getBouquetPending(bouquet.id)) return;
     setNameEn(bouquet.nameEn);
-    setNameTh(bouquet.nameTh);
+    setNameTh(bouquet.nameRu);
     setDescriptionEn(bouquet.descriptionEn);
-    setDescriptionTh(bouquet.descriptionTh);
+    setDescriptionTh(bouquet.descriptionRu);
     setCompositionEn(bouquet.compositionEn);
-    setCompositionTh(bouquet.compositionTh);
+    setCompositionTh(bouquet.compositionRu);
     const next = initialPricingState(bouquet);
     setPricingType(next.pricingType);
     setSinglePrice(next.singlePrice);
@@ -169,11 +169,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
     () =>
       JSON.stringify({
         nameEn,
-        nameTh,
+        nameRu,
         descriptionEn,
-        descriptionTh,
+        descriptionRu,
         compositionEn,
-        compositionTh,
+        compositionRu,
         pricingType,
         singlePrice,
         sizeRows,
@@ -189,11 +189,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
       }),
     [
       nameEn,
-      nameTh,
+      nameRu,
       descriptionEn,
-      descriptionTh,
+      descriptionRu,
       compositionEn,
-      compositionTh,
+      compositionRu,
       pricingType,
       singlePrice,
       sizeRows,
@@ -213,11 +213,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
     () =>
       JSON.stringify({
         nameEn: bouquet.nameEn,
-        nameTh: bouquet.nameTh,
+        nameRu: bouquet.nameRu,
         descriptionEn: bouquet.descriptionEn,
-        descriptionTh: bouquet.descriptionTh,
+        descriptionRu: bouquet.descriptionRu,
         compositionEn: bouquet.compositionEn,
-        compositionTh: bouquet.compositionTh,
+        compositionRu: bouquet.compositionRu,
         pricingType: bouquet.pricingType,
         singlePrice: serverPricing.singlePrice,
         sizeRows: serverPricing.sizeRows,
@@ -266,11 +266,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
     const formData = new FormData();
     formData.set('bouquetId', bouquet.id);
     formData.set('nameEn', nameEn);
-    formData.set('nameTh', nameTh);
+    formData.set('nameRu', nameRu);
     formData.set('descriptionEn', descriptionEn);
-    formData.set('descriptionTh', descriptionTh);
+    formData.set('descriptionRu', descriptionRu);
     formData.set('compositionEn', compositionEn);
-    formData.set('compositionTh', compositionTh);
+    formData.set('compositionRu', compositionRu);
     formData.set('pricingType', pricingType);
     formData.set('singlePrice', singlePrice);
     formData.set('sizeRows', JSON.stringify(sizeRows));
@@ -370,7 +370,7 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
       formData.set('bouquetId', bouquet.id);
       formData.set('file', file);
       formData.set('altEn', nameEn);
-      formData.set('altTh', nameTh);
+      formData.set('altRu', nameRu);
       if (variantKey) formData.set('variantKey', variantKey);
       const result = await uploadBouquetImageAction(formData);
       setLoading(null);
@@ -383,7 +383,7 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
       formData.set('bouquetId', bouquet.id);
       formData.set('imageId', image.id);
       formData.set('altEn', image.altEn);
-      formData.set('altTh', image.altTh);
+      formData.set('altRu', image.altRu);
       const result = await updateBouquetImageAltAction(formData);
       setLoading(null);
       if (result.error) setError(result.error);
@@ -397,7 +397,7 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
       formData.set('bouquetId', bouquet.id);
       formData.set('file', file);
       formData.set('altEn', image.altEn || nameEn);
-      formData.set('altTh', image.altTh || nameTh);
+      formData.set('altRu', image.altRu || nameRu);
       if (image.variantKey) formData.set('variantKey', image.variantKey);
       const upload = await uploadBouquetImageAction(formData);
       if (upload.error) {
@@ -430,11 +430,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
     }
     setBouquetPending(bouquet.id, {
       nameEn,
-      nameTh,
+      nameRu,
       descriptionEn,
-      descriptionTh,
+      descriptionRu,
       compositionEn,
-      compositionTh,
+      compositionRu,
       pricingType,
       singlePrice,
       sizeRows,
@@ -453,11 +453,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
     bouquet.id,
     setBouquetPending,
     nameEn,
-    nameTh,
+    nameRu,
     descriptionEn,
-    descriptionTh,
+    descriptionRu,
     compositionEn,
-    compositionTh,
+    compositionRu,
     pricingType,
     singlePrice,
     sizeRows,
@@ -569,8 +569,8 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
           <input className="admin-cms-input" value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
         </label>
         <label className="admin-cms-field">
-          <span className="admin-cms-field-label">Name (TH)</span>
-          <input className="admin-cms-input" value={nameTh} onChange={(e) => setNameTh(e.target.value)} />
+          <span className="admin-cms-field-label">Name (RU)</span>
+          <input className="admin-cms-input" value={nameRu} onChange={(e) => setNameTh(e.target.value)} />
         </label>
         <label className="admin-cms-field">
           <span className="admin-cms-field-label">Description (EN)</span>
@@ -582,11 +582,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
           />
         </label>
         <label className="admin-cms-field">
-          <span className="admin-cms-field-label">Description (TH)</span>
+          <span className="admin-cms-field-label">Description (RU)</span>
           <textarea
             className="admin-cms-input"
             rows={3}
-            value={descriptionTh}
+            value={descriptionRu}
             onChange={(e) => setDescriptionTh(e.target.value)}
           />
         </label>
@@ -600,11 +600,11 @@ export function AdminBouquetDetailClient({ bouquet }: Props) {
           />
         </label>
         <label className="admin-cms-field">
-          <span className="admin-cms-field-label">Composition (TH)</span>
+          <span className="admin-cms-field-label">Composition (RU)</span>
           <textarea
             className="admin-cms-input"
             rows={2}
-            value={compositionTh}
+            value={compositionRu}
             onChange={(e) => setCompositionTh(e.target.value)}
           />
         </label>

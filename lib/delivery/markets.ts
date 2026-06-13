@@ -1,34 +1,33 @@
 /**
- * Canonical delivery destinations and URL market slugs (province expansion MVP).
+ * Canonical delivery destinations and URL market slugs.
+ * Internal id `CHIANG_MAI` is the primary Yekaterinburg service area (legacy key from Thailand fork).
  */
 
 import { isThaiLocale, type Locale } from '@/lib/i18n';
 
 export const DELIVERY_DESTINATIONS = [
   'CHIANG_MAI',
-  'PATTAYA',
-  'PHUKET',
-  'KRABI',
-  'SAMUI',
-  'HUA_HIN',
+  'VERKHNYAYA_PYSHMA',
+  'PERVOURALSK',
+  'BEREZOVSKY',
+  'ARAMIL',
 ] as const;
 
 export type DeliveryDestinationId = (typeof DELIVERY_DESTINATIONS)[number];
 
+/** Satellite cities around Yekaterinburg (not the main city districts). */
 export const EXPANSION_DESTINATION_IDS: DeliveryDestinationId[] = [
-  'PATTAYA',
-  'PHUKET',
-  'KRABI',
-  'SAMUI',
-  'HUA_HIN',
+  'VERKHNYAYA_PYSHMA',
+  'PERVOURALSK',
+  'BEREZOVSKY',
+  'ARAMIL',
 ];
 
 export const MARKET_PATH_SLUGS = [
-  'pattaya',
-  'phuket',
-  'krabi',
-  'samui',
-  'hua-hin',
+  'verkhnyaya-pyshma',
+  'pervouralsk',
+  'berezovsky',
+  'aramil',
 ] as const;
 
 export type MarketPathSlug = (typeof MARKET_PATH_SLUGS)[number];
@@ -36,41 +35,35 @@ export type MarketPathSlug = (typeof MARKET_PATH_SLUGS)[number];
 export interface MarketRegistryEntry {
   pathSlug: MarketPathSlug;
   destinationId: DeliveryDestinationId;
-  /** Customer-facing; never use province name as primary for Hua Hin */
   customerFacingNameEn: string;
-  customerFacingNameTh: string;
+  /** Russian display name (field name kept from Thailand fork). */
+  customerFacingNameRu: string;
 }
 
 export const MARKETS: MarketRegistryEntry[] = [
   {
-    pathSlug: 'pattaya',
-    destinationId: 'PATTAYA',
-    customerFacingNameEn: 'Pattaya',
-    customerFacingNameTh: 'พัทยา',
+    pathSlug: 'verkhnyaya-pyshma',
+    destinationId: 'VERKHNYAYA_PYSHMA',
+    customerFacingNameEn: 'Verkhnyaya Pyshma',
+    customerFacingNameRu: 'Верхняя Пышма',
   },
   {
-    pathSlug: 'phuket',
-    destinationId: 'PHUKET',
-    customerFacingNameEn: 'Phuket',
-    customerFacingNameTh: 'ภูเก็ต',
+    pathSlug: 'pervouralsk',
+    destinationId: 'PERVOURALSK',
+    customerFacingNameEn: 'Pervouralsk',
+    customerFacingNameRu: 'Первоуральск',
   },
   {
-    pathSlug: 'krabi',
-    destinationId: 'KRABI',
-    customerFacingNameEn: 'Krabi / Ao Nang',
-    customerFacingNameTh: 'กระบี่ / อ่าวนาง',
+    pathSlug: 'berezovsky',
+    destinationId: 'BEREZOVSKY',
+    customerFacingNameEn: 'Berezovsky',
+    customerFacingNameRu: 'Берёзовский',
   },
   {
-    pathSlug: 'samui',
-    destinationId: 'SAMUI',
-    customerFacingNameEn: 'Koh Samui',
-    customerFacingNameTh: 'เกาะสมุย',
-  },
-  {
-    pathSlug: 'hua-hin',
-    destinationId: 'HUA_HIN',
-    customerFacingNameEn: 'Hua Hin',
-    customerFacingNameTh: 'หัวหิน',
+    pathSlug: 'aramil',
+    destinationId: 'ARAMIL',
+    customerFacingNameEn: 'Aramil',
+    customerFacingNameRu: 'Арамиль',
   },
 ];
 
@@ -95,9 +88,17 @@ export function destinationDisplayName(
   lang: Locale | 'th'
 ): string {
   if (id === 'CHIANG_MAI') {
-    return isThaiLocale(lang) ? 'เชียงใหม่' : 'Chiang Mai';
+    if (lang === 'ru') return 'Екатеринбург';
+    if (isThaiLocale(lang)) return 'Екатеринбург';
+    return 'Yekaterinburg';
   }
   const m = MARKETS.find((x) => x.destinationId === id);
   if (!m) return id;
-  return isThaiLocale(lang) ? m.customerFacingNameTh : m.customerFacingNameEn;
+  if (lang === 'ru' || isThaiLocale(lang)) return m.customerFacingNameRu;
+  return m.customerFacingNameEn;
+}
+
+/** @deprecated Use customerFacingNameRu — kept for Thailand-era call sites. */
+export function marketLabelRu(entry: MarketRegistryEntry): string {
+  return entry.customerFacingNameRu;
 }

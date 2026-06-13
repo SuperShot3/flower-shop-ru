@@ -7,7 +7,8 @@ import { PrefetchLink } from '@/components/PrefetchLink';
 import { Bouquet, type BouquetSize } from '@/lib/bouquets';
 import { optionDisplayLabel } from '@/lib/bouquetOptions';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
-import type { Locale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import {translations, isThaiLocale} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
@@ -23,10 +24,10 @@ import {
 } from '@/lib/favorites';
 import { buildCatalogItemHref } from '@/lib/delivery/marketRoute';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 import { bouquetIsAvailableForDestination } from '@/lib/bouquetDestinationAvailability';
 import {
-  applyCatalogDiscountThb,
+  applyCatalogDiscount,
   effectiveCatalogUnitPriceWithExpansion,
 } from '@/lib/catalogDiscount';
 import { CatalogDiscountBadge } from '@/components/CatalogDiscountBadge';
@@ -85,11 +86,11 @@ export function BouquetCard({
     bouquet,
     checkoutProfile.destinationId
   );
-  const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+  const name = catalogLocalizedName(bouquet, lang);
   const minBasePrice = bouquet.sizes?.length
     ? Math.min(...bouquet.sizes.map((s) => s.price))
     : 0;
-  const minPrice = applyCatalogDiscountThb(minBasePrice, bouquet.discountPercent);
+  const minPrice = applyCatalogDiscount(minBasePrice, bouquet.discountPercent);
   const displayMinPrice = effectiveCatalogUnitPriceWithExpansion(
     minBasePrice,
     bouquet.discountPercent,
@@ -167,10 +168,10 @@ export function BouquetCard({
     (mode: 'stay' | 'checkout') => {
       if (!selectedSize || selectedSize.availability === false) return;
       if (!bouquetIsAvailableForDestination(bouquet, checkoutProfile.destinationId)) return;
-      const itemName = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+      const itemName = catalogLocalizedName(bouquet, lang);
       const discountedSize = {
         ...selectedSize,
-        price: applyCatalogDiscountThb(selectedSize.price, bouquet.discountPercent),
+        price: applyCatalogDiscount(selectedSize.price, bouquet.discountPercent),
       };
       addItem(
         {
@@ -178,7 +179,7 @@ export function BouquetCard({
           bouquetId: bouquet.id,
           slug: bouquet.slug,
           nameEn: bouquet.nameEn,
-          nameTh: bouquet.nameTh,
+          nameRu: bouquet.nameRu,
           imageUrl: imgSrc || bouquet.images?.[0],
           size: discountedSize,
           addOns: getDefaultAddOns(),
@@ -187,7 +188,7 @@ export function BouquetCard({
         1
       );
       trackAddToCart({
-        currency: 'THB',
+        currency: 'RUB',
         value: effectiveCatalogUnitPriceWithExpansion(
           selectedSize.price,
           bouquet.discountPercent,
@@ -341,9 +342,9 @@ export function BouquetCard({
 
       const fav: FavoriteItem = {
         id: bouquet.id,
-        name: isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn,
+        name: catalogLocalizedName(bouquet, lang),
         nameEn: bouquet.nameEn,
-        nameTh: bouquet.nameTh,
+        nameRu: bouquet.nameRu,
         price: minPrice,
         image: imgSrc || bouquet.images?.[0] || '',
         slug: bouquet.slug,
@@ -385,7 +386,7 @@ export function BouquetCard({
         className="card-link"
         data-ga-select-item="catalog"
         onClick={handleLinkClick}
-        aria-label={`${name} — from ฿${displayMinPrice.toLocaleString()}`}
+        aria-label={`${name} — from ₽${displayMinPrice.toLocaleString()}`}
       >
         <div
           className={`card-image-wrap ${isPopular ? 'card-image-wrap-popular' : ''} ${isCompact ? 'card-image-wrap-compact' : ''}`}
@@ -481,7 +482,7 @@ export function BouquetCard({
           </div>
           <div className="card-price">
             <CatalogDiscountPrice
-              basePriceThb={
+              basePrice={
                 bouquet.sizes?.length ? Math.min(...bouquet.sizes.map((s) => s.price)) : 0
               }
               discountPercent={bouquet.discountPercent}
@@ -603,7 +604,7 @@ export function BouquetCard({
                       </span>
                     </label>
                     <span className="card-hover-option-price">
-                      ฿{effectiveCatalogUnitPriceWithExpansion(
+                      ₽{effectiveCatalogUnitPriceWithExpansion(
                         s.price,
                         bouquet.discountPercent,
                         checkoutProfile.destinationId

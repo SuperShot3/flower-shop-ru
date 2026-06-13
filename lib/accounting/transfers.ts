@@ -29,7 +29,7 @@ export async function createAccountingTransfer(
     .from(TABLE)
     .insert({
       amount: input.amount,
-      currency: input.currency ?? 'THB',
+      currency: input.currency ?? 'RUB',
       transfer_date: input.transfer_date,
       from_location: input.from_location,
       to_location: input.to_location,

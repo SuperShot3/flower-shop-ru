@@ -141,14 +141,14 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
 
   const prepOptions = PREP_TIME_OPTIONS.map((p) => ({
     value: p.value,
-    label: isThaiLocale(lang) ? p.labelTh : p.labelEn,
+    label: isThaiLocale(lang) ? p.labelRu : p.labelEn,
   }));
 
   const chipOptions = useMemo(
     () =>
       CATEGORY_OPTIONS.map((c) => ({
         value: c.value,
-        label: isThaiLocale(lang) ? c.labelTh : c.labelEn,
+        label: isThaiLocale(lang) ? c.labelRu : c.labelEn,
         icon: c.icon,
       })),
     [lang]
@@ -192,7 +192,7 @@ export function ApplyWizard({ lang }: { lang: Locale }) {
       (c) =>
         c.value === lower ||
         c.labelEn.toLowerCase() === lower ||
-        c.labelTh.trim() === normalized
+        c.labelRu.trim() === normalized
     );
     if (presetMatch) {
       if (f.categories.includes(presetMatch.value)) {

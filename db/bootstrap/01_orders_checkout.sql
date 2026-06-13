@@ -21,6 +21,7 @@
 --   supabase/migrations/20260508120000_orders_delivery_destination_zone_postal.sql
 --   supabase/migrations/20260511153000_expand_order_status_lifecycle.sql
 --   supabase/migrations/20260520130000_orders_marketing_email_consent.sql
+--   supabase/migrations/20260613120000_orders_internal_notes.sql
 -- =============================================================================
 
 -- >>> BEGIN 20250314000000_orders_schema_full.sql
@@ -498,4 +499,16 @@ COMMENT ON COLUMN public.orders.marketing_email_consent IS
   'Customer opted in at checkout to offers and review-invitation email (e.g. Trustpilot BCC on delivered email).';
 
 -- <<< END 20260520130000_orders_marketing_email_consent.sql
+
+-- >>> BEGIN 20260613120000_orders_internal_notes.sql
+
+-- Admin-only notes on an order (not shown to customers).
+
+ALTER TABLE public.orders
+  ADD COLUMN IF NOT EXISTS internal_notes text;
+
+COMMENT ON COLUMN public.orders.internal_notes IS
+  'Optional admin-only notes for fulfillment; never exposed on customer order pages.';
+
+-- <<< END 20260613120000_orders_internal_notes.sql
 

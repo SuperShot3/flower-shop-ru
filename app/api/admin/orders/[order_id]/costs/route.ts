@@ -267,7 +267,7 @@ export async function PATCH(
         .from('expenses')
         .update({
           amount: roundedCogs,
-          currency: 'THB',
+          currency: 'RUB',
           date: expenseDateIso,
           description: cogsExpenseDesc,
           payment_method: 'bank_transfer',
@@ -291,7 +291,7 @@ export async function PATCH(
         .from('expenses')
         .insert({
           amount: roundedCogs,
-          currency: 'THB',
+          currency: 'RUB',
           date: expenseDateIso,
           category: 'flowers',
           description: cogsExpenseDesc,
@@ -389,7 +389,7 @@ export async function PATCH(
           .from('expenses')
           .update({
             amount: roundedDelivery,
-            currency: 'THB',
+            currency: 'RUB',
             date: expenseDateIso,
             description: deliveryExpenseDesc,
             payment_method: 'bank_transfer',
@@ -413,7 +413,7 @@ export async function PATCH(
           .from('expenses')
           .insert({
             amount: roundedDelivery,
-            currency: 'THB',
+            currency: 'RUB',
             date: expenseDateIso,
             category: 'delivery',
             description: deliveryExpenseDesc,

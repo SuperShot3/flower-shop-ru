@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, type ReactNode, type TouchEvent } from 'react';
 import Image from 'next/image';
-import type { Locale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import {translations, isThaiLocale} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import type { DeliveryFormValues } from '@/components/DeliveryForm';
@@ -23,7 +24,7 @@ import type { CheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile
 import type { CheckoutSectionId } from '@/lib/checkout/premiumCheckoutValidation';
 import { isNonBouquetCartLine } from '@/lib/cart/cartPriceBreakdown';
 import { shouldUnoptimizeCartImageUrl, isUsableCartImageUrl } from '@/lib/cart/cartImageUrl';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { formatThb } from '@/lib/costsUtils';
 import {
@@ -234,11 +235,11 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
       >
         <div className="co-card">
           {items.map((item, index) => {
-            const name = isThaiLocale(lang) ? item.nameTh : item.nameEn;
+            const name = catalogLocalizedName(item, lang);
             const qty = item.quantity ?? 1;
             const unit =
               item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {});
-            const display = applyExpansionItemMarkupThb(unit, delivery.deliveryDestination) * qty;
+            const display = applyExpansionItemMarkup(unit, delivery.deliveryDestination) * qty;
             return (
               <div key={`${item.bouquetId}-${index}`} className="co-product-row">
                 {item.imageUrl && isUsableCartImageUrl(item.imageUrl) ? (
@@ -331,8 +332,8 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
               <option value="">{tBuyNow.selectDistrict}</option>
               {zones.map((z) => (
                 <option key={z.id} value={z.id}>
-                  {zoneLabel(delivery.deliveryDestination, z.id, lang) ?? z.labelEn} — {'\u0E3F'}
-                  {(getZoneFee(delivery.deliveryDestination, z.id) ?? z.feeThb).toLocaleString()}
+                  {zoneLabel(delivery.deliveryDestination, z.id, lang) ?? z.labelEn} — ₽
+                  {(getZoneFee(delivery.deliveryDestination, z.id) ?? z.feeRub).toLocaleString('ru-RU')}
                 </option>
               ))}
             </select>
@@ -348,9 +349,9 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
               deliveryNoteLabel: t.deliveryNoteForDriverLabel,
               deliveryNotePlaceholder: t.deliveryNoteForDriverPlaceholder,
               deliveryNoteHint: t.deliveryNoteForDriverHint,
+              openAddressInYandexMaps: tBuyNow.openGoogleMapsButton,
+              yandexMapsCheckHelper: tBuyNow.yandexMapsCheckHelper,
               googleMapsLinkPlaceholder: tBuyNow.googleMapsLinkPlaceholder,
-              googleMapsLinkHint: tBuyNow.googleMapsLinkHint,
-              openGoogleMapsAriaLabel: tBuyNow.openGoogleMapsButton,
             }}
           />
         </div>
@@ -587,12 +588,12 @@ export function PremiumCheckoutFlow(props: PremiumCheckoutFlowProps) {
           )}
           {items.map((item, index) => {
             if (!isNonBouquetCartLine(item)) return null;
-            const name = isThaiLocale(lang) ? item.nameTh : item.nameEn;
+            const name = catalogLocalizedName(item, lang);
             const qty = item.quantity ?? 1;
             const unit =
               item.size.price + getAddOnsTotal(item.addOns?.productAddOns ?? {});
             const lineTotal =
-              applyExpansionItemMarkupThb(unit, delivery.deliveryDestination) * qty;
+              applyExpansionItemMarkup(unit, delivery.deliveryDestination) * qty;
             if (lineTotal <= 0) return null;
             return (
               <div key={`other-item-${index}`} className="co-price-row">

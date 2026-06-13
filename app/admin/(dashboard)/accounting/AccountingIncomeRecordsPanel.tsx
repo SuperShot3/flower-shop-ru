@@ -8,7 +8,7 @@ import type { IncomeListResult } from '@/lib/accounting/incomeRecords';
 function fmt(amount: number) {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
-    currency: 'THB',
+    currency: 'RUB',
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(amount);
@@ -99,7 +99,7 @@ export function AccountingIncomeRecordsPanel({
           String(rec.amount),
           rec.processing_fee_amount != null ? String(rec.processing_fee_amount) : '',
           escapeCsvCell(rec.external_reference ?? ''),
-          escapeCsvCell(rec.currency || 'THB'),
+          escapeCsvCell(rec.currency || 'RUB'),
           escapeCsvCell(rec.created_by ?? ''),
         ].join(',')
       );

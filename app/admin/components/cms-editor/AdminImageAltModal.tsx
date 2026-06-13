@@ -6,30 +6,30 @@ type Props = {
   open: boolean;
   title?: string;
   altEn: string;
-  altTh?: string;
+  altRu?: string;
   onAltEnChange: (value: string) => void;
   onAltThChange?: (value: string) => void;
   onSave: () => void;
   onClose: () => void;
   saving?: boolean;
   altEnLabel?: string;
-  altThLabel?: string;
+  altRuLabel?: string;
 };
 
 export function AdminImageAltModal({
   open,
   title = 'Edit alt text',
   altEn,
-  altTh,
+  altRu,
   onAltEnChange,
   onAltThChange,
   onSave,
   onClose,
   saving,
   altEnLabel = 'Alt (EN)',
-  altThLabel = 'Alt (TH)',
+  altRuLabel = 'Alt (RU)',
 }: Props) {
-  const showTh = altTh !== undefined && onAltThChange !== undefined;
+  const showTh = altRu !== undefined && onAltThChange !== undefined;
 
   return (
     <AdminCmsModal
@@ -63,10 +63,10 @@ export function AdminImageAltModal({
       </label>
       {showTh ? (
         <label className="admin-cms-field">
-          <span className="admin-cms-field-label">{altThLabel}</span>
+          <span className="admin-cms-field-label">{altRuLabel}</span>
           <input
             className="admin-cms-input"
-            value={altTh}
+            value={altRu}
             onChange={(e) => onAltThChange(e.target.value)}
           />
         </label>

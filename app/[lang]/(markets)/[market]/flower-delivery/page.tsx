@@ -20,8 +20,18 @@ export async function generateMetadata({
   const m = getMarketByPathSlug(params.market);
   if (!m) return {};
   const isTh = isThaiLocale(params.lang);
-  const place = isTh ? m.customerFacingNameTh : m.customerFacingNameEn;
-  const title = isTh ? `ส่งดอกไม้ ${place} | Lanna Bloom` : `Flower delivery ${place} | Lanna Bloom`;
+  const place =
+    params.lang === 'ru'
+      ? m.customerFacingNameRu
+      : isTh
+        ? m.customerFacingNameRu
+        : m.customerFacingNameEn;
+  const title =
+    params.lang === 'ru'
+      ? `Доставка цветов — ${place} | Lanna Bloom`
+      : isTh
+        ? `ส่งดอกไม้ ${place} | Lanna Bloom`
+        : `Flower delivery ${place} | Lanna Bloom`;
   const bouquetOnly = isTh ? ' (ช่อดอกไม้เท่านั้น)' : ' (bouquet delivery only)';
   const description = isTh
     ? `ช่อดอกไม้สด จัดส่ง${place}${bouquetOnly} เลือกช่อออนไลน์ ชำระเงินปลอดภัย`
@@ -46,9 +56,12 @@ export default async function MarketFlowerDeliveryPage({
   ]);
 
   const isTh = isThaiLocale(lang);
-  const marketH1 = isTh
-    ? `ส่งดอกไม้ ${entry.customerFacingNameTh}`
-    : `${entry.customerFacingNameEn} flower delivery`;
+  const marketH1 =
+    lang === 'ru'
+      ? `Доставка цветов — ${entry.customerFacingNameRu}`
+      : isTh
+        ? `Доставка цветов — ${entry.customerFacingNameRu}`
+        : `${entry.customerFacingNameEn} flower delivery`;
 
   return (
     <div className="market-flower-delivery-page">

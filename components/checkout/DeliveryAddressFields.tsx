@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { DeliveryFormValues } from '@/components/DeliveryForm';
 import { CHECKOUT_FIELD_LIMITS, clipCheckoutField } from '@/lib/checkout/checkoutFieldLimits';
 import type { Locale } from '@/lib/i18n';
-
-const GOOGLE_MAPS_OPEN_URL = 'https://www.google.com/maps';
+import { openYandexMapsForAddress } from '@/lib/yandexMapsUrl';
 
 export function DeliveryAddressFields({
   lang: _lang,
@@ -23,12 +22,12 @@ export function DeliveryAddressFields({
   labels: {
     addressLabel: string;
     addressPlaceholder: string;
+    openAddressInYandexMaps: string;
+    yandexMapsCheckHelper: string;
+    googleMapsLinkPlaceholder: string;
     deliveryNoteLabel: string;
     deliveryNotePlaceholder: string;
     deliveryNoteHint: string;
-    googleMapsLinkPlaceholder: string;
-    googleMapsLinkHint: string;
-    openGoogleMapsAriaLabel: string;
   };
 }) {
   const [addressDraft, setAddressDraft] = useState(
@@ -81,7 +80,7 @@ export function DeliveryAddressFields({
     setMapsLinkDraft(clipped);
     onChange({
       ...value,
-      deliveryGoogleMapsUrl: clipped || null,
+      deliveryGoogleMapsUrl: clipped.trim() || null,
     });
   };
 
@@ -90,6 +89,11 @@ export function DeliveryAddressFields({
     setNoteDraft(clipped);
     onChange({ ...value, deliveryNote: clipped });
     if (clipped.trim()) setShowNoteHint(false);
+  };
+
+  const handleOpenInYandexMaps = () => {
+    const address = value.deliveryFormattedAddress ?? value.addressLine ?? addressDraft;
+    openYandexMapsForAddress(address);
   };
 
   return (
@@ -146,26 +150,25 @@ export function DeliveryAddressFields({
             maxLength={CHECKOUT_FIELD_LIMITS.googleMapsUrl}
             aria-describedby={`${inputId}-maps-link-hint`}
           />
-          <a
-            href={GOOGLE_MAPS_OPEN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             className="co-maps-link-btn"
-            aria-label={labels.openGoogleMapsAriaLabel}
+            onClick={handleOpenInYandexMaps}
+            aria-label={labels.openAddressInYandexMaps}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/icons/google-maps-old-svgrepo-com.svg"
+              src="/icons/yandex-maps.svg"
               alt=""
               className="co-maps-link-btn-icon"
               width={26}
               height={26}
               decoding="async"
             />
-          </a>
+          </button>
         </div>
         <p id={`${inputId}-maps-link-hint`} className="co-maps-link-hint">
-          {labels.googleMapsLinkHint}
+          {labels.yandexMapsCheckHelper}
         </p>
       </div>
 
@@ -187,7 +190,7 @@ export function DeliveryAddressFields({
             if (!noteDraft.trim()) setShowNoteHint(true);
           }}
           placeholder={labels.deliveryNotePlaceholder}
-            maxLength={CHECKOUT_FIELD_LIMITS.deliveryNote}
+          maxLength={CHECKOUT_FIELD_LIMITS.deliveryNote}
           autoComplete="off"
         />
         {showNoteHint && !value.deliveryNote?.trim() && (
@@ -268,7 +271,6 @@ export function DeliveryAddressFields({
           border: none;
           border-left: 1px solid var(--border);
           background: color-mix(in srgb, var(--pastel-cream) 70%, #fff);
-          text-decoration: none;
           cursor: pointer;
           touch-action: manipulation;
           -webkit-tap-highlight-color: transparent;

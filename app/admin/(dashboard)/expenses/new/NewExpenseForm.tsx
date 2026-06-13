@@ -164,7 +164,7 @@ export function NewExpenseForm() {
         {/* Amount + Date row */}
         <div className="admin-expenses-form-row">
           <div className="admin-form-group">
-            <label htmlFor="exp-amount">Amount (THB) *</label>
+            <label htmlFor="exp-amount">Amount (RUB) *</label>
             <input
               id="exp-amount"
               type="number"

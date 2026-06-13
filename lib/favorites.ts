@@ -18,7 +18,7 @@ export type FavoriteItem = {
   name: string;
   /** Full names are optional, but when available they let favorites render correctly for other locales. */
   nameEn?: string;
-  nameTh?: string;
+  nameRu?: string;
   price: number;
   image: string;
   slug: string;

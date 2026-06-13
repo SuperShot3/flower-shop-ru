@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 import { createOrder, getOrderDetailsUrl, getOrderPublicToken } from '@/lib/orders';
 import type { CustomOrderDetails, DeliveryDistrictKey, OrderPayload, OrderItem } from '@/lib/orders';
 import { sendAdminNewOrderNotificationOnce } from '@/lib/orderNotification';
-import { calcDeliveryFeeTHB } from '@/lib/deliveryFees';
+import { calcDeliveryFeeRUB } from '@/lib/deliveryFees';
 import { detectDistrictFromAddress } from '@/lib/deliveryFees';
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 import { getZoneFee, isSupportedZone, legacyDistrictFromChiangMaiZone, zoneLabel } from '@/lib/delivery/zones';
@@ -18,11 +18,10 @@ import { stripDuplicateThaiLeading66, thaiFullPhoneHasDuplicateCountryCode } fro
 const CUSTOM_ORDER_ITEM_ID = 'custom-order-request';
 const DELIVERY_DESTINATIONS: DeliveryDestinationId[] = [
   'CHIANG_MAI',
-  'PATTAYA',
-  'PHUKET',
-  'KRABI',
-  'SAMUI',
-  'HUA_HIN',
+  'VERKHNYAYA_PYSHMA',
+  'PERVOURALSK',
+  'BEREZOVSKY',
+  'ARAMIL',
 ];
 
 function normalizeDigits(s: string): string {
@@ -174,7 +173,7 @@ export async function POST(request: NextRequest) {
       giftDescription,
       occasion,
       greetingCard: greetingCard || undefined,
-      estimatedBudgetTHB: estimatedCost || undefined,
+      estimatedBudgetRUB: estimatedCost || undefined,
       deliveryDateLabel: buildDeliveryDateLabel({ day, month, year }) || undefined,
       timePreference,
       timeComments: timeComments || undefined,

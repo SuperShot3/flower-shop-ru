@@ -12,6 +12,7 @@ import {
 } from '@/lib/deliveryHours';
 import {
   MARKETS,
+  destinationDisplayName,
   getMarketByPathSlug,
   isMarketPathSlug,
   type MarketPathSlug,
@@ -184,10 +185,10 @@ export function CatalogDeliveryBar({
               onChange={handleLocationChange}
               aria-label={isThaiLocale(lang) ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
             >
-              <option value="CHIANG_MAI">Chiang Mai</option>
+              <option value="CHIANG_MAI">{destinationDisplayName('CHIANG_MAI', lang)}</option>
               {MARKETS.map((m) => (
                 <option key={m.destinationId} value={m.destinationId}>
-                  {isThaiLocale(lang) ? m.customerFacingNameTh : m.customerFacingNameEn}
+                  {lang === 'ru' ? m.customerFacingNameRu : m.customerFacingNameEn}
                 </option>
               ))}
             </select>

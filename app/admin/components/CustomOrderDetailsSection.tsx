@@ -38,11 +38,11 @@ export function CustomOrderDetailsSection({ details }: { details: CustomOrderDet
             {details.greetingCard}
           </p>
         )}
-        {details.estimatedBudgetTHB && (
+        {details.estimatedBudgetRUB && (
           <p>
-            <strong>Estimated budget (THB)</strong>
+            <strong>Estimated budget (RUB)</strong>
             <br />
-            {details.estimatedBudgetTHB}
+            {details.estimatedBudgetRUB}
           </p>
         )}
         {details.customerComments && (

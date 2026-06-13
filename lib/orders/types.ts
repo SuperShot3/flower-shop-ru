@@ -36,17 +36,42 @@ export interface OrderItem {
 
 /** District key for delivery fee calculation. */
 export type DeliveryDistrictKey =
-  | 'MUEANG' | 'SARAPHI' | 'SAN_SAI' | 'HANG_DONG' | 'SAN_KAMPHAENG'
-  | 'MAE_RIM' | 'DOI_SAKET' | 'MAE_ON' | 'SAMOENG' | 'MAE_TAENG' | 'LAMPHUN' | 'UNKNOWN';
+  | 'ORDZHONIKIDZEVSKY'
+  | 'ZHELEZNODOROZHNY'
+  | 'VERKH_ISETSKY'
+  | 'KIROVSKY'
+  | 'LENINSKY'
+  | 'OKTYABRSKY'
+  | 'CHKALOVSKY'
+  | 'AKADEMICHESKY'
+  | 'VIZ'
+  | 'SOLNECHNY'
+  | 'UKTUS'
+  | 'VERKHNYAYA_PYSHMA'
+  | 'PERVOURALSK'
+  | 'BEREZOVSKY'
+  | 'ARAMIL'
+  | 'UNKNOWN'
+  /** Legacy Thailand keys — may appear on old orders */
+  | 'MUEANG'
+  | 'SARAPHI'
+  | 'SAN_SAI'
+  | 'HANG_DONG'
+  | 'SAN_KAMPHAENG'
+  | 'MAE_RIM'
+  | 'DOI_SAKET'
+  | 'MAE_ON'
+  | 'SAMOENG'
+  | 'MAE_TAENG'
+  | 'LAMPHUN';
 
-/** Canonical delivery market (Chiang Mai + regional expansion). */
+/** Canonical delivery market (Yekaterinburg + nearby cities). */
 export type OrderDeliveryDestinationId =
   | 'CHIANG_MAI'
-  | 'PATTAYA'
-  | 'PHUKET'
-  | 'KRABI'
-  | 'SAMUI'
-  | 'HUA_HIN';
+  | 'VERKHNYAYA_PYSHMA'
+  | 'PERVOURALSK'
+  | 'BEREZOVSKY'
+  | 'ARAMIL';
 
 export interface OrderDelivery {
   address: string;
@@ -87,17 +112,17 @@ export interface OrderPricing {
   grandTotal: number;
 }
 
-export type ContactPreferenceOption = 'phone' | 'line' | 'whatsapp';
+export type ContactPreferenceOption = 'phone' | 'whatsapp' | 'telegram' | 'max';
 
-/** Legacy value that may still appear in stored order JSON. */
-export type ContactPreferenceStored = ContactPreferenceOption | 'telegram';
+/** Legacy values that may still appear in stored order JSON. */
+export type ContactPreferenceStored = ContactPreferenceOption | 'line';
 
 /** Extra fields from the /custom-order form; stored in order_json for admin and customer view. */
 export interface CustomOrderDetails {
   giftDescription: string;
   occasion?: string;
   greetingCard?: string;
-  estimatedBudgetTHB?: string;
+  estimatedBudgetRUB?: string;
   /** Human-readable delivery date (or partial) */
   deliveryDateLabel?: string;
   timePreference?: string;

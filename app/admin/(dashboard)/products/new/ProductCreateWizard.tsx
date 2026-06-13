@@ -48,13 +48,13 @@ type ProductImageAnalysis = {
 
 type ProductDraftCopy = {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   compositionEn: string;
-  compositionTh: string;
+  compositionRu: string;
   altEn: string;
-  altTh: string;
+  altRu: string;
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -84,7 +84,7 @@ type Hints = {
 type TextGenerationHistoryEntry = {
   id: string;
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   generatedAt: string;
   account: string;
 };
@@ -102,13 +102,13 @@ const TEXT_GENERATION_HISTORY_LIMIT = 12;
 
 const emptyDraft: ProductDraftCopy = {
   nameEn: '',
-  nameTh: '',
+  nameRu: '',
   descriptionEn: '',
-  descriptionTh: '',
+  descriptionRu: '',
   compositionEn: '',
-  compositionTh: '',
+  compositionRu: '',
   altEn: '',
-  altTh: '',
+  altRu: '',
   seoTitle: '',
   seoDescription: '',
   seoKeywords: [],
@@ -186,7 +186,7 @@ function isTextGenerationHistoryEntry(value: unknown): value is TextGenerationHi
   return (
     typeof entry?.id === 'string' &&
     typeof entry.nameEn === 'string' &&
-    typeof entry.nameTh === 'string' &&
+    typeof entry.nameRu === 'string' &&
     typeof entry.generatedAt === 'string' &&
     typeof entry.account === 'string'
   );
@@ -409,7 +409,7 @@ export function ProductCreateWizard({ adminEmail }: { adminEmail: string }) {
     const entry: TextGenerationHistoryEntry = {
       id: createId(),
       nameEn: nextDraft.nameEn || 'Untitled product',
-      nameTh: nextDraft.nameTh,
+      nameRu: nextDraft.nameRu,
       generatedAt: new Date().toISOString(),
       account: adminEmail || 'Unknown account',
     };
@@ -1233,8 +1233,8 @@ export function ProductCreateWizard({ adminEmail }: { adminEmail: string }) {
                   history
                 </span>
                 <div>
-                  <strong>{entry.nameEn || entry.nameTh || 'Untitled product'}</strong>
-                  {entry.nameTh ? <span>{entry.nameTh}</span> : null}
+                  <strong>{entry.nameEn || entry.nameRu || 'Untitled product'}</strong>
+                  {entry.nameRu ? <span>{entry.nameRu}</span> : null}
                   <small>
                     Generated {formatGeneratedAt(entry.generatedAt)} by {entry.account}
                   </small>
@@ -1430,11 +1430,11 @@ function TextStep({
               />
             </label>
             <label className="admin-form-group">
-              <span>Name TH</span>
+              <span>Name RU</span>
               <input
                 className="admin-input"
-                value={draft.nameTh}
-                onChange={(event) => onChangeDraft('nameTh', event.target.value)}
+                value={draft.nameRu}
+                onChange={(event) => onChangeDraft('nameRu', event.target.value)}
               />
             </label>
           </div>
@@ -1450,8 +1450,8 @@ function TextStep({
             <span>Description TH</span>
             <textarea
               className="admin-input admin-product-create-textarea"
-              value={draft.descriptionTh}
-              onChange={(event) => onChangeDraft('descriptionTh', event.target.value)}
+              value={draft.descriptionRu}
+              onChange={(event) => onChangeDraft('descriptionRu', event.target.value)}
             />
           </label>
           <div className="admin-product-create-two">
@@ -1467,8 +1467,8 @@ function TextStep({
               <span>Composition TH</span>
               <input
                 className="admin-input"
-                value={draft.compositionTh}
-                onChange={(event) => onChangeDraft('compositionTh', event.target.value)}
+                value={draft.compositionRu}
+                onChange={(event) => onChangeDraft('compositionRu', event.target.value)}
               />
             </label>
           </div>
@@ -1625,7 +1625,7 @@ function ReviewStep({
 
         <div className="admin-product-create-two">
           <label className="admin-form-group">
-            <span>Price THB</span>
+            <span>Price RUB</span>
             <input
               className="admin-input"
               inputMode="decimal"
@@ -1738,7 +1738,7 @@ function ReviewStep({
         ) : null}
         <div className="admin-product-create-preview">
           <strong>{draft.nameEn || 'Product name'}</strong>
-          <span>{price ? `THB ${price}` : 'Set a price before saving'}</span>
+          <span>{price ? `RUB ${price}` : 'Set a price before saving'}</span>
           <p>{draft.descriptionEn || 'Description preview will appear here.'}</p>
         </div>
       </div>

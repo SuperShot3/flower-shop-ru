@@ -17,7 +17,7 @@ export {
   markCheckoutPurchaseSent,
 } from './analytics/gtag';
 
-const CURRENCY = 'THB';
+const CURRENCY = 'RUB';
 
 /** GA4 ecommerce item schema: item_id, item_name, item_category, item_variant, price, quantity, currency */
 export interface AnalyticsItem {

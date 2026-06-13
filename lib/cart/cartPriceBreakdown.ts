@@ -1,6 +1,6 @@
 import type { CartItem } from '@/contexts/CartContext';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 import type { OrderDeliveryDestinationId } from '@/lib/orders';
 
 export function isNonBouquetCartLine(item: CartItem): boolean {
@@ -29,7 +29,7 @@ export function cartPriceBreakdown(
   for (const item of items) {
     const qty = item.quantity ?? 1;
     const addOnsUnit = getAddOnsTotal(item.addOns?.productAddOns ?? {});
-    const unitMarked = applyExpansionItemMarkupThb(
+    const unitMarked = applyExpansionItemMarkup(
       item.size.price + addOnsUnit,
       deliveryDestination
     );
@@ -39,7 +39,7 @@ export function cartPriceBreakdown(
       continue;
     }
 
-    const addOnsMarked = applyExpansionItemMarkupThb(addOnsUnit, deliveryDestination);
+    const addOnsMarked = applyExpansionItemMarkup(addOnsUnit, deliveryDestination);
     bouquetSubtotal += (unitMarked - addOnsMarked) * qty;
     addOnsSubtotal += addOnsMarked * qty;
   }

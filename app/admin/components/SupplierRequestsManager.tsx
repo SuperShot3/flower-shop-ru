@@ -27,7 +27,7 @@ function canDisable(status: string): boolean {
 
 function formatAmount(value: number | null | undefined): string {
   if (value == null) return 'No price yet';
-  return `฿${Number(value).toLocaleString()}`;
+  return `₽${Number(value).toLocaleString()}`;
 }
 
 export function SupplierRequestsManager({

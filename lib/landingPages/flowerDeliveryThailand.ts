@@ -3,7 +3,7 @@ import { MARKETS } from '@/lib/delivery/markets';
 
 export type ThailandServiceArea = {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   href: (lang: Locale) => string;
   noteEn?: string;
   noteTh?: string;
@@ -12,18 +12,18 @@ export type ThailandServiceArea = {
 export function getThailandServiceAreas(): ThailandServiceArea[] {
   return [
     {
-      nameEn: 'Chiang Mai',
-      nameTh: 'เชียงใหม่',
+      nameEn: 'Yekaterinburg',
+      nameRu: 'Екатеринбург',
       href: (lang) => `/${lang}/catalog`,
       noteEn: 'Full flower & gift catalog · same-day when available',
-      noteTh: 'ดอกไม้และของขวัญครบ · จัดส่งวันเดียวได้ตามเงื่อนไข',
+      noteTh: 'Полный каталог · доставка сегодня по возможности',
     },
     ...MARKETS.map((m) => ({
       nameEn: m.customerFacingNameEn,
-      nameTh: m.customerFacingNameTh,
+      nameRu: m.customerFacingNameRu,
       href: (lang: Locale) => `/${lang}/${m.pathSlug}/flower-delivery`,
-      noteEn: 'Bouquet delivery only',
-      noteTh: 'จัดส่งช่อดอกไม้เท่านั้น',
+      noteEn: 'Bouquet delivery',
+      noteTh: 'Доставка букетов',
     })),
   ];
 }

@@ -73,7 +73,7 @@ function supplierTaskCompletionKey(publicToken: string) {
 function formatPriceDisplay(value: number, lang: Lang): string {
   return new Intl.NumberFormat(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
     style: 'currency',
-    currency: 'THB',
+    currency: 'RUB',
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(value);
@@ -243,7 +243,7 @@ const UI: Record<
     noExtraMessage: 'No extra message',
     replyHeading: 'Reply to this request',
     priceLabel: 'Quoted price',
-    pricePlaceholder: 'e.g. 500 THB',
+    pricePlaceholder: 'e.g. 500 ₽',
     readyLabel: 'Ready time',
     readyPlaceholder: 'e.g. Today 4:00 PM',
     reasonLabel: 'Reason or conditions',

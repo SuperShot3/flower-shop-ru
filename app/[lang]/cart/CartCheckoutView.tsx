@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useRef, type ReactNode } from 'react';
-import type { Locale } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { useCheckoutStickyHeader } from '@/contexts/CheckoutStickyHeaderContext';
 import {translations, isThaiLocale, localeDateFormat} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
@@ -48,7 +49,7 @@ function buildStickyItemSummary(items: CartItem[], lang: Locale): string | null 
   if (items.length === 0) return null;
   const totalQty = items.reduce((sum, item) => sum + (item.quantity ?? 1), 0);
   const primary = items[0];
-  const primaryName = isThaiLocale(lang) ? primary.nameTh : primary.nameEn;
+  const primaryName = catalogLocalizedName(primary, lang);
   if (totalQty <= 1) return primaryName;
   return `${primaryName} +${totalQty - 1}`;
 }

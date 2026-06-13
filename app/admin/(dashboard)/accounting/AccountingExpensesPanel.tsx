@@ -20,7 +20,7 @@ const CATEGORY_LABEL: Record<string, string> = Object.fromEntries(
 );
 const PM_LABEL = PAYMENT_METHOD_LABEL_BY_VALUE;
 
-function formatAmount(amount: number, currency = 'THB') {
+function formatAmount(amount: number, currency = 'RUB') {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency,
@@ -304,7 +304,7 @@ export function AccountingExpensesPanel({
           !expenseDocumentationComplete(exp) ? 'YES' : '',
           exp.paper_bill_requested_at ? 'Yes' : '',
           String(exp.amount),
-          escapeCsvCell(exp.currency || 'THB'),
+          escapeCsvCell(exp.currency || 'RUB'),
           escapeCsvCell(exp.notes ?? ''),
           escapeCsvCell(exp.linked_order_id ?? ''),
           escapeCsvCell(exp.created_by ?? ''),

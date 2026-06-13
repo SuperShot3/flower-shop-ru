@@ -1,5 +1,5 @@
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 
 /** Parse CMS discount; returns undefined when inactive. */
 export function normalizeCatalogDiscountPercent(raw: unknown): number | undefined {
@@ -13,27 +13,27 @@ export function hasCatalogDiscount(discountPercent?: number): boolean {
   return normalizeCatalogDiscountPercent(discountPercent) != null;
 }
 
-/** Round down to whole THB (storefront + checkout). */
-export function applyCatalogDiscountThb(priceThb: number, discountPercent?: number): number {
+/** Round down to whole RUB (storefront + checkout). */
+export function applyCatalogDiscount(priceRub: number, discountPercent?: number): number {
   const pct = normalizeCatalogDiscountPercent(discountPercent);
-  if (!pct || priceThb <= 0) return Math.max(0, Math.round(priceThb));
-  return Math.max(0, Math.floor((priceThb * (100 - pct)) / 100));
+  if (!pct || priceRub <= 0) return Math.max(0, Math.round(priceRub));
+  return Math.max(0, Math.floor((priceRub * (100 - pct)) / 100));
 }
 
-export function effectiveCatalogUnitPriceThb(
-  basePriceThb: number,
+export function effectiveCatalogUnitPrice(
+  basePrice: number,
   discountPercent?: number
 ): number {
-  return applyCatalogDiscountThb(basePriceThb, discountPercent);
+  return applyCatalogDiscount(basePrice, discountPercent);
 }
 
 export function effectiveCatalogUnitPriceWithExpansion(
-  basePriceThb: number,
+  basePrice: number,
   discountPercent: number | undefined,
   destinationId: DeliveryDestinationId
 ): number {
-  return applyExpansionItemMarkupThb(
-    applyCatalogDiscountThb(basePriceThb, discountPercent),
+  return applyExpansionItemMarkup(
+    applyCatalogDiscount(basePrice, discountPercent),
     destinationId
   );
 }
@@ -43,5 +43,5 @@ export function minDiscountedPriceFromOptions(
   discountPercent?: number
 ): number {
   if (!prices.length) return 0;
-  return Math.min(...prices.map((p) => applyCatalogDiscountThb(p, discountPercent)));
+  return Math.min(...prices.map((p) => applyCatalogDiscount(p, discountPercent)));
 }

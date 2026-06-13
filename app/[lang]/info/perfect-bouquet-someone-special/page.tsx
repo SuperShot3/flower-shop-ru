@@ -284,7 +284,7 @@ function bouquetDisplayName(
   fallbackEn: string
 ): string {
   if (!bouquet) return fallbackEn;
-  const th = bouquet.nameTh?.trim();
+  const th = bouquet.nameRu?.trim();
   return isThaiLocale(locale) && th ? th : bouquet.nameEn;
 }
 

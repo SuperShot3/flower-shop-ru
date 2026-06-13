@@ -17,7 +17,7 @@ interface OrderTableProps {
 
 function formatAmount(n: number | null | undefined): string {
   if (n == null) return '—';
-  return `฿${Number(n).toLocaleString()}`;
+  return `₽${Number(n).toLocaleString()}`;
 }
 
 /** Orders still in the delivery pipeline (not terminal). */

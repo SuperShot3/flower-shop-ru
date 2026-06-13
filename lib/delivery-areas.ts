@@ -1,35 +1,24 @@
 /**
- * Chiang Mai province districts (amphoe). City is fixed: Chiang Mai only.
+ * Yekaterinburg service area — districts and nearby cities.
  */
 
 /** Shop address — reference only; not used for real distance in v1. */
 export const SHOP_ADDRESS =
-  '90 Wichayanon Rd, Tambon Chang Moi, Mueang Chiang Mai District, Chiang Mai 50300';
+  'Екатеринбург, Свердловская область';
 
 export const PREP_MINUTES = 30;
 
 export type DeliveryTier = 'near' | 'mid' | 'far';
 export type DeliveryType = 'standard' | 'priority';
 
-/** Temporary estimate grouping (v1 — may be adjusted). Near = close to shop; far = remote. */
-const NEAR_IDS = new Set<string>(['mueang-chiang-mai']);
-const FAR_IDS = new Set<string>([
-  'fang',
-  'omkoi',
-  'wiang-haeng',
-  'doi-tao',
-  'galyani-vadhana',
-  'mae-ai',
-  'chiang-dao',
-  'mae-chaem',
-  'samoeng',
-  'chai-prakan',
-]);
+/** Estimate grouping by distance from shop (v1 — manual fees in zones.ts). */
+const NEAR_IDS = new Set<string>(['ordzhonikidzevsky', 'zheleznodorozhny']);
+const FAR_IDS = new Set<string>(['pervouralsk', 'aramil']);
 
 export interface District {
   id: string;
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
 }
 
 export function getDeliveryTier(district: District): DeliveryTier {
@@ -51,33 +40,26 @@ export function getTotalTimeRangeMinutes(
   return deliveryType === 'standard' ? { minTotal: 100, maxTotal: 125 } : { minTotal: 90, maxTotal: 110 };
 }
 
-export const CITY_EN = 'Chiang Mai';
-export const CITY_TH = 'เชียงใหม่';
+export const CITY_EN = 'Yekaterinburg';
+export const CITY_RU = 'Екатеринбург';
 
-export const CHIANG_MAI_DISTRICTS: District[] = [
-  { id: 'mueang-chiang-mai', nameEn: 'Mueang Chiang Mai', nameTh: 'เมืองเชียงใหม่' },
-  { id: 'chom-thong', nameEn: 'Chom Thong', nameTh: 'จอมทอง' },
-  { id: 'mae-chaem', nameEn: 'Mae Chaem', nameTh: 'แม่แจ่ม' },
-  { id: 'chiang-dao', nameEn: 'Chiang Dao', nameTh: 'เชียงดาว' },
-  { id: 'doi-saket', nameEn: 'Doi Saket', nameTh: 'ดอยสะเก็ด' },
-  { id: 'mae-taeng', nameEn: 'Mae Taeng', nameTh: 'แม่แตง' },
-  { id: 'mae-rim', nameEn: 'Mae Rim', nameTh: 'แม่ริม' },
-  { id: 'samoeng', nameEn: 'Samoeng', nameTh: 'สะเมิง' },
-  { id: 'fang', nameEn: 'Fang', nameTh: 'ฝาง' },
-  { id: 'mae-ai', nameEn: 'Mae Ai', nameTh: 'แม่เอ๋ย' },
-  { id: 'phrao', nameEn: 'Phrao', nameTh: 'พร้าว' },
-  { id: 'san-pa-tong', nameEn: 'San Pa Tong', nameTh: 'สันป่าตอง' },
-  { id: 'san-kamphaeng', nameEn: 'San Kamphaeng', nameTh: 'สันกำแพง' },
-  { id: 'san-sai', nameEn: 'San Sai', nameTh: 'สันทราย' },
-  { id: 'hang-dong', nameEn: 'Hang Dong', nameTh: 'หางดง' },
-  { id: 'hot', nameEn: 'Hot', nameTh: 'ฮอด' },
-  { id: 'doi-tao', nameEn: 'Doi Tao', nameTh: 'ดอยเต่า' },
-  { id: 'omkoi', nameEn: 'Omkoi', nameTh: 'อมก๋อย' },
-  { id: 'saraphi', nameEn: 'Saraphi', nameTh: 'สารภี' },
-  { id: 'wiang-haeng', nameEn: 'Wiang Haeng', nameTh: 'เวียงแหง' },
-  { id: 'chai-prakan', nameEn: 'Chai Prakan', nameTh: 'ไชยปราการ' },
-  { id: 'mae-wang', nameEn: 'Mae Wang', nameTh: 'แม่วาง' },
-  { id: 'mae-on', nameEn: 'Mae On', nameTh: 'แม่โถ' },
-  { id: 'doi-lo', nameEn: 'Doi Lo', nameTh: 'ดอยหล่อ' },
-  { id: 'galyani-vadhana', nameEn: 'Galyani Vadhana', nameTh: 'กัลยาณิวัฒนา' },
+/** @deprecated Use CITY_RU */
+export const CITY_TH = CITY_RU;
+
+/** Eight official administrative districts of Yekaterinburg + popular micro-districts. */
+export const EKB_DISTRICTS: District[] = [
+  { id: 'ordzhonikidzevsky', nameEn: 'Ordzhonikidzevsky', nameRu: 'Орджоникидзевский' },
+  { id: 'zheleznodorozhny', nameEn: 'Zheleznodorozhny', nameRu: 'Железнодорожный' },
+  { id: 'verkh-isetsky', nameEn: 'Verkh-Isetsky', nameRu: 'Верх-Исетский' },
+  { id: 'kirovsky', nameEn: 'Kirovsky', nameRu: 'Кировский' },
+  { id: 'leninsky', nameEn: 'Leninsky', nameRu: 'Ленинский' },
+  { id: 'oktyabrsky', nameEn: 'Oktyabrsky', nameRu: 'Октябрьский' },
+  { id: 'chkalovsky', nameEn: 'Chkalovsky', nameRu: 'Чкаловский' },
+  { id: 'akademichesky', nameEn: 'Akademichesky', nameRu: 'Академический' },
+  { id: 'viz', nameEn: 'VIZ', nameRu: 'ВИЗ' },
+  { id: 'solnechny', nameEn: 'Solnechny', nameRu: 'Солнечный' },
+  { id: 'uktus', nameEn: 'Uktus', nameRu: 'Уктус' },
 ];
+
+/** @deprecated Use EKB_DISTRICTS */
+export const CHIANG_MAI_DISTRICTS = EKB_DISTRICTS;

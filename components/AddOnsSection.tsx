@@ -21,7 +21,7 @@ export interface AddOnsValues {
   productAddOns?: Record<string, boolean>;
 }
 
-export const CARD_BEAUTIFUL_PRICE_THB = 20;
+export const CARD_BEAUTIFUL_PRICE_RUB = 20;
 
 const defaultAddOns: AddOnsValues = {
   cardType: null,

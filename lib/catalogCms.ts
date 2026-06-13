@@ -59,9 +59,9 @@ function imageRowToStoredImage(row: CatalogProductImageRow): CatalogStoredImage 
 
 export type CatalogRevisionSeoInput = {
   seoTitleEn?: string | null;
-  seoTitleTh?: string | null;
+  seoTitleRu?: string | null;
   seoDescriptionEn?: string | null;
-  seoDescriptionTh?: string | null;
+  seoDescriptionRu?: string | null;
   seoKeywords?: string[];
   ogImagePath?: string | null;
 };
@@ -92,9 +92,9 @@ export async function createCatalogRevision(
       status: input.status ?? 'draft',
       payload: input.payload,
       seo_title_en: cleanText(input.seoTitleEn),
-      seo_title_th: cleanText(input.seoTitleTh),
+      seo_title_ru: cleanText(input.seoTitleRu),
       seo_description_en: cleanText(input.seoDescriptionEn),
-      seo_description_th: cleanText(input.seoDescriptionTh),
+      seo_description_ru: cleanText(input.seoDescriptionRu),
       seo_keywords: cleanTextArray(input.seoKeywords),
       og_image_path: cleanText(input.ogImagePath),
       moderation_note: cleanText(input.moderationNote),
@@ -152,7 +152,7 @@ export type CreateCatalogProductImageInput = {
   sourceType?: CatalogImageSourceType;
   originalImageId?: string | null;
   altEn?: string | null;
-  altTh?: string | null;
+  altRu?: string | null;
   isPrimary?: boolean;
   sortOrder?: number;
   metadata?: JsonObject;
@@ -211,7 +211,7 @@ export async function createCatalogProductImage(
       source_type: input.sourceType ?? 'uploaded',
       original_image_id: input.originalImageId ?? null,
       alt_en: cleanText(input.altEn),
-      alt_th: cleanText(input.altTh),
+      alt_ru: cleanText(input.altRu),
       is_primary: input.isPrimary === true,
       sort_order: input.sortOrder ?? 0,
       metadata: input.metadata ?? {},
@@ -366,7 +366,7 @@ export async function ensureCatalogProductImagesFromInline(
     public_url: image.public_url ?? catalogPublicUrl(image.storage_path.trim()),
     source_type: 'migrated_from_import' as CatalogImageSourceType,
     alt_en: cleanText(image.alt),
-    alt_th: null,
+    alt_ru: null,
     is_primary: index === primaryIndex,
     sort_order: image.sort_order ?? index,
     metadata: {
@@ -464,7 +464,7 @@ export async function syncCatalogProductInlineImagesFromNormalized(
 export async function updateCatalogProductImageText(input: {
   imageId: string;
   altEn?: string | null;
-  altTh?: string | null;
+  altRu?: string | null;
   actor?: string | null;
 }): Promise<CatalogProductImageRow> {
   const supabase = requireSupabase();
@@ -472,7 +472,7 @@ export async function updateCatalogProductImageText(input: {
     .from('catalog_product_images')
     .update({
       alt_en: cleanText(input.altEn),
-      alt_th: cleanText(input.altTh),
+      alt_ru: cleanText(input.altRu),
       updated_by: cleanText(input.actor),
       updated_at: new Date().toISOString(),
     })
@@ -598,7 +598,7 @@ export type UpsertCatalogCollectionInput = CatalogRevisionSeoInput & {
   titleEn: string;
   titleTh?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   fallbackMode?: CatalogCollectionFallbackMode;
   isActive?: boolean;
   startsAt?: string | null;
@@ -624,11 +624,11 @@ export async function upsertCatalogCollection(
         title_en: input.titleEn.trim(),
         title_th: input.titleTh?.trim() ?? '',
         description_en: input.descriptionEn?.trim() ?? '',
-        description_th: input.descriptionTh?.trim() ?? '',
+        description_ru: input.descriptionRu?.trim() ?? '',
         seo_title_en: cleanText(input.seoTitleEn),
-        seo_title_th: cleanText(input.seoTitleTh),
+        seo_title_ru: cleanText(input.seoTitleRu),
         seo_description_en: cleanText(input.seoDescriptionEn),
-        seo_description_th: cleanText(input.seoDescriptionTh),
+        seo_description_ru: cleanText(input.seoDescriptionRu),
         fallback_mode: input.fallbackMode ?? 'automatic',
         is_active: input.isActive ?? true,
         starts_at: input.startsAt ?? null,
@@ -653,7 +653,7 @@ export type UpsertCatalogCollectionItemInput = {
   entityId: string;
   sortOrder?: number;
   labelEn?: string | null;
-  labelTh?: string | null;
+  labelRu?: string | null;
   isActive?: boolean;
   metadata?: JsonObject;
 };
@@ -671,7 +671,7 @@ export async function upsertCatalogCollectionItem(
         entity_id: input.entityId,
         sort_order: input.sortOrder ?? 0,
         label_en: cleanText(input.labelEn),
-        label_th: cleanText(input.labelTh),
+        label_th: cleanText(input.labelRu),
         is_active: input.isActive ?? true,
         metadata: input.metadata ?? {},
         updated_at: new Date().toISOString(),

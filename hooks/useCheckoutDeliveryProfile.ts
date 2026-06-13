@@ -31,7 +31,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
       return {
         destinationId: marketCtx.destinationId,
         variant: 'expansion',
-        labels: { en: marketCtx.labelEn, th: marketCtx.labelTh },
+        labels: { en: marketCtx.labelEn, th: marketCtx.labelRu },
       };
     }
 
@@ -44,7 +44,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
         return {
           destinationId: m.destinationId,
           variant: 'expansion',
-          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameTh },
+          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
         };
       }
     }
@@ -58,7 +58,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
         return {
           destinationId: m.destinationId,
           variant: 'expansion',
-          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameTh },
+          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
         };
       }
     }
@@ -71,7 +71,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
           return {
             destinationId: sess.destinationId,
             variant: 'expansion',
-            labels: { en: m.customerFacingNameEn, th: m.customerFacingNameTh },
+            labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
           };
         }
       }

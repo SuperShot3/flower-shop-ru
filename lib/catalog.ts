@@ -242,7 +242,7 @@ export async function getBouquetsFromCatalogPaginated(
 
 export async function getBouquetBySlugFromCatalog(
   slug: string,
-  locale: 'en' | 'th' = 'en'
+  locale: 'en' | 'ru' = 'en'
 ): Promise<Bouquet | null> {
   requireDatabase();
   const row = await catalogDb.fetchBouquetBySlug(slug, locale);
@@ -461,7 +461,7 @@ export async function getProductBySlugFromCatalog(
 
   slug: string,
 
-  locale: 'en' | 'th' = 'en'
+  locale: 'en' | 'ru' = 'en'
 
 ): Promise<CatalogProduct | null> {
 
@@ -532,7 +532,7 @@ type StripeProductPricing = {
 
   nameEn: string;
 
-  nameTh?: string;
+  nameRu?: string;
 
   price: number;
 
@@ -558,7 +558,7 @@ function mapRowToStripeProductPricing(row: CatalogProductRow): StripeProductPric
 
     nameEn: product.nameEn,
 
-    nameTh: product.nameTh,
+    nameRu: product.nameRu,
 
     price: product.price,
 
@@ -578,11 +578,11 @@ export async function getProductByIdFromCatalog(productId: string): Promise<{
 
   nameEn: string;
 
-  nameTh?: string;
+  nameRu?: string;
 
   descriptionEn?: string;
 
-  descriptionTh?: string;
+  descriptionRu?: string;
 
   category: string;
 
@@ -622,11 +622,11 @@ export async function getProductByIdFromCatalog(productId: string): Promise<{
 
     nameEn: product.nameEn,
 
-    nameTh: product.nameTh,
+    nameRu: product.nameRu,
 
     descriptionEn: product.descriptionEn,
 
-    descriptionTh: product.descriptionTh,
+    descriptionRu: product.descriptionRu,
 
     category: product.category,
 

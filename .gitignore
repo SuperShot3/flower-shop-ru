@@ -7,8 +7,6 @@ node_modules
 .env
 .env.local
 .env*.local
-.env.export.local
-
 # Next.js
 .next
 out
@@ -16,21 +14,16 @@ out
 # Vercel
 .vercel
 
-# Sanity
-.sanity
-
 # orders (JSON store; do not commit order data)
 data/orders.json
-
-# one-time Thailand catalog export (images + manifest)
-data/catalog/
-data/catalog-mirror-manifest.json
 
 # security audit (internal-only)
 SECURITY_AUDIT.md
 
 # misc
 .DS_Store
+tsconfig.tsbuildinfo
+*.swp
 *.pem
 npm-debug.log*
 yarn-debug.log*

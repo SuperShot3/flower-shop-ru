@@ -1,250 +1,88 @@
 'use client';
 
-import Link from 'next/link';
 import {
-  getLineContactUrl,
-  getWhatsAppContactUrl,
-} from '@/lib/messenger';
+  PolicyInlineLink,
+  PolicyList,
+  PolicyNote,
+  PolicyPageLayout,
+  PolicySection,
+  PolicyText,
+} from '@/components/legal/PolicyPageLayout';
 import { translations } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 
-const AMERICAN_EXPRESS_URL = 'https://www.americanexpress.com/en-us/help/refunds.html';
-const STRIPE_SUPPORT_URL = 'https://support.stripe.com/questions/refund-processing-fees';
-
 export function RefundReplacementClient({ lang }: { lang: Locale }) {
   const t = translations[lang].refundPolicy;
-  const tNav = translations[lang].nav;
-
-  const contactLinks = [
-    { label: t.contactOnLine, href: getLineContactUrl() },
-    { label: t.contactOnWhatsApp, href: getWhatsAppContactUrl() },
-  ];
+  const contactHref = `/${lang}/contact`;
 
   return (
-    <div className="policy-page">
-      <div className="container">
-        <h1 className="policy-title">{t.title}</h1>
-        <p className="policy-last-updated">{t.lastUpdated}</p>
-        <p className="policy-intro">{t.intro}</p>
+    <PolicyPageLayout lang={lang} title={t.title} intro={t.intro} lastUpdated={t.lastUpdated}>
+      <PolicySection heading={t.timeLimitTitle}>
+        <PolicyText>{t.timeLimitText}</PolicyText>
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.timeLimitTitle}</h2>
-          <p className="policy-text">{t.timeLimitText}</p>
-        </section>
+      <PolicySection heading={t.eligibleTitle}>
+        <PolicyText>{t.eligibleIntro}</PolicyText>
+        <PolicyList items={[t.eligibleList1, t.eligibleList2, t.eligibleList3]} />
+        <PolicyText>{t.eligibleOutro}</PolicyText>
+        <PolicyList items={[t.eligibleOption1, t.eligibleOption2]} />
+        <PolicyNote>{t.keepBouquetNote}</PolicyNote>
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.eligibleTitle}</h2>
-          <p className="policy-text">{t.eligibleIntro}</p>
-          <ul className="policy-list">
-            <li>{t.eligibleList1}</li>
-            <li>{t.eligibleList2}</li>
-            <li>{t.eligibleList3}</li>
-          </ul>
-          <p className="policy-text">{t.eligibleOutro}</p>
-          <ul className="policy-list">
-            <li>{t.eligibleOption1}</li>
-            <li>{t.eligibleOption2}</li>
-          </ul>
-          <p className="policy-text policy-note">{t.keepBouquetNote}</p>
-        </section>
+      <PolicySection heading={t.whatToSendTitle}>
+        <PolicyText>
+          {t.whatToSendIntro}{' '}
+          <PolicyInlineLink href={contactHref}>{t.contactPageLabel}</PolicyInlineLink>{' '}
+          {t.whatToSendIntroSuffix}
+        </PolicyText>
+        <PolicyList
+          items={[t.whatToSendList1, t.whatToSendList2, t.whatToSendList3, t.whatToSendList4]}
+        />
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.whatToSendTitle}</h2>
-          <p className="policy-text">
-            {t.whatToSendIntro}{' '}
-            {contactLinks.map((link, i) => (
-              <span key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="policy-link-inline"
-                >
-                  {link.label}
-                </a>
-                {i < contactLinks.length - 1 ? ', ' : ''}
-              </span>
-            ))}{' '}
-            {t.whatToSendIntroSuffix}
-          </p>
-          <ul className="policy-list">
-            <li>{t.whatToSendList1}</li>
-            <li>{t.whatToSendList2}</li>
-            <li>{t.whatToSendList3}</li>
-            <li>{t.whatToSendList4}</li>
-          </ul>
-        </section>
+      <PolicySection heading={t.notEligibleTitle}>
+        <PolicyText>{t.notEligibleIntro}</PolicyText>
+        <PolicyList
+          items={[
+            t.notEligible1,
+            t.notEligible2,
+            t.notEligible3,
+            t.notEligible4,
+            t.notEligible5,
+            t.notEligible6,
+          ]}
+        />
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.notEligibleTitle}</h2>
-          <p className="policy-text">{t.notEligibleIntro}</p>
-          <ul className="policy-list">
-            <li>{t.notEligible1}</li>
-            <li>{t.notEligible2}</li>
-            <li>{t.notEligible3}</li>
-            <li>{t.notEligible4}</li>
-            <li>{t.notEligible5}</li>
-            <li>{t.notEligible6}</li>
-          </ul>
-        </section>
+      <PolicySection heading={t.aiImagesTitle}>
+        <PolicyText>{t.aiImagesIntro}</PolicyText>
+        <PolicyText>{t.aiImagesBody}</PolicyText>
+        <PolicyList
+          items={[t.aiImagesList1, t.aiImagesList2, t.aiImagesList3, t.aiImagesList4]}
+        />
+        <PolicyText>{t.aiImagesOutro}</PolicyText>
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.aiImagesTitle}</h2>
-          <p className="policy-text">{t.aiImagesIntro}</p>
-          <p className="policy-text">{t.aiImagesBody}</p>
-          <ul className="policy-list">
-            <li>{t.aiImagesList1}</li>
-            <li>{t.aiImagesList2}</li>
-            <li>{t.aiImagesList3}</li>
-            <li>{t.aiImagesList4}</li>
-          </ul>
-          <p className="policy-text">{t.aiImagesOutro}</p>
-        </section>
+      <PolicySection heading={t.substitutionsTitle}>
+        <PolicyText>{t.substitutionsIntro}</PolicyText>
+        <PolicyList items={[t.substitutions1, t.substitutions2, t.substitutions3]} />
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.substitutionsTitle}</h2>
-          <p className="policy-text">{t.substitutionsIntro}</p>
-          <ul className="policy-list">
-            <li>{t.substitutions1}</li>
-            <li>{t.substitutions2}</li>
-            <li>{t.substitutions3}</li>
-          </ul>
-        </section>
+      <PolicySection heading={t.deliveryIssuesTitle}>
+        <PolicyText>{t.deliveryIssues}</PolicyText>
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.deliveryIssuesTitle}</h2>
-          <p className="policy-text">{t.deliveryIssues}</p>
-        </section>
+      <PolicySection heading={t.refundMethodTitle}>
+        <PolicyList items={[t.refundMethod1, t.refundMethod2, t.refundMethod3, t.refundMethod4]} />
+      </PolicySection>
 
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.refundMethodTitle}</h2>
-          <ul className="policy-list">
-            <li>{t.refundMethod1}</li>
-            <li>
-              {t.refundMethod2}{' '}
-              (<a
-                href={AMERICAN_EXPRESS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="policy-link-inline"
-              >
-                {t.americanExpress}
-              </a>)
-            </li>
-            <li>
-              {t.refundMethod3}{' '}
-              (<a
-                href={STRIPE_SUPPORT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="policy-link-inline"
-              >
-                {t.stripeSupport}
-              </a>)
-            </li>
-            <li>{t.refundMethod4}</li>
-          </ul>
-        </section>
-
-        <section className="policy-section">
-          <h2 className="policy-heading">{t.howToContactTitle}</h2>
-          <p className="policy-text">
-            {t.howToContactIntro}{' '}
-            {contactLinks.map((link, i) => (
-              <span key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="policy-link-inline"
-                >
-                  {link.label}
-                </a>
-                {i < contactLinks.length - 1 ? ', ' : ''}
-              </span>
-            ))}{' '}
-            {t.howToContactOutro}
-          </p>
-        </section>
-
-        <p className="policy-back">
-          <Link href={`/${lang}`} className="policy-link">
-            {tNav.home}
-          </Link>
-        </p>
-      </div>
-      <style jsx>{`
-        .policy-page {
-          padding: 32px 0 48px;
-        }
-        .policy-title {
-          font-family: var(--font-serif);
-          font-size: 1.75rem;
-          font-weight: 600;
-          color: var(--text);
-          margin: 0 0 8px;
-        }
-        .policy-last-updated {
-          font-size: 0.9rem;
-          color: var(--text-muted);
-          margin: 0 0 20px;
-        }
-        .policy-intro {
-          font-size: 1rem;
-          color: var(--text);
-          margin: 0 0 28px;
-          line-height: 1.6;
-        }
-        .policy-section {
-          margin-bottom: 28px;
-        }
-        .policy-heading {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: var(--text);
-          margin: 0 0 12px;
-        }
-        .policy-text {
-          font-size: 1rem;
-          color: var(--text);
-          margin: 0 0 10px;
-          line-height: 1.6;
-        }
-        .policy-note {
-          font-weight: 500;
-          color: var(--text);
-        }
-        .policy-list {
-          margin: 8px 0 14px;
-          padding-left: 1.25rem;
-          color: var(--text);
-          line-height: 1.6;
-        }
-        .policy-list li {
-          margin-bottom: 6px;
-        }
-        .policy-link-inline {
-          font-weight: 600;
-          color: var(--accent);
-          text-decoration: underline;
-        }
-        .policy-link-inline:hover {
-          color: #967a4d;
-        }
-        .policy-back {
-          margin-top: 36px;
-          padding-top: 24px;
-          border-top: 1px solid var(--border);
-        }
-        .policy-link {
-          font-weight: 600;
-          color: var(--accent);
-          text-decoration: underline;
-        }
-        .policy-link:hover {
-          color: #967a4d;
-        }
-      `}</style>
-    </div>
+      <PolicySection heading={t.howToContactTitle}>
+        <PolicyText>
+          {t.howToContactIntro}{' '}
+          <PolicyInlineLink href={contactHref}>{t.contactPageLabel}</PolicyInlineLink>{' '}
+          {t.howToContactOutro}
+        </PolicyText>
+      </PolicySection>
+    </PolicyPageLayout>
   );
 }

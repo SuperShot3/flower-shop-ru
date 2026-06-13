@@ -18,9 +18,9 @@ export function catalogShelfItemKey(entityType: CatalogEntityType, id: string): 
 
 export type CatalogProductPendingEdit = {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   price: string;
   occasion: string[];
   availableMarkets: DeliveryDestinationId[];
@@ -28,11 +28,11 @@ export type CatalogProductPendingEdit = {
 
 export type CatalogBouquetPendingEdit = {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   compositionEn: string;
-  compositionTh: string;
+  compositionRu: string;
   pricingType: PricingType;
   singlePrice: string;
   sizeRows: CatalogSizePricingRow[];

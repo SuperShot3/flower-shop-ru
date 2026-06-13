@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { CatalogProduct } from '@/lib/catalog/types';
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { computeFinalPrice } from '@/lib/partnerPricing';
 import { useCart } from '@/contexts/CartContext';
 import { getDefaultAddOns } from '@/components/AddOnsSection';
@@ -47,7 +48,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
   const isInCart = (product: CatalogProduct) => findCartIndex(product) >= 0;
 
   const handleToggleGift = (product: CatalogProduct) => {
-    const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+    const name = catalogLocalizedName(product, lang);
     const imgSrc = product.images?.[0] ?? '';
     const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
     const index = findCartIndex(product);
@@ -55,7 +56,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
     if (index >= 0) {
       removeItem(index);
       trackRemoveFromCart({
-        currency: 'THB',
+        currency: 'RUB',
         value: finalPrice,
         items: [
           {
@@ -84,7 +85,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
           bouquetId: product.id,
           slug: product.slug,
           nameEn: product.nameEn,
-          nameTh: product.nameTh ?? product.nameEn,
+          nameRu: product.nameRu ?? product.nameEn,
           imageUrl: imgSrc,
           size: syntheticSize,
           addOns: defaultAddOns,
@@ -93,7 +94,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
         1
       );
       trackAddToCart({
-        currency: 'THB',
+        currency: 'RUB',
         value: finalPrice,
         items: [
           {
@@ -114,12 +115,12 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
       <div className="gifts-carousel-viewport" ref={emblaRef}>
         <div className="gifts-carousel-container">
           {gifts.map((product) => {
-            const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+            const name = catalogLocalizedName(product, lang);
             const imgSrc = product.images?.[0] ?? '';
             const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
             const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
             const inCart = isInCart(product);
-            const priceLabel = `฿${finalPrice.toLocaleString()}`;
+            const priceLabel = `₽${finalPrice.toLocaleString()}`;
 
             return (
               <div key={product.id} className="gifts-carousel-slide">
@@ -128,7 +129,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
                     type="button"
                     className={`${interest.surface} ${interest.surfaceWithCover}`}
                     onClick={() => handleToggleGift(product)}
-                    aria-label={inCart ? `${name} — Added` : `${name} — ฿${finalPrice.toLocaleString()} — Add to cart`}
+                    aria-label={inCart ? `${name} — Added` : `${name} — ₽${finalPrice.toLocaleString()} — Add to cart`}
                   >
                     {imgSrc ? (
                       <span className={interest.surfaceCover} aria-hidden>

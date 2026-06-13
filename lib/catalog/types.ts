@@ -11,9 +11,9 @@ export interface CatalogProduct {
   id: string;
   slug: string;
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   category: string;
   catalogKind?: 'product' | 'plushyToy' | 'balloon';
   sizeLabel?: string;
@@ -32,7 +32,7 @@ export interface CatalogProduct {
 export interface ModerationProduct {
   id: string;
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   category: string;
   price: number;
   partnerId?: string;
@@ -63,11 +63,11 @@ export interface AdminBouquetDetail {
   id: string;
   slug: string;
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   compositionEn: string;
-  compositionTh: string;
+  compositionRu: string;
   status: BouquetStatus;
   featuredPopular: boolean;
   discountPercent?: number;
@@ -94,9 +94,9 @@ export interface AdminProductDetail {
   id: string;
   slug?: string;
   nameEn: string;
-  nameTh?: string;
+  nameRu?: string;
   descriptionEn?: string;
-  descriptionTh?: string;
+  descriptionRu?: string;
   category: string;
   price: number;
   cost?: number;
@@ -112,9 +112,9 @@ export interface AdminProductDetail {
   partnerId?: string;
   adminOverrides?: {
     nameEn?: string;
-    nameTh?: string;
+    nameRu?: string;
     descriptionEn?: string;
-    descriptionTh?: string;
+    descriptionRu?: string;
   };
   adminChangeSummary?: string;
   adminLastEditedAt?: string;
@@ -131,7 +131,7 @@ export type AdminCatalogProductImage = {
   storagePath: string;
   sourceType: CatalogImageSourceType;
   altEn: string;
-  altTh: string;
+  altRu: string;
   isPrimary: boolean;
   sortOrder: number;
   /** Stored image format from catalog_product_images.metadata.format or storage path. */
@@ -175,9 +175,9 @@ export type CatalogAuditEntityType = CatalogEntityType | 'collection' | 'image' 
 
 export type CatalogSeoFields = {
   seo_title_en: string | null;
-  seo_title_th: string | null;
+  seo_title_ru: string | null;
   seo_description_en: string | null;
-  seo_description_th: string | null;
+  seo_description_ru: string | null;
   seo_keywords: string[];
   og_image_path: string | null;
 };
@@ -212,7 +212,7 @@ export type CatalogProductImageRow = {
   source_type: CatalogImageSourceType;
   original_image_id: string | null;
   alt_en: string | null;
-  alt_th: string | null;
+  alt_ru: string | null;
   is_primary: boolean;
   sort_order: number;
   metadata: Record<string, unknown>;
@@ -230,7 +230,7 @@ export type CatalogCollectionRow = Omit<CatalogSeoFields, 'seo_keywords' | 'og_i
   title_en: string;
   title_th: string;
   description_en: string;
-  description_th: string;
+  description_ru: string;
   fallback_mode: CatalogCollectionFallbackMode;
   is_active: boolean;
   starts_at: string | null;
@@ -284,7 +284,7 @@ export type CatalogBouquetPricing = {
     enabled?: boolean;
     label?: string;
     labelEn?: string;
-    labelTh?: string;
+    labelRu?: string;
     price?: number;
     description?: string;
     preparationTime?: number;
@@ -295,7 +295,7 @@ export type CatalogBouquetPricing = {
     stemCount?: number;
     price?: number;
     labelEn?: string;
-    labelTh?: string;
+    labelRu?: string;
     preparationTime?: number;
     availability?: boolean;
   }>;
@@ -304,7 +304,7 @@ export type CatalogBouquetPricing = {
     stemCount?: number;
     price?: number;
     labelEn?: string;
-    labelTh?: string;
+    labelRu?: string;
     preparationTime?: number;
     availability?: boolean;
   }>;
@@ -312,7 +312,7 @@ export type CatalogBouquetPricing = {
   fixedVariants?: Array<{
     variantKey?: string;
     nameEn?: string;
-    nameTh?: string;
+    nameRu?: string;
     price?: number;
     stemMin?: number;
     stemMax?: number;
@@ -323,7 +323,7 @@ export type CatalogBouquetPricing = {
   customTiers?: Array<{
     minPrice?: number;
     labelEn?: string;
-    labelTh?: string;
+    labelRu?: string;
     preparationTime?: number;
     availability?: boolean;
   }>;
@@ -338,11 +338,20 @@ export type CatalogPartnerRow = {
   line_or_whatsapp: string | null;
   shop_address: string | null;
   shop_bio_en: string | null;
-  shop_bio_th: string | null;
+  shop_bio_ru: string | null;
   portrait: CatalogPortrait | null;
   city: string;
   status: PartnerStatus;
   supabase_user_id: string | null;
+  district: string | null;
+  telegram: string | null;
+  whatsapp: string | null;
+  stock_categories: string[];
+  flowers_in_stock: string[];
+  internal_notes: string | null;
+  self_deliver: boolean;
+  delivery_zones: string | null;
+  prep_time_note: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -352,13 +361,13 @@ export type CatalogBouquetRow = {
   legacy_sanity_id: string | null;
   partner_id: string | null;
   slug_en: string;
-  slug_th: string | null;
+  slug_ru: string | null;
   name_en: string;
-  name_th: string;
+  name_ru: string;
   description_en: string;
-  description_th: string;
+  description_ru: string;
   composition_en: string;
-  composition_th: string;
+  composition_ru: string;
   pricing_type: PricingType;
   pricing: CatalogBouquetPricing;
   status: BouquetStatus;
@@ -379,7 +388,7 @@ export type CatalogBouquetRow = {
   updated_at: string;
 } & Pick<
   CatalogSeoFields,
-  'seo_title_en' | 'seo_title_th' | 'seo_description_en' | 'seo_description_th'
+  'seo_title_en' | 'seo_title_ru' | 'seo_description_en' | 'seo_description_ru'
 >;
 
 export type CatalogProductRow = {
@@ -387,11 +396,11 @@ export type CatalogProductRow = {
   legacy_sanity_id: string | null;
   partner_id: string;
   slug_en: string;
-  slug_th: string | null;
+  slug_ru: string | null;
   name_en: string;
-  name_th: string;
+  name_ru: string;
   description_en: string;
-  description_th: string;
+  description_ru: string;
   category: string;
   price: number;
   cost: number | null;
@@ -405,9 +414,9 @@ export type CatalogProductRow = {
   custom_attributes: Array<{ key?: string; value?: string }>;
   admin_overrides: {
     nameEn?: string;
-    nameTh?: string;
+    nameRu?: string;
     descriptionEn?: string;
-    descriptionTh?: string;
+    descriptionRu?: string;
   } | null;
   admin_change_summary: string | null;
   admin_last_edited_at: string | null;

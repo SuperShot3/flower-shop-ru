@@ -1,4 +1,5 @@
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BouquetCard } from '@/components/BouquetCard';
@@ -33,7 +34,7 @@ export async function CatalogProductCard({
     (await getCatalogProductBySlug(trimmed));
   if (product) {
     if (variant === 'article-catalog-button') {
-      const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+      const name = catalogLocalizedName(product, lang);
       const imgSrc = product.images?.[0] ?? '';
       const imgAlt = product.imageAlts?.[0]?.trim() || name;
       const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
@@ -73,7 +74,7 @@ export async function CatalogProductCard({
   const bouquet = await getCatalogBouquetBySlug(trimmed);
   if (bouquet) {
     if (variant === 'article-catalog-button') {
-      const name = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+      const name = catalogLocalizedName(bouquet, lang);
       const imgSrc = bouquet.images?.[0] ?? '';
       const imgAlt = bouquet.imageAlts?.[0]?.trim() || name;
       const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');

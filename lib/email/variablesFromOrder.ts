@@ -7,7 +7,7 @@ import {
 } from './socialFooter';
 import { buildOrderLineProductShowcase } from './productShowcaseBlock';
 
-const BAHT = (n: number) => `฿${n.toLocaleString()}`;
+const BAHT = (n: number) => `₽${n.toLocaleString()}`;
 
 function importantDatesUrl(order: Order, base: string): string {
   const email = (order.customerEmail ?? '').trim();

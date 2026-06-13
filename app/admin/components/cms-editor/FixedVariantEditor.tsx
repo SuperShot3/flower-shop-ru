@@ -67,7 +67,7 @@ export function FixedVariantEditor({
     const row: FixedVariantRow = {
       variantKey: key,
       nameEn: 'Standard',
-      nameTh: '',
+      nameRu: '',
       price: 0,
       availability: true,
     };
@@ -132,17 +132,17 @@ export function FixedVariantEditor({
                       />
                     </label>
                     <label className="admin-cms-field">
-                      <span className="admin-cms-field-label">Name (TH)</span>
+                      <span className="admin-cms-field-label">Name (RU)</span>
                       <input
                         className="admin-cms-input"
-                        value={variant.nameTh ?? ''}
+                        value={variant.nameRu ?? ''}
                         onChange={(e) =>
-                          updateVariant(variant.variantKey, { nameTh: e.target.value })
+                          updateVariant(variant.variantKey, { nameRu: e.target.value })
                         }
                       />
                     </label>
                     <label className="admin-cms-field">
-                      <span className="admin-cms-field-label">Price (฿)</span>
+                      <span className="admin-cms-field-label">Price (₽)</span>
                       <input
                         type="number"
                         min={0}

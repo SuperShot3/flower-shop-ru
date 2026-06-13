@@ -19,8 +19,8 @@ export interface BouquetSellableOption {
   price: number;
   /** Shopper-facing label (default EN or shared) */
   label: string;
-  /** Thai label when different from `label` */
-  labelTh?: string;
+  /** Russian label when different from `label` */
+  labelRu?: string;
   description?: string;
   preparationTime?: number;
   availability?: boolean;
@@ -91,21 +91,21 @@ export function bouquetMatchesStemBucket(
   return sizes.some((s) => optionOverlapsStemBucket(s, bucket));
 }
 
-export function labelSingleStemCount(lang: Locale | 'th', stemCount: number, labelEn?: string, labelTh?: string): string {
-  if (isThaiLocale(lang) && labelTh?.trim()) return labelTh.trim();
+export function labelSingleStemCount(lang: Locale, stemCount: number, labelEn?: string, labelRu?: string): string {
+  if (lang === 'ru' && labelRu?.trim()) return labelRu.trim();
   if (labelEn?.trim()) return labelEn.trim();
-  return isThaiLocale(lang) ? `กุหลาบ ${stemCount} ดอก` : `${stemCount} roses`;
+  return lang === 'ru' ? `${stemCount} роз` : `${stemCount} roses`;
 }
 
-export function labelFixedVariant(lang: Locale | 'th', nameEn: string, nameTh: string, stemMin?: number, stemMax?: number): string {
-  const name = isThaiLocale(lang) && nameTh.trim() ? nameTh.trim() : nameEn.trim();
+export function labelFixedVariant(lang: Locale, nameEn: string, nameRu: string, stemMin?: number, stemMax?: number): string {
+  const name = lang === 'ru' && nameRu.trim() ? nameRu.trim() : nameEn.trim();
   if (stemMin != null && stemMax != null) {
-    return isThaiLocale(lang)
-      ? `${name} (ประมาณ ${stemMin}–${stemMax} ดอก)`
+    return lang === 'ru'
+      ? `${name} (примерно ${stemMin}–${stemMax} шт.)`
       : `${name} (approx. ${stemMin}–${stemMax} stems)`;
   }
   if (stemMin != null) {
-    return isThaiLocale(lang) ? `${name} (ประมาณ ${stemMin}+ ดอก)` : `${name} (approx. ${stemMin}+ stems)`;
+    return lang === 'ru' ? `${name} (примерно ${stemMin}+ шт.)` : `${name} (approx. ${stemMin}+ stems)`;
   }
   return name;
 }
@@ -137,7 +137,7 @@ export function resolveBouquetOptionFromIdentifier(
   }
 
   const byLabel = sizes.find(
-    (s) => s.label.toLowerCase() === lower || s.labelTh?.toLowerCase() === lower
+    (s) => s.label.toLowerCase() === lower || s.labelRu?.toLowerCase() === lower
   );
   if (byLabel) return byLabel;
 
@@ -168,14 +168,14 @@ export function resolveBouquetOptionFromIdentifier(
 }
 
 export function optionDisplayLabel(opt: BouquetSellableOption, lang: Locale): string {
-  if (isThaiLocale(lang) && opt.labelTh?.trim()) return opt.labelTh.trim();
+  if (lang === 'ru' && opt.labelRu?.trim()) return opt.labelRu.trim();
   return opt.label;
 }
 
-export function labelCustomTier(lang: Locale, minPrice: number, labelEn?: string, labelTh?: string): string {
-  if (isThaiLocale(lang) && labelTh?.trim()) return labelTh.trim();
+export function labelCustomTier(lang: Locale, minPrice: number, labelEn?: string, labelRu?: string): string {
+  if (lang === 'ru' && labelRu?.trim()) return labelRu.trim();
   if (labelEn?.trim()) return labelEn.trim();
-  return isThaiLocale(lang)
-    ? `ช่อตามงบ เริ่มต้น ฿${minPrice.toLocaleString()}`
-    : `Custom bouquet from ฿${minPrice.toLocaleString()}`;
+  return lang === 'ru'
+    ? `Букет по бюджету от ₽${minPrice.toLocaleString('ru-RU')}`
+    : `Custom bouquet from ₽${minPrice.toLocaleString('en-GB')}`;
 }

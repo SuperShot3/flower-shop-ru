@@ -199,7 +199,7 @@ function DeliveryCardAddress({ order }: { order: SupabaseOrderRow }) {
         rel="noopener noreferrer"
         className="admin-delivery-address-link"
       >
-        Open in Google Maps
+        Open in Yandex Maps
       </a>
     );
   } else if (raw && mapsHref) {
@@ -551,7 +551,7 @@ function DeliveryDriverAssignment({
 
 function formatSupplierBoardAmount(value: number | null | undefined): string {
   if (value == null) return '—';
-  return `฿${Number(value).toLocaleString()}`;
+  return `₽${Number(value).toLocaleString()}`;
 }
 
 function DeliveryCardSupplierReply({

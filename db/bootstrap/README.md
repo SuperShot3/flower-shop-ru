@@ -5,8 +5,12 @@
 ## Apply
 
 ```bash
-# Supabase (Vercel integration) or local Postgres
+# Supabase (Vercel integration) or local
 export POSTGRES_URL="postgres://..."
+npm run db:bootstrap:apply
+
+# VPS Docker
+export DATABASE_URL="postgresql://flower:SECRET@127.0.0.1:5432/flower_ru"
 npm run db:bootstrap:apply
 ```
 

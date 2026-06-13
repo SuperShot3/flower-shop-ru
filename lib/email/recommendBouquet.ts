@@ -42,7 +42,7 @@ function minPrice(b: Bouquet | null): number {
 
 function priceLabel(n: number): string {
   if (n <= 0) return 'See our catalog for current prices';
-  return `฿${n.toLocaleString()} onwards`;
+  return `₽${n.toLocaleString()} onwards`;
 }
 
 export type RecommendedBouquet = {

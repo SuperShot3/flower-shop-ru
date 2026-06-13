@@ -173,7 +173,7 @@ export function ManualIncomeForm() {
         {/* Amount + Date */}
         <div className="admin-expenses-form-row">
           <div className="admin-form-group">
-            <label htmlFor="inc-amount">Amount (THB) *</label>
+            <label htmlFor="inc-amount">Amount (RUB) *</label>
             <input
               id="inc-amount"
               type="number"

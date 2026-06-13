@@ -1,0 +1,1619 @@
+{
+  "generatedAt": "2026-06-11T03:33:32.353Z",
+  "sourceSupabaseUrl": "https://kwbffyojrdjlehdhpptf.supabase.co",
+  "publicBase": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/",
+  "uploadTarget": "supabase-storage",
+  "stats": {
+    "bouquets": 78,
+    "partners": 0,
+    "imagePaths": 233,
+    "downloaded": 0,
+    "skippedExisting": 204,
+    "uploadedToBlob": 437,
+    "failed": 0
+  },
+  "mappings": {
+    "bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/0.jpg": {
+      "storagePath": "bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/0.jpg",
+      "localPath": "data/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/0.jpg"
+    },
+    "bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/1.jpg": {
+      "storagePath": "bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/1.jpg",
+      "localPath": "data/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/003c45c6-ab1b-4eaa-b49d-098cc284526e/1.jpg"
+    },
+    "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/0.jpg": {
+      "storagePath": "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/0.jpg",
+      "localPath": "data/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/0.jpg"
+    },
+    "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/1.jpg": {
+      "storagePath": "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/1.jpg",
+      "localPath": "data/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/1.jpg"
+    },
+    "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/2.jpg": {
+      "storagePath": "bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/2.jpg",
+      "localPath": "data/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0136b1df-321a-44c1-92f6-363dd90b0b8e/2.jpg"
+    },
+    "bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/0.jpg": {
+      "storagePath": "bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/0.jpg",
+      "localPath": "data/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/0.jpg"
+    },
+    "bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/1.jpg": {
+      "storagePath": "bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/1.jpg",
+      "localPath": "data/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/0c857f96-5b0b-40ce-8a2b-8b7d44de6133/1.jpg"
+    },
+    "bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/0.jpg": {
+      "storagePath": "bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/0.jpg",
+      "localPath": "data/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/0.jpg"
+    },
+    "bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/1.jpg": {
+      "storagePath": "bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/1.jpg",
+      "localPath": "data/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1326ba76-d1e5-4b07-8e60-9d5d13348166/1.jpg"
+    },
+    "bouquets/155d9430-9372-490c-9210-f33bf34328e4/0.jpg": {
+      "storagePath": "bouquets/155d9430-9372-490c-9210-f33bf34328e4/0.jpg",
+      "localPath": "data/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/0.jpg"
+    },
+    "bouquets/155d9430-9372-490c-9210-f33bf34328e4/1.jpg": {
+      "storagePath": "bouquets/155d9430-9372-490c-9210-f33bf34328e4/1.jpg",
+      "localPath": "data/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/1.jpg"
+    },
+    "bouquets/155d9430-9372-490c-9210-f33bf34328e4/2.jpg": {
+      "storagePath": "bouquets/155d9430-9372-490c-9210-f33bf34328e4/2.jpg",
+      "localPath": "data/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/2.jpg"
+    },
+    "bouquets/155d9430-9372-490c-9210-f33bf34328e4/3.jpg": {
+      "storagePath": "bouquets/155d9430-9372-490c-9210-f33bf34328e4/3.jpg",
+      "localPath": "data/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/155d9430-9372-490c-9210-f33bf34328e4/3.jpg"
+    },
+    "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/0.jpg": {
+      "storagePath": "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/0.jpg",
+      "localPath": "data/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/0.jpg"
+    },
+    "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/1.jpg": {
+      "storagePath": "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/1.jpg",
+      "localPath": "data/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/1.jpg"
+    },
+    "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/2.jpg": {
+      "storagePath": "bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/2.jpg",
+      "localPath": "data/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/17c6b209-3eb6-4532-8efb-c22952a725ed/2.jpg"
+    },
+    "bouquets/1849090d-e2da-419a-9a12-786a179941ea/0.jpg": {
+      "storagePath": "bouquets/1849090d-e2da-419a-9a12-786a179941ea/0.jpg",
+      "localPath": "data/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/0.jpg"
+    },
+    "bouquets/1849090d-e2da-419a-9a12-786a179941ea/1.jpg": {
+      "storagePath": "bouquets/1849090d-e2da-419a-9a12-786a179941ea/1.jpg",
+      "localPath": "data/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1849090d-e2da-419a-9a12-786a179941ea/1.jpg"
+    },
+    "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/0.jpg": {
+      "storagePath": "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/0.jpg",
+      "localPath": "data/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/0.jpg"
+    },
+    "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/1.jpg": {
+      "storagePath": "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/1.jpg",
+      "localPath": "data/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/1.jpg"
+    },
+    "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/2.jpg": {
+      "storagePath": "bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/2.jpg",
+      "localPath": "data/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/1c133d05-8068-4f7f-802e-72f847c7c560/2.jpg"
+    },
+    "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/0.jpg": {
+      "storagePath": "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/0.jpg",
+      "localPath": "data/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/0.jpg"
+    },
+    "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/1.jpg": {
+      "storagePath": "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/1.jpg",
+      "localPath": "data/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/1.jpg"
+    },
+    "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/2.jpg": {
+      "storagePath": "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/2.jpg",
+      "localPath": "data/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/2.jpg"
+    },
+    "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/3.jpg": {
+      "storagePath": "bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/3.jpg",
+      "localPath": "data/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/20cec3c3-6aeb-40be-a286-cee9c8e9e7d8/3.jpg"
+    },
+    "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/0.jpg": {
+      "storagePath": "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/0.jpg",
+      "localPath": "data/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/0.jpg"
+    },
+    "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/1.jpg": {
+      "storagePath": "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/1.jpg",
+      "localPath": "data/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/1.jpg"
+    },
+    "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/2.jpg": {
+      "storagePath": "bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/2.jpg",
+      "localPath": "data/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/23899376-ea09-4ff0-bee5-614cb02da1c6/2.jpg"
+    },
+    "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/0.jpg": {
+      "storagePath": "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/0.jpg",
+      "localPath": "data/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/0.jpg"
+    },
+    "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/1.jpg": {
+      "storagePath": "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/1.jpg",
+      "localPath": "data/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/1.jpg"
+    },
+    "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/2.jpg": {
+      "storagePath": "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/2.jpg",
+      "localPath": "data/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/2.jpg"
+    },
+    "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/3.jpg": {
+      "storagePath": "bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/3.jpg",
+      "localPath": "data/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25e10110-3e47-442f-ac1b-ada026ad3c73/3.jpg"
+    },
+    "bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/0.jpg": {
+      "storagePath": "bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/0.jpg",
+      "localPath": "data/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/0.jpg"
+    },
+    "bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/1.jpg": {
+      "storagePath": "bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/1.jpg",
+      "localPath": "data/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/25fd8075-73c9-41d0-9fb3-314b083b6816/1.jpg"
+    },
+    "bouquets/2f51b373-5d8a-460d-a349-d30559f5bd49/0.jpg": {
+      "storagePath": "bouquets/2f51b373-5d8a-460d-a349-d30559f5bd49/0.jpg",
+      "localPath": "data/catalog/bouquets/2f51b373-5d8a-460d-a349-d30559f5bd49/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/2f51b373-5d8a-460d-a349-d30559f5bd49/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/2f51b373-5d8a-460d-a349-d30559f5bd49/0.jpg"
+    },
+    "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/0.jpg": {
+      "storagePath": "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/0.jpg",
+      "localPath": "data/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/0.jpg"
+    },
+    "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/1.jpg": {
+      "storagePath": "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/1.jpg",
+      "localPath": "data/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/1.jpg"
+    },
+    "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/2.jpg": {
+      "storagePath": "bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/2.jpg",
+      "localPath": "data/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3279a05d-e6e2-4fcc-8941-04db759ad786/2.jpg"
+    },
+    "bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/0.jpg": {
+      "storagePath": "bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/0.jpg",
+      "localPath": "data/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/0.jpg"
+    },
+    "bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/1.jpg": {
+      "storagePath": "bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/1.jpg",
+      "localPath": "data/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/33aefad9-6d35-4ed0-85c3-46139e187a31/1.jpg"
+    },
+    "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/0.jpg": {
+      "storagePath": "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/0.jpg",
+      "localPath": "data/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/0.jpg"
+    },
+    "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/1.jpg": {
+      "storagePath": "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/1.jpg",
+      "localPath": "data/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/1.jpg"
+    },
+    "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/2.jpg": {
+      "storagePath": "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/2.jpg",
+      "localPath": "data/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/2.jpg"
+    },
+    "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/3.jpg": {
+      "storagePath": "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/3.jpg",
+      "localPath": "data/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/3.jpg"
+    },
+    "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/4.jpg": {
+      "storagePath": "bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/4.jpg",
+      "localPath": "data/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/34e39139-25a3-4e83-8b96-5e7fdd0c4b95/4.jpg"
+    },
+    "bouquets/3749716d-b604-4145-abeb-1e955ead4cab/0.jpg": {
+      "storagePath": "bouquets/3749716d-b604-4145-abeb-1e955ead4cab/0.jpg",
+      "localPath": "data/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/0.jpg"
+    },
+    "bouquets/3749716d-b604-4145-abeb-1e955ead4cab/1.jpg": {
+      "storagePath": "bouquets/3749716d-b604-4145-abeb-1e955ead4cab/1.jpg",
+      "localPath": "data/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3749716d-b604-4145-abeb-1e955ead4cab/1.jpg"
+    },
+    "bouquets/3cdcc0d8-e4ff-4048-bfe3-c1ea51688263/0.jpg": {
+      "storagePath": "bouquets/3cdcc0d8-e4ff-4048-bfe3-c1ea51688263/0.jpg",
+      "localPath": "data/catalog/bouquets/3cdcc0d8-e4ff-4048-bfe3-c1ea51688263/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3cdcc0d8-e4ff-4048-bfe3-c1ea51688263/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/3cdcc0d8-e4ff-4048-bfe3-c1ea51688263/0.jpg"
+    },
+    "bouquets/40864159-c894-4777-be9c-ce271c94bc86/0.jpg": {
+      "storagePath": "bouquets/40864159-c894-4777-be9c-ce271c94bc86/0.jpg",
+      "localPath": "data/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/0.jpg"
+    },
+    "bouquets/40864159-c894-4777-be9c-ce271c94bc86/1.jpg": {
+      "storagePath": "bouquets/40864159-c894-4777-be9c-ce271c94bc86/1.jpg",
+      "localPath": "data/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/1.jpg"
+    },
+    "bouquets/40864159-c894-4777-be9c-ce271c94bc86/2.jpg": {
+      "storagePath": "bouquets/40864159-c894-4777-be9c-ce271c94bc86/2.jpg",
+      "localPath": "data/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/2.jpg"
+    },
+    "bouquets/40864159-c894-4777-be9c-ce271c94bc86/3.jpg": {
+      "storagePath": "bouquets/40864159-c894-4777-be9c-ce271c94bc86/3.jpg",
+      "localPath": "data/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/40864159-c894-4777-be9c-ce271c94bc86/3.jpg"
+    },
+    "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/0.jpg": {
+      "storagePath": "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/0.jpg",
+      "localPath": "data/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/0.jpg"
+    },
+    "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/1.jpg": {
+      "storagePath": "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/1.jpg",
+      "localPath": "data/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/1.jpg"
+    },
+    "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/2.jpg": {
+      "storagePath": "bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/2.jpg",
+      "localPath": "data/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/44811fbf-3ee1-4eb9-9b4d-3698bfcb6bac/2.jpg"
+    },
+    "bouquets/498d42a7-f868-4fb3-8a88-01e85e65772e/0.jpg": {
+      "storagePath": "bouquets/498d42a7-f868-4fb3-8a88-01e85e65772e/0.jpg",
+      "localPath": "data/catalog/bouquets/498d42a7-f868-4fb3-8a88-01e85e65772e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/498d42a7-f868-4fb3-8a88-01e85e65772e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/498d42a7-f868-4fb3-8a88-01e85e65772e/0.jpg"
+    },
+    "bouquets/49e262bb-e5b4-4106-8d6a-2e5f802c6551/0.jpg": {
+      "storagePath": "bouquets/49e262bb-e5b4-4106-8d6a-2e5f802c6551/0.jpg",
+      "localPath": "data/catalog/bouquets/49e262bb-e5b4-4106-8d6a-2e5f802c6551/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/49e262bb-e5b4-4106-8d6a-2e5f802c6551/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/49e262bb-e5b4-4106-8d6a-2e5f802c6551/0.jpg"
+    },
+    "bouquets/590ccf8b-0990-42e7-9d20-732b5d2c4947/0.jpg": {
+      "storagePath": "bouquets/590ccf8b-0990-42e7-9d20-732b5d2c4947/0.jpg",
+      "localPath": "data/catalog/bouquets/590ccf8b-0990-42e7-9d20-732b5d2c4947/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/590ccf8b-0990-42e7-9d20-732b5d2c4947/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/590ccf8b-0990-42e7-9d20-732b5d2c4947/0.jpg"
+    },
+    "bouquets/5c7c643c-822e-449d-97dd-89a853993163/0.jpg": {
+      "storagePath": "bouquets/5c7c643c-822e-449d-97dd-89a853993163/0.jpg",
+      "localPath": "data/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/0.jpg"
+    },
+    "bouquets/5c7c643c-822e-449d-97dd-89a853993163/1.jpg": {
+      "storagePath": "bouquets/5c7c643c-822e-449d-97dd-89a853993163/1.jpg",
+      "localPath": "data/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5c7c643c-822e-449d-97dd-89a853993163/1.jpg"
+    },
+    "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/0.jpg": {
+      "storagePath": "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/0.jpg",
+      "localPath": "data/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/0.jpg"
+    },
+    "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/1.jpg": {
+      "storagePath": "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/1.jpg",
+      "localPath": "data/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/1.jpg"
+    },
+    "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/2.jpg": {
+      "storagePath": "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/2.jpg",
+      "localPath": "data/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/2.jpg"
+    },
+    "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/3.jpg": {
+      "storagePath": "bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/3.jpg",
+      "localPath": "data/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/5de409da-7bb7-4ed5-9410-b98f82f40656/3.jpg"
+    },
+    "bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/0.jpg": {
+      "storagePath": "bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/0.jpg",
+      "localPath": "data/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/0.jpg"
+    },
+    "bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/1.jpg": {
+      "storagePath": "bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/1.jpg",
+      "localPath": "data/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6469d85e-c960-47a4-a193-db176a8d4a71/1.jpg"
+    },
+    "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/0.jpg": {
+      "storagePath": "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/0.jpg",
+      "localPath": "data/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/0.jpg"
+    },
+    "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/1.jpg": {
+      "storagePath": "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/1.jpg",
+      "localPath": "data/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/1.jpg"
+    },
+    "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/2.jpg": {
+      "storagePath": "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/2.jpg",
+      "localPath": "data/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/2.jpg"
+    },
+    "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/3.jpg": {
+      "storagePath": "bouquets/6630c2c5-72bf-4003-925a-025f43214f63/3.jpg",
+      "localPath": "data/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6630c2c5-72bf-4003-925a-025f43214f63/3.jpg"
+    },
+    "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/0.jpg": {
+      "storagePath": "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/0.jpg",
+      "localPath": "data/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/0.jpg"
+    },
+    "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/1.jpg": {
+      "storagePath": "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/1.jpg",
+      "localPath": "data/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/1.jpg"
+    },
+    "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/2.jpg": {
+      "storagePath": "bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/2.jpg",
+      "localPath": "data/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a70b186-5a54-40c9-9f71-d77c788f0683/2.jpg"
+    },
+    "bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/0.jpg": {
+      "storagePath": "bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/0.jpg",
+      "localPath": "data/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/0.jpg"
+    },
+    "bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/1.jpg": {
+      "storagePath": "bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/1.jpg",
+      "localPath": "data/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/6a922099-2d31-4530-8dea-eaf13ed058f3/1.jpg"
+    },
+    "bouquets/71a01b75-8842-4ec2-a919-e33bfa136457/0.jpg": {
+      "storagePath": "bouquets/71a01b75-8842-4ec2-a919-e33bfa136457/0.jpg",
+      "localPath": "data/catalog/bouquets/71a01b75-8842-4ec2-a919-e33bfa136457/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/71a01b75-8842-4ec2-a919-e33bfa136457/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/71a01b75-8842-4ec2-a919-e33bfa136457/0.jpg"
+    },
+    "bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/0.jpg": {
+      "storagePath": "bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/0.jpg",
+      "localPath": "data/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/0.jpg"
+    },
+    "bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/1.jpg": {
+      "storagePath": "bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/1.jpg",
+      "localPath": "data/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/73fb37d1-2f10-48c3-b924-538bbddaec1e/1.jpg"
+    },
+    "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/0.jpg": {
+      "storagePath": "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/0.jpg",
+      "localPath": "data/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/0.jpg"
+    },
+    "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/1.jpg": {
+      "storagePath": "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/1.jpg",
+      "localPath": "data/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/1.jpg"
+    },
+    "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/2.jpg": {
+      "storagePath": "bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/2.jpg",
+      "localPath": "data/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/74291c0a-21cc-47e8-8c5b-8a33a8979962/2.jpg"
+    },
+    "bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/0.jpg": {
+      "storagePath": "bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/0.jpg",
+      "localPath": "data/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/0.jpg"
+    },
+    "bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/1.jpg": {
+      "storagePath": "bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/1.jpg",
+      "localPath": "data/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/760a63ac-c536-4ac8-9a1a-7f3cce03ad44/1.jpg"
+    },
+    "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/0.jpg": {
+      "storagePath": "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/0.jpg",
+      "localPath": "data/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/0.jpg"
+    },
+    "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/1.jpg": {
+      "storagePath": "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/1.jpg",
+      "localPath": "data/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/1.jpg"
+    },
+    "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/2.jpg": {
+      "storagePath": "bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/2.jpg",
+      "localPath": "data/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/775ff20f-9643-4804-9a7c-e4e9f7031cb8/2.jpg"
+    },
+    "bouquets/77648bee-965a-48bc-9148-9365baa9918b/0.jpg": {
+      "storagePath": "bouquets/77648bee-965a-48bc-9148-9365baa9918b/0.jpg",
+      "localPath": "data/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/0.jpg"
+    },
+    "bouquets/77648bee-965a-48bc-9148-9365baa9918b/1.jpg": {
+      "storagePath": "bouquets/77648bee-965a-48bc-9148-9365baa9918b/1.jpg",
+      "localPath": "data/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/1.jpg"
+    },
+    "bouquets/77648bee-965a-48bc-9148-9365baa9918b/2.jpg": {
+      "storagePath": "bouquets/77648bee-965a-48bc-9148-9365baa9918b/2.jpg",
+      "localPath": "data/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/77648bee-965a-48bc-9148-9365baa9918b/2.jpg"
+    },
+    "bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/0.jpg": {
+      "storagePath": "bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/0.jpg",
+      "localPath": "data/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/0.jpg"
+    },
+    "bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/1.jpg": {
+      "storagePath": "bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/1.jpg",
+      "localPath": "data/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/7e898011-4b3d-4c53-973a-fe9fd2f4f525/1.jpg"
+    },
+    "bouquets/84d98c4e-4f19-4950-8c70-76c9daba91d9/0.jpg": {
+      "storagePath": "bouquets/84d98c4e-4f19-4950-8c70-76c9daba91d9/0.jpg",
+      "localPath": "data/catalog/bouquets/84d98c4e-4f19-4950-8c70-76c9daba91d9/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/84d98c4e-4f19-4950-8c70-76c9daba91d9/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/84d98c4e-4f19-4950-8c70-76c9daba91d9/0.jpg"
+    },
+    "bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/0.jpg": {
+      "storagePath": "bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/0.jpg",
+      "localPath": "data/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/0.jpg"
+    },
+    "bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/1.jpg": {
+      "storagePath": "bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/1.jpg",
+      "localPath": "data/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8545bf8a-08f6-40c6-882f-c0b15a95f962/1.jpg"
+    },
+    "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/0.jpg": {
+      "storagePath": "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/0.jpg",
+      "localPath": "data/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/0.jpg"
+    },
+    "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/1.jpg": {
+      "storagePath": "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/1.jpg",
+      "localPath": "data/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/1.jpg"
+    },
+    "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/2.jpg": {
+      "storagePath": "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/2.jpg",
+      "localPath": "data/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/2.jpg"
+    },
+    "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/3.jpg": {
+      "storagePath": "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/3.jpg",
+      "localPath": "data/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/3.jpg"
+    },
+    "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/4.jpg": {
+      "storagePath": "bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/4.jpg",
+      "localPath": "data/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8690e9a2-c1b0-40ba-9d81-4530237a7aab/4.jpg"
+    },
+    "bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/0.jpg": {
+      "storagePath": "bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/0.jpg",
+      "localPath": "data/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/0.jpg"
+    },
+    "bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/1.jpg": {
+      "storagePath": "bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/1.jpg",
+      "localPath": "data/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/8b4cf2e8-cb24-48ba-8f4c-fc3572ec8130/1.jpg"
+    },
+    "bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/0.jpg": {
+      "storagePath": "bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/0.jpg",
+      "localPath": "data/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/0.jpg"
+    },
+    "bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/cms-1780311775790/primary.webp": {
+      "storagePath": "bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/cms-1780311775790/primary.webp",
+      "localPath": "data/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/cms-1780311775790/primary.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/cms-1780311775790/primary.webp",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/92d1d23f-5e75-4af1-86e6-ca53f1924c12/cms-1780311775790/primary.webp"
+    },
+    "bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/0.jpg": {
+      "storagePath": "bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/0.jpg",
+      "localPath": "data/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/0.jpg"
+    },
+    "bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/1.jpg": {
+      "storagePath": "bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/1.jpg",
+      "localPath": "data/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9516158d-93a4-43fd-9ce5-14156aba1cea/1.jpg"
+    },
+    "bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/0.jpg": {
+      "storagePath": "bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/0.jpg",
+      "localPath": "data/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/0.jpg"
+    },
+    "bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/1.jpg": {
+      "storagePath": "bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/1.jpg",
+      "localPath": "data/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/99b22e78-0b48-43d5-89ec-a6518178f64e/1.jpg"
+    },
+    "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/0.jpg": {
+      "storagePath": "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/0.jpg",
+      "localPath": "data/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/0.jpg"
+    },
+    "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/1.jpg": {
+      "storagePath": "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/1.jpg",
+      "localPath": "data/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/1.jpg"
+    },
+    "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/2.jpg": {
+      "storagePath": "bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/2.jpg",
+      "localPath": "data/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/9bf48ca5-69ed-4fa2-ae59-b1e7b0cf3a04/2.jpg"
+    },
+    "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/0.jpg": {
+      "storagePath": "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/0.jpg",
+      "localPath": "data/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/0.jpg"
+    },
+    "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/1.jpg": {
+      "storagePath": "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/1.jpg",
+      "localPath": "data/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/1.jpg"
+    },
+    "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/2.jpg": {
+      "storagePath": "bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/2.jpg",
+      "localPath": "data/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a036800a-a1c2-42ff-804e-ae160c674ee8/2.jpg"
+    },
+    "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/0.jpg": {
+      "storagePath": "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/0.jpg",
+      "localPath": "data/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/0.jpg"
+    },
+    "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/1.jpg": {
+      "storagePath": "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/1.jpg",
+      "localPath": "data/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/1.jpg"
+    },
+    "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/2.jpg": {
+      "storagePath": "bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/2.jpg",
+      "localPath": "data/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a2816ee1-cf43-4cc1-b6f2-e40499c69202/2.jpg"
+    },
+    "bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/0.jpg": {
+      "storagePath": "bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/0.jpg",
+      "localPath": "data/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/0.jpg"
+    },
+    "bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/1.jpg": {
+      "storagePath": "bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/1.jpg",
+      "localPath": "data/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a3763275-829b-4bd3-b04a-7c9aca252a97/1.jpg"
+    },
+    "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/0.jpg": {
+      "storagePath": "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/0.jpg",
+      "localPath": "data/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/0.jpg"
+    },
+    "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/1.jpg": {
+      "storagePath": "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/1.jpg",
+      "localPath": "data/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/1.jpg"
+    },
+    "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/2.jpg": {
+      "storagePath": "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/2.jpg",
+      "localPath": "data/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/2.jpg"
+    },
+    "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/3.jpg": {
+      "storagePath": "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/3.jpg",
+      "localPath": "data/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/3.jpg"
+    },
+    "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/4.jpg": {
+      "storagePath": "bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/4.jpg",
+      "localPath": "data/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5c423c4-63ce-4818-8f71-3a3200e7c4a6/4.jpg"
+    },
+    "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/0.jpg": {
+      "storagePath": "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/0.jpg",
+      "localPath": "data/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/0.jpg"
+    },
+    "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/1.jpg": {
+      "storagePath": "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/1.jpg",
+      "localPath": "data/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/1.jpg"
+    },
+    "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/2.jpg": {
+      "storagePath": "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/2.jpg",
+      "localPath": "data/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/2.jpg"
+    },
+    "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/3.jpg": {
+      "storagePath": "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/3.jpg",
+      "localPath": "data/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/3.jpg"
+    },
+    "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/4.jpg": {
+      "storagePath": "bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/4.jpg",
+      "localPath": "data/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a5ee9078-03b1-4744-b213-62aaddbc5213/4.jpg"
+    },
+    "bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/0.jpg": {
+      "storagePath": "bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/0.jpg",
+      "localPath": "data/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/0.jpg"
+    },
+    "bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/1.jpg": {
+      "storagePath": "bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/1.jpg",
+      "localPath": "data/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a819a4b7-8a3b-49e9-a4ae-ebb6ee8be79d/1.jpg"
+    },
+    "bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/0.jpg": {
+      "storagePath": "bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/0.jpg",
+      "localPath": "data/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/0.jpg"
+    },
+    "bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/1.jpg": {
+      "storagePath": "bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/1.jpg",
+      "localPath": "data/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a8cf92b4-44d8-4870-8593-124d2731b644/1.jpg"
+    },
+    "bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/0.jpg": {
+      "storagePath": "bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/0.jpg",
+      "localPath": "data/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/0.jpg"
+    },
+    "bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/1.jpg": {
+      "storagePath": "bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/1.jpg",
+      "localPath": "data/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/a934e8d0-89ac-40ff-a01c-c54098434670/1.jpg"
+    },
+    "bouquets/ac747f6a-fbc8-44b7-8592-dd06cc4243d8/0.jpg": {
+      "storagePath": "bouquets/ac747f6a-fbc8-44b7-8592-dd06cc4243d8/0.jpg",
+      "localPath": "data/catalog/bouquets/ac747f6a-fbc8-44b7-8592-dd06cc4243d8/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ac747f6a-fbc8-44b7-8592-dd06cc4243d8/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ac747f6a-fbc8-44b7-8592-dd06cc4243d8/0.jpg"
+    },
+    "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/0.jpg": {
+      "storagePath": "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/0.jpg",
+      "localPath": "data/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/0.jpg"
+    },
+    "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/1.jpg": {
+      "storagePath": "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/1.jpg",
+      "localPath": "data/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/1.jpg"
+    },
+    "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/2.jpg": {
+      "storagePath": "bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/2.jpg",
+      "localPath": "data/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acd6fa7f-bd8a-45d9-b8de-895e66dd95cb/2.jpg"
+    },
+    "bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/0.jpg": {
+      "storagePath": "bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/0.jpg",
+      "localPath": "data/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/0.jpg"
+    },
+    "bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/1.jpg": {
+      "storagePath": "bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/1.jpg",
+      "localPath": "data/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/acedfe7c-3346-4c59-8d50-c3b6c87784bb/1.jpg"
+    },
+    "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/0.jpg": {
+      "storagePath": "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/0.jpg",
+      "localPath": "data/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/0.jpg"
+    },
+    "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/1.jpg": {
+      "storagePath": "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/1.jpg",
+      "localPath": "data/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/1.jpg"
+    },
+    "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/2.jpg": {
+      "storagePath": "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/2.jpg",
+      "localPath": "data/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/2.jpg"
+    },
+    "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/3.jpg": {
+      "storagePath": "bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/3.jpg",
+      "localPath": "data/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b0b70663-8d37-47f4-8850-59fed9f26144/3.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/0.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/0.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/0.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/1.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/1.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/1.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/2.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/2.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/2.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/3.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/3.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/3.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/4.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/4.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/4.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/5.jpg": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/5.jpg",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/5.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/5.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/5.jpg"
+    },
+    "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/cms-1779967674441/primary.webp": {
+      "storagePath": "bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/cms-1779967674441/primary.webp",
+      "localPath": "data/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/cms-1779967674441/primary.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/cms-1779967674441/primary.webp",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b2b878e9-a298-40e6-80d4-cd77d5c1d453/cms-1779967674441/primary.webp"
+    },
+    "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/0.jpg": {
+      "storagePath": "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/0.jpg",
+      "localPath": "data/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/0.jpg"
+    },
+    "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/1.jpg": {
+      "storagePath": "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/1.jpg",
+      "localPath": "data/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/1.jpg"
+    },
+    "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/2.jpg": {
+      "storagePath": "bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/2.jpg",
+      "localPath": "data/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b5e3b13d-02c3-4d93-8c46-a34705b2e1ce/2.jpg"
+    },
+    "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/1.jpg": {
+      "storagePath": "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/1.jpg",
+      "localPath": "data/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/1.jpg"
+    },
+    "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/2.jpg": {
+      "storagePath": "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/2.jpg",
+      "localPath": "data/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/2.jpg"
+    },
+    "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/3.jpg": {
+      "storagePath": "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/3.jpg",
+      "localPath": "data/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/3.jpg"
+    },
+    "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/4.jpg": {
+      "storagePath": "bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/4.jpg",
+      "localPath": "data/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/4.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b6545b39-15a9-46b6-8d23-0cfdf24d1da3/4.jpg"
+    },
+    "bouquets/b911deda-1bd1-4590-8463-f8c8e3f99890/0.jpg": {
+      "storagePath": "bouquets/b911deda-1bd1-4590-8463-f8c8e3f99890/0.jpg",
+      "localPath": "data/catalog/bouquets/b911deda-1bd1-4590-8463-f8c8e3f99890/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b911deda-1bd1-4590-8463-f8c8e3f99890/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/b911deda-1bd1-4590-8463-f8c8e3f99890/0.jpg"
+    },
+    "bouquets/befc405e-319f-41f9-9731-1289c495ce80/0.jpg": {
+      "storagePath": "bouquets/befc405e-319f-41f9-9731-1289c495ce80/0.jpg",
+      "localPath": "data/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/0.jpg"
+    },
+    "bouquets/befc405e-319f-41f9-9731-1289c495ce80/1.jpg": {
+      "storagePath": "bouquets/befc405e-319f-41f9-9731-1289c495ce80/1.jpg",
+      "localPath": "data/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/befc405e-319f-41f9-9731-1289c495ce80/1.jpg"
+    },
+    "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/0.jpg": {
+      "storagePath": "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/0.jpg",
+      "localPath": "data/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/0.jpg"
+    },
+    "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/1.jpg": {
+      "storagePath": "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/1.jpg",
+      "localPath": "data/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/1.jpg"
+    },
+    "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/2.jpg": {
+      "storagePath": "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/2.jpg",
+      "localPath": "data/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/2.jpg"
+    },
+    "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/3.jpg": {
+      "storagePath": "bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/3.jpg",
+      "localPath": "data/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/c84afbc6-dca9-465e-ad5a-a39f2f44edbb/3.jpg"
+    },
+    "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/0.jpg": {
+      "storagePath": "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/0.jpg",
+      "localPath": "data/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/0.jpg"
+    },
+    "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/1.jpg": {
+      "storagePath": "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/1.jpg",
+      "localPath": "data/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/1.jpg"
+    },
+    "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/2.jpg": {
+      "storagePath": "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/2.jpg",
+      "localPath": "data/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/2.jpg"
+    },
+    "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/3.jpg": {
+      "storagePath": "bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/3.jpg",
+      "localPath": "data/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/ce784c10-13af-4958-a131-54f6cdabf28f/3.jpg"
+    },
+    "bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/0.jpg": {
+      "storagePath": "bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/0.jpg",
+      "localPath": "data/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/0.jpg"
+    },
+    "bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/1.jpg": {
+      "storagePath": "bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/1.jpg",
+      "localPath": "data/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d4b8471e-6662-44e8-abe8-5de03c09264f/1.jpg"
+    },
+    "bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/0.jpg": {
+      "storagePath": "bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/0.jpg",
+      "localPath": "data/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/0.jpg"
+    },
+    "bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/1.jpg": {
+      "storagePath": "bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/1.jpg",
+      "localPath": "data/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d7265936-87c4-4267-879a-9e08f6b793e1/1.jpg"
+    },
+    "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/0.jpg": {
+      "storagePath": "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/0.jpg",
+      "localPath": "data/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/0.jpg"
+    },
+    "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/1.jpg": {
+      "storagePath": "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/1.jpg",
+      "localPath": "data/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/1.jpg"
+    },
+    "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/2.jpg": {
+      "storagePath": "bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/2.jpg",
+      "localPath": "data/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d78ce35f-7e61-4c64-bc1b-c294bb3bff2c/2.jpg"
+    },
+    "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/0.jpg": {
+      "storagePath": "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/0.jpg",
+      "localPath": "data/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/0.jpg"
+    },
+    "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/1.jpg": {
+      "storagePath": "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/1.jpg",
+      "localPath": "data/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/1.jpg"
+    },
+    "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/2.jpg": {
+      "storagePath": "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/2.jpg",
+      "localPath": "data/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/2.jpg"
+    },
+    "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/3.jpg": {
+      "storagePath": "bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/3.jpg",
+      "localPath": "data/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/d91c6885-30a0-4e1b-bf09-13786a34b65b/3.jpg"
+    },
+    "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/0.jpg": {
+      "storagePath": "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/0.jpg",
+      "localPath": "data/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/0.jpg"
+    },
+    "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/1.jpg": {
+      "storagePath": "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/1.jpg",
+      "localPath": "data/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/1.jpg"
+    },
+    "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/2.jpg": {
+      "storagePath": "bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/2.jpg",
+      "localPath": "data/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/daadcce9-137b-4b4e-9748-5c87831738f1/2.jpg"
+    },
+    "bouquets/e26dac48-7300-43fc-9bf1-08383162f91f/0.jpg": {
+      "storagePath": "bouquets/e26dac48-7300-43fc-9bf1-08383162f91f/0.jpg",
+      "localPath": "data/catalog/bouquets/e26dac48-7300-43fc-9bf1-08383162f91f/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e26dac48-7300-43fc-9bf1-08383162f91f/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e26dac48-7300-43fc-9bf1-08383162f91f/0.jpg"
+    },
+    "bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/0.jpg": {
+      "storagePath": "bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/0.jpg",
+      "localPath": "data/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/0.jpg"
+    },
+    "bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/1.jpg": {
+      "storagePath": "bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/1.jpg",
+      "localPath": "data/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e3a98db7-ea57-4667-9f2b-c80ce783dd5e/1.jpg"
+    },
+    "bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/0.jpg": {
+      "storagePath": "bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/0.jpg",
+      "localPath": "data/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/0.jpg"
+    },
+    "bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/1.jpg": {
+      "storagePath": "bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/1.jpg",
+      "localPath": "data/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e50de4bc-c10c-40b4-b9ce-8f84b5ce1b4d/1.jpg"
+    },
+    "bouquets/e6eda029-7dc1-4ef9-950f-e45ec6e9c4d8/0.jpg": {
+      "storagePath": "bouquets/e6eda029-7dc1-4ef9-950f-e45ec6e9c4d8/0.jpg",
+      "localPath": "data/catalog/bouquets/e6eda029-7dc1-4ef9-950f-e45ec6e9c4d8/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e6eda029-7dc1-4ef9-950f-e45ec6e9c4d8/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/e6eda029-7dc1-4ef9-950f-e45ec6e9c4d8/0.jpg"
+    },
+    "bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/0.jpg": {
+      "storagePath": "bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/0.jpg",
+      "localPath": "data/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/0.jpg"
+    },
+    "bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/1.jpg": {
+      "storagePath": "bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/1.jpg",
+      "localPath": "data/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f7161cde-015c-44ff-93eb-b916803b4ebe/1.jpg"
+    },
+    "bouquets/f71f0610-c261-4978-9029-529f8010b20e/0.jpg": {
+      "storagePath": "bouquets/f71f0610-c261-4978-9029-529f8010b20e/0.jpg",
+      "localPath": "data/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/0.jpg"
+    },
+    "bouquets/f71f0610-c261-4978-9029-529f8010b20e/1.jpg": {
+      "storagePath": "bouquets/f71f0610-c261-4978-9029-529f8010b20e/1.jpg",
+      "localPath": "data/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f71f0610-c261-4978-9029-529f8010b20e/1.jpg"
+    },
+    "bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/0.jpg": {
+      "storagePath": "bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/0.jpg",
+      "localPath": "data/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/0.jpg"
+    },
+    "bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/1.jpg": {
+      "storagePath": "bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/1.jpg",
+      "localPath": "data/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/f8adbe2e-d2d1-4795-938c-e64ab7f09814/1.jpg"
+    },
+    "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/0.jpg": {
+      "storagePath": "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/0.jpg",
+      "localPath": "data/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/0.jpg"
+    },
+    "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/1.jpg": {
+      "storagePath": "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/1.jpg",
+      "localPath": "data/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/1.jpg"
+    },
+    "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/2.jpg": {
+      "storagePath": "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/2.jpg",
+      "localPath": "data/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/2.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/2.jpg"
+    },
+    "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/3.jpg": {
+      "storagePath": "bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/3.jpg",
+      "localPath": "data/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/3.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fbf7cb45-99de-4626-862a-f84d7491c9ad/3.jpg"
+    },
+    "bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/0.jpg": {
+      "storagePath": "bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/0.jpg",
+      "localPath": "data/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/0.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/0.jpg"
+    },
+    "bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/1.jpg": {
+      "storagePath": "bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/1.jpg",
+      "localPath": "data/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/1.jpg",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/bouquets/fc6cf253-b031-4b3d-95ba-eae04fca9ce2/1.jpg"
+    },
+    "products/05f0d312-5194-42f5-ae31-d68e1dd65747/primary.webp": {
+      "storagePath": "products/05f0d312-5194-42f5-ae31-d68e1dd65747/primary.webp",
+      "localPath": "data/catalog/products/05f0d312-5194-42f5-ae31-d68e1dd65747/primary.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/05f0d312-5194-42f5-ae31-d68e1dd65747/primary.webp",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/05f0d312-5194-42f5-ae31-d68e1dd65747/primary.webp"
+    },
+    "products/d2c8cae6-f224-4f19-80a4-2fb82494ca98/primary.webp": {
+      "storagePath": "products/d2c8cae6-f224-4f19-80a4-2fb82494ca98/primary.webp",
+      "localPath": "data/catalog/products/d2c8cae6-f224-4f19-80a4-2fb82494ca98/primary.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/d2c8cae6-f224-4f19-80a4-2fb82494ca98/primary.webp",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/d2c8cae6-f224-4f19-80a4-2fb82494ca98/primary.webp"
+    },
+    "products/d88b3e9b-cf57-484b-92fd-2978357c5480/primary.webp": {
+      "storagePath": "products/d88b3e9b-cf57-484b-92fd-2978357c5480/primary.webp",
+      "localPath": "data/catalog/products/d88b3e9b-cf57-484b-92fd-2978357c5480/primary.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/d88b3e9b-cf57-484b-92fd-2978357c5480/primary.webp",
+      "skipped": true,
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/products/d88b3e9b-cf57-484b-92fd-2978357c5480/primary.webp"
+    },
+    "site-settings/default-carousel/1.jpg": {
+      "storagePath": "site-settings/default-carousel/1.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/1.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1.jpg"
+    },
+    "site-settings/default-carousel/10.jpg": {
+      "storagePath": "site-settings/default-carousel/10.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/10.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/10.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/10.jpg"
+    },
+    "site-settings/default-carousel/11.jpg": {
+      "storagePath": "site-settings/default-carousel/11.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/11.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/11.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/11.jpg"
+    },
+    "site-settings/default-carousel/13.jpg": {
+      "storagePath": "site-settings/default-carousel/13.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/13.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/13.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/13.jpg"
+    },
+    "site-settings/default-carousel/14.jpg": {
+      "storagePath": "site-settings/default-carousel/14.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/14.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/14.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/14.jpg"
+    },
+    "site-settings/default-carousel/12.jpg": {
+      "storagePath": "site-settings/default-carousel/12.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/12.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/12.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/12.jpg"
+    },
+    "site-settings/default-carousel/15.jpg": {
+      "storagePath": "site-settings/default-carousel/15.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/15.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/15.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/15.jpg"
+    },
+    "site-settings/default-carousel/0.jpg": {
+      "storagePath": "site-settings/default-carousel/0.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/0.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/0.jpg"
+    },
+    "site-settings/default-carousel/16.jpg": {
+      "storagePath": "site-settings/default-carousel/16.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/16.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/16.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/16.jpg"
+    },
+    "site-settings/default-carousel/1780330668875.webp": {
+      "storagePath": "site-settings/default-carousel/1780330668875.webp",
+      "localPath": "data/catalog/site-settings/default-carousel/1780330668875.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1780330668875.webp",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1780330668875.webp"
+    },
+    "site-settings/default-carousel/17.jpg": {
+      "storagePath": "site-settings/default-carousel/17.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/17.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/17.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/17.jpg"
+    },
+    "site-settings/default-carousel/18.jpg": {
+      "storagePath": "site-settings/default-carousel/18.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/18.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/18.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/18.jpg"
+    },
+    "site-settings/default-carousel/1780330689674.webp": {
+      "storagePath": "site-settings/default-carousel/1780330689674.webp",
+      "localPath": "data/catalog/site-settings/default-carousel/1780330689674.webp",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1780330689674.webp",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/1780330689674.webp"
+    },
+    "site-settings/default-carousel/2.jpg": {
+      "storagePath": "site-settings/default-carousel/2.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/2.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/2.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/2.jpg"
+    },
+    "site-settings/default-carousel/20.jpg": {
+      "storagePath": "site-settings/default-carousel/20.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/20.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/20.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/20.jpg"
+    },
+    "site-settings/default-carousel/19.jpg": {
+      "storagePath": "site-settings/default-carousel/19.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/19.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/19.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/19.jpg"
+    },
+    "site-settings/default-carousel/22.jpg": {
+      "storagePath": "site-settings/default-carousel/22.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/22.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/22.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/22.jpg"
+    },
+    "site-settings/default-carousel/21.jpg": {
+      "storagePath": "site-settings/default-carousel/21.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/21.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/21.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/21.jpg"
+    },
+    "site-settings/default-carousel/23.jpg": {
+      "storagePath": "site-settings/default-carousel/23.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/23.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/23.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/23.jpg"
+    },
+    "site-settings/default-carousel/24.jpg": {
+      "storagePath": "site-settings/default-carousel/24.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/24.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/24.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/24.jpg"
+    },
+    "site-settings/default-carousel/25.jpg": {
+      "storagePath": "site-settings/default-carousel/25.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/25.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/25.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/25.jpg"
+    },
+    "site-settings/default-carousel/3.jpg": {
+      "storagePath": "site-settings/default-carousel/3.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/3.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/3.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/3.jpg"
+    },
+    "site-settings/default-carousel/4.jpg": {
+      "storagePath": "site-settings/default-carousel/4.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/4.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/4.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/4.jpg"
+    },
+    "site-settings/default-carousel/5.jpg": {
+      "storagePath": "site-settings/default-carousel/5.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/5.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/5.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/5.jpg"
+    },
+    "site-settings/default-carousel/7.jpg": {
+      "storagePath": "site-settings/default-carousel/7.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/7.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/7.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/7.jpg"
+    },
+    "site-settings/default-carousel/9.jpg": {
+      "storagePath": "site-settings/default-carousel/9.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/9.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/9.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/9.jpg"
+    },
+    "site-settings/default-carousel/8.jpg": {
+      "storagePath": "site-settings/default-carousel/8.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/8.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/8.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/8.jpg"
+    },
+    "site-settings/default-carousel/6.jpg": {
+      "storagePath": "site-settings/default-carousel/6.jpg",
+      "localPath": "data/catalog/site-settings/default-carousel/6.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/6.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default-carousel/6.jpg"
+    },
+    "site-settings/default/0.jpg": {
+      "storagePath": "site-settings/default/0.jpg",
+      "localPath": "data/catalog/site-settings/default/0.jpg",
+      "publicUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default/0.jpg",
+      "storageUrl": "https://wqzrnfutuxkosapmponj.supabase.co/storage/v1/object/public/catalog/site-settings/default/0.jpg"
+    }
+  }
+}

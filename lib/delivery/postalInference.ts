@@ -24,7 +24,7 @@ export function extractPreferredPostcodeFromText(text: string): string | null {
   return matches[matches.length - 1];
 }
 
-function extractFromGoogleMapsUrl(url: string): string | null {
+function extractFromMapsUrl(url: string): string | null {
   const raw = url.trim();
   if (!raw) return null;
 
@@ -35,6 +35,13 @@ function extractFromGoogleMapsUrl(url: string): string | null {
       const decoded = decodeURIComponent(q.replace(/\+/g, ' '));
       const fromQ = extractPreferredPostcodeFromText(decoded);
       if (fromQ) return fromQ;
+    }
+    const text = u.searchParams.get('text');
+    if (text) {
+      const fromText = extractPreferredPostcodeFromText(
+        decodeURIComponent(text.replace(/\+/g, ' '))
+      );
+      if (fromText) return fromText;
     }
   } catch {
     // ignore invalid URL
@@ -52,7 +59,7 @@ export function inferPostalCodeFromDelivery(input: {
   if (explicit && /^\d{5}$/.test(explicit)) return explicit;
   const fromAddress = extractPreferredPostcodeFromText(input.address ?? '');
   const fromUrl = input.deliveryGoogleMapsUrl
-    ? extractFromGoogleMapsUrl(input.deliveryGoogleMapsUrl)
+    ? extractFromMapsUrl(input.deliveryGoogleMapsUrl)
     : null;
   return fromAddress ?? fromUrl ?? null;
 }

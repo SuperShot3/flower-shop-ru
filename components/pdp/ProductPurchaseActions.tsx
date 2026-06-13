@@ -21,7 +21,7 @@ export function ProductPurchaseActions({
 }) {
   const tProduct = translations[lang].product;
   const tCart = translations[lang].cart;
-  const resolvedAtc = (tProduct.addToCartWithPrice ?? `${tCart.addToCart} — ฿{price}`).replace(
+  const resolvedAtc = (tProduct.addToCartWithPrice ?? `${tCart.addToCart} — ₽{price}`).replace(
     '{price}',
     totalPrice.toLocaleString()
   );

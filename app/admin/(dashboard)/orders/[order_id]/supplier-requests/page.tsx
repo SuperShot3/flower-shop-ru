@@ -137,7 +137,7 @@ export default async function SupplierRequestsPage({ params }: PageProps) {
             <strong>{order.confirmed_supplier_shop_name}</strong>
           </p>
           <p className="admin-muted">
-            Price: {order.confirmed_supplier_price != null ? `฿${Number(order.confirmed_supplier_price).toLocaleString()}` : 'Not set'} ·
+            Price: {order.confirmed_supplier_price != null ? `₽${Number(order.confirmed_supplier_price).toLocaleString()}` : 'Not set'} ·
             Ready: {order.confirmed_supplier_ready_time ?? 'Not set'} ·
             Confirmed: {formatShopDateTime(order.confirmed_supplier_confirmed_at)}
           </p>

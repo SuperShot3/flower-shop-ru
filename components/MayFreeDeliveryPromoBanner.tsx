@@ -38,9 +38,9 @@ export function MayFreeDeliveryPromoBanner({
   const promo = translations[lang].mayFreeDeliveryPromo;
   const messageDesktop =
     promo?.bannerMessage ??
-    'Free delivery 19–31 May on flower orders ฿2,500+ — applied automatically at checkout';
+    'Free delivery 19–31 May on flower orders ₽2,500+ — applied automatically at checkout';
   const messageMobile =
-    promo?.bannerMessageShort ?? 'Free delivery 19–31 May · ฿2,500+ on flowers';
+    promo?.bannerMessageShort ?? 'Free delivery 19–31 May · ₽2,500+ on flowers';
   const ariaLabel = promo?.bannerAlt ?? messageDesktop;
 
   return (

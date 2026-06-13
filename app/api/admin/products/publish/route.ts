@@ -112,17 +112,17 @@ export async function POST(request: NextRequest) {
       const visibleItems = stringArrayField(b, 'flowerTypes');
       const customAttributes = [
         customAttribute('composition_en', stringField(b, 'compositionEn')),
-        customAttribute('composition_th', stringField(b, 'compositionTh')),
+        customAttribute('composition_ru', stringField(b, 'compositionRu')),
         listAttribute('color_tags', colors),
         listAttribute('visible_items', visibleItems),
       ].filter((attribute): attribute is { key: string; value: string } => Boolean(attribute));
 
       const result = await createAdminReviewProductInCatalog({
         nameEn,
-        nameTh: stringField(b, 'nameTh'),
+        nameRu: stringField(b, 'nameRu'),
         slug: stringField(b, 'slug') || undefined,
         descriptionEn: stringField(b, 'descriptionEn'),
-        descriptionTh: stringField(b, 'descriptionTh'),
+        descriptionRu: stringField(b, 'descriptionRu'),
         category: itemCategory,
         price,
         images,
@@ -149,12 +149,12 @@ export async function POST(request: NextRequest) {
 
     const result = await createAdminReviewBouquetInCatalog({
       nameEn,
-      nameTh: stringField(b, 'nameTh'),
+      nameRu: stringField(b, 'nameRu'),
       slug: stringField(b, 'slug') || undefined,
       descriptionEn: stringField(b, 'descriptionEn'),
-      descriptionTh: stringField(b, 'descriptionTh'),
+      descriptionRu: stringField(b, 'descriptionRu'),
       compositionEn: stringField(b, 'compositionEn'),
-      compositionTh: stringField(b, 'compositionTh'),
+      compositionRu: stringField(b, 'compositionRu'),
       price,
       images,
       colors: stringArrayField(b, 'colors'),

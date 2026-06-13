@@ -12,7 +12,7 @@ This repository is **independent** from [lannabloom.shop](https://lannabloom.sho
 | Database | [Supabase](https://supabase.com) Postgres via Vercel | — |
 | Images | [Supabase Storage](https://supabase.com/docs/guides/storage) (`catalog` bucket) |
 | Payments | Disabled in UI | YooKassa |
-| Partners / catalog | Partner apply form; catalog grows as partners join | Full catalog import from Thailand |
+| Partners / catalog | Partner apply form; catalog grows as partners join | Full catalog |
 
 **Domain:** registered at REG.RU. Point DNS (`@` and `www`) to **Vercel**, not REG.RU shared hosting (FTP/MySQL). See [Deploy](#deploy-to-vercel) below.
 
@@ -20,7 +20,6 @@ This repository is **independent** from [lannabloom.shop](https://lannabloom.sho
 
 - **Never** deploy this repo to the Thailand Vercel project.
 - **Never** set Thailand runtime credentials — the app refuses to start if it finds Thailand Supabase ref, `STRIPE_*`, or `NEXT_PUBLIC_GTM_ID`. See [`.env.example`](.env.example).
-- **Never** write to Thailand Supabase from runtime code. Export scripts are read-only and run locally only.
 
 ## Tech stack
 
@@ -86,30 +85,15 @@ Do **not** copy `.env.local` from the Thailand `flower_shop` repo.
 
 SSL is issued automatically by Vercel after DNS propagates.
 
-## One-time migration from Thailand (optional)
-
-When you need real bouquet data, run from your Mac only using `.env.export.local` (gitignored). Full step-by-step guide: **[docs/export-catalog-from-thailand.md](docs/export-catalog-from-thailand.md)**
-
-```bash
-npm run mirror-catalog:dry-run           # preview image paths
-npm run mirror-catalog                   # download images to data/catalog/
-npm run migrate-catalog-storage:dry-run  # preview Supabase upload
-npm run migrate-catalog-storage          # upload to Russia Supabase Storage
-npm run import-catalog-pg:dry-run        # preview row counts
-npm run import-catalog-pg                # insert bouquets into Russia Postgres
-```
-
-Uses `SUPABASE_EXPORT_*` — never deploy export credentials to Vercel or VPS.
-
 ## Project layout
 
 ```
-app/[lang]/          # Storefront (en / th — Russian locale TBD)
+app/[lang]/          # Storefront (ru / en)
 app/admin/           # Staff dashboard
 app/api/             # Route handlers
 lib/db/              # Postgres catalog reads
 lib/catalog/         # Images, mappers, types
-db/migrations/       # SQL schema
+db/bootstrap/        # SQL schema (7 files)
 ```
 
 ## Scripts
@@ -119,8 +103,6 @@ db/migrations/       # SQL schema
 | `npm run dev` | Local development |
 | `npm run build` | Production build |
 | `npm run check-isolation` | Fail if Thailand env vars are set |
-| `npm run mirror-catalog` | Download Thailand catalog images (local) |
-| `npm run import-catalog-pg` | Import catalog into Postgres |
 
 ## Further reading
 

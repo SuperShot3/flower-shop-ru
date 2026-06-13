@@ -30,7 +30,7 @@ export function ProductStickyPurchaseBar({
   const [visible, setVisible] = useState(false);
   const tProduct = translations[lang].product;
   const tCart = translations[lang].cart;
-  const stickyAtcLabel = (tProduct.addToCartWithPrice ?? `${tCart.addToCart} — ฿{price}`).replace(
+  const stickyAtcLabel = (tProduct.addToCartWithPrice ?? `${tCart.addToCart} — ₽{price}`).replace(
     '{price}',
     totalPrice.toLocaleString()
   );
@@ -74,7 +74,7 @@ export function ProductStickyPurchaseBar({
           <p className={styles.stickyTitle}>{productTitle}</p>
           <p className={styles.stickyPrice}>
             <data className={styles.stickyPriceValue} value={totalPrice}>
-              ฿{totalPrice.toLocaleString()}
+              ₽{totalPrice.toLocaleString()}
             </data>
           </p>
         </div>

@@ -5,7 +5,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, isThaiLocale, localeDateFormat} from '@/lib/i18n';
 import { getArticleBySlug, getArticleTitle, getArticleExcerpt, getArticleCtaLinks } from '../_data/articles';
 import { ShareButton } from '@/components/ShareButton';
 import { ArticleCta } from './ArticleCta';
@@ -25,19 +25,19 @@ const CONTENT_DIR = path.join(process.cwd(), 'content', 'info');
  * then falls back to [slug].mdx for articles not yet migrated to locale-specific files.
  */
 async function getMdxContent(slug: string, lang: string): Promise<string | null> {
-  const localeFile = path.join(CONTENT_DIR, `${slug}.${lang}.mdx`);
-  const fallbackFile = path.join(CONTENT_DIR, `${slug}.mdx`);
-  try {
-    const content = await fs.readFile(localeFile, 'utf-8');
-    return content;
-  } catch {
+  const candidates = [
+    path.join(CONTENT_DIR, `${slug}.${lang}.mdx`),
+    ...(lang !== 'en' ? [path.join(CONTENT_DIR, `${slug}.en.mdx`)] : []),
+    path.join(CONTENT_DIR, `${slug}.mdx`),
+  ];
+  for (const file of candidates) {
     try {
-      const content = await fs.readFile(fallbackFile, 'utf-8');
-      return content;
+      return await fs.readFile(file, 'utf-8');
     } catch {
-      return null;
+      continue;
     }
   }
+  return null;
 }
 
 export async function generateMetadata({
@@ -114,7 +114,8 @@ export default async function InfoArticlePage({
   const articleTitle = getArticleTitle(article, lang);
   const articleExcerpt = getArticleExcerpt(article, lang);
   const ctaLinks = getArticleCtaLinks(article, lang);
-  const guidesBackLabel = isThaiLocale(lang) ? '← คู่มือ' : '← Guides';
+  const guidesBackLabel =
+    lang === 'ru' ? '← Гайды' : isThaiLocale(lang) ? '← คู่มือ' : '← Guides';
 
   const base = getBaseUrl();
   const basePath = `/${lang}/info`;
@@ -122,7 +123,7 @@ export default async function InfoArticlePage({
 
   const formatDate = (iso: string) => {
     const d = new Date(iso);
-    return d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
+    return d.toLocaleDateString(localeDateFormat(lang), {
       month: 'long',
       day: 'numeric',
       year: 'numeric',

@@ -42,9 +42,9 @@ export function SizeSelector({
               className={`size-btn ${selected.optionId === size.optionId ? 'active' : ''}`}
               onClick={() => onSelect(size)}
               aria-pressed={selected.optionId === size.optionId}
-              aria-label={`${optionDisplayLabel(size, lang)} ฿${displayPrice.toLocaleString()}`}
+              aria-label={`${optionDisplayLabel(size, lang)} ₽${displayPrice.toLocaleString()}`}
             >
-              <span className="size-btn-price">฿{displayPrice.toLocaleString()}</span>
+              <span className="size-btn-price">₽{displayPrice.toLocaleString()}</span>
             {size.description ? (
               <span className="size-btn-desc">{size.description}</span>
             ) : null}

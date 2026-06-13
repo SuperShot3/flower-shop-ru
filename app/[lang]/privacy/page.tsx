@@ -1,70 +1,90 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
+import {
+  PolicyInlineLink,
+  PolicyList,
+  PolicyPageLayout,
+  PolicySection,
+  PolicyText,
+} from '@/components/legal/PolicyPageLayout';
+import { isValidLocale, translations, type Locale } from '@/lib/i18n';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   if (!isValidLocale(params.lang)) return { title: 'Privacy Policy' };
-  const lang = params.lang as Locale;
-  return { title: isThaiLocale(lang) ? 'นโยบายความเป็นส่วนตัว | Lanna Bloom' : 'Privacy Policy | Lanna Bloom' };
+  const t = translations[params.lang as Locale].legal.privacy;
+  return { title: t.metaTitle };
 }
 
 export default function PrivacyPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
   if (!isValidLocale(lang)) notFound();
   const locale = lang as Locale;
-
-  const isTh = isThaiLocale(locale);
-  const h1 = isTh ? 'นโยบายความเป็นส่วนตัว' : 'Privacy Policy';
+  const t = translations[locale].legal.privacy;
+  const requisitesNote = translations[locale].legal.terms.sellerPlaceholder;
 
   return (
-    <div className="container py-10">
-      <h1 className="text-3xl font-extrabold text-stone-900 mb-4">{h1}</h1>
-      <div className="prose prose-stone max-w-none">
-        <p>
-          {isTh
-            ? 'เอกสารนี้อธิบายว่า Lanna Bloom เก็บ ใช้ และเปิดเผยข้อมูลส่วนบุคคลอย่างไรเมื่อคุณใช้งานเว็บไซต์และทำรายการสั่งซื้อ'
-            : 'This policy explains how Lanna Bloom collects, uses, and shares personal data when you use our website and place orders.'}
-        </p>
+    <PolicyPageLayout
+      lang={locale}
+      title={t.title}
+      intro={t.intro}
+      callout={requisitesNote}
+    >
+      <PolicySection heading={t.operatorHeading}>
+        <PolicyText>{t.operatorText}</PolicyText>
+      </PolicySection>
 
-        <h2>{isTh ? 'ข้อมูลที่เราเก็บ' : 'Data we collect'}</h2>
-        <ul>
-          <li>{isTh ? 'ข้อมูลการติดต่อและการจัดส่ง (ชื่อ เบอร์โทร ที่อยู่ ข้อความการ์ด ฯลฯ)' : 'Contact and delivery details (name, phone, address, card message, etc.).'}</li>
-          <li>{isTh ? 'ข้อมูลการสั่งซื้อและการชำระเงิน (ผ่านผู้ให้บริการชำระเงิน เช่น Stripe เมื่อมีการชำระด้วยบัตร)' : 'Order and payment data (via payment providers such as Stripe when paying by card).'}</li>
-          <li>{isTh ? 'ข้อมูลการใช้งานเว็บไซต์ (เมื่อคุณยินยอมคุกกี้วิเคราะห์/การตลาด)' : 'Website usage data (only when you consent to analytics/marketing cookies).'}</li>
-        </ul>
+      <PolicySection heading={t.collectedHeading}>
+        <PolicyList
+          items={[
+            t.collectedList1,
+            t.collectedList2,
+            t.collectedList3,
+            t.collectedList4,
+            t.collectedList5,
+          ]}
+        />
+      </PolicySection>
 
-        <h2>{isTh ? 'คุกกี้และการวัดผล' : 'Cookies & measurement'}</h2>
-        <p>
-          {isTh ? (
-            <>
-              เราใช้คุกกี้ที่จำเป็นเพื่อให้เว็บไซต์ทำงานได้ และใช้คุกกี้/การวัดผลเพิ่มเติมเมื่อคุณยินยอม ดูรายละเอียดใน{' '}
-              <Link href={`/${locale}/cookies`}>นโยบายคุกกี้</Link>.
-            </>
-          ) : (
-            <>
-              We use essential cookies to make the site work and only use additional analytics/marketing measurement when you consent. See our{' '}
-              <Link href={`/${locale}/cookies`}>Cookie Policy</Link>.
-            </>
-          )}
-        </p>
+      <PolicySection heading={t.purposesHeading}>
+        <PolicyList items={[t.purposesList1, t.purposesList2, t.purposesList3]} />
+      </PolicySection>
 
-        <h2>{isTh ? 'การแบ่งปันข้อมูล' : 'Sharing'}</h2>
-        <p>
-          {isTh
-            ? 'เราอาจแบ่งปันข้อมูลกับผู้ให้บริการที่จำเป็นต่อการให้บริการ เช่น ผู้ให้บริการชำระเงิน โฮสติ้ง อีเมล และระบบจัดการคำสั่งซื้อ'
-            : 'We may share data with service providers necessary to operate the service, such as payment, hosting, email, and order management providers.'}
-        </p>
+      <PolicySection heading={t.legalBasisHeading}>
+        <PolicyText>{t.legalBasisText}</PolicyText>
+      </PolicySection>
 
-        <h2>{isTh ? 'การติดต่อ' : 'Contact'}</h2>
-        <p>
-          {isTh
-            ? 'หากมีคำถามเกี่ยวกับนโยบายนี้ กรุณาติดต่อเราผ่านหน้า Contact'
-            : 'If you have questions about this policy, please contact us via our Contact page.'}{' '}
-          <Link href={`/${locale}/contact`}>{isTh ? 'ติดต่อเรา' : 'Contact'}</Link>.
-        </p>
-      </div>
-    </div>
+      <PolicySection heading={t.processorsHeading}>
+        <PolicyText>{t.processorsText}</PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.analyticsHeading}>
+        <PolicyText>{t.analyticsText}</PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.retentionHeading}>
+        <PolicyText>{t.retentionText}</PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.rightsHeading}>
+        <PolicyList items={[t.rightsList1, t.rightsList2, t.rightsList3, t.rightsList4]} />
+        <PolicyText>{t.rightsText}</PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.cookiesHeading}>
+        <PolicyText>
+          {t.cookiesBeforeLink}{' '}
+          <PolicyInlineLink href={`/${locale}/cookies`}>{t.cookiesLinkLabel}</PolicyInlineLink>
+          {t.cookiesAfterLink}
+        </PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.contactHeading}>
+        <PolicyText>
+          {t.contactText}{' '}
+          <PolicyInlineLink href={`/${locale}/contact`}>{t.contactLinkLabel}</PolicyInlineLink>
+          {t.contactAfterLink}
+        </PolicyText>
+      </PolicySection>
+    </PolicyPageLayout>
   );
 }
-

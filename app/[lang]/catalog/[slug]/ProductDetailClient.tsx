@@ -9,7 +9,7 @@ import type { CatalogProduct } from '@/lib/catalog/types';
 import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
 import { trackViewItem } from '@/lib/analytics';
 import { computeFinalPrice } from '@/lib/partnerPricing';
-import { applyCatalogDiscountThb, hasCatalogDiscount } from '@/lib/catalogDiscount';
+import { applyCatalogDiscount, hasCatalogDiscount } from '@/lib/catalogDiscount';
 import { CatalogDiscountPrice } from '@/components/CatalogDiscountPrice';
 import { CatalogDiscountBadge } from '@/components/CatalogDiscountBadge';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
@@ -36,7 +36,7 @@ export function ProductDetailClient({
   const descDisplay = description?.trim() || (isThaiLocale(lang) ? 'ยังไม่มีรายละเอียดสินค้า' : 'No description provided.');
   const checkoutProfile = useCheckoutDeliveryProfile(lang);
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
-  const discountedPrice = applyCatalogDiscountThb(finalPrice, product.discountPercent);
+  const discountedPrice = applyCatalogDiscount(finalPrice, product.discountPercent);
   const isPlushyToy = product.catalogKind === 'plushyToy' || product.category === 'plushy_toys';
   const isBalloon = product.catalogKind === 'balloon' || product.category === 'balloons';
   const isStandaloneAddOn = isPlushyToy || isBalloon;
@@ -44,7 +44,7 @@ export function ProductDetailClient({
 
   useEffect(() => {
     trackViewItem({
-      currency: 'THB',
+      currency: 'RUB',
       value: discountedPrice,
       items: [
         {
@@ -104,14 +104,14 @@ export function ProductDetailClient({
         <div className="product-price-block">
           {hasCatalogDiscount(product.discountPercent) ? (
             <CatalogDiscountPrice
-              basePriceThb={finalPrice}
+              basePrice={finalPrice}
               discountPercent={product.discountPercent}
               destinationId={checkoutProfile.destinationId}
               className="product-price"
               amountClassName="product-price"
             />
           ) : (
-            <span className="product-price">฿{finalPrice.toLocaleString()}</span>
+            <span className="product-price">₽{finalPrice.toLocaleString()}</span>
           )}
         </div>
         <ProductOrderBlockForProduct

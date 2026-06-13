@@ -20,9 +20,10 @@ export type OrderSummaryItemRow = SupabaseOrderItemRow & {
 
 const CONTACT_PREF_LABELS: Record<ContactPreferenceStored, string> = {
   phone: 'Phone',
-  line: 'LINE',
   whatsapp: 'WhatsApp',
   telegram: 'Telegram',
+  max: 'MAX',
+  line: 'LINE',
 };
 
 function orderJsonPartial(order: SupabaseOrderRow): Partial<Order> | null | undefined {
@@ -165,7 +166,7 @@ function parseContactPreference(raw: string | null | undefined): ContactPreferen
   try {
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return [];
-    const allowed = new Set<ContactPreferenceStored>(['phone', 'line', 'telegram', 'whatsapp']);
+    const allowed = new Set<ContactPreferenceStored>(['phone', 'whatsapp', 'telegram', 'max', 'line']);
     const out: ContactPreferenceStored[] = [];
     for (const x of parsed) {
       if (typeof x === 'string' && allowed.has(x as ContactPreferenceStored)) {
@@ -186,7 +187,7 @@ export function naText(value: string | null | undefined): string {
 
 export function formatAmountNa(n: number | null | undefined): string {
   if (n == null) return 'N/A';
-  return `฿${Number(n).toLocaleString()}`;
+  return `₽${Number(n).toLocaleString()}`;
 }
 
 /**
@@ -414,7 +415,7 @@ export function buildOrderSummaryPlainText(order: SupabaseOrderRow, items: Order
     lines.push(`  ${g}`);
   }
   lines.push(`  Address: ${naText(customerDeliveryAddressRaw(order))}`);
-  lines.push(`  Google Maps (checkout): ${mapsUrl ?? 'N/A'}`);
+  lines.push(`  Yandex Maps (checkout): ${mapsUrl ?? 'N/A'}`);
   lines.push('');
   lines.push('Recipient');
   lines.push(`  Name: ${naText(rName)}`);

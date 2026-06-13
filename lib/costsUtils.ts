@@ -17,8 +17,11 @@ export function computeProfit(
   return Math.round(profit * 100) / 100;
 }
 
-/** Format THB amount for display. */
-export function formatThb(n: number | null | undefined): string {
+/** @deprecated use formatMoney from lib/money */
+export { formatMoney as formatThb, formatPriceCompact } from '@/lib/money';
+
+/** Format RUB amount for display. */
+export function formatRub(n: number | null | undefined): string {
   if (n == null || Number.isNaN(n)) return '—';
-  return `฿${Number(n).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+  return `₽${Number(n).toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 }

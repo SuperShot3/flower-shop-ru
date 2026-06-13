@@ -9,7 +9,8 @@ import {
 } from './AddOnsSection';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { useCart } from '@/contexts/CartContext';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';
 import { TrustBadges } from '@/components/TrustBadges';
@@ -19,8 +20,8 @@ import { computeFinalPrice } from '@/lib/partnerPricing';
 import { getProductDisplayCategory } from '@/lib/catalogCategories';
 import { BALLOON_TEXT_MAX_LENGTH, normalizeBalloonText } from '@/lib/balloonCustomization';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
-import { applyCatalogDiscountThb } from '@/lib/catalogDiscount';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
+import { applyCatalogDiscount } from '@/lib/catalogDiscount';
 
 export function ProductOrderBlockForProduct({
   product,
@@ -52,12 +53,12 @@ export function ProductOrderBlockForProduct({
     balloonTextPlaceholder?: string;
     balloonTextHelper?: string;
   };
-  const name = isThaiLocale(lang) && product.nameTh ? product.nameTh : product.nameEn;
+  const name = catalogLocalizedName(product, lang);
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
-  const discountedBase = applyCatalogDiscountThb(finalPrice, product.discountPercent);
+  const discountedBase = applyCatalogDiscount(finalPrice, product.discountPercent);
   const addOnsTotal = getAddOnsTotal(addOns.productAddOns ?? {});
   const qty = Math.max(1, Math.floor(quantity));
-  const unitPrice = applyExpansionItemMarkupThb(
+  const unitPrice = applyExpansionItemMarkup(
     discountedBase + addOnsTotal,
     checkoutProfile.destinationId
   );
@@ -88,7 +89,7 @@ export function ProductOrderBlockForProduct({
         bouquetId: product.id,
         slug: product.slug,
         nameEn: product.nameEn,
-        nameTh: product.nameTh ?? product.nameEn,
+        nameRu: product.nameRu ?? product.nameEn,
         imageUrl: selectedImageUrl ?? product.images?.[0],
         size: syntheticSize,
         addOns: { ...addOns, balloonText },
@@ -96,7 +97,7 @@ export function ProductOrderBlockForProduct({
       qty
     );
     trackAddToCart({
-      currency: 'THB',
+      currency: 'RUB',
       value: totalPrice,
       items: [
         {
@@ -189,7 +190,7 @@ export function ProductOrderBlockForProduct({
                 type="button"
                 className="order-qty-btn"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                aria-label="Decrease quantity"
+                aria-label={t.decreaseQuantity ?? 'Decrease quantity'}
               >
                 −
               </button>
@@ -198,12 +199,12 @@ export function ProductOrderBlockForProduct({
                 type="button"
                 className="order-qty-btn"
                 onClick={() => setQuantity((q) => q + 1)}
-                aria-label="Increase quantity"
+                aria-label={t.increaseQuantity ?? 'Increase quantity'}
               >
                 +
               </button>
             </div>
-            <span className="order-qty-price">฿{totalPrice.toLocaleString()}</span>
+            <span className="order-qty-price">₽{totalPrice.toLocaleString()}</span>
           </div>
           <TrustBadges lang={lang} />
           <button
@@ -211,7 +212,7 @@ export function ProductOrderBlockForProduct({
             className="order-add-to-cart-btn"
             onClick={handleAddToCart}
           >
-            {t.addToCart} — ฿{totalPrice.toLocaleString()}
+            {t.addToCart} — ₽{totalPrice.toLocaleString()}
           </button>
         </>
       )}

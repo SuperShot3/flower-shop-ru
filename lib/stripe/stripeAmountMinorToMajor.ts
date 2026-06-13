@@ -1,6 +1,6 @@
 /**
  * Convert Stripe API integer amounts (minor units) to major display units.
- * See Stripe docs: zero-decimal currencies vs two-decimal (e.g. THB uses satang).
+ * See Stripe docs: zero-decimal currencies vs two-decimal (e.g. RUB uses satang).
  */
 
 const ZERO_DECIMAL_CURRENCIES = new Set([

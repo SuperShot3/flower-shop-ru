@@ -5,14 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { Bouquet } from '@/lib/bouquets';
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { trackSelectItem } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
 import interest from '@/components/interestCarouselItem.module.css';
 import { buildCatalogItemHref } from '@/lib/delivery/marketRoute';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
 
 export function BouquetsCarousel({ bouquets, lang }: { bouquets: Bouquet[]; lang: Locale }) {
   const pathname = usePathname();
@@ -33,12 +34,12 @@ export function BouquetsCarousel({ bouquets, lang }: { bouquets: Bouquet[]; lang
       <div className="bouquets-carousel-viewport" ref={emblaRef}>
         <div className="bouquets-carousel-container">
           {bouquets.map((bouquet) => {
-            const name = isThaiLocale(lang) && bouquet.nameTh ? bouquet.nameTh : bouquet.nameEn;
+            const name = catalogLocalizedName(bouquet, lang);
             const imgSrc = bouquet.images?.[0] ?? '';
             const isDataUrl = typeof imgSrc === 'string' && imgSrc.startsWith('data:');
             const minPrice =
               bouquet.sizes?.length > 0 ? Math.min(...bouquet.sizes.map((s) => s.price)) : 0;
-            const displayMinPrice = applyExpansionItemMarkupThb(
+            const displayMinPrice = applyExpansionItemMarkup(
               minPrice,
               checkoutProfile.destinationId
             );
@@ -85,7 +86,7 @@ export function BouquetsCarousel({ bouquets, lang }: { bouquets: Bouquet[]; lang
                         {name}
                       </p>
                       <p className={interest.price}>
-                        {isThaiLocale(lang) ? 'เริ่มต้น ' : 'From '}฿{displayMinPrice.toLocaleString()}
+                        {isThaiLocale(lang) ? 'เริ่มต้น ' : 'From '}₽{displayMinPrice.toLocaleString()}
                       </p>
                     </div>
                   </Link>

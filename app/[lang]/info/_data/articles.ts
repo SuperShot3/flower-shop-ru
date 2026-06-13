@@ -12,7 +12,7 @@ import { isThaiLocale } from '@/lib/i18n';
 /** CTA link shown at bottom of article. href is path without lang (e.g. /catalog, /catalog?category=roses) */
 export type ArticleCtaLink = {
   label: string;
-  labelTh: string;
+  labelRu: string;
   href: string;
 };
 
@@ -20,6 +20,10 @@ export type ArticleMeta = {
   slug: string;
   title: string;
   excerpt: string;
+  /** Russian title (optional; falls back to title if missing) */
+  titleRu?: string;
+  /** Russian excerpt (optional; falls back to excerpt if missing) */
+  excerptRu?: string;
   /** Thai title (optional; falls back to title if missing) */
   titleTh?: string;
   /** Thai excerpt (optional; falls back to excerpt if missing) */
@@ -60,8 +64,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🧸' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
-      { label: 'Contact us', labelTh: 'ติดต่อเรา', href: '/contact' },
+      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Contact us', labelRu: 'ติดต่อเรา', href: '/contact' },
     ],
   },
   {
@@ -81,8 +85,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🎂' },
     },
     ctaLinks: [
-      { label: 'Browse birthday flowers', labelTh: 'ดูดอกไม้วันเกิด', href: '/catalog?occasion=birthday' },
-      { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Browse birthday flowers', labelRu: 'ดูดอกไม้วันเกิด', href: '/catalog?occasion=birthday' },
+      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
     ],
   },
   {
@@ -102,7 +106,7 @@ export const articles: ArticleMeta[] = [
       src: '/blog_images/order_onwebsite/lannabloom_website.webp',
       alt: 'Lanna Bloom website shown on a laptop',
     },
-    ctaLinks: [{ label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' }],
+    ctaLinks: [{ label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' }],
   },
   {
     slug: 'birthday-flowers-chiang-mai-from-abroad',
@@ -120,8 +124,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🎂' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
-      { label: 'Delivery policy', labelTh: 'นโยบายจัดส่ง', href: '/info/delivery-policy' },
+      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Delivery policy', labelRu: 'นโยบายจัดส่ง', href: '/info/delivery-policy' },
     ],
   },
   {
@@ -140,7 +144,7 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🌸' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
     ],
   },
   {
@@ -157,10 +161,10 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🚕' },
     },
     ctaLinks: [
-      { label: 'Browse rose bouquets', labelTh: 'ดูช่อกุหลาบ', href: '/catalog?types=rose' },
-      { label: 'Red roses', labelTh: 'กุหลาบแดง', href: '/catalog?types=rose&colors=red' },
-      { label: 'White roses', labelTh: 'กุหลาบขาว', href: '/catalog?types=rose&colors=white' },
-      { label: 'Order now', labelTh: 'สั่งซื้อเลย', href: '/catalog' },
+      { label: 'Browse rose bouquets', labelRu: 'ดูช่อกุหลาบ', href: '/catalog?types=rose' },
+      { label: 'Red roses', labelRu: 'กุหลาบแดง', href: '/catalog?types=rose&colors=red' },
+      { label: 'White roses', labelRu: 'กุหลาบขาว', href: '/catalog?types=rose&colors=white' },
+      { label: 'Order now', labelRu: 'สั่งซื้อเลย', href: '/catalog' },
     ],
   },
   {
@@ -180,9 +184,9 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🌹' },
     },
     ctaLinks: [
-      { label: '51 red roses', labelTh: 'กุหลาบแดง 51 ดอก', href: '/catalog/51-red-roses' },
-      { label: 'All rose bouquets', labelTh: 'ช่อกุหลาบทั้งหมด', href: '/info/rose-bouquets-chiang-mai' },
-      { label: 'Browse the catalog', labelTh: 'ดูแคตตาล็อก', href: '/catalog?types=rose' },
+      { label: '51 red roses', labelRu: 'กุหลาบแดง 51 ดอก', href: '/catalog/51-red-roses' },
+      { label: 'All rose bouquets', labelRu: 'ช่อกุหลาบทั้งหมด', href: '/info/rose-bouquets-chiang-mai' },
+      { label: 'Browse the catalog', labelRu: 'ดูแคตตาล็อก', href: '/catalog?types=rose' },
     ],
   },
   {
@@ -200,15 +204,18 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🚚' },
     },
     ctaLinks: [
-      { label: 'Order same-day delivery', labelTh: 'สั่งจัดส่งวันเดียว', href: '/catalog' },
-      { label: 'Message us to order', labelTh: 'ทักสั่งซื้อ', href: '/contact' },
+      { label: 'Order same-day delivery', labelRu: 'สั่งจัดส่งวันเดียว', href: '/catalog' },
+      { label: 'Message us to order', labelRu: 'ทักสั่งซื้อ', href: '/contact' },
     ],
   },
   {
     slug: 'delivery-policy',
     title: 'Delivery Policy',
     excerpt:
-      'How we deliver in every zone we serve: service hours 09:00–20:00, same-day guidance (orders after 18:00 usually roll to the next day), zones and fees at checkout, chat confirmation after you order online, and what we need for a smooth delivery. Custom requests or extra questions? Message us on LINE or WhatsApp.',
+      'How we deliver in Yekaterinburg and nearby cities: service hours 09:00–20:00, same-day guidance (orders after 18:00 usually roll to the next day), zones and fees at checkout, and what we need for a smooth delivery.',
+    titleRu: 'Правила доставки',
+    excerptRu:
+      'Доставка по Екатеринбургу и ближайшим городам: часы 09:00–20:00, доставка в тот же день (заказы после 18:00 обычно на следующий день), зоны и стоимость при оформлении заказа.',
     titleTh: 'นโยบายการจัดส่ง',
     excerptTh:
       'สรุปการจัดส่งทุกโซนที่เราเปิดให้บริการ: เวลาให้บริการ 09:00–20:00 แนวทางจัดส่งภายในวัน (ออเดอร์หลัง 18:00 มักนัดวันถัดไป) โซนและค่าจัดส่งตอนเช็กเอาต์ การยืนยันทางแชทหลังสั่งบนเว็บ และข้อมูลที่อยู่ที่ควรเตรียม ต้องการงานพิเศษหรือสอบถามเพิ่มเติม ทัก LINE หรือ WhatsApp ได้เลย',
@@ -220,8 +227,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '📧' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
-      { label: 'Refund / Replacement / Cancellation Policy', labelTh: 'นโยบายคืนเงิน / เปลี่ยนสินค้า / ยกเลิก', href: '/refund-replacement' },
+      { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
+      { label: 'Refund / Replacement / Cancellation Policy', labelRu: 'Возврат, замена и отмена', href: '/refund-replacement' },
     ],
   },
   {
@@ -238,8 +245,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🏥' },
     },
     ctaLinks: [
-      { label: 'Order flowers for delivery', labelTh: 'สั่งดอกไม้จัดส่ง', href: '/catalog' },
-      { label: 'Contact us', labelTh: 'ติดต่อเรา', href: '/contact' },
+      { label: 'Order flowers for delivery', labelRu: 'สั่งดอกไม้จัดส่ง', href: '/catalog' },
+      { label: 'Contact us', labelRu: 'ติดต่อเรา', href: '/contact' },
     ],
   },
 ];
@@ -248,21 +255,23 @@ export function getArticleBySlug(slug: string): ArticleMeta | undefined {
   return articles.find((a) => a.slug === slug);
 }
 
-/** Get localized title (lang: 'en' | 'th') */
+/** Get localized title (lang: 'en' | 'ru' | 'th') */
 export function getArticleTitle(article: ArticleMeta, lang: string): string {
+  if (lang === 'ru' && article.titleRu) return article.titleRu;
   if (isThaiLocale(lang) && article.titleTh) return article.titleTh;
   return article.title;
 }
 
-/** Get localized excerpt (lang: 'en' | 'th') */
+/** Get localized excerpt (lang: 'en' | 'ru' | 'th') */
 export function getArticleExcerpt(article: ArticleMeta, lang: string): string {
+  if (lang === 'ru' && article.excerptRu) return article.excerptRu;
   if (isThaiLocale(lang) && article.excerptTh) return article.excerptTh;
   return article.excerpt;
 }
 
 const DEFAULT_CTA: ArticleCtaLink[] = [
-  { label: 'Browse bouquets', labelTh: 'เลือกช่อดอกไม้', href: '/catalog' },
-  { label: 'Order via LINE / WhatsApp', labelTh: 'สั่งผ่าน LINE / WhatsApp', href: '/contact' },
+  { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
+  { label: 'Order via LINE / WhatsApp', labelRu: 'สั่งผ่าน LINE / WhatsApp', href: '/contact' },
 ];
 
 /** Get CTA links for article. Uses article's ctaLinks or default. */

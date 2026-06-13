@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import type { CheckoutStickyHeaderPayload } from '@/contexts/CheckoutStickyHeaderContext';
-import {type Locale, translations, isThaiLocale} from '@/lib/i18n';
-import { formatBangkokDate, formatBangkokTime } from '@/lib/deliveryHours';
+import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
+import { destinationDisplayName } from '@/lib/delivery/markets';
+import type { Locale } from '@/lib/i18n';
+import { formatShopClockDate, formatShopClockTime, SHOP_TIMEZONE } from '@/lib/shopTime';
 
 const CLOCK_TICK_MS = 1_000;
 
@@ -21,9 +23,12 @@ export function CheckoutCompactHeaderBar({
       ? payload.deliveryFreeLabel
       : `${thb}${payload.deliveryFee.toLocaleString()}`;
 
-  const locationLabel = translations[lang].catalog.localTimeBangkok ?? 'Chiang Mai';
+  const profile = useCheckoutDeliveryProfile(lang);
+  const locationLabel = destinationDisplayName(profile.destinationId, lang);
   const clockTitle =
-    isThaiLocale(lang) ? 'เวลาท้องถิ่น (เชียงใหม่)' : 'Local time in Chiang Mai (Asia/Bangkok)';
+    lang === 'ru'
+      ? `Местное время (${locationLabel})`
+      : `Local time in ${locationLabel} (${SHOP_TIMEZONE})`;
 
   return (
     <div className="checkout-compact-header" role="region" aria-label="Order summary">
@@ -67,13 +72,13 @@ export function CheckoutCompactHeaderBar({
           </span>
         </div>
         </div>
-        <CheckoutChiangMaiClock lang={lang} locationLabel={locationLabel} title={clockTitle} />
+        <CheckoutLocalTimeClock lang={lang} locationLabel={locationLabel} title={clockTitle} />
       </div>
     </div>
   );
 }
 
-function CheckoutChiangMaiClock({
+function CheckoutLocalTimeClock({
   lang,
   locationLabel,
   title,
@@ -97,10 +102,10 @@ function CheckoutChiangMaiClock({
       aria-label={title}
     >
       <time className="checkout-compact-header__local-time-clock" dateTime={now?.toISOString()} suppressHydrationWarning>
-        {now ? formatBangkokTime(now, lang) : '--:--'}
+        {now ? formatShopClockTime(now, lang) : '--:--'}
       </time>
       <span className="checkout-compact-header__local-time-date" suppressHydrationWarning>
-        {now ? formatBangkokDate(now, lang) : '—'}
+        {now ? formatShopClockDate(now, lang) : '—'}
       </span>
       <span className="checkout-compact-header__local-time-label">{locationLabel}</span>
     </div>

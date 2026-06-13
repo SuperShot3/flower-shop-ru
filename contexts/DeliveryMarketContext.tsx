@@ -8,7 +8,7 @@ export interface DeliveryMarketContextValue {
   destinationId: DeliveryDestinationId;
   pathSlug: MarketPathSlug;
   labelEn: string;
-  labelTh: string;
+  labelRu: string;
 }
 
 const DeliveryMarketContext = createContext<DeliveryMarketContextValue | null>(null);
@@ -18,17 +18,17 @@ export function DeliveryMarketProvider({
   destinationId,
   pathSlug,
   labelEn,
-  labelTh,
+  labelRu,
 }: {
   children: ReactNode;
   destinationId: DeliveryDestinationId;
   pathSlug: MarketPathSlug;
   labelEn: string;
-  labelTh: string;
+  labelRu: string;
 }) {
   const value = useMemo(
-    () => ({ destinationId, pathSlug, labelEn, labelTh }),
-    [destinationId, pathSlug, labelEn, labelTh]
+    () => ({ destinationId, pathSlug, labelEn, labelRu }),
+    [destinationId, pathSlug, labelEn, labelRu]
   );
   return (
     <DeliveryMarketContext.Provider value={value}>{children}</DeliveryMarketContext.Provider>

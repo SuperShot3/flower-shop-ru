@@ -6,14 +6,14 @@
 export interface ProductAddOn {
   id: 'chocolates' | 'vase' | 'teddy';
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   price: number;
 }
 
 export const ADDONS: ProductAddOn[] = [
-  { id: 'chocolates', nameEn: 'Gift Chocolates', nameTh: 'ช็อคโกแลตของขวัญ', price: 350 },
-  { id: 'vase', nameEn: 'Gift Vase', nameTh: 'แจกันของขวัญ', price: 450 },
-  { id: 'teddy', nameEn: 'Teddy Bear', nameTh: 'ตุ๊กตาหมี', price: 290 },
+  { id: 'chocolates', nameEn: 'Gift Chocolates', nameRu: 'ช็อคโกแลตของขวัญ', price: 350 },
+  { id: 'vase', nameEn: 'Gift Vase', nameRu: 'แจกันของขวัญ', price: 450 },
+  { id: 'teddy', nameEn: 'Teddy Bear', nameRu: 'ตุ๊กตาหมี', price: 290 },
 ];
 
 export function getAddOnById(id: ProductAddOn['id']): ProductAddOn | undefined {

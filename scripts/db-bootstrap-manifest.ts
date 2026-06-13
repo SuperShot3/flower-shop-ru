@@ -69,6 +69,7 @@ export const BOOTSTRAP_GROUPS: BootstrapGroup[] = [
       '20260508120000_orders_delivery_destination_zone_postal.sql',
       '20260511153000_expand_order_status_lifecycle.sql',
       '20260520130000_orders_marketing_email_consent.sql',
+      '20260613120000_orders_internal_notes.sql',
     ],
   },
   {
@@ -138,12 +139,27 @@ export const BOOTSTRAP_GROUPS: BootstrapGroup[] = [
 ALTER TABLE public.catalog_partners
   ALTER COLUMN city SET DEFAULT 'Yekaterinburg';
 
+ALTER TABLE public.catalog_partners
+  ADD COLUMN IF NOT EXISTS district text,
+  ADD COLUMN IF NOT EXISTS telegram text,
+  ADD COLUMN IF NOT EXISTS whatsapp text,
+  ADD COLUMN IF NOT EXISTS stock_categories text[] NOT NULL DEFAULT '{}',
+  ADD COLUMN IF NOT EXISTS flowers_in_stock text[] NOT NULL DEFAULT '{}',
+  ADD COLUMN IF NOT EXISTS internal_notes text,
+  ADD COLUMN IF NOT EXISTS self_deliver boolean NOT NULL DEFAULT false,
+  ADD COLUMN IF NOT EXISTS delivery_zones text,
+  ADD COLUMN IF NOT EXISTS prep_time_note text;
+
+CREATE INDEX IF NOT EXISTS catalog_partners_district_idx
+  ON public.catalog_partners (district)
+  WHERE district IS NOT NULL;
+
 -- Allow Russian locale slugs when importing RU storefront content
 ALTER TABLE public.catalog_slug_registry
   DROP CONSTRAINT IF EXISTS catalog_slug_registry_locale_check;
 ALTER TABLE public.catalog_slug_registry
   ADD CONSTRAINT catalog_slug_registry_locale_check
-  CHECK (locale IN ('en', 'th', 'ru'));
+  CHECK (locale IN ('en', 'ru'));
 `,
   },
   {

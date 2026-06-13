@@ -56,7 +56,7 @@ export async function createAccountingWithdrawal(
     .from(TABLE)
     .insert({
       amount: input.amount,
-      currency: input.currency ?? 'THB',
+      currency: input.currency ?? 'RUB',
       withdrawal_date: input.withdrawal_date,
       from_location: input.from_location,
       purpose: input.purpose.trim(),

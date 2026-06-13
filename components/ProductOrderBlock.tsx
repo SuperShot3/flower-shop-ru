@@ -9,7 +9,8 @@ import {
   type AddOnsValues,
 } from './AddOnsSection';
 import { useCart } from '@/contexts/CartContext';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, isThaiLocale} from '@/lib/i18n'
+import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
@@ -19,9 +20,10 @@ import type { CatalogProduct } from '@/lib/catalog/types';
 import { getPreferredBouquetSize } from '@/lib/favorites';
 import { useCheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
 import { useOrderGiftCardMessage } from '@/hooks/useOrderGiftCardMessage';
-import { applyExpansionItemMarkupThb } from '@/lib/expansionMarkup';
-import { applyCatalogDiscountThb } from '@/lib/catalogDiscount';
+import { applyExpansionItemMarkup } from '@/lib/expansionMarkup';
+import { applyCatalogDiscount } from '@/lib/catalogDiscount';
 import { bouquetIsAvailableForDestination } from '@/lib/bouquetDestinationAvailability';
+import { destinationDisplayName } from '@/lib/delivery/markets';
 import { ProductSizeCard } from '@/components/pdp/ProductSizeCard';
 import { ProductDeliveryBenefitBadge } from '@/components/pdp/ProductDeliveryBenefitBadge';
 import { ProductPurchaseActions } from '@/components/pdp/ProductPurchaseActions';
@@ -70,17 +72,19 @@ export function ProductOrderBlock({
   const { giftCardMessage, setGiftCardMessage } = useOrderGiftCardMessage();
   const checkoutProfile = useCheckoutDeliveryProfile(lang);
   const tProduct = translations[lang].product;
+  const tBuyNow = translations[lang].buyNow;
+  const tCart = translations[lang].cart;
   const availableForDestination = bouquetIsAvailableForDestination(
     bouquet,
     checkoutProfile.destinationId
   );
   const hideGiftAddOns = checkoutProfile.variant === 'expansion';
-  const destinationLabel = isThaiLocale(lang) ? checkoutProfile.labels.th : checkoutProfile.labels.en;
+  const destinationLabel = destinationDisplayName(checkoutProfile.destinationId, lang);
 
   const addOnsTotal = getAddOnsTotal(addOns.productAddOns ?? {});
   const qty = Math.max(1, Math.floor(quantity));
-  const discountedSizePrice = applyCatalogDiscountThb(selectedSize.price, bouquet.discountPercent);
-  const unitPrice = applyExpansionItemMarkupThb(
+  const discountedSizePrice = applyCatalogDiscount(selectedSize.price, bouquet.discountPercent);
+  const unitPrice = applyExpansionItemMarkup(
     discountedSizePrice + addOnsTotal,
     checkoutProfile.destinationId
   );
@@ -102,7 +106,7 @@ export function ProductOrderBlock({
   };
 
   const addToCartCore = () => {
-    const itemName = isThaiLocale(lang) ? bouquet.nameTh : bouquet.nameEn;
+    const itemName = catalogLocalizedName(bouquet, lang);
     const price = unitPrice;
     addItem(
       {
@@ -110,7 +114,7 @@ export function ProductOrderBlock({
         bouquetId: bouquet.id,
         slug: bouquet.slug,
         nameEn: bouquet.nameEn,
-        nameTh: bouquet.nameTh,
+        nameRu: bouquet.nameRu,
         imageUrl:
           selectedImageUrl ??
           selectedSize.imageUrls?.[0] ??
@@ -122,7 +126,7 @@ export function ProductOrderBlock({
       qty
     );
     trackAddToCart({
-      currency: 'THB',
+      currency: 'RUB',
       value: totalPrice,
       items: [
         {
@@ -155,7 +159,7 @@ export function ProductOrderBlock({
   return (
     <div className={`order-block ${stickyBarVisible ? 'order-block--sticky-pad' : ''}`}>
       <div className={pdpStyles.pdpPriceRow}>
-        <span className={pdpStyles.pdpUnitPrice}>฿{unitPrice.toLocaleString()}</span>
+        <span className={pdpStyles.pdpUnitPrice}>₽{unitPrice.toLocaleString()}</span>
         <ProductDeliveryBenefitBadge
           lang={lang}
           lineTotalThb={lineTotalForPromo}
@@ -211,13 +215,13 @@ export function ProductOrderBlock({
       />
 
       <div className={pdpStyles.qtyRow}>
-        <span className={pdpStyles.qtyLabel}>{translations[lang].buyNow.quantity ?? 'Quantity'}</span>
+        <span className={pdpStyles.qtyLabel}>{tBuyNow.quantity ?? tCart.quantity ?? 'Quantity'}</span>
         <div className={pdpStyles.qtyControl}>
           <button
             type="button"
             className={pdpStyles.qtyBtn}
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            aria-label="Decrease quantity"
+            aria-label={tCart.decreaseQuantity ?? 'Decrease quantity'}
           >
             −
           </button>
@@ -226,7 +230,7 @@ export function ProductOrderBlock({
             type="button"
             className={pdpStyles.qtyBtn}
             onClick={() => setQuantity((q) => q + 1)}
-            aria-label="Increase quantity"
+            aria-label={tCart.increaseQuantity ?? 'Increase quantity'}
           >
             +
           </button>
@@ -243,10 +247,10 @@ export function ProductOrderBlock({
             lang={lang}
             partnerName={bouquet.partnerName}
             partnerImage={bouquet.partnerPortraitUrl ?? null}
-            studioName={bouquet.partnerCity || 'Chiang Mai'}
+            studioName={bouquet.partnerCity || tProduct.floristDefaultStudio || 'Chiang Mai'}
             quote={
-              (isThaiLocale(lang) ? bouquet.partnerShopBioTh : bouquet.partnerShopBioEn) ||
-              "We source our flowers daily from local markets to ensure maximum freshness and fragrance in every arrangement."
+              (isThaiLocale(lang) ? bouquet.partnerShopBioRu : bouquet.partnerShopBioEn) ||
+              tProduct.floristDefaultQuote
             }
           />
         </div>

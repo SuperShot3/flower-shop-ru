@@ -7,7 +7,6 @@ For a **new** Supabase Postgres project, use the curated bootstrap instead of ru
 | `db/bootstrap/0N_*.sql` | **7 generated files** — final schema state (run in order) |
 | `supabase/migrations/` | **68 legacy files** — Thailand history; keep for existing DBs |
 | `scripts/db-bootstrap-manifest.ts` | Which legacy files compose each bootstrap file |
-| `db/migrations/001_catalog_schema.sql` | **Deprecated** slim catalog-only path — use full bootstrap |
 
 ## Quick start (new Russia Supabase)
 
@@ -70,11 +69,9 @@ When you add a schema change:
 
 ---
 
-## `db/migrations/001` vs bootstrap
+## `db/bootstrap/` vs incremental migrations
 
-`db/migrations/001_catalog_schema.sql` was an early Russia MVP shortcut (catalog only, no RLS, Yekaterinburg default). The bootstrap `06_catalog.sql` is the **authoritative** catalog shape (CMS tables, `pricing_type`, RLS, storage bucket) plus Russia locale/city patches.
-
-For catalog import from Thailand, apply **full bootstrap** first, then run `npm run import-catalog-pg` — see [export-catalog-from-thailand.md](export-catalog-from-thailand.md).
+The bootstrap `06_catalog.sql` is the **authoritative** catalog shape (CMS tables, `pricing_type`, RLS, storage bucket) plus Russia locale/city defaults.
 
 ---
 

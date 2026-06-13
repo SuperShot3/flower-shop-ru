@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import type { AccountingWithdrawal } from '@/types/accountingWithdrawals';
 
-function formatAmount(amount: number, currency = 'THB') {
+function formatAmount(amount: number, currency = 'RUB') {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency,
@@ -85,7 +85,7 @@ export function AccountingWithdrawalsPanel({ withdrawalsData, periodLabel }: Pro
           escapeCsvCell(w.purpose),
           escapeCsvCell(w.notes ?? ''),
           String(w.amount),
-          escapeCsvCell(w.currency || 'THB'),
+          escapeCsvCell(w.currency || 'RUB'),
           escapeCsvCell(LOCATION_LABELS[w.from_location] ?? w.from_location),
           escapeCsvCell(w.created_by ?? ''),
         ].join(',')

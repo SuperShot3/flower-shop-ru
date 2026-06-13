@@ -11,11 +11,11 @@ export interface Bouquet {
   id: string;
   slug: string;
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   compositionEn: string;
-  compositionTh: string;
+  compositionRu: string;
   /** single_price | size_based | stem_count */
   pricingType?: PricingType;
   colors?: string[];
@@ -34,7 +34,7 @@ export interface Bouquet {
   partnerName?: string;
   partnerCity?: string;
   partnerShopBioEn?: string;
-  partnerShopBioTh?: string;
+  partnerShopBioRu?: string;
   partnerPortraitUrl?: string;
   status?: BouquetStatus;
   /** CMS: pin to top of homepage Popular feed + show badge (catalog sort unchanged). */
@@ -42,9 +42,9 @@ export interface Bouquet {
   /** CMS sale discount (1–90%). Applied at checkout; shows badge when set. */
   discountPercent?: number;
   seoTitleEn?: string | null;
-  seoTitleTh?: string | null;
+  seoTitleRu?: string | null;
   seoDescriptionEn?: string | null;
-  seoDescriptionTh?: string | null;
+  seoDescriptionRu?: string | null;
 }
 
 export type PartnerStatus = 'pending_review' | 'approved' | 'disabled';
@@ -57,7 +57,7 @@ export interface Partner {
   lineOrWhatsapp?: string;
   shopAddress?: string;
   shopBioEn?: string;
-  shopBioTh?: string;
+  shopBioRu?: string;
   portraitUrl?: string;
   city: string;
   status: PartnerStatus;
@@ -89,11 +89,11 @@ export const bouquets: Bouquet[] = [
     id: '1',
     slug: 'classic-roses',
     nameEn: 'Classic Red Roses',
-    nameTh: 'กุหลาบแดงคลาสสิก',
+    nameRu: 'กุหลาบแดงคลาสสิก',
     descriptionEn: 'Timeless elegance with premium red roses.',
-    descriptionTh: 'ความสง่างามเหนือกาลเวลาด้วยกุหลาบแดงพรีเมียม',
+    descriptionRu: 'ความสง่างามเหนือกาลเวลาด้วยกุหลาบแดงพรีเมียม',
     compositionEn: 'Red roses, eucalyptus, ribbon',
-    compositionTh: 'กุหลาบแดง ยูคาลิปตัส ริบบิ้น',
+    compositionRu: 'กุหลาบแดง ยูคาลิปตัส ริบบิ้น',
     pricingType: 'single_price',
     images: [
       img('1518895949257-762e860e6f5b'),
@@ -111,11 +111,11 @@ export const bouquets: Bouquet[] = [
     id: '2',
     slug: 'pastel-dream',
     nameEn: 'Pastel Dream',
-    nameTh: 'ความฝันพาสเทล',
+    nameRu: 'ความฝันพาสเทล',
     descriptionEn: 'Soft pastel mix for a gentle statement.',
-    descriptionTh: 'ช่อผสมพาสเทลนุ่มสำหรับความประทับใจอันอ่อนโยน',
+    descriptionRu: 'ช่อผสมพาสเทลนุ่มสำหรับความประทับใจอันอ่อนโยน',
     compositionEn: 'Pink roses, white hydrangea, baby\'s breath',
-    compositionTh: 'กุหลาบชมพู ไฮเดรนเยียขาว เบบี้เบรธ',
+    compositionRu: 'กุหลาบชมพู ไฮเดรนเยียขาว เบบี้เบรธ',
     pricingType: 'single_price',
     images: [
       img('1490757867850-704c4c2d6aac'),
@@ -133,11 +133,11 @@ export const bouquets: Bouquet[] = [
     id: '3',
     slug: 'sunshine-box',
     nameEn: 'Sunshine in a Box',
-    nameTh: 'แสงแดดในกล่อง',
+    nameRu: 'แสงแดดในกล่อง',
     descriptionEn: 'Bright seasonal flowers in an elegant box.',
-    descriptionTh: 'ดอกไม้ตามฤดูกาลสดใสในกล่องสวยงาม',
+    descriptionRu: 'ดอกไม้ตามฤดูกาลสดใสในกล่องสวยงาม',
     compositionEn: 'Sunflowers, chrysanthemums, greens',
-    compositionTh: 'ดอกทานตะวัน เบญจมาศ ใบไม้เขียว',
+    compositionRu: 'ดอกทานตะวัน เบญจมาศ ใบไม้เขียว',
     pricingType: 'single_price',
     images: [
       img('1455659817273-f96807779a8a'),
@@ -155,11 +155,11 @@ export const bouquets: Bouquet[] = [
     id: '4',
     slug: 'romantic-pink',
     nameEn: 'Romantic Pink',
-    nameTh: 'โรแมนติกชมพู',
+    nameRu: 'โรแมนติกชมพู',
     descriptionEn: 'Perfect for expressing love and appreciation.',
-    descriptionTh: 'เหมาะสำหรับแสดงความรักและความซาบซึ้ง',
+    descriptionRu: 'เหมาะสำหรับแสดงความรักและความซาบซึ้ง',
     compositionEn: 'Pink roses, peonies, eucalyptus',
-    compositionTh: 'กุหลาบชมพู ดอกโบตั๋น ยูคาลิปตัส',
+    compositionRu: 'กุหลาบชมพู ดอกโบตั๋น ยูคาลิปตัส',
     pricingType: 'single_price',
     images: [
       img('1490757867850-704c4c2d6aac'),
@@ -177,11 +177,11 @@ export const bouquets: Bouquet[] = [
     id: '5',
     slug: 'birthday-joy',
     nameEn: 'Birthday Joy',
-    nameTh: 'ความสุขวันเกิด',
+    nameRu: 'ความสุขวันเกิด',
     descriptionEn: 'Colorful and cheerful for celebrations.',
-    descriptionTh: 'สดใสและรื่นเริงสำหรับงานฉลอง',
+    descriptionRu: 'สดใสและรื่นเริงสำหรับงานฉลอง',
     compositionEn: 'Mixed seasonal flowers, ribbon',
-    compositionTh: 'ดอกไม้ตามฤดูกาลผสม ริบบิ้น',
+    compositionRu: 'ดอกไม้ตามฤดูกาลผสม ริบบิ้น',
     pricingType: 'single_price',
     images: [
       img('1518895949257-762e860e6f5b'),
@@ -199,11 +199,11 @@ export const bouquets: Bouquet[] = [
     id: '6',
     slug: 'white-sympathy',
     nameEn: 'White Sympathy',
-    nameTh: 'แสดงความอาลัยสีขาว',
+    nameRu: 'แสดงความอาลัยสีขาว',
     descriptionEn: 'Elegant white arrangement for remembrance.',
-    descriptionTh: 'จัดดอกไม้สีขาวสง่างามเพื่อระลึกถึง',
+    descriptionRu: 'จัดดอกไม้สีขาวสง่างามเพื่อระลึกถึง',
     compositionEn: 'White lilies, roses, chrysanthemums',
-    compositionTh: 'ดอกลิลลี่ขาว กุหลาบขาว เบญจมาศขาว',
+    compositionRu: 'ดอกลิลลี่ขาว กุหลาบขาว เบญจมาศขาว',
     pricingType: 'single_price',
     images: [
       img('1455659817273-f96807779a8a'),

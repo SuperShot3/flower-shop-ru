@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
-import { isValidLocale, type Locale } from '@/lib/i18n';
-import { PartnerNav } from '@/components/partner/PartnerNav';
-import { ApplyWizard } from './ApplyWizard';
+import { isValidLocale } from '@/lib/i18n';
 
 export default async function PartnerApplyPage({
   params,
@@ -11,12 +9,6 @@ export default async function PartnerApplyPage({
   const lang = params.lang;
   if (!isValidLocale(lang)) notFound();
 
-  return (
-    <div className="partner-page partner-apply-page">
-      <PartnerNav lang={lang as Locale} current="apply" />
-      <div className="container">
-        <ApplyWizard lang={lang as Locale} />
-      </div>
-    </div>
-  );
+  // Public partner apply hidden for Russia MVP — admin enters partners directly.
+  notFound();
 }

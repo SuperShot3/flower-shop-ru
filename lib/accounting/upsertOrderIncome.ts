@@ -31,7 +31,7 @@ function mapMoneyLocation(method: IncomePaymentMethod): MoneyLocation {
 
 export interface OrderIncomeContext {
   orderId: string;
-  amount: number;           // In THB (already divided by 100 for Stripe)
+  amount: number;           // In RUB (already divided by 100 for Stripe)
   currency?: string;
   paymentMethod?: string | null;
   stripePaymentIntentId?: string | null;
@@ -81,7 +81,7 @@ export async function upsertOrderIncome(ctx: OrderIncomeContext): Promise<void> 
     const { created, error } = await upsertOrderIncomeRecord({
       order_id:          ctx.orderId.trim(),
       amount:            ctx.amount,
-      currency:          (ctx.currency ?? 'THB').toUpperCase(),
+      currency:          (ctx.currency ?? 'RUB').toUpperCase(),
       payment_method:    pm,
       money_location:    loc,
       description:       `Order ${ctx.orderId.trim()}`,

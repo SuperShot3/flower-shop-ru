@@ -2,7 +2,7 @@
 
 import type { AccountingTransfer } from '@/types/accountingTransfers';
 
-function formatAmount(amount: number, currency = 'THB') {
+function formatAmount(amount: number, currency = 'RUB') {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency,
@@ -84,7 +84,7 @@ export function AccountingTransfersPanel({ transfersData, periodLabel }: Props) 
           t.attachment_attached ? 'Yes' : 'No',
           escapeCsvCell(t.note ?? ''),
           String(t.amount),
-          escapeCsvCell(t.currency || 'THB'),
+          escapeCsvCell(t.currency || 'RUB'),
           escapeCsvCell(t.created_by ?? ''),
         ].join(',')
       );

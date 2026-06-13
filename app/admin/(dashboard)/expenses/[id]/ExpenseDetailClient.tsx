@@ -25,7 +25,7 @@ const CATEGORY_LABEL: Record<string, string> = Object.fromEntries(
 );
 const PM_LABEL = PAYMENT_METHOD_LABEL_BY_VALUE;
 
-function formatAmount(amount: number, currency = 'THB') {
+function formatAmount(amount: number, currency = 'RUB') {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency,

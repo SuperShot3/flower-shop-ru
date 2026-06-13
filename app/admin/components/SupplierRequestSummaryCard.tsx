@@ -14,7 +14,7 @@ interface SupplierRequestSummaryCardProps {
 
 function formatAmount(n: number | null | undefined): string {
   if (n == null) return 'Not set';
-  return `฿${Number(n).toLocaleString()}`;
+  return `₽${Number(n).toLocaleString()}`;
 }
 
 export function SupplierRequestSummaryCard({

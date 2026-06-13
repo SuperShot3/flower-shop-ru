@@ -46,7 +46,7 @@ const DISCOUNT_CODES: Record<string, DiscountCodeDefinition> = {
     type: 'percent',
     value: 10,
     discountBase: 'items',
-    allowedDeliveryDestinations: ['PHUKET'],
+    allowedDeliveryDestinations: ['PERVOURALSK'],
     affiliate: {
       name: 'Vasiliy',
       commissionPercent: 5,

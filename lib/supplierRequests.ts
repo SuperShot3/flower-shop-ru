@@ -184,7 +184,7 @@ export interface SupplierMessageCardSnapshot {
 }
 
 export interface SupplierCatalogSnapshot {
-  nameTh?: string | null;
+  nameRu?: string | null;
   sizeTh?: string | null;
   preparationTimeMinutes?: number | null;
 }
@@ -324,7 +324,7 @@ export function buildSupplierSnapshots(
     const catalogKey = item.id != null ? String(item.id) : `${item.bouquet_id ?? 'item'}:${index}`;
     const catalog = catalogByItemId[catalogKey] ?? {};
     const title = nullIfBlank(item.bouquet_title) ?? `รายการที่ ${index + 1}`;
-    const titleTh = nullIfBlank(catalog.nameTh);
+    const titleTh = nullIfBlank(catalog.nameRu);
     const size = nullIfBlank(item.size);
     const sizeTh = nullIfBlank(catalog.sizeTh);
     return {

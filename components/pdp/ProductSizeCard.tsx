@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { BouquetSize } from '@/lib/bouquets';
 import type { Locale } from '@/lib/i18n';
+import { translations } from '@/lib/i18n';
 import {
   friendlyLegacyLabel,
   optionDisplayLabel,
@@ -42,6 +43,9 @@ export function ProductSizeCard({
   destinationId: DeliveryDestinationId;
   discountPercent?: number;
 }) {
+  const tProduct = translations[lang].product;
+  const bouquetOptionsAria =
+    (tProduct as { bouquetOptionsAria?: string }).bouquetOptionsAria ?? 'Bouquet options';
   const [open, setOpen] = useState(false);
   const multiple = sizes.length > 1;
   const displayLabel = optionDisplayLabel(selected, lang);
@@ -76,7 +80,7 @@ export function ProductSizeCard({
               <div className={styles.sizeCardSub}>{selected.description}</div>
             ) : null}
           </div>
-          <span className={styles.sizeCardPrice}>฿{displayPrice.toLocaleString()}</span>
+          <span className={styles.sizeCardPrice}>₽{displayPrice.toLocaleString()}</span>
           {multiple ? (
             <span
               className={`${styles.sizeCardChevron} ${open ? styles.sizeCardChevronOpen : ''}`}
@@ -95,7 +99,7 @@ export function ProductSizeCard({
           ) : null}
         </div>
         {multiple && open ? (
-          <div className={styles.sizePickerList} role="listbox" aria-label="Bouquet options">
+          <div className={styles.sizePickerList} role="listbox" aria-label={bouquetOptionsAria}>
             {sizes.map((size) => {
               const label = optionDisplayLabel(size, lang);
               const price = effectiveCatalogUnitPriceWithExpansion(
@@ -123,7 +127,7 @@ export function ProductSizeCard({
                     <span className={styles.sizePickerOptionCheckSpacer} aria-hidden />
                   )}
                   <span className={styles.sizePickerOptionLabel}>{label}</span>
-                  <span className={styles.sizePickerOptionPrice}>฿{price.toLocaleString()}</span>
+                  <span className={styles.sizePickerOptionPrice}>₽{price.toLocaleString()}</span>
                 </button>
               );
             })}

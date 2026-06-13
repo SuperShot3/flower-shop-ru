@@ -125,9 +125,9 @@ export async function updateProductByAdminAction(formData: FormData): Promise<{ 
   const input: Parameters<typeof updateCatalogProductByAdmin>[1] = {};
 
   if (formData.has('nameEn')) input.nameEn = String(formData.get('nameEn') ?? '');
-  if (formData.has('nameTh')) input.nameTh = String(formData.get('nameTh') ?? '');
+  if (formData.has('nameRu')) input.nameRu = String(formData.get('nameRu') ?? '');
   if (formData.has('descriptionEn')) input.descriptionEn = String(formData.get('descriptionEn') ?? '');
-  if (formData.has('descriptionTh')) input.descriptionTh = String(formData.get('descriptionTh') ?? '');
+  if (formData.has('descriptionRu')) input.descriptionRu = String(formData.get('descriptionRu') ?? '');
 
   const priceRaw = String(formData.get('price') ?? '').trim();
   if (priceRaw) {
@@ -146,9 +146,9 @@ export async function updateProductByAdminAction(formData: FormData): Promise<{ 
   if (formData.get('useAdminOverrides') === 'true') {
     input.adminOverrides = {
       nameEn: (String(formData.get('nameEn') ?? '') || '').trim() || null,
-      nameTh: (String(formData.get('nameTh') ?? '') || '').trim() || null,
+      nameRu: (String(formData.get('nameRu') ?? '') || '').trim() || null,
       descriptionEn: (String(formData.get('descriptionEn') ?? '') || '').trim() || null,
-      descriptionTh: (String(formData.get('descriptionTh') ?? '') || '').trim() || null,
+      descriptionRu: (String(formData.get('descriptionRu') ?? '') || '').trim() || null,
     };
     input.adminChangeSummary =
       (String(formData.get('adminChangeSummary') ?? '') || '').trim() || null;
@@ -168,9 +168,9 @@ export async function updateProductByAdminAction(formData: FormData): Promise<{ 
         actor,
         payload: {
           ...(input.nameEn != null && { nameEn: input.nameEn }),
-          ...(input.nameTh != null && { nameTh: input.nameTh }),
+          ...(input.nameRu != null && { nameRu: input.nameRu }),
           ...(input.descriptionEn != null && { descriptionEn: input.descriptionEn }),
-          ...(input.descriptionTh != null && { descriptionTh: input.descriptionTh }),
+          ...(input.descriptionRu != null && { descriptionRu: input.descriptionRu }),
           ...(input.price != null && { price: input.price }),
           ...(input.occasion != null && { occasion: input.occasion }),
           ...(input.excludedDeliveryDestinations != null && {
@@ -272,7 +272,7 @@ export async function uploadProductImageAction(formData: FormData): Promise<{ er
   const productId = String(formData.get('productId') || '').trim();
   const file = formData.get('file');
   const altEn = String(formData.get('altEn') || '').trim();
-  const altTh = String(formData.get('altTh') || '').trim();
+  const altRu = String(formData.get('altRu') || '').trim();
   if (!productId) return { error: 'Missing productId' };
   if (!file || !(file instanceof File)) return { error: 'Image file is required' };
 
@@ -307,7 +307,7 @@ export async function uploadProductImageAction(formData: FormData): Promise<{ er
       publicUrl: webp.public_url,
       sourceType: 'uploaded',
       altEn: altEn || 'Product image',
-      altTh,
+      altRu,
       isPrimary: existingImages.length === 0,
       sortOrder: existingImages.length,
       metadata: { format: 'webp', master_path: pngMaster.storage_path },
@@ -344,7 +344,7 @@ export async function updateProductImageAltAction(formData: FormData): Promise<{
     await updateCatalogProductImageText({
       imageId,
       altEn: String(formData.get('altEn') || ''),
-      altTh: String(formData.get('altTh') || ''),
+      altRu: String(formData.get('altRu') || ''),
       actor: actorFromSessionUser(session.user),
     });
     if (revisionId) {

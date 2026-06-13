@@ -217,19 +217,19 @@ export function BouquetReviewClient({ bouquet }: BouquetReviewClientProps) {
             </div>
 
             <h2 className="admin-product-detail-title">{bouquet.nameEn}</h2>
-            {bouquet.nameTh ? <p className="admin-product-detail-subtitle">{bouquet.nameTh}</p> : null}
-            <div className="admin-product-detail-price">฿{price.toLocaleString()}</div>
+            {bouquet.nameRu ? <p className="admin-product-detail-subtitle">{bouquet.nameRu}</p> : null}
+            <div className="admin-product-detail-price">₽{price.toLocaleString()}</div>
 
             <div className="admin-product-detail-section">
               <h3>Description</h3>
               <p>{bouquet.descriptionEn || 'No English description.'}</p>
-              {bouquet.descriptionTh ? <p>{bouquet.descriptionTh}</p> : null}
+              {bouquet.descriptionRu ? <p>{bouquet.descriptionRu}</p> : null}
             </div>
 
             <div className="admin-product-detail-section">
               <h3>Composition</h3>
               <p>{bouquet.compositionEn || 'No English composition.'}</p>
-              {bouquet.compositionTh ? <p>{bouquet.compositionTh}</p> : null}
+              {bouquet.compositionRu ? <p>{bouquet.compositionRu}</p> : null}
             </div>
 
             <div className="admin-product-detail-section">

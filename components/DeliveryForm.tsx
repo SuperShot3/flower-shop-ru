@@ -10,14 +10,15 @@ import {
   getZoneFee,
   chiangMaiZoneIdFromLegacyDistrict,
   legacyDistrictFromChiangMaiZone,
+  zoneDisplayLabel,
 } from '@/lib/delivery/zones';
-import { PinIcon } from '@/components/icons/PinIcon';
-import { getLocalTodayYmd, getLocalTomorrowYmd } from '@/lib/localDateYmd';
-import { getBangkokYmd } from '@/lib/deliveryHours';
 import {
   CHECKOUT_FIELD_LIMITS,
   clipCheckoutField,
 } from '@/lib/checkout/checkoutFieldLimits';
+import { getLocalTodayYmd, getLocalTomorrowYmd } from '@/lib/localDateYmd';
+import { getBangkokYmd } from '@/lib/deliveryHours';
+import { openYandexMapsForAddress } from '@/lib/yandexMapsUrl';
 
 /** 4 delivery windows from 09:00 to 20:00. */
 export const DELIVERY_TIME_SLOTS = [
@@ -146,7 +147,6 @@ export function DeliveryForm({
     if (zoneManuallyChangedRef.current) return;
     const detected = detectDistrictFromAddress(value.addressLine);
     if (!detected) return;
-    if (detected === 'MUEANG') return;
     const suggested = chiangMaiZoneIdFromLegacyDistrict(detected, false);
     if (suggested && value.deliveryZoneId !== suggested) {
       onChange({
@@ -238,8 +238,8 @@ export function DeliveryForm({
                 <option value="">{t.selectDistrict}</option>
                 {zones.map((z) => (
                   <option key={z.id} value={z.id}>
-                    {isThaiLocale(lang) ? z.labelTh : z.labelEn}
-                    {` — ฿${(getZoneFee(destinationForZones, z.id) ?? z.feeThb).toLocaleString()}`}
+                    {zoneDisplayLabel(z, lang)}
+                    {` — ₽${(getZoneFee(destinationForZones, z.id) ?? z.feeRub).toLocaleString('ru-RU')}`}
                   </option>
                 ))}
               </select>
@@ -273,11 +273,8 @@ export function DeliveryForm({
               </span>
             </div>
             {showLocationPicker && (
-              <>
-                <div className="buy-now-field">
-                  <label className="buy-now-label" htmlFor="buy-now-google-maps-link">
-                    {(t as { googleMapsLinkLabel?: string }).googleMapsLinkLabel ?? 'Google Maps link (optional)'}
-                  </label>
+              <div className="buy-now-field">
+                <div className="buy-now-maps-link-row">
                   <input
                     id="buy-now-google-maps-link"
                     type="url"
@@ -289,27 +286,39 @@ export function DeliveryForm({
                           clipCheckoutField(e.target.value, 'googleMapsUrl').trim() || null,
                       })
                     }
-                    placeholder={(t as { googleMapsLinkPlaceholder?: string }).googleMapsLinkPlaceholder ?? 'Paste link from Google Maps'}
-                    className="buy-now-input"
+                    placeholder={
+                      (t as { googleMapsLinkPlaceholder?: string }).googleMapsLinkPlaceholder ??
+                      'Paste a share link (optional)'
+                    }
+                    className="buy-now-input buy-now-maps-link-input"
                     maxLength={CHECKOUT_FIELD_LIMITS.googleMapsUrl}
                     aria-describedby="buy-now-google-maps-hint"
                   />
-                  <p id="buy-now-google-maps-hint" className="buy-now-hint">
-                    {(t as { googleMapsLinkHint?: string }).googleMapsLinkHint ?? 'Open Google Maps → drop a pin / choose location → Share → Copy link → paste here.'}
-                  </p>
-                </div>
-                <div className="buy-now-field">
-                  <a
-                    href="https://www.google.com/maps"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="buy-now-open-gmaps-btn"
+                  <button
+                    type="button"
+                    className="buy-now-maps-link-btn"
+                    onClick={() => openYandexMapsForAddress(value.addressLine)}
+                    aria-label={
+                      (t as { openGoogleMapsButton?: string }).openGoogleMapsButton ??
+                      'Open address in Yandex Maps'
+                    }
                   >
-                    <PinIcon className="buy-now-open-gmaps-btn-icon" size={18} />
-                    {(t as { openGoogleMapsButton?: string }).openGoogleMapsButton ?? 'Open Google Maps'}
-                  </a>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/icons/yandex-maps.svg"
+                      alt=""
+                      className="buy-now-maps-link-btn-icon"
+                      width={18}
+                      height={18}
+                      decoding="async"
+                    />
+                  </button>
                 </div>
-              </>
+                <p id="buy-now-google-maps-hint" className="buy-now-hint">
+                  {(t as { yandexMapsCheckHelper?: string }).yandexMapsCheckHelper ??
+                    'Check the address on Yandex Maps, then return here to complete your order.'}
+                </p>
+              </div>
             )}
           </div>
         </div>
@@ -699,6 +708,51 @@ export function DeliveryForm({
           color: var(--text-muted);
           margin: 8px 0 0 28px;
         }
+        .buy-now-maps-link-row {
+          display: flex;
+          align-items: stretch;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          background: var(--surface);
+        }
+        .buy-now-maps-link-row:focus-within {
+          border-color: var(--accent);
+        }
+        .buy-now-maps-link-input {
+          flex: 1;
+          min-width: 0;
+          border: none !important;
+          border-radius: 0 !important;
+          min-height: 48px;
+        }
+        .buy-now-maps-link-input:focus {
+          outline: none;
+          border: none;
+        }
+        .buy-now-maps-link-btn {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          min-height: 48px;
+          padding: 0;
+          border: none;
+          border-left: 1px solid var(--border);
+          background: color-mix(in srgb, var(--pastel-cream) 70%, var(--surface));
+          cursor: pointer;
+          touch-action: manipulation;
+        }
+        .buy-now-maps-link-btn:hover {
+          background: var(--pastel-cream);
+        }
+        .buy-now-maps-link-btn-icon {
+          flex-shrink: 0;
+          width: 18px;
+          height: 18px;
+          object-fit: contain;
+        }
         .buy-now-open-gmaps-btn {
           display: inline-flex;
           align-items: center;
@@ -717,6 +771,7 @@ export function DeliveryForm({
           flex-shrink: 0;
           width: 18px;
           height: 18px;
+          object-fit: contain;
         }
         @media (max-width: 480px) {
           .buy-now-open-gmaps-btn-icon {

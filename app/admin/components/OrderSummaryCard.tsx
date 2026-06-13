@@ -59,7 +59,7 @@ export function OrderSummaryCard({ order, items, customGreetingCard }: OrderSumm
   const deliveryDateTimeAddressForCopy = hasDeliveryWhenWhere
     ? `Date: ${deliveryDateRaw || 'N/A'}\nTime / window: ${deliveryWindowRaw || 'N/A'}\nAddress: ${
         deliveryAddressResolved || 'N/A'
-      }\nGoogle Maps: ${mapsUrlRaw || 'N/A'}`
+      }\nYandex Maps: ${mapsUrlRaw || 'N/A'}`
     : '';
   const recipientNameForCopy = recipientName.trim();
   const recipientPhoneForCopy = recipientPhone.trim();
@@ -184,7 +184,7 @@ export function OrderSummaryCard({ order, items, customGreetingCard }: OrderSumm
                 </span>
               </p>
               <p className="admin-summary-recipient-line">
-                <span className="admin-summary-inline-label">Google Maps (checkout):</span>{' '}
+                <span className="admin-summary-inline-label">Yandex Maps (checkout):</span>{' '}
                 {mapsUrl ? (
                   <a
                     href={mapsUrl}
@@ -192,7 +192,7 @@ export function OrderSummaryCard({ order, items, customGreetingCard }: OrderSumm
                     rel="noopener noreferrer"
                     className="admin-link admin-summary-key-value"
                   >
-                    Open in Google Maps
+                    Open in Yandex Maps
                   </a>
                 ) : (
                   <span className="admin-muted">N/A</span>
@@ -201,7 +201,7 @@ export function OrderSummaryCard({ order, items, customGreetingCard }: OrderSumm
             </div>
             <AdminCopyTextButton
               text={deliveryDateTimeAddressForCopy}
-              ariaLabel="Copy delivery date, time window, address, and Google Maps link to clipboard"
+              ariaLabel="Copy delivery date, time window, address, and Yandex Maps link to clipboard"
               className="admin-copy-text-btn--inline"
             >
               Copy date, time, address & map

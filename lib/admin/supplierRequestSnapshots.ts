@@ -81,7 +81,7 @@ export async function buildSupplierCatalogSnapshots(
         return [
           key,
           {
-            nameTh: product?.nameTh ?? null,
+            nameRu: product?.nameRu ?? null,
             preparationTimeMinutes: product?.preparationTime ?? null,
           },
         ] as const;
@@ -89,13 +89,13 @@ export async function buildSupplierCatalogSnapshots(
 
       if (itemType === 'plushyToy') {
         const toy = await getCatalogPlushyToyById(id);
-        return [key, { nameTh: toy?.nameTh ?? null }] as const;
+        return [key, { nameRu: toy?.nameRu ?? null }] as const;
       }
 
       const bouquet = await getCatalogBouquetById(id);
       const matchedSize = bouquet?.sizes.find((size) =>
         matchesSizeLabel(size.label, item.size) ||
-        matchesSizeLabel(size.labelTh, item.size) ||
+        matchesSizeLabel(size.labelRu, item.size) ||
         matchesSizeLabel(size.key, item.size) ||
         matchesSizeLabel(size.optionId, item.size)
       );
@@ -103,8 +103,8 @@ export async function buildSupplierCatalogSnapshots(
       return [
         key,
         {
-          nameTh: bouquet?.nameTh ?? null,
-          sizeTh: matchedSize?.labelTh ?? null,
+          nameRu: bouquet?.nameRu ?? null,
+          sizeTh: matchedSize?.labelRu ?? null,
           preparationTimeMinutes: matchedSize?.preparationTime ?? null,
         },
       ] as const;

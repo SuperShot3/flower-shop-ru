@@ -50,6 +50,6 @@ export function purchaseValueAndCurrencyFromOrder(order: OrderLikeForPurchase): 
   currency: string;
 } {
   const value = order.pricing?.grandTotal ?? order.amountTotal ?? 0;
-  const currency = (order.currency ?? 'THB').trim() || 'THB';
+  const currency = (order.currency ?? 'RUB').trim() || 'THB';
   return { value, currency };
 }

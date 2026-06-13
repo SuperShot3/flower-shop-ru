@@ -6766,7 +6766,200 @@ a.admin-summary-key-value {
   font-size: 0.9rem;
 }
 
-/* Admin product moderation */
+/* Partner CRM (EKB internal directory) */
+.admin-partners-crm {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+}
+.admin-partners-crm-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+}
+.admin-partners-crm-add {
+  flex-shrink: 0;
+}
+.admin-partners-crm-filters {
+  margin-bottom: 12px;
+}
+.admin-partners-crm-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.admin-partners-crm-search .admin-input {
+  flex: 1;
+  min-width: 200px;
+}
+.admin-partners-crm-districts {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+.admin-partners-crm-cards {
+  display: grid;
+  gap: 12px;
+}
+.admin-partners-crm-card {
+  border: 1px solid var(--admin-border, #e5e7eb);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.admin-partners-crm-card.is-disabled {
+  opacity: 0.72;
+}
+.admin-partners-crm-card-main {
+  display: block;
+  padding: 14px 16px 10px;
+  text-decoration: none;
+  color: inherit;
+}
+.admin-partners-crm-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.admin-partners-crm-card-top h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.admin-partners-crm-card-district {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--admin-primary, #1a3c34);
+  font-weight: 500;
+}
+.admin-partners-crm-card-meta,
+.admin-partners-crm-card-categories,
+.admin-partners-crm-card-flowers,
+.admin-partners-crm-card-date {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--admin-text-muted, #6b7280);
+}
+.admin-partners-crm-card-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--admin-border, #e5e7eb);
+}
+.admin-partners-crm-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border, #e5e7eb);
+  background: var(--admin-bg-light, #f9fafb);
+  color: var(--admin-primary, #1a3c34);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.admin-partners-crm-contact-btn:hover {
+  border-color: var(--admin-primary, #1a3c34);
+  background: #fff;
+}
+.admin-partners-crm-table-wrap {
+  display: none;
+}
+@media (min-width: 900px) {
+  .admin-partners-crm-cards {
+    display: none;
+  }
+  .admin-partners-crm-table-wrap {
+    display: block;
+  }
+  .admin-partners-crm-header {
+    position: static;
+    backdrop-filter: none;
+    background: transparent;
+    padding: 0;
+  }
+}
+.admin-partners-crm-table tr.is-disabled {
+  opacity: 0.7;
+}
+.admin-partners-crm-form-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 0 48px;
+}
+.admin-partners-crm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-partners-crm-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--admin-border, #e5e7eb);
+  border-radius: 12px;
+  background: #fff;
+}
+.admin-partners-crm-form-section h2 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.admin-partners-crm-form-section .admin-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.admin-partners-crm-form-section .admin-input,
+.admin-partners-crm-form-section .admin-textarea {
+  font-size: 1rem;
+  min-height: 44px;
+}
+.admin-partners-crm-form-section .admin-textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+.admin-partners-crm-form-section .partner-chips {
+  margin-top: 4px;
+}
+.admin-partners-crm-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.admin-partners-crm-form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+.admin-partners-crm-status-btn {
+  margin-left: auto;
+  color: #b45309;
+  border-color: #fcd34d;
+}
+
 .admin-moderation-section {
   margin-bottom: 32px;
 }
@@ -13692,4 +13885,215 @@ a.admin-summary-key-value {
 .premium-checkout .co-card--pad,
 .premium-checkout .co-field {
   overflow: visible;
+}
+
+/* Policy / legal document pages (refund, terms, privacy, cookies) */
+.policy-page {
+  padding: var(--space-6) 0 var(--space-10);
+  background: var(--bg);
+}
+
+.policy-page-inner {
+  max-width: 44rem;
+}
+
+.policy-page-hero {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  padding: 0 var(--space-2);
+}
+
+.policy-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.375rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 auto var(--space-3);
+  max-width: 36rem;
+}
+
+.policy-intro {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0 auto;
+  max-width: 38rem;
+}
+
+.policy-last-updated {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
+  background: var(--pastel-cream);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0 var(--space-4);
+}
+
+.policy-document {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 1px 2px rgba(26, 60, 52, 0.04),
+    0 8px 24px rgba(26, 60, 52, 0.06);
+  padding: var(--space-6) var(--space-5);
+  overflow: hidden;
+}
+
+.policy-callout {
+  margin-bottom: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.policy-callout + .policy-body {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-2);
+}
+
+.policy-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.policy-section {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.policy-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.policy-heading {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  margin: 0 0 var(--space-4);
+}
+
+.policy-section-content > :last-child {
+  margin-bottom: 0;
+}
+
+.policy-text {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 var(--space-3);
+}
+
+.policy-list {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.policy-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 1rem;
+}
+
+.policy-list-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.125rem;
+  color: var(--accent);
+}
+
+.policy-list-icon-svg {
+  display: block;
+}
+
+.policy-list-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.policy-note {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--pastel-cream) 70%, var(--surface));
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.policy-link-inline {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.policy-link-inline:hover {
+  color: #967a4d;
+}
+
+.policy-back {
+  margin-top: var(--space-2);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+.policy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.policy-link:hover {
+  color: #967a4d;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .policy-page {
+    padding: var(--space-8) 0 3.5rem;
+  }
+
+  .policy-page-hero {
+    margin-bottom: var(--space-8);
+  }
+
+  .policy-document {
+    padding: var(--space-8) var(--space-8);
+  }
+
+  .policy-section {
+    padding: var(--space-6) 0;
+  }
 }

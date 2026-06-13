@@ -76,7 +76,7 @@ export default function FlowerDeliveryThailandPage({
             {areas.map((area) => (
               <li key={area.nameEn}>
                 <Link href={area.href(lang)} className="text-[#1A3C34] font-medium hover:text-[#C5A059]">
-                  {isTh ? area.nameTh : area.nameEn}
+                  {isTh ? area.nameRu : area.nameEn}
                 </Link>
                 {area.noteEn ? (
                   <span className="text-stone-500 text-sm">

@@ -11,11 +11,11 @@ const PAGE_W = 595;
 const PAGE_H = 842;
 const MARGIN = 48;
 
-/** THB for PDF — avoid `฿` so standard fonts (WinAnsi) never throw. */
+/** RUB for PDF — avoid `₽` so standard fonts (WinAnsi) never throw. */
 function formatThbPdfAmount(n: number | null | undefined): string {
-  if (n == null || Number.isNaN(n)) return 'THB n/a';
+  if (n == null || Number.isNaN(n)) return 'RUB n/a';
   const s = Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-  return `THB ${s}`;
+  return `RUB ${s}`;
 }
 
 function formatPdfDateTime(iso: string | null | undefined): string {

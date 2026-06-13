@@ -24,13 +24,13 @@ export type ProductImageAnalysis = {
 
 export type ProductDraftCopy = {
   nameEn: string;
-  nameTh: string;
+  nameRu: string;
   descriptionEn: string;
-  descriptionTh: string;
+  descriptionRu: string;
   compositionEn: string;
-  compositionTh: string;
+  compositionRu: string;
   altEn: string;
-  altTh: string;
+  altRu: string;
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -106,13 +106,13 @@ function normalizeAnalysis(value: Partial<ProductImageAnalysis>): ProductImageAn
 function normalizeDraft(value: Partial<ProductDraftCopy>): ProductDraftCopy {
   return {
     nameEn: String(value.nameEn ?? '').trim(),
-    nameTh: String(value.nameTh ?? '').trim(),
+    nameRu: String(value.nameRu ?? '').trim(),
     descriptionEn: String(value.descriptionEn ?? '').trim(),
-    descriptionTh: String(value.descriptionTh ?? '').trim(),
+    descriptionRu: String(value.descriptionRu ?? '').trim(),
     compositionEn: String(value.compositionEn ?? '').trim(),
-    compositionTh: String(value.compositionTh ?? '').trim(),
+    compositionRu: String(value.compositionRu ?? '').trim(),
     altEn: String(value.altEn ?? '').trim(),
-    altTh: String(value.altTh ?? '').trim(),
+    altRu: String(value.altRu ?? '').trim(),
     seoTitle: String(value.seoTitle ?? '').trim(),
     seoDescription: String(value.seoDescription ?? '').trim(),
     seoKeywords: toStringArray(value.seoKeywords),
@@ -195,7 +195,7 @@ export async function generateProductDescription(
         content:
           `${DESCRIPTION_RULES}\n\nAdmin hints:\n${stringifyHints(hints)}\n\n` +
           `Approved/edited product analysis:\n${JSON.stringify(analysis, null, 2)}\n\n` +
-          'Return JSON with keys: nameEn, nameTh, descriptionEn, descriptionTh, compositionEn, compositionTh, altEn, altTh, seoTitle, seoDescription, seoKeywords, searchPhrases.',
+          'Return JSON with keys: nameEn, nameRu, descriptionEn, descriptionRu, compositionEn, compositionRu, altEn, altRu, seoTitle, seoDescription, seoKeywords, searchPhrases.',
       },
     ],
   });

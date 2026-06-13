@@ -13,11 +13,16 @@ export function ArticleCta({
   return (
     <section className={styles.infoArticleCta} aria-labelledby="info-article-cta-title">
       <h2 id="info-article-cta-title" className={styles.infoArticleCtaTitle}>
-        {isThaiLocale(lang) ? 'สั่งซื้อหรือเลือกช่อ' : 'Order or browse'}
+        {lang === 'ru'
+          ? 'Заказать или выбрать букет'
+          : isThaiLocale(lang)
+            ? 'สั่งซื้อหรือเลือกช่อ'
+            : 'Order or browse'}
       </h2>
       <div className={styles.infoArticleCtaLinks}>
         {links.map((link, i) => {
-          const label = isThaiLocale(lang) ? link.labelTh : link.label;
+          const label =
+            lang === 'ru' || isThaiLocale(lang) ? link.labelRu : link.label;
           const href = `/${lang}${link.href}`;
           const isPrimary = i === 0;
           return (

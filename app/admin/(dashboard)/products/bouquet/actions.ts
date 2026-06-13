@@ -132,11 +132,11 @@ export async function updateBouquetByAdminAction(formData: FormData): Promise<{ 
 
   const input: UpdateCatalogBouquetByAdminInput = {
     nameEn: String(formData.get('nameEn') ?? ''),
-    nameTh: String(formData.get('nameTh') ?? ''),
+    nameRu: String(formData.get('nameRu') ?? ''),
     descriptionEn: String(formData.get('descriptionEn') ?? ''),
-    descriptionTh: String(formData.get('descriptionTh') ?? ''),
+    descriptionRu: String(formData.get('descriptionRu') ?? ''),
     compositionEn: String(formData.get('compositionEn') ?? ''),
-    compositionTh: String(formData.get('compositionTh') ?? ''),
+    compositionRu: String(formData.get('compositionRu') ?? ''),
     featuredPopular: formData.get('featuredPopular') === 'true',
     colors: parseCommaList(String(formData.get('colors') ?? '')),
     flowerTypes: parseCommaList(String(formData.get('flowerTypes') ?? '')),
@@ -207,11 +207,11 @@ export async function updateBouquetByAdminAction(formData: FormData): Promise<{ 
         actor,
         payload: {
           nameEn: input.nameEn,
-          nameTh: input.nameTh,
+          nameRu: input.nameRu,
           descriptionEn: input.descriptionEn,
-          descriptionTh: input.descriptionTh,
+          descriptionRu: input.descriptionRu,
           compositionEn: input.compositionEn,
-          compositionTh: input.compositionTh,
+          compositionRu: input.compositionRu,
           featuredPopular: input.featuredPopular,
           colors: input.colors,
           flowerTypes: input.flowerTypes,
@@ -275,7 +275,7 @@ export async function uploadBouquetImageAction(formData: FormData): Promise<{ er
   const bouquetId = String(formData.get('bouquetId') || '').trim();
   const file = formData.get('file');
   const altEn = String(formData.get('altEn') || '').trim();
-  const altTh = String(formData.get('altTh') || '').trim();
+  const altRu = String(formData.get('altRu') || '').trim();
   const variantKey = String(formData.get('variantKey') || '').trim() || null;
   if (!bouquetId) return { error: 'Missing bouquetId' };
   if (!file || !(file instanceof File)) return { error: 'Image file is required' };
@@ -312,7 +312,7 @@ export async function uploadBouquetImageAction(formData: FormData): Promise<{ er
       publicUrl: webp.public_url,
       sourceType: 'uploaded',
       altEn: altEn || 'Bouquet image',
-      altTh,
+      altRu,
       isPrimary: !variantKey && existingImages.length === 0,
       sortOrder: existingImages.length,
       metadata: {
@@ -351,7 +351,7 @@ export async function updateBouquetImageAltAction(formData: FormData): Promise<{
     await updateCatalogProductImageText({
       imageId,
       altEn: String(formData.get('altEn') || ''),
-      altTh: String(formData.get('altTh') || ''),
+      altRu: String(formData.get('altRu') || ''),
       actor: actorFromSessionUser(session.user),
     });
     if (revisionId) {

@@ -6,8 +6,7 @@ import type { ContactPreferenceOption } from '@/lib/orders';
 import {
   nationalDigitsValidForCheckout,
 } from '@/lib/phoneFieldHints';
-import { isValidLineUserId, normalizeLineUserId } from '@/lib/lineUserId';
-import { isValidGoogleMapsUrl } from '@/lib/googleMapsUrl';
+import { isValidCheckoutMapsUrl } from '@/lib/yandexMapsUrl';
 
 function exceedsLimit(value: string, max: number): boolean {
   return value.trim().length > max;
@@ -48,7 +47,7 @@ export function isPremiumDeliveryValid(delivery: DeliveryFormValues): boolean {
   const mapsUrl = delivery.deliveryGoogleMapsUrl?.trim() ?? '';
   if (mapsUrl) {
     if (exceedsLimit(mapsUrl, CHECKOUT_FIELD_LIMITS.googleMapsUrl)) return false;
-    if (!isValidGoogleMapsUrl(mapsUrl)) return false;
+    if (!isValidCheckoutMapsUrl(mapsUrl)) return false;
   }
   const note = delivery.deliveryNote?.trim() ?? '';
   if (exceedsLimit(note, CHECKOUT_FIELD_LIMITS.deliveryNote)) return false;
@@ -62,10 +61,9 @@ export function isPremiumSenderValid(params: {
   countryCode: string;
   phoneNational: string;
   contactPreference: ContactPreferenceOption[];
-  lineId: string;
   customerEmail: string;
 }): boolean {
-  const { customerName, countryCode, phoneNational, contactPreference, lineId, customerEmail } =
+  const { customerName, countryCode, phoneNational, contactPreference, customerEmail } =
     params;
   if (!customerName.trim()) return false;
   if (exceedsLimit(customerName, CHECKOUT_FIELD_LIMITS.customerName)) return false;
@@ -74,10 +72,6 @@ export function isPremiumSenderValid(params: {
   }
   if (!nationalDigitsValidForCheckout(countryCode, phoneNational)) return false;
   if (contactPreference.length === 0) return false;
-  if (contactPreference.includes('line')) {
-    const norm = normalizeLineUserId(lineId);
-    if (!isValidLineUserId(norm)) return false;
-  }
   const emailTrim = customerEmail.trim();
   if (emailTrim) {
     if (exceedsLimit(emailTrim, CHECKOUT_FIELD_LIMITS.customerEmail)) return false;
@@ -117,7 +111,6 @@ export function getFirstCheckoutFieldIssue(
     pleaseAddYourPhone: string;
     pleaseAddYourEmail: string;
     pleaseChooseContact: string;
-    pleaseAddLineId: string;
     invalidMapsLink: string;
   },
   params: {
@@ -126,7 +119,6 @@ export function getFirstCheckoutFieldIssue(
     countryCode: string;
     phoneNational: string;
     contactPreference: ContactPreferenceOption[];
-    lineId: string;
     customerEmail: string;
     recipientName: string;
     recipientCountryCode: string;
@@ -141,7 +133,6 @@ export function getFirstCheckoutFieldIssue(
     countryCode,
     phoneNational,
     contactPreference,
-    lineId,
     customerEmail,
     recipientName,
     recipientCountryCode,
@@ -161,7 +152,7 @@ export function getFirstCheckoutFieldIssue(
   if (
     mapsUrl &&
     (exceedsLimit(mapsUrl, CHECKOUT_FIELD_LIMITS.googleMapsUrl) ||
-      !isValidGoogleMapsUrl(mapsUrl))
+      !isValidCheckoutMapsUrl(mapsUrl))
   ) {
     return { sectionId: 'delivery', message: copy.invalidMapsLink };
   }
@@ -184,13 +175,6 @@ export function getFirstCheckoutFieldIssue(
 
   if (contactPreference.length === 0) {
     return { sectionId: 'sender', message: copy.pleaseChooseContact };
-  }
-
-  if (contactPreference.includes('line')) {
-    const norm = normalizeLineUserId(lineId);
-    if (!isValidLineUserId(norm)) {
-      return { sectionId: 'sender', message: copy.pleaseAddLineId };
-    }
   }
 
   if (customerEmail.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail.trim())) {
