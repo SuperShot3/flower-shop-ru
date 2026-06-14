@@ -89,6 +89,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/:lang(en|ru)/info/how-to-order-flower-delivery-chiang-mai',
+        destination: '/:lang/info/how-to-order-flower-delivery-yekaterinburg',
+        permanent: true,
+      },
+      {
         source: '/collections/white-roses-chiang-mai',
         destination: '/ru/collections/roses-chiang-mai?color=white',
         permanent: true,

@@ -167,7 +167,7 @@ export function Hero({
     ? `/${lang}/catalog/${effectiveMarket.pathSlug}`
     : `/${lang}/catalog`;
   const primaryCtaHref = browseCollectionHref ?? catalogHref;
-  const howToHref = `/${lang}/info/how-to-order-flower-delivery-chiang-mai`;
+  const howToHref = `/${lang}/info/how-to-order-flower-delivery-yekaterinburg`;
   const heroCarouselImages = buildHeroCarouselImages(heroImageUrl, carouselImages);
   const isHomeLanding =
     !titleOverride &&

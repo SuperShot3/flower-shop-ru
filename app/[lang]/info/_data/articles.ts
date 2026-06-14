@@ -129,13 +129,13 @@ export const articles: ArticleMeta[] = [
     ],
   },
   {
-    slug: 'how-to-order-flower-delivery-chiang-mai',
-    title: 'How to Order Flower Delivery in Chiang Mai',
+    slug: 'how-to-order-flower-delivery-yekaterinburg',
+    title: 'How to Order Flower Delivery in Yekaterinburg',
     excerpt:
-      'Place an order on our website, then message us your order link or number to confirm details. Payment happens after confirmation. Delivery in Chiang Mai 09:00–20:00; orders after 18:00 may move to the next day.',
-    titleTh: 'วิธีสั่งดอกไม้จัดส่งในเชียงใหม่',
-    excerptTh:
-      'สั่งซื้อบนเว็บไซต์ แล้วส่งลิงก์หรือหมายเลขออเดอร์มาที่แชทเพื่อยืนยันรายละเอียด ชำระเงินหลังยืนยัน จัดส่งในเชียงใหม่ 09:00–20:00 สั่งหลัง 18:00 อาจจัดส่งวันถัดไป',
+      'Place an order on our website, enter delivery details and a Yandex Maps link, then we confirm payment with you. Delivery across Yekaterinburg 09:00–20:00; orders after 18:00 usually move to the next day.',
+    titleRu: 'Как заказать доставку цветов в Екатеринбурге',
+    excerptRu:
+      'Оформите заказ на сайте, укажите адрес и ссылку Яндекс Карт — мы подтвердим оплату с вами. Доставка по Екатеринбургу 09:00–20:00; заказы после 18:00 обычно на следующий день.',
     publishedAt: '2026-02-17T00:00:00.000Z',
     featured: false,
     cover: {
@@ -144,7 +144,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🌸' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
+      { label: 'Contact us', labelRu: 'Связаться с нами', href: '/contact' },
     ],
   },
   {

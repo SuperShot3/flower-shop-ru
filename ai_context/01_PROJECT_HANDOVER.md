@@ -9,26 +9,29 @@ Business and product context for the **Russia** storefront ([ekb-flowers.ru](htt
 - **Market:** Russia — **Yekaterinburg only** at launch (more cities later); Russian-first localization planned; `/en` and `/th` routes exist from Thailand fork
 - **Relation to Thailand:** Independent from **Lanna Bloom** ([lannabloom.shop](https://lannabloom.shop)) — separate repo, Vercel project, database, Blob store
 
+## Business goal
+
+**Direct-to-consumer flower delivery** in Yekaterinburg. Customers browse the catalog, add bouquets to cart, and place orders.
+
 ## MVP scope (current phase)
 
 | In scope | Out of scope (later) |
 |----------|----------------------|
 | Site live on `ekb-flowers.ru` | YooKassa live payments |
-| Partner **apply** form | Partner dashboard / self-serve uploads |
-| Empty or minimal catalog | Full catalog migration from Thailand |
+| Customer catalog with bouquets and prices | Full catalog migration from Thailand |
+| Cart + checkout UI | Accounting/email automation |
 | Static/legal pages | — |
-| Admin login for staff | Accounting/email automation |
+| Admin login for staff | — |
 
-**Goal now:** show a credible storefront URL while recruiting florist partners. Add partner images to catalog as they sign up. Scale on Vercel + Supabase; add YooKassa when ready to sell.
+**Goal now:** customers can browse bouquets and place orders. Add YooKassa when ready to accept online payment.
 
 ## Customer experience (MVP)
 
 | Journey | Summary |
 |---------|---------|
-| Browse | Home + catalog (may be empty / coming soon) |
-| Partner | `/[lang]/partner/apply` — application form |
+| Browse | Home + catalog |
 | Cart / checkout | UI present; **online payment disabled** (`paymentAvailability`) |
-| Pay | YooKassa — step 6, not MVP |
+| Pay | YooKassa — later |
 | Order tracking | `/order/{orderId}?token=...` — when orders exist |
 
 ## Languages
@@ -36,18 +39,10 @@ Business and product context for the **Russia** storefront ([ekb-flowers.ru](htt
 - URL locales: `/en/*`, `/th/*` (Thailand copy may remain until Russian locale pass)
 - Plan: Russian-first content for production launch in Russia
 
-## Partner flow (MVP)
-
-1. **Apply** — `/[lang]/partner/apply` → Postgres `partner_applications` (migration in progress from Supabase)
-2. **Admin review** — `/admin/partners/applications` (staff approves manually)
-3. **Catalog** — staff adds partner bouquets/images via admin when ready
-
-No self-serve partner portal in MVP.
-
 ## Admin (staff)
 
 - **URL:** `/admin`
-- **Primary admin email:** `k.v.polovnikov@gmail.com` — seed via `ADMIN_SEED_EMAIL` + `scripts/seed-admin.ts` (Postgres migration in progress)
+- **Primary admin email:** `k.v.polovnikov@gmail.com` — seed via `ADMIN_SEED_EMAIL` + `scripts/seed-admin.ts`
 - **Auth:** NextAuth + `AUTH_SECRET` (not shared with Thailand)
 - RBAC via `lib/adminRbac.ts`
 
@@ -63,7 +58,7 @@ No self-serve partner portal in MVP.
 |-------|------------|
 | Hosting | Vercel |
 | Database | Supabase Postgres (`POSTGRES_URL`) |
-| Images | Supabase Storage (`catalog` bucket); interim Vercel Blob during migration |
+| Images | Supabase Storage (`catalog` bucket) |
 | Payments (later) | YooKassa |
 
 Domain DNS at REG.RU → Vercel. Ignore REG.RU shared hosting FTP/MySQL for this app.

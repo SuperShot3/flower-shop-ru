@@ -22,13 +22,28 @@ Do not share `AUTH_SECRET` or admin password with the Thailand project.
 
 | Area | Route | MVP status |
 |------|-------|------------|
-| Partner applications | `/admin/partners/applications` | Active when Postgres wired |
-| Products / moderation | `/admin/products/` | Use when partners join |
+| Partner applications | `/admin/partners/applications` | Legacy route |
+| Products / moderation | `/admin/products/` | When Postgres wired |
 | Orders | `/admin/orders/` | After YooKassa |
 | Accounting / expenses | `/admin/accounting/`, `/admin/expenses/` | Defer |
 | Email Control Center | `/admin/emails/` | Defer (was Supabase + Resend) |
 
 Admin APIs: `app/api/admin/**` — always verify session + RBAC.
+
+**When editing admin / accounting / receipts:**
+
+- Receipt/proof caps in `lib/receiptUploadLimits.ts` must match client compression and API enforcement.
+- Synced order expenses (`flowers`, `delivery`) come from Costs & Profit — do not break `order_id` linkage.
+
+## Email Control Center
+
+When implementing automated email (newsletter, reminders, order lifecycle):
+
+- Template in Supabase `public.email_templates` (migration) with stable `template_key`.
+- Render via `lib/email/renderTemplate.ts`; include `{{brand_header}}` + `{{social_footer}}` from `lib/email/socialFooter.ts`.
+- Persist in `public.email_outbox`; send via `lib/email/sendOutboxEmail.ts`.
+- Avoid one-off hardcoded HTML unless admin-only alert.
+- New template variables: update preview mocks in `app/api/admin/emails/preview/route.ts` and `test-send/route.ts`.
 
 ## Accounting (deferred)
 

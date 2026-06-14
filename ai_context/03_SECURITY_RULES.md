@@ -61,6 +61,13 @@ The following applied to Lanna Bloom / Supabase / Stripe and remain in code/docs
 - Supabase RLS and service role patterns (`lib/supabase/`)
 - See [04_CHECKOUT_ORDERS_STRIPE.md](04_CHECKOUT_ORDERS_STRIPE.md) for Stripe flow (do not enable in Russia)
 
+## Supabase migrations
+
+When adding or editing `supabase/migrations/`:
+
+- Every new `public` table: `GRANT` to `service_role` in the same file as RLS; `REVOKE` from `anon` / `authenticated` when backend-only.
+- Grant `anon` / `authenticated` only when RLS intentionally exposes rows (e.g. token-scoped order reads).
+
 ## When changing security-sensitive code
 
 1. Read this file.

@@ -1,19 +1,8 @@
 ---
-description: Main project instructions for EKB Flowers (Russia)
+description: EKB Flowers — read project context first
 alwaysApply: true
 ---
 
-Before working on this repository, read:
+Before substantive work, read `/ai_context/00_START_HERE.md` and the topic file for your task (listed in its index).
 
-1. `/ai_context/00_START_HERE.md`
-2. The relevant `/ai_context/` file for the current task
-
-Do not rely on assumptions or memory. Inspect the actual code before editing.
-
-This is **EKB Flowers** — Russia storefront at [ekb-flowers.ru](https://www.ekb-flowers.ru).
-
-**MVP stack:** Next.js on Vercel, Supabase Postgres (`POSTGRES_URL`), Supabase Storage, domain at REG.RU. Payments disabled until YooKassa. Admin seed: `k.v.polovnikov@gmail.com`.
-
-**Runtime env guard:** `lib/env/validateRussiaEnv.ts` — see `ai_context/03_SECURITY_RULES.md`.
-
-For product or blog copy, use `.cursor/skills/flower-content-writer/` or `.cursor/skills/blog-content-writer/` instead of expanding rules.
+Inspect the code — do not rely on memory.

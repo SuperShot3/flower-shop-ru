@@ -12,7 +12,7 @@ This repository is **independent** from [lannabloom.shop](https://lannabloom.sho
 | Database | [Supabase](https://supabase.com) Postgres via Vercel | — |
 | Images | [Supabase Storage](https://supabase.com/docs/guides/storage) (`catalog` bucket) |
 | Payments | Disabled in UI | YooKassa |
-| Partners / catalog | Partner apply form; catalog grows as partners join | Full catalog |
+| Catalog | Customer bouquets via admin | Full catalog |
 
 **Domain:** registered at REG.RU. Point DNS (`@` and `www`) to **Vercel**, not REG.RU shared hosting (FTP/MySQL). See [Deploy](#deploy-to-vercel) below.
 
