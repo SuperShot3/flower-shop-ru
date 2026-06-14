@@ -5,7 +5,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, locales, type Locale, isThaiLocale, localeDateFormat} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale, localeDateFormat} from '@/lib/i18n';
 import { getArticleBySlug, getArticleTitle, getArticleExcerpt, getArticleCtaLinks } from '../_data/articles';
 import { ShareButton } from '@/components/ShareButton';
 import { ArticleCta } from './ArticleCta';
@@ -78,7 +78,6 @@ export function generateStaticParams() {
   const slugs = [
     'plush-toys-teddy-bears-chiang-mai',
     'birthday-flower-gift-guide',
-    'order-flowers-website-vs-facebook-chiang-mai',
     'birthday-flowers-chiang-mai-from-abroad',
     'how-to-order-flower-delivery-yekaterinburg',
     'rose-bouquets-chiang-mai',
@@ -115,7 +114,7 @@ export default async function InfoArticlePage({
   const articleExcerpt = getArticleExcerpt(article, lang);
   const ctaLinks = getArticleCtaLinks(article, lang);
   const guidesBackLabel =
-    lang === 'ru' ? '← Гайды' : isThaiLocale(lang) ? '← คู่มือ' : '← Guides';
+    lang === 'ru' ? '← Гайды' : '← Guides';
 
   const base = getBaseUrl();
   const basePath = `/${lang}/info`;
@@ -213,7 +212,6 @@ export default async function InfoArticlePage({
               url={articleUrl}
               title={articleTitle}
               text={articleExcerpt}
-              showFacebook
               ariaLabel="Share this guide"
             />
           </div>

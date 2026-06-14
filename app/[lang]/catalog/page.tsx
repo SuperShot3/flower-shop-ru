@@ -7,7 +7,7 @@ import {
   getCatalogProductsFiltered,
   type CatalogProduct,
 } from '@/lib/catalogReads';
-import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, type Locale} from '@/lib/i18n';
 import { translations } from '@/lib/i18n';
 import { CatalogWithFilters } from '@/components/CatalogWithFilters';
 import { CATEGORY_I18N_KEYS, PRODUCT_CATEGORIES } from '@/lib/catalogCategories';
@@ -44,7 +44,7 @@ export async function generateMetadata({
       description: BALLOONS_SEO_DESCRIPTION,
       url: canonical,
       siteName: 'Lanna Bloom',
-      locale: isThaiLocale(locale) ? 'th_TH' : 'en_US',
+      locale: 'en_US',
       type: 'website',
     },
   };

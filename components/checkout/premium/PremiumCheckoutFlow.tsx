@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode, type TouchEvent } from 're
 import Image from 'next/image';
 import type { Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import type { DeliveryFormValues } from '@/components/DeliveryForm';
 import {
@@ -40,7 +40,7 @@ function formatDestinationLabel(
   profile: CheckoutDeliveryProfile,
   lang: Locale
 ): string {
-  return isThaiLocale(lang) ? profile.labels.th : profile.labels.en;
+  return lang === 'ru' ? profile.labels.ru : profile.labels.en;
 }
 
 function primaryBouquetIndex(items: CartItem[]): number {

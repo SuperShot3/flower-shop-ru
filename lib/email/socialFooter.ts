@@ -1,8 +1,6 @@
 import { getBaseUrl } from '@/lib/orders';
 import {
-  DEFAULT_FACEBOOK_URL,
   DEFAULT_GOOGLE_MAPS_URL,
-  DEFAULT_INSTAGRAM_URL,
   DEFAULT_REVIEW_URL,
   DEFAULT_WEBSITE_URL,
 } from './constants';
@@ -81,8 +79,6 @@ const DEFAULT_FOOTER_ICONS = {
    * @see https://cdnjs.com/libraries/twemoji
    */
   website: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.0/72x72/1f30d.png',
-  instagram: 'https://img.icons8.com/fluency/32/instagram-new.png',
-  facebook: 'https://img.icons8.com/fluency/32/facebook-new.png',
   tiktok: 'https://img.icons8.com/fluency/32/tiktok.png',
   maps: 'https://img.icons8.com/fluency/32/marker--v1.png',
   /**
@@ -94,8 +90,6 @@ const DEFAULT_FOOTER_ICONS = {
 
 export type SocialLinks = {
   websiteUrl: string;
-  instagramUrl: string;
-  facebookUrl: string;
   /** Optional; if empty, TikTok is omitted. */
   tiktokUrl: string;
   googleMapsUrl: string;
@@ -112,8 +106,6 @@ function envOrEmpty(key: string): string {
 export function getDefaultSocialLinks(): SocialLinks {
   return {
     websiteUrl: envOrEmpty('WEBSITE_URL') || DEFAULT_WEBSITE_URL,
-    instagramUrl: envOrEmpty('INSTAGRAM_URL') || DEFAULT_INSTAGRAM_URL,
-    facebookUrl: envOrEmpty('FACEBOOK_URL') || DEFAULT_FACEBOOK_URL,
     tiktokUrl: envOrEmpty('TIKTOK_URL') || envOrEmpty('NEXT_PUBLIC_TIKTOK_URL') || '',
     googleMapsUrl: envOrEmpty('GOOGLE_MAPS_URL') || DEFAULT_GOOGLE_MAPS_URL,
     reviewUrl: envOrEmpty('REVIEW_URL') || DEFAULT_REVIEW_URL,
@@ -126,8 +118,6 @@ export function getDefaultSocialLinks(): SocialLinks {
  */
 export function getSocialFooterHtml(links: SocialLinks = getDefaultSocialLinks()): string {
   const w = escapeHtml(links.websiteUrl);
-  const ig = escapeHtml(links.instagramUrl);
-  const fb = escapeHtml(links.facebookUrl);
   const tt = links.tiktokUrl.trim() ? escapeHtml(links.tiktokUrl) : '';
   const maps = escapeHtml(links.googleMapsUrl);
   const review = escapeHtml(links.reviewUrl);
@@ -136,8 +126,6 @@ export function getSocialFooterHtml(links: SocialLinks = getDefaultSocialLinks()
     process.env.EMAIL_FOOTER_TEXT_ONLY === '1' || process.env.EMAIL_FOOTER_TEXT_ONLY === 'true';
 
   const websiteIcon = process.env.EMAIL_FOOTER_ICON_WEBSITE_URL?.trim() || (textOnly ? undefined : DEFAULT_FOOTER_ICONS.website);
-  const instaIcon = process.env.EMAIL_FOOTER_ICON_INSTAGRAM_URL?.trim() || (textOnly ? undefined : DEFAULT_FOOTER_ICONS.instagram);
-  const facebookIcon = process.env.EMAIL_FOOTER_ICON_FACEBOOK_URL?.trim() || (textOnly ? undefined : DEFAULT_FOOTER_ICONS.facebook);
   const mapsIcon = process.env.EMAIL_FOOTER_ICON_MAPS_URL?.trim() || (textOnly ? undefined : DEFAULT_FOOTER_ICONS.maps);
   const reviewIcon = process.env.EMAIL_FOOTER_ICON_REVIEW_URL?.trim() || (textOnly ? undefined : DEFAULT_FOOTER_ICONS.review);
   const tiktokIcon =
@@ -156,8 +144,6 @@ export function getSocialFooterHtml(links: SocialLinks = getDefaultSocialLinks()
 
   const parts: string[] = [
     linkWithOptionalIcon(w, 'Website', websiteIcon),
-    linkWithOptionalIcon(ig, 'Instagram', instaIcon),
-    linkWithOptionalIcon(fb, 'Facebook', facebookIcon),
   ];
   if (tt) {
     parts.push(linkWithOptionalIcon(tt, 'TikTok', tiktokIcon));

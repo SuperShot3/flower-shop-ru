@@ -9,7 +9,7 @@ import {
   type AddOnsValues,
 } from './AddOnsSection';
 import { useCart } from '@/contexts/CartContext';
-import {translations, isThaiLocale} from '@/lib/i18n'
+import {translations} from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';
@@ -249,7 +249,7 @@ export function ProductOrderBlock({
             partnerImage={bouquet.partnerPortraitUrl ?? null}
             studioName={bouquet.partnerCity || tProduct.floristDefaultStudio || 'Chiang Mai'}
             quote={
-              (isThaiLocale(lang) ? bouquet.partnerShopBioRu : bouquet.partnerShopBioEn) ||
+              (lang === 'ru' ? bouquet.partnerShopBioRu : bouquet.partnerShopBioEn) ||
               tProduct.floristDefaultQuote
             }
           />

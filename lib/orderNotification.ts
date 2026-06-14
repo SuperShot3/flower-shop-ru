@@ -13,7 +13,7 @@ import {
   sendCustomerPaymentFailedEmail,
   sendMinimalAdminNewOrderEmail,
 } from '@/lib/orderEmail';
-import { isThaiLocale, isValidLocale, defaultLocale, type Locale } from '@/lib/i18n';
+import { isValidLocale, defaultLocale, type Locale } from '@/lib/i18n';
 /**
  * Send exactly one admin "new order" email for this order, then set admin_notified.
  * Safe to call on retries or refresh: if admin_notified is already true, skips send.

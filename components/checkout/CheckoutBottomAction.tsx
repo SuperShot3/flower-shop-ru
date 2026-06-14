@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
+import { CheckoutPersonalDataConsent } from '@/components/legal/CheckoutPersonalDataConsent';
 
 export type CheckoutBottomActionProps = {
   lang: Locale;
@@ -14,6 +15,8 @@ export type CheckoutBottomActionProps = {
   readyToPay: boolean;
   loading: boolean;
   disabled: boolean;
+  personalDataConsent: boolean;
+  onPersonalDataConsentChange: (checked: boolean) => void;
   onAction: () => void;
   labels: {
     continue: string;
@@ -38,6 +41,8 @@ export function CheckoutBottomAction({
   readyToPay,
   loading,
   disabled,
+  personalDataConsent,
+  onPersonalDataConsentChange,
   onAction,
   labels,
 }: CheckoutBottomActionProps) {
@@ -50,6 +55,13 @@ export function CheckoutBottomAction({
 
   return (
     <div className="checkout-bottom-action" role="region" aria-label={regionLabel}>
+      <CheckoutPersonalDataConsent
+        lang={lang}
+        id="checkout-pd-consent-mobile"
+        checked={personalDataConsent}
+        onChange={onPersonalDataConsentChange}
+        className="checkout-bottom-action__consent"
+      />
       <div className="checkout-bottom-action__inner">
         <div className="checkout-bottom-action__price" aria-live="polite">
           <div className="checkout-bottom-action__total-row">
@@ -85,7 +97,7 @@ export function CheckoutBottomAction({
           type="button"
           className={`checkout-bottom-action__btn${readyToPay ? ' checkout-bottom-action__btn--pay' : ''}`}
           onClick={onAction}
-          disabled={disabled || loading}
+          disabled={disabled || loading || !personalDataConsent}
           aria-busy={loading}
         >
           {loading ? '\u2026' : cta}
@@ -115,6 +127,10 @@ export function CheckoutBottomAction({
           -webkit-backdrop-filter: blur(20px);
           border-top: 1px solid rgba(0, 0, 0, 0.08);
           box-sizing: border-box;
+        }
+        .checkout-bottom-action__consent {
+          max-width: 560px;
+          margin: 0 auto 10px;
         }
         .checkout-bottom-action__inner {
           max-width: 560px;

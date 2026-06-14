@@ -9,8 +9,6 @@ export interface PartnerApplicationRow {
   email: string | null;
   line_id: string | null;
   phone: string | null;
-  instagram: string | null;
-  facebook: string | null;
   address: string | null;
   district: string | null;
   lat: number | null;
@@ -38,8 +36,6 @@ export interface InsertPartnerApplicationInput {
   line_id?: string;
   phone: string;
   address?: string;
-  instagram?: string;
-  facebook?: string;
   district?: string;
   lat?: number;
   lng?: number;
@@ -70,8 +66,6 @@ export async function insertPartnerApplication(
       email: input.email,
       line_id: input.line_id ?? null,
       phone: input.phone,
-      instagram: input.instagram ?? null,
-      facebook: input.facebook ?? null,
       address: input.address ?? null,
       district: input.district ?? null,
       lat: input.lat ?? null,

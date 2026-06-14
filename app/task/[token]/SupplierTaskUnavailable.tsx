@@ -1,29 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { isThaiLocale } from '@/lib/i18n';
 
-type Lang = 'th' | 'en';
+type Lang = 'ru' | 'en';
 
-const COPY: Record<Lang, { title: string; body: string; langGroup: string; thai: string; english: string }> = {
-  th: {
-    title: 'คำขอนี้ไม่พร้อมใช้งานแล้ว',
-    body: 'กรุณาติดต่อผู้ประสานงานเพื่อรับรายละเอียดล่าสุด',
-    langGroup: 'เลือกภาษา',
-    thai: 'ไทย',
+const COPY: Record<Lang, { title: string; body: string; langGroup: string; russian: string; english: string }> = {
+  ru: {
+    title: 'Эта ссылка больше недоступна',
+    body: 'Свяжитесь с координатором, чтобы получить актуальные детали.',
+    langGroup: 'Язык',
+    russian: 'Русский',
     english: 'English',
   },
   en: {
     title: 'This request is no longer available',
     body: 'Please contact the coordinator for the latest details.',
     langGroup: 'Language',
-    thai: 'ไทย',
+    russian: 'Russian',
     english: 'English',
   },
 };
 
 export function SupplierTaskUnavailable() {
-  const [lang, setLang] = useState<Lang>('th');
+  const [lang, setLang] = useState<Lang>('ru');
   const t = COPY[lang];
 
   return (
@@ -33,11 +32,11 @@ export function SupplierTaskUnavailable() {
           <div className="supplier-task-lang" role="group" aria-label={t.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
-              onClick={() => setLang('th')}
-              aria-pressed={isThaiLocale(lang)}
+              className={`supplier-task-lang-btn ${lang === 'ru' ? 'is-active' : ''}`}
+              onClick={() => setLang('ru')}
+              aria-pressed={lang === 'ru'}
             >
-              {t.thai}
+              {t.russian}
             </button>
             <button
               type="button"

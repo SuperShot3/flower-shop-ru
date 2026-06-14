@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { CatalogProduct } from '@/lib/catalog/types';
-import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { type Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { computeFinalPrice } from '@/lib/partnerPricing';
 import { useCart } from '@/contexts/CartContext';
@@ -169,7 +169,7 @@ export function GiftsCarousel({ gifts, lang }: { gifts: CatalogProduct[]; lang: 
       </div>
       {gifts.length > 1 && (
         <p className="gifts-carousel-swipe-hint" aria-hidden>
-          {isThaiLocale(lang) ? 'เลื่อนเพื่อดูเพิ่มเติม' : 'Swipe to browse'}
+          {'Swipe to browse'}
         </p>
       )}
       <style jsx>{`

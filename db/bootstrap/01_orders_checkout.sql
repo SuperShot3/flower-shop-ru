@@ -22,6 +22,7 @@
 --   supabase/migrations/20260511153000_expand_order_status_lifecycle.sql
 --   supabase/migrations/20260520130000_orders_marketing_email_consent.sql
 --   supabase/migrations/20260613120000_orders_internal_notes.sql
+--   supabase/migrations/20260614130000_orders_personal_data_consent.sql
 -- =============================================================================
 
 -- >>> BEGIN 20250314000000_orders_schema_full.sql
@@ -511,4 +512,20 @@ COMMENT ON COLUMN public.orders.internal_notes IS
   'Optional admin-only notes for fulfillment; never exposed on customer order pages.';
 
 -- <<< END 20260613120000_orders_internal_notes.sql
+
+-- >>> BEGIN 20260614130000_orders_personal_data_consent.sql
+
+-- Mandatory checkout consent for personal data processing (152-FZ art. 9).
+
+ALTER TABLE public.orders
+  ADD COLUMN IF NOT EXISTS personal_data_consent boolean NOT NULL DEFAULT false,
+  ADD COLUMN IF NOT EXISTS personal_data_consent_at timestamptz;
+
+COMMENT ON COLUMN public.orders.personal_data_consent IS
+  'Customer gave explicit consent at checkout to process personal data for order fulfilment.';
+
+COMMENT ON COLUMN public.orders.personal_data_consent_at IS
+  'Timestamp when personal_data_consent was recorded at order creation.';
+
+-- <<< END 20260614130000_orders_personal_data_consent.sql
 

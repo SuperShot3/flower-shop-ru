@@ -5,6 +5,8 @@ import {
   getLineContactUrl,
 } from '@/lib/messenger';
 import { trackMessengerClick } from '@/lib/analytics';
+import type { Locale } from '@/lib/i18n';
+import { MessengerPrivacyConsentLine } from '@/components/legal/MessengerPrivacyConsentLine';
 import { LineIcon, WhatsAppIcon } from './icons';
 
 const MESSENGERS = [
@@ -26,9 +28,10 @@ const MESSENGERS = [
   },
 ] as const;
 
-export function MessengerLinks() {
+export function MessengerLinks({ lang }: { lang: Locale }) {
   return (
-    <div className="messenger-links">
+    <div className="messenger-links-wrap">
+      <div className="messenger-links">
       {MESSENGERS.map((m) => {
         const href = m.getHref();
         return (
@@ -53,7 +56,14 @@ export function MessengerLinks() {
           </a>
         );
       })}
+      </div>
+      <MessengerPrivacyConsentLine lang={lang} className="messenger-links-privacy" />
       <style jsx>{`
+        .messenger-links-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
         .messenger-links {
           display: flex;
           align-items: center;
@@ -85,6 +95,10 @@ export function MessengerLinks() {
             width: 20px;
             height: 20px;
           }
+        }
+        .messenger-links-privacy {
+          text-align: left;
+          max-width: 12rem;
         }
       `}</style>
     </div>

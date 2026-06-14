@@ -93,9 +93,9 @@ export async function POST(
     revalidatePath(`/admin/products/bouquet/${bouquetId}`);
     if (bouquet.status === 'approved') {
       revalidatePath('/en/catalog', 'layout');
-      revalidatePath('/th/catalog', 'layout');
+      revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
       revalidatePath(`/en/catalog/${bouquet.slug}`);
-      revalidatePath(`/th/catalog/${bouquet.slug}`);
+      revalidatePath(`/ru/catalog/${bouquet.slug}`);
       revalidateCatalogCacheAfterSupabaseWrite();
     }
 

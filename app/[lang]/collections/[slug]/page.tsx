@@ -6,7 +6,7 @@ import { BouquetCard } from '@/components/BouquetCard';
 import { ProductCard } from '@/components/ProductCard';
 import { GuideFaq } from '@/app/[lang]/info/_components/GuideFaq';
 import { buildCatalogSearchString } from '@/lib/catalogFilterParams';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale} from '@/lib/i18n';
 import {
   getCollectionHub,
   getCollectionLandingPages,
@@ -69,8 +69,7 @@ function selectRandomAddOns(products: CatalogProduct[], limit = MAX_ADD_ONS_PER_
 
 function flowerTypeUi(flowerType: HubFlowerType, locale: Locale) {
   if (flowerType === 'orchid') {
-    return isThaiLocale(locale)
-      ? {
+    return locale === 'ru' ? {
           tabsAria: 'คอลเลกชันกล้วยไม้',
           browseAll: 'ดูกล้วยไม้ทั้งหมด',
           allInCatalog: 'กล้วยไม้ทั้งหมด',
@@ -81,8 +80,7 @@ function flowerTypeUi(flowerType: HubFlowerType, locale: Locale) {
           allInCatalog: 'All orchids',
         };
   }
-  return isThaiLocale(locale)
-    ? {
+  return locale === 'ru' ? {
         tabsAria: 'คอลเลกชันกุหลาบ',
         browseAll: 'ดูช่อกุหลาบทั้งหมด',
         allInCatalog: 'กุหลาบทั้งหมด',
@@ -141,7 +139,7 @@ export async function generateMetadata({
       description: copy.seoDescription,
       url: canonical,
       siteName: 'Lanna Bloom',
-      locale: isThaiLocale(locale) ? 'th_TH' : 'en_US',
+      locale: 'en_US',
       type: 'website',
     },
   };
@@ -233,7 +231,7 @@ export default async function CollectionLandingPage({
                 <div className={styles.heroPlaceholder} />
               )}
             </div>
-            <div className={styles.heroBadge}>{isThaiLocale(locale) ? 'จัดส่งวันเดียว เชียงใหม่' : 'Same-day Delivery Chiang Mai'}</div>
+            <div className={styles.heroBadge}>{'Same-day Delivery Chiang Mai'}</div>
           </div>
         </section>
 
@@ -260,7 +258,7 @@ export default async function CollectionLandingPage({
               <span className={styles.tabCopy}>
                 <span className={styles.tabLabel}>{tab.label}</span>
                 <span className={styles.tabHint}>
-                  {isThaiLocale(locale) ? 'คอลเลกชันในเชียงใหม่' : 'Chiang Mai collection'}
+                  {'Chiang Mai collection'}
                 </span>
               </span>
               <span className={styles.tabArrow} aria-hidden>
@@ -300,7 +298,7 @@ export default async function CollectionLandingPage({
               <p className={styles.sectionIntro}>{catalogView.collectionIntro}</p>
             </div>
             <Link href={catalogHref} className={styles.sectionLink}>
-              {isThaiLocale(locale) ? 'ดูทั้งหมด' : 'View all'}
+              {'View all'}
             </Link>
           </div>
 
@@ -339,7 +337,7 @@ export default async function CollectionLandingPage({
                 <p className={styles.sectionIntro}>{hubCopy.addOnsIntro}</p>
               </div>
               <Link href={addOnsHref} className={styles.sectionLink}>
-                {isThaiLocale(locale) ? 'ดูของเสริมทั้งหมด' : 'View all add-ons'}
+                {'View all add-ons'}
               </Link>
             </div>
             <div className={styles.addOnGrid}>
@@ -350,7 +348,7 @@ export default async function CollectionLandingPage({
           </section>
         ) : null}
 
-        <section className={styles.section} aria-label={isThaiLocale(locale) ? 'จุดเด่นบริการ' : 'Service highlights'}>
+        <section className={styles.section} aria-label={'Service highlights'}>
           <div className={styles.trustBand}>
             {hubCopy.trustItems.map((item, index) => (
               <div key={item.title} className={styles.trustItem}>
@@ -366,22 +364,22 @@ export default async function CollectionLandingPage({
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.infoGrid}`} aria-label={isThaiLocale(locale) ? 'ข้อมูลเพิ่มเติม' : 'Additional information'}>
+        <section className={`${styles.section} ${styles.infoGrid}`} aria-label={'Additional information'}>
           <div className={styles.deliveryCard}>
             <h2>{hubCopy.deliveryTitle}</h2>
             <p>{hubCopy.deliveryText}</p>
           </div>
           <div className={styles.linksCard}>
-            <h2>{isThaiLocale(locale) ? 'เลือกซื้อเพิ่มเติม' : 'Helpful links'}</h2>
+            <h2>{'Helpful links'}</h2>
             <div className={styles.internalLinks}>
               <Link href={catalogHref}>{catalogView.collectionTitle}</Link>
               <Link href={allFlowerTypeHref}>{flowerTypeLabels.allInCatalog}</Link>
               {hub.flowerType === 'rose' ? (
                 <Link href={`/${locale}/info/rose-bouquets-chiang-mai`}>
-                  {isThaiLocale(locale) ? 'คู่มือช่อกุหลาบ' : 'Rose bouquet guide'}
+                  {'Rose bouquet guide'}
                 </Link>
               ) : null}
-              <Link href={`/${locale}/contact`}>{isThaiLocale(locale) ? 'ติดต่อเรา' : 'Contact us'}</Link>
+              <Link href={`/${locale}/contact`}>{'Contact us'}</Link>
             </div>
           </div>
         </section>

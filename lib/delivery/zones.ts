@@ -6,7 +6,7 @@
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 import { isExpansionDestination } from '@/lib/delivery/markets';
 import type { DistrictKey } from '@/lib/deliveryFees';
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 
 const EXPANSION_FEE_FLOOR_RUB = 300;
 
@@ -159,16 +159,15 @@ export function getZoneFee(destinationId: DeliveryDestinationId, zoneId: string)
 
 export function zoneDisplayLabel(
   zone: DeliveryZoneDef,
-  lang: Locale | 'th'
+  lang: Locale
 ): string {
-  if (lang === 'ru' || isThaiLocale(lang)) return zone.labelRu;
-  return zone.labelEn;
+  return lang === 'ru' ? zone.labelRu : zone.labelEn;
 }
 
 export function zoneLabel(
   destinationId: DeliveryDestinationId,
   zoneId: string,
-  lang: Locale | 'th'
+  lang: Locale
 ): string | null {
   const z = findZoneDef(destinationId, zoneId);
   if (!z) return null;

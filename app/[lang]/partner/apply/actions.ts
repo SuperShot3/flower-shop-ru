@@ -40,8 +40,6 @@ export async function applyPartnerAction(formData: FormData) {
   const email = (formData.get('email') as string)?.trim();
   const lineId = (formData.get('lineId') as string)?.trim();
   const phone = (formData.get('phone') as string)?.trim();
-  const instagram = (formData.get('instagram') as string)?.trim();
-  const facebook = (formData.get('facebook') as string)?.trim();
   const address = (formData.get('address') as string)?.trim();
   const district = (formData.get('district') as string)?.trim();
   const selfDeliver = formData.get('selfDeliver') === 'true';
@@ -97,8 +95,6 @@ export async function applyPartnerAction(formData: FormData) {
       phone,
       address: address || undefined,
       district: district || undefined,
-      instagram: instagram || undefined,
-      facebook: facebook || undefined,
       self_deliver: selfDeliver,
       delivery_zones: deliveryZones || undefined,
       delivery_fee_note: deliveryFee || undefined,

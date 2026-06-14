@@ -70,8 +70,6 @@ export function buildReminderTemplateVariables(
     review_link: links.reviewUrl,
     important_dates_link: `${base}/important-dates?email=${encodeURIComponent(r.customer_email)}`,
     website_url: links.websiteUrl,
-    instagram_url: links.instagramUrl,
-    facebook_url: links.facebookUrl,
     tiktok_url: links.tiktokUrl,
     google_maps_url: links.googleMapsUrl,
     brand_header: brandHeader,

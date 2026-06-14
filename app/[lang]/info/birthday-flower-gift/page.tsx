@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Bouquet } from '@/lib/bouquets';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale} from '@/lib/i18n';
 import { getCatalogBouquetBySlug } from '@/lib/catalogReads';
 import { BouquetCard } from '@/components/BouquetCard';
 import { MessengerOrderButtons } from '@/components/MessengerOrderButtons';
@@ -133,7 +133,7 @@ function bouquetDisplayName(
 ): string {
   if (!bouquet) return fallbackEn;
   const th = bouquet.nameRu?.trim();
-  return isThaiLocale(locale) && th ? th : bouquet.nameEn;
+  return locale === 'ru' && th ? th : bouquet.nameEn;
 }
 
 export default async function BirthdayFlowerGiftGuidePage({
@@ -249,9 +249,7 @@ export default async function BirthdayFlowerGiftGuidePage({
                     <aside
                       className="guide-bouquet-detail-aside"
                       aria-label={
-                        isThaiLocale(locale)
-                          ? `ช่อดอกไม้ สำหรับ ${section.fallbackNameEn}`
-                          : `Bouquet: ${section.fallbackNameEn}`
+                        `Bouquet: ${section.fallbackNameEn}`
                       }
                     >
                       <div className="guide-bouquet-slot">

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BouquetCard } from '@/components/BouquetCard';
 import type { Bouquet } from '@/lib/bouquets';
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 
 const PAGE_SIZE = 8;
 
@@ -64,7 +64,7 @@ export function MarketBouquetsShowcase({
   }, [hasMore, items.length]);
 
   const heading =
-    isThaiLocale(lang) ? 'ช่อดอกไม้แนะนำ' : 'Featured bouquets';
+    'Featured bouquets';
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-stone-50" aria-labelledby="market-bouquets-title">

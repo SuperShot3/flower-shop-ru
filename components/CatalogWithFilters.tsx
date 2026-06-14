@@ -19,7 +19,7 @@ import { useFlowerFilterSheetOpen } from '@/contexts/FlowerFilterSheetOpenContex
 import { optionDisplayLabel } from '@/lib/bouquetOptions';
 import type { Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import type { Bouquet } from '@/lib/bouquets';
 import type { CatalogFilterParams } from '@/lib/catalogListLogic';
 import type { CatalogProduct } from '@/lib/catalog/types';

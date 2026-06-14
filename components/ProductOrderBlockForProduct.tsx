@@ -9,7 +9,7 @@ import {
 } from './AddOnsSection';
 import { getAddOnsTotal } from '@/lib/addonsConfig';
 import { useCart } from '@/contexts/CartContext';
-import {translations, isThaiLocale} from '@/lib/i18n'
+import {translations} from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { trackAddToCart } from '@/lib/analytics';

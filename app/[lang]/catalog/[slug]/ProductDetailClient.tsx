@@ -6,7 +6,7 @@ import { ProductShareLink } from '@/components/ProductShareLink';
 import { ProductOrderBlockForProduct } from '@/components/ProductOrderBlockForProduct';
 import type { Bouquet } from '@/lib/bouquets';
 import type { CatalogProduct } from '@/lib/catalog/types';
-import {translations, type Locale, isThaiLocale} from '@/lib/i18n';
+import {translations, type Locale} from '@/lib/i18n';
 import { trackViewItem } from '@/lib/analytics';
 import { computeFinalPrice } from '@/lib/partnerPricing';
 import { applyCatalogDiscount, hasCatalogDiscount } from '@/lib/catalogDiscount';
@@ -33,7 +33,7 @@ export function ProductDetailClient({
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const images = product.images ?? [];
   const selectedImageUrl = images[selectedImageIndex] ?? images[0];
-  const descDisplay = description?.trim() || (isThaiLocale(lang) ? 'ยังไม่มีรายละเอียดสินค้า' : 'No description provided.');
+  const descDisplay = description?.trim() || ('No description provided.');
   const checkoutProfile = useCheckoutDeliveryProfile(lang);
   const finalPrice = computeFinalPrice(product.cost ?? product.price, product.commissionPercent);
   const discountedPrice = applyCatalogDiscount(finalPrice, product.discountPercent);

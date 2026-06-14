@@ -6,7 +6,7 @@
  * - Contact-only mode: set NEXT_PUBLIC_LINE_OA_ADD_FRIEND_LINK to your shareable LINE link
  *   (e.g. line.me/ti/p/... or lin.ee/...).
  */
-import {translations, isThaiLocale} from '@/lib/i18n'
+import {translations} from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import { isValidLineUserId, normalizeLineUserId } from '@/lib/lineUserId';
@@ -17,7 +17,6 @@ const CONTACT_PHONE = '66803313431';
 const WHATSAPP_PHONE = CONTACT_PHONE;
 /** LINE contact link (contact-only). */
 const LINE_ADD_FRIEND_LINK = (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_LINE_OA_ADD_FRIEND_LINK) || 'https://line.me/ti/p/4sZ7z5fYAB';
-const FACEBOOK_PAGE = 'konstantin.polovnikov.3';
 
 function encode(text: string): string {
   return encodeURIComponent(text);
@@ -47,12 +46,6 @@ export function getLineUserContactUrl(lineIdRaw: string): string | null {
   if (!isValidLineUserId(id)) return null;
   return `https://line.me/ti/p/~${encodeURIComponent(id)}`;
 }
-
-export function getFacebookOrderUrl(message: string): string {
-  const base = `https://www.facebook.com/${FACEBOOK_PAGE}`;
-  return `${base}/messages?text=${encode(message)}`;
-}
-
 /** Base contact URLs (no pre-filled message) for header/footer links. */
 export function getWhatsAppContactUrl(): string {
   return `https://wa.me/${WHATSAPP_PHONE}`;
@@ -65,11 +58,6 @@ export function getContactPhoneTelUrl(): string {
 export function getContactPhoneDisplay(): string {
   return '+66 80 331 3431';
 }
-
-export function getFacebookContactUrl(): string {
-  return `https://www.facebook.com/${FACEBOOK_PAGE}`;
-}
-
 export function buildOrderMessage(
   bouquetName: string,
   sizeLabel: string,

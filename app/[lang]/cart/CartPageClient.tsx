@@ -11,7 +11,7 @@ import {
   isDeliveryTimeSlotSelectableForDate,
   type DeliveryFormValues,
 } from '@/components/DeliveryForm';
-import {translations, isThaiLocale} from '@/lib/i18n'
+import {translations} from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import type { Locale } from '@/lib/i18n';
 import type { ContactPreferenceOption } from '@/lib/orders';
@@ -180,6 +180,7 @@ type StoredCartForm = {
   isOrderingForSomeoneElse?: boolean;
   surpriseDelivery?: boolean;
   marketingEmailConsent?: boolean;
+  personalDataConsent?: boolean;
   deliveryNotes?: string;
 };
 
@@ -758,6 +759,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
   const [marketingEmailConsent, setMarketingEmailConsent] = useState(
     () => loadCartFormFromStorage()?.marketingEmailConsent === true
   );
+  const [personalDataConsent, setPersonalDataConsent] = useState(false);
   const [countryCode, setCountryCode] = useState(
     () => loadCartFormFromStorage()?.countryCode ?? DEFAULT_CHECKOUT_COUNTRY_CODE
   );
@@ -824,8 +826,9 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       isOrderingForSomeoneElse,
       surpriseDelivery,
       marketingEmailConsent,
+      personalDataConsent,
     });
-  }, [items.length, delivery, customerName, customerEmail, countryCode, phoneNational, recipientName, recipientCountryCode, recipientPhoneNational, contactPreference, isOrderingForSomeoneElse, surpriseDelivery, marketingEmailConsent]);
+  }, [items.length, delivery, customerName, customerEmail, countryCode, phoneNational, recipientName, recipientCountryCode, recipientPhoneNational, contactPreference, isOrderingForSomeoneElse, surpriseDelivery, marketingEmailConsent, personalDataConsent]);
 
   useEffect(() => {
     if (!addShippingInfoFiredRef.current && items.length > 0 && delivery.addressLine.trim().length >= 10) {
@@ -1142,6 +1145,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         phoneCountryCode: countryCode,
         customerEmail: customerEmail.trim() || undefined,
         ...(marketingEmailConsent ? { marketingEmailConsent: true } : {}),
+        personalDataConsent: true,
         contactPreference,
         submissionToken: checkoutSubmissionToken,
         recipientName: isOrderingForSomeoneElse ? recipientName.trim() : undefined,
@@ -1203,11 +1207,25 @@ export function CartPageClient({ lang }: { lang: Locale }) {
       isOrderingForSomeoneElse,
     });
 
+  const scrollToPersonalDataConsent = () => {
+    const el = document.querySelector('[data-checkout-pd-consent]');
+    if (el instanceof HTMLElement) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      scrollToCheckoutSection('payment');
+    }
+  };
+
   const handleCheckoutBottomAction = async () => {
     const issue = getPremiumFieldIssue();
     if (issue) {
       setOrderError(issue.message);
       scrollToCheckoutSection(issue.sectionId);
+      return;
+    }
+    if (!personalDataConsent) {
+      setOrderError(t.personalDataConsentRequired);
+      scrollToPersonalDataConsent();
       return;
     }
     await handlePlaceOrder();
@@ -1218,6 +1236,11 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     if (issue) {
       setOrderError(issue.message);
       scrollToCheckoutSection(issue.sectionId);
+      return;
+    }
+    if (!personalDataConsent) {
+      setOrderError(t.personalDataConsentRequired);
+      scrollToPersonalDataConsent();
       return;
     }
     if (cartExpansionInvalid) {
@@ -1721,6 +1744,8 @@ export function CartPageClient({ lang }: { lang: Locale }) {
           hasDeliveryZone={hasDeliveryZone}
           placing={placing}
           checkoutSubmissionToken={checkoutSubmissionToken}
+          personalDataConsent={personalDataConsent}
+          onPersonalDataConsentChange={setPersonalDataConsent}
           onBottomAction={handleCheckoutBottomAction}
           onPay={handlePlaceOrder}
         />

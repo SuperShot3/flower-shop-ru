@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale} from '@/lib/i18n';
 import {
   getFlowerDeliveryThailandCopy,
   getThailandServiceAreas,
@@ -44,7 +44,7 @@ export default function FlowerDeliveryThailandPage({
   const lang = params.lang as Locale;
   const copy = getFlowerDeliveryThailandCopy(lang);
   const areas = getThailandServiceAreas();
-  const isTh = isThaiLocale(lang);
+  const isRu = lang === 'ru';
 
   return (
     <div className="guide-page">
@@ -76,12 +76,12 @@ export default function FlowerDeliveryThailandPage({
             {areas.map((area) => (
               <li key={area.nameEn}>
                 <Link href={area.href(lang)} className="text-[#1A3C34] font-medium hover:text-[#C5A059]">
-                  {isTh ? area.nameRu : area.nameEn}
+                  {isRu ? area.nameRu : area.nameEn}
                 </Link>
                 {area.noteEn ? (
                   <span className="text-stone-500 text-sm">
                     {' '}
-                    — {isTh ? area.noteTh : area.noteEn}
+                    — {isRu ? area.noteRu : area.noteEn}
                   </span>
                 ) : null}
               </li>

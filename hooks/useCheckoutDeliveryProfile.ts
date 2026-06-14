@@ -16,7 +16,7 @@ import type { Locale } from '@/lib/i18n';
 export type CheckoutDeliveryProfile = {
   destinationId: DeliveryDestinationId;
   variant: 'chiang-mai' | 'expansion';
-  labels: { en: string; th: string };
+  labels: { en: string; ru: string };
 };
 
 /**
@@ -31,7 +31,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
       return {
         destinationId: marketCtx.destinationId,
         variant: 'expansion',
-        labels: { en: marketCtx.labelEn, th: marketCtx.labelRu },
+        labels: { en: marketCtx.labelEn, ru: marketCtx.labelRu },
       };
     }
 
@@ -44,7 +44,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
         return {
           destinationId: m.destinationId,
           variant: 'expansion',
-          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
+          labels: { en: m.customerFacingNameEn, ru: m.customerFacingNameRu },
         };
       }
     }
@@ -58,7 +58,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
         return {
           destinationId: m.destinationId,
           variant: 'expansion',
-          labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
+          labels: { en: m.customerFacingNameEn, ru: m.customerFacingNameRu },
         };
       }
     }
@@ -71,7 +71,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
           return {
             destinationId: sess.destinationId,
             variant: 'expansion',
-            labels: { en: m.customerFacingNameEn, th: m.customerFacingNameRu },
+            labels: { en: m.customerFacingNameEn, ru: m.customerFacingNameRu },
           };
         }
       }
@@ -82,7 +82,7 @@ export function useCheckoutDeliveryProfile(_lang: Locale): CheckoutDeliveryProfi
       variant: 'chiang-mai',
       labels: {
         en: destinationDisplayName('CHIANG_MAI', 'en'),
-        th: destinationDisplayName('CHIANG_MAI', 'th'),
+        ru: destinationDisplayName('CHIANG_MAI', 'ru'),
       },
     };
   }, [marketCtx, pathname]);

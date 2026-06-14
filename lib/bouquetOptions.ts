@@ -3,7 +3,7 @@
  * Customer-facing copy lives in `label` — never rely on optionId for display.
  */
 
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 
 /** Legacy size keys; optional on hybrid options for cart backward compat */
 export type SizeKey = 's' | 'm' | 'l' | 'xl';

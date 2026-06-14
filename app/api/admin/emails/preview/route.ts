@@ -29,8 +29,6 @@ function buildMock(base: string): Record<string, string> {
   review_link: 'https://g.page/r/CclGzPBur8RbEBM/review',
   important_dates_link: `${b}/important-dates?email=you%40example.com&name=Alex&order=order-demo-001`,
   website_url: b,
-  instagram_url: 'https://www.instagram.com/lannabloomchiangmai/',
-  facebook_url: 'https://www.facebook.com/profile.php?id=61587782069439',
   tiktok_url: '',
   google_maps_url: 'https://g.page/r/CclGzPBur8RbEBM',
   recipient_name: 'Jamie',

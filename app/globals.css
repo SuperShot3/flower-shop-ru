@@ -13914,6 +13914,15 @@ a.admin-summary-key-value {
   max-width: 36rem;
 }
 
+.policy-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0 auto var(--space-3);
+  max-width: 38rem;
+}
+
 .policy-intro {
   font-size: 1.0625rem;
   line-height: 1.65;

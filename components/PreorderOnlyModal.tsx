@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import type { Locale } from '@/lib/i18n';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import { SHOP_TIMEZONE } from '@/lib/shopTime';
 
 const STORAGE_KEY = 'lannabloom_preorder_only_dismissed_date';
@@ -14,7 +14,7 @@ function getTodayBangkok(): string {
 
 function getFormattedDateBangkok(lang: Locale): string {
   const d = new Date();
-  if (isThaiLocale(lang)) {
+  if (lang === 'ru') {
     return d.toLocaleDateString('th-TH', {
       timeZone: SHOP_TIMEZONE,
       day: 'numeric',

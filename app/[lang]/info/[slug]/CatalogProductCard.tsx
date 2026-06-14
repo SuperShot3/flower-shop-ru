@@ -1,4 +1,4 @@
-import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { type Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -24,7 +24,7 @@ export async function CatalogProductCard({
   const trimmed = (slug || '').trim();
   if (!trimmed) return null;
 
-  const viewLabel = isThaiLocale(lang) ? 'ดูในแคตตาล็อก' : 'View in catalog';
+  const viewLabel = 'View in catalog';
   const href = `/${lang}/catalog/${encodeURIComponent(trimmed)}`;
 
   // Prefer standalone catalog documents first, then fall back to partner products.

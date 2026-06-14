@@ -26,6 +26,7 @@ export default function PrivacyPage({ params }: { params: { lang: string } }) {
     <PolicyPageLayout
       lang={locale}
       title={t.title}
+      subtitle={t.subtitle}
       intro={t.intro}
       callout={requisitesNote}
     >
@@ -57,6 +58,10 @@ export default function PrivacyPage({ params }: { params: { lang: string } }) {
         <PolicyText>{t.processorsText}</PolicyText>
       </PolicySection>
 
+      <PolicySection heading={t.crossBorderHeading}>
+        <PolicyText>{t.crossBorderText}</PolicyText>
+      </PolicySection>
+
       <PolicySection heading={t.analyticsHeading}>
         <PolicyText>{t.analyticsText}</PolicyText>
       </PolicySection>
@@ -68,6 +73,10 @@ export default function PrivacyPage({ params }: { params: { lang: string } }) {
       <PolicySection heading={t.rightsHeading}>
         <PolicyList items={[t.rightsList1, t.rightsList2, t.rightsList3, t.rightsList4]} />
         <PolicyText>{t.rightsText}</PolicyText>
+      </PolicySection>
+
+      <PolicySection heading={t.withdrawalHeading}>
+        <PolicyText>{t.withdrawalText}</PolicyText>
       </PolicySection>
 
       <PolicySection heading={t.cookiesHeading}>

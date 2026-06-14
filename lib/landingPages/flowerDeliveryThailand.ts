@@ -1,4 +1,4 @@
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 import { MARKETS } from '@/lib/delivery/markets';
 
 export type ThailandServiceArea = {
@@ -6,7 +6,7 @@ export type ThailandServiceArea = {
   nameRu: string;
   href: (lang: Locale) => string;
   noteEn?: string;
-  noteTh?: string;
+  noteRu?: string;
 };
 
 export function getThailandServiceAreas(): ThailandServiceArea[] {
@@ -16,14 +16,14 @@ export function getThailandServiceAreas(): ThailandServiceArea[] {
       nameRu: 'Екатеринбург',
       href: (lang) => `/${lang}/catalog`,
       noteEn: 'Full flower & gift catalog · same-day when available',
-      noteTh: 'Полный каталог · доставка сегодня по возможности',
+      noteRu: 'Полный каталог · доставка сегодня по возможности',
     },
     ...MARKETS.map((m) => ({
       nameEn: m.customerFacingNameEn,
       nameRu: m.customerFacingNameRu,
       href: (lang: Locale) => `/${lang}/${m.pathSlug}/flower-delivery`,
       noteEn: 'Bouquet delivery',
-      noteTh: 'Доставка букетов',
+      noteRu: 'Доставка букетов',
     })),
   ];
 }
@@ -40,38 +40,37 @@ export type FlowerDeliveryThailandCopy = {
   ctaDeliveryPolicy: string;
 };
 
-const COPY: Record<'en' | 'th', FlowerDeliveryThailandCopy> = {
+const COPY: Record<Locale, FlowerDeliveryThailandCopy> = {
   en: {
-    metaTitle: 'Flower Delivery in Thailand | Lanna Bloom',
+    metaTitle: 'Flower Delivery in Yekaterinburg | Lanna Bloom',
     metaDescription:
-      'Order flowers online with Lanna Bloom. Primary delivery in Chiang Mai; bouquet delivery in Phuket, Hua Hin, Koh Samui, Krabi & Ao Nang, and Pattaya.',
-    h1: 'Flower delivery in Thailand',
+      'Order flowers online with Lanna Bloom. Delivery in Yekaterinburg and nearby cities — Verkhnyaya Pyshma, Pervouralsk, Berezovsky, and Aramil.',
+    h1: 'Flower delivery in Yekaterinburg',
     intro:
-      'Lanna Bloom is a Chiang Mai flower and gift delivery service. Order online with secure checkout — we deliver in Chiang Mai and selected destinations across Thailand, with more areas planned.',
+      'Lanna Bloom delivers flowers and gifts in Yekaterinburg and nearby cities. Order online — we confirm payment with you and deliver locally.',
     areasTitle: 'Where we deliver',
     expandingNote:
-      'We are expanding carefully. Nationwide delivery is not available yet — only the areas listed below.',
-    ctaCatalog: 'Shop Chiang Mai',
-    ctaChiangMaiGuide: 'Chiang Mai delivery guide',
+      'We deliver across Yekaterinburg districts and selected nearby cities. Confirm your address at checkout.',
+    ctaCatalog: 'Browse catalog',
+    ctaChiangMaiGuide: 'Delivery guide',
     ctaDeliveryPolicy: 'Delivery policy',
   },
-  th: {
-    metaTitle: 'ส่งดอกไม้ทั่วประเทศไทย | Lanna Bloom',
+  ru: {
+    metaTitle: 'Доставка цветов в Екатеринбурге | Lanna Bloom',
     metaDescription:
-      'สั่งดอกไม้ออนไลน์กับ Lanna Bloom จัดส่งหลักในเชียงใหม่ และจัดส่งช่อดอกไม้ในภูเก็ต หัวหิน เกาะสมุย กระบี่และอ่าวนาง และพัทยา',
-    h1: 'บริการส่งดอกไม้ในประเทศไทย',
+      'Закажите цветы онлайн в Lanna Bloom. Доставка по Екатеринбургу и ближайшим городам — Верхняя Пышма, Первоуральск, Берёзовский, Арамиль.',
+    h1: 'Доставка цветов в Екатеринбурге',
     intro:
-      'Lanna Bloom ให้บริการส่งดอกไม้และของขวัญในเชียงใหม่ สั่งซื้อออนไลน์ชำระเงินปลอดภัย — เราจัดส่งในเชียงใหม่และจุดหมายที่เลือกทั่วประเทศไทย และจะขยายพื้นที่เพิ่มเติมต่อไป',
-    areasTitle: 'พื้นที่ที่ให้บริการ',
+      'Lanna Bloom доставляет цветы и подарки по Екатеринбургу и ближайшим городам. Оформите заказ на сайте — мы подтвердим оплату с вами и доставим.',
+    areasTitle: 'Куда доставляем',
     expandingNote:
-      'เราขยายพื้นที่อย่างรอบคอบ ยังไม่มีบริการทั่วทั้งประเทศ — เฉพาะพื้นที่ที่ระบุด้านล่างเท่านั้น',
-    ctaCatalog: 'เลือกซื้อเชียงใหม่',
-    ctaChiangMaiGuide: 'คู่มือจัดส่งเชียงใหม่',
-    ctaDeliveryPolicy: 'นโยบายการจัดส่ง',
+      'Доставляем по районам Екатеринбурга и в выбранные города области. Адрес уточняется при оформлении заказа.',
+    ctaCatalog: 'Смотреть каталог',
+    ctaChiangMaiGuide: 'Как заказать',
+    ctaDeliveryPolicy: 'Правила доставки',
   },
 };
 
 export function getFlowerDeliveryThailandCopy(lang: Locale): FlowerDeliveryThailandCopy {
-  if (isThaiLocale(lang)) return COPY.th;
-  return COPY.en;
+  return COPY[lang];
 }

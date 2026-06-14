@@ -53,8 +53,6 @@ export function buildOrderTemplateVariables(
     review_link: links.reviewUrl,
     important_dates_link: importantDatesUrl(order, base),
     website_url: links.websiteUrl,
-    instagram_url: links.instagramUrl,
-    facebook_url: links.facebookUrl,
     tiktok_url: links.tiktokUrl,
     google_maps_url: links.googleMapsUrl,
     /* Placeholders for reminder templates; empty for order context */

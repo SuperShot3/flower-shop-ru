@@ -50,7 +50,7 @@ The primary plan is [SPEC.md](../SPEC.md). Key updates applied:
 
 ## 3. Implementation Checklist (Ordered Steps)
 
-1. **Supabase migration** — Create `partner_applications` table (id, created_at, shop_name, contact_name, email, line_id, phone, instagram, facebook, address, district, lat, lng, self_deliver, delivery_zones, delivery_fee_note, categories, prep_time, cutoff_time, max_orders_per_day, sample_photo_urls, experience_note, status, admin_note, user_id, sanity_partner_id). No partner_products table.
+1. **Supabase migration** — Create `partner_applications` table (id, created_at, shop_name, contact_name, email, line_id, phone, address, district, lat, lng, self_deliver, delivery_zones, delivery_fee_note, categories, prep_time, cutoff_time, max_orders_per_day, sample_photo_urls, experience_note, status, admin_note, user_id, sanity_partner_id). No partner_products table.
 
 2. **Supabase Auth** — Add @supabase/ssr (or use existing client). Partner login page. Session helpers for partner routes.
 

@@ -10,6 +10,7 @@ import { translations } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import type { MessengerPageLocation } from '@/lib/analytics';
 import { trackMessengerClick } from '@/lib/analytics';
+import { MessengerPrivacyConsentLine } from '@/components/legal/MessengerPrivacyConsentLine';
 import { LineIcon, WhatsAppIcon } from './icons';
 
 const CHANNELS_ORDER = [
@@ -92,6 +93,7 @@ export function MessengerOrderButtons({
           );
         })}
       </div>
+      <MessengerPrivacyConsentLine lang={lang} />
       <style jsx>{`
         .order-buttons {
           margin-top: 24px;

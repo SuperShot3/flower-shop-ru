@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import type { Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { useCheckoutStickyHeader } from '@/contexts/CheckoutStickyHeaderContext';
-import {translations, isThaiLocale, localeDateFormat} from '@/lib/i18n';
+import {translations, localeDateFormat} from '@/lib/i18n';
 import type { CartItem } from '@/contexts/CartContext';
 import {
   isDeliveryTimeSlotSelectableForDate,
@@ -12,6 +12,7 @@ import {
 } from '@/components/DeliveryForm';
 import { PremiumCheckoutFlow } from '@/components/checkout/premium/PremiumCheckoutFlow';
 import { CheckoutBottomAction } from '@/components/checkout/CheckoutBottomAction';
+import { CheckoutPersonalDataConsent } from '@/components/legal/CheckoutPersonalDataConsent';
 import type { CheckoutDeliveryProfile } from '@/hooks/useCheckoutDeliveryProfile';
 import type { CheckoutSectionId } from '@/lib/checkout/premiumCheckoutValidation';
 import { getPaymentAvailability } from '@/lib/checkout/paymentAvailability';
@@ -103,6 +104,8 @@ export function CartCheckoutView({
   hasDeliveryZone,
   placing,
   checkoutSubmissionToken,
+  personalDataConsent,
+  onPersonalDataConsentChange,
   onBottomAction,
   onPay,
 }: {
@@ -150,6 +153,8 @@ export function CartCheckoutView({
   hasDeliveryZone: boolean;
   placing: boolean;
   checkoutSubmissionToken: string | null;
+  personalDataConsent: boolean;
+  onPersonalDataConsentChange: (checked: boolean) => void;
   onBottomAction: () => void;
   onPay: () => void;
 }) {
@@ -172,7 +177,8 @@ export function CartCheckoutView({
       ? paymentAvailabilityBase
       : { stripe: { enabled: false, reason: preparingCheckout } };
 
-  const checkoutDisabled = !paymentAvailability.stripe.enabled || placing;
+  const checkoutDisabled =
+    !paymentAvailability.stripe.enabled || placing || !personalDataConsent;
 
   const deliveryScheduleLine = formatCheckoutStickySchedule(
     delivery,
@@ -284,6 +290,12 @@ export function CartCheckoutView({
         inlineError={orderError}
         paymentSection={
           <div className="co-payment-block">
+            <CheckoutPersonalDataConsent
+              lang={lang}
+              id="checkout-pd-consent-desktop"
+              checked={personalDataConsent}
+              onChange={onPersonalDataConsentChange}
+            />
             <button
               type="button"
               className="co-payment-btn"
@@ -330,6 +342,8 @@ export function CartCheckoutView({
         readyToPay={isPaymentUnlocked}
         loading={placing}
         disabled={!checkoutSubmissionToken}
+        personalDataConsent={personalDataConsent}
+        onPersonalDataConsentChange={onPersonalDataConsentChange}
         onAction={onBottomAction}
         labels={{
           continue: tPremium.continueBtn,

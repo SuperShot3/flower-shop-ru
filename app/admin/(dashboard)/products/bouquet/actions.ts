@@ -62,10 +62,10 @@ function revalidateBouquetAdminPaths(bouquetId: string): void {
 async function revalidateBouquetCatalogPaths(writeId: string): Promise<void> {
   const bouquet = await getCatalogBouquetByIdForAdmin(writeId);
   revalidatePath('/en/catalog', 'layout');
-  revalidatePath('/th/catalog', 'layout');
+  revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
   if (bouquet?.slug) {
     revalidatePath(`/en/catalog/${bouquet.slug}`);
-    revalidatePath(`/th/catalog/${bouquet.slug}`);
+    revalidatePath(`/ru/catalog/${bouquet.slug}`);
   }
   revalidateCatalogCacheAfterSupabaseWrite();
 }
@@ -569,10 +569,10 @@ export async function deleteBouquetFromStudioAction(
     revalidatePath(`/admin/products/bouquet/${bouquetId}`);
     revalidatePath(`/admin/products/review/${bouquetId}`);
     revalidatePath('/en/catalog', 'layout');
-    revalidatePath('/th/catalog', 'layout');
+    revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
     if (bouquet?.slug) {
       revalidatePath(`/en/catalog/${bouquet.slug}`);
-      revalidatePath(`/th/catalog/${bouquet.slug}`);
+      revalidatePath(`/ru/catalog/${bouquet.slug}`);
     }
     revalidateCatalogCacheAfterSupabaseWrite();
     return {};

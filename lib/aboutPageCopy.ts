@@ -131,7 +131,7 @@ const baseAboutPageCopy: Record<'en' | 'th', AboutPageCopy> = {
       title: 'What we believe',
       paragraphs: [
         'We believe local businesses deserve better visibility.',
-        'Many florists, makers, and small creative sellers rely heavily on Facebook or messaging apps to sell their products. While that works to some extent, it can also limit growth. Customers may struggle to discover them, compare options, understand delivery areas, or trust the process.',
+        'Many florists, makers, and small creative sellers rely heavily on social media or messaging apps to sell their products. While that works to some extent, it can also limit growth. Customers may struggle to discover them, compare options, understand delivery areas, or trust the process.',
         'Our goal is to help local sellers move beyond social-only selling and become easier to discover through a more structured online experience.',
         'That means:',
       ],
@@ -146,7 +146,7 @@ const baseAboutPageCopy: Record<'en' | 'th', AboutPageCopy> = {
       title: 'Supporting local sellers and craftsmen',
       paragraphs: [
         'Lanna Bloom is not just about selling bouquets.',
-        'We are building a platform that can support local florists, small sellers, and craftsmen by giving them access to a bigger market than only Facebook. We want to create more opportunities for talented local businesses to be seen by customers who are actively searching for quality gifts and flower delivery in Chiang Mai.',
+        'We are building a platform that can support local florists, small sellers, and craftsmen by giving them access to a bigger market than chat-only sales. We want to create more opportunities for talented local businesses to be seen by customers who are actively searching for quality gifts and flower delivery in Chiang Mai.',
         'Our long-term vision is to grow a trusted flower and gift delivery service where customers can find not only bouquets, but also carefully selected gifts and handcrafted products from local creators across more of Thailand.',
         'We grow step by step, and we are building this carefully with real local needs in mind.',
       ],
@@ -302,7 +302,7 @@ const baseAboutPageCopy: Record<'en' | 'th', AboutPageCopy> = {
       title: 'สิ่งที่เราเชื่อ',
       paragraphs: [
         'เราเชื่อว่าร้านธุรกิจท้องถิ่นสมควรได้รับการมองเห็นมากขึ้น',
-        'หลายร้านดอกไม้ ผู้ทำของ และผู้ขายสร้างสรรค์รายย่อยพึ่งพา Facebook หรือแอปแชทในการขายอย่างหนัก ซึ่งก็ได้ผลบ้าง แต่ก็อาจจำกัดการเติบโต ลูกค้าอาจค้นหาไม่เจอ เปรียบเทียบตัวเลือกยาก พื้นที่จัดส่งไม่ชัด หรือไม่มั่นใจในขั้นตอน',
+        'หลายร้านดอกไม้ ผู้ทำของ และผู้ขายสร้างสรรค์รายย่อยพึ่งพาโซเชียลมีเดียหรือแอปแชทในการขายอย่างหนัก ซึ่งก็ได้ผลบ้าง แต่ก็อาจจำกัดการเติบโต ลูกค้าอาจค้นหาไม่เจอ เปรียบเทียบตัวเลือกยาก พื้นที่จัดส่งไม่ชัด หรือไม่มั่นใจในขั้นตอน',
         'เป้าหมายของเราคือช่วยให้ผู้ขายท้องถิ่นก้าวข้ามการขายผ่านโซเชียลอย่างเดียว และถูกค้นพบได้ง่ายขึ้นผ่านประสบการณ์ออนไลน์ที่มีโครงสร้างชัดเจน',
         'นั่นหมายถึง:',
       ],
@@ -317,7 +317,7 @@ const baseAboutPageCopy: Record<'en' | 'th', AboutPageCopy> = {
       title: 'สนับสนุนผู้ขายและช่างฝีมือท้องถิ่น',
       paragraphs: [
         'Lanna Bloom ไม่ได้มีเพียงการขายช่อดอกไม้',
-        'เรากำลังสร้างแพลตฟอร์มที่สนับสนุนช่างดอกไม้ท้องถิ่น ผู้ขายรายย่อย และช่างฝีมือ โดยเปิดตลาดที่กว้างกว่าการขายผ่าน Facebook เพียงอย่างเดียว เราต้องการสร้างโอกาสให้ธุรกิจท้องถิ่นที่มีความสามารถสูงได้ถูกมองเห็นโดยลูกค้าที่กำลังมองหาของขวัญคุณภาพและบริการส่งดอกไม้ในเชียงใหม่อย่างจริงจัง',
+        'เรากำลังสร้างแพลตฟอร์มที่สนับสนุนช่างดอกไม้ท้องถิ่น ผู้ขายรายย่อย และช่างฝีมือ โดยเปิดตลาดที่กว้างกว่าการขายผ่านแชทเพียงอย่างเดียว เราต้องการสร้างโอกาสให้ธุรกิจท้องถิ่นที่มีความสามารถสูงได้ถูกมองเห็นโดยลูกค้าที่กำลังมองหาของขวัญคุณภาพและบริการส่งดอกไม้ในเชียงใหม่อย่างจริงจัง',
         'วิสัยทัศน์ระยะยาวของเราคือการเติบโตเป็นบริการส่งดอกไม้และของขวัญที่เชื่อถือได้ ที่ลูกค้าทั้งได้พบช่อดอกไม้และของขวัญงานประดิษฐ์ที่คัดสรรจากผู้สร้างท้องถิ่นในพื้นที่มากขึ้น',
         'เราเติบโตทีละขั้นและพัฒนาอย่างรอบคอบด้วยความต้องการในท้องถิ่นจริง',
       ],

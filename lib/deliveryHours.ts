@@ -2,7 +2,7 @@
  * Same-day delivery window in Chiang Mai (Asia/Bangkok).
  * Matches site copy: 09:00–20:00; orders after 20:00 go to the next day.
  */
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import {type Locale, localeDateFormat} from '@/lib/i18n';
 
 export const DELIVERY_SHOP_TIMEZONE = 'Asia/Bangkok';
 
@@ -51,8 +51,8 @@ function addDaysToYmd(ymd: string, days: number): string {
 /** Format a YYYY-MM-DD at noon Bangkok for locale display. */
 function formatYmdForLocale(ymd: string, lang: Locale): string {
   const d = new Date(`${ymd}T12:00:00+07:00`);
-  if (isThaiLocale(lang)) {
-    return d.toLocaleDateString('th-TH', {
+  if (lang === 'ru') {
+    return d.toLocaleDateString('ru-RU', {
       timeZone: DELIVERY_SHOP_TIMEZONE,
       day: 'numeric',
       month: 'short',
@@ -83,7 +83,7 @@ export function getTomorrowBangkokDisplayDate(now: Date, lang: Locale): string {
 
 /** Live clock string HH:mm in Bangkok. */
 export function formatBangkokTime(now: Date, lang: Locale): string {
-  return now.toLocaleTimeString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
+  return now.toLocaleTimeString(localeDateFormat(lang), {
     timeZone: DELIVERY_SHOP_TIMEZONE,
     hour: '2-digit',
     minute: '2-digit',
@@ -93,7 +93,7 @@ export function formatBangkokTime(now: Date, lang: Locale): string {
 
 /** Short calendar date in Bangkok for live clocks (e.g. checkout header). */
 export function formatBangkokDate(now: Date, lang: Locale): string {
-  return now.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
+  return now.toLocaleDateString(localeDateFormat(lang), {
     timeZone: DELIVERY_SHOP_TIMEZONE,
     weekday: 'short',
     day: 'numeric',

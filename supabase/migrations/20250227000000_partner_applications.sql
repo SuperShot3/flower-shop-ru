@@ -43,6 +43,7 @@ CREATE INDEX IF NOT EXISTS idx_partner_applications_created_at ON public.partner
 -- RLS: public can insert (apply); admin uses service role for read/update
 ALTER TABLE public.partner_applications ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public insert" ON public.partner_applications;
 CREATE POLICY "Allow public insert" ON public.partner_applications
   FOR INSERT TO anon, authenticated WITH CHECK (true);
 

@@ -70,6 +70,7 @@ export const BOOTSTRAP_GROUPS: BootstrapGroup[] = [
       '20260511153000_expand_order_status_lifecycle.sql',
       '20260520130000_orders_marketing_email_consent.sql',
       '20260613120000_orders_internal_notes.sql',
+      '20260614130000_orders_personal_data_consent.sql',
     ],
   },
   {
@@ -85,6 +86,7 @@ export const BOOTSTRAP_GROUPS: BootstrapGroup[] = [
       '20250308000000_newsletter_subscribers.sql',
       '20260506130000_welcome_codes.sql',
       '20260508140500_reviews_admin_only.sql',
+      '20260614120000_drop_partner_social_columns.sql',
     ],
   },
   {

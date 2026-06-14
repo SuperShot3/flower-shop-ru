@@ -70,8 +70,6 @@ CREATE TABLE IF NOT EXISTS public.partner_applications (
   email text NOT NULL,
   line_id text,
   phone text NOT NULL,
-  instagram text,
-  facebook text,
   -- Location
   address text,
   district text,
@@ -103,6 +101,7 @@ CREATE INDEX IF NOT EXISTS idx_partner_applications_created_at ON public.partner
 -- RLS: public can insert (apply); admin uses service role for read/update
 ALTER TABLE public.partner_applications ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Allow public insert" ON public.partner_applications;
 CREATE POLICY "Allow public insert" ON public.partner_applications
   FOR INSERT TO anon, authenticated WITH CHECK (true);
 
@@ -293,4 +292,14 @@ ALTER TABLE public.customer_reviews
   ALTER COLUMN status SET DEFAULT 'approved';
 
 -- <<< END 20260508140500_reviews_admin_only.sql
+
+-- >>> BEGIN 20260614120000_drop_partner_social_columns.sql
+
+-- Remove unused partner social profile columns (legacy).
+
+ALTER TABLE public.partner_applications
+  DROP COLUMN IF EXISTS instagram,
+  DROP COLUMN IF EXISTS facebook;
+
+-- <<< END 20260614120000_drop_partner_social_columns.sql
 

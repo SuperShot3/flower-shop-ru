@@ -71,8 +71,6 @@ export async function sendNewsletterWelcomeViaOutbox(params: {
   const vars: Record<string, string> = {
     customer_email: email,
     website_url: links.websiteUrl,
-    instagram_url: links.instagramUrl,
-    facebook_url: links.facebookUrl,
     tiktok_url: links.tiktokUrl,
     google_maps_url: links.googleMapsUrl,
     review_link: links.reviewUrl,

@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import {
   MARKETS,
@@ -106,7 +106,7 @@ export function Footer({ lang }: { lang: Locale }) {
             <p className="text-stone-500 text-sm leading-relaxed mb-6">{t.tagline}</p>
             <div className="flex gap-4 items-center flex-wrap">
               <SocialLinks />
-              <MessengerLinks />
+              <MessengerLinks lang={lang} />
             </div>
           </div>
           <div>
@@ -154,7 +154,7 @@ export function Footer({ lang }: { lang: Locale }) {
               <ul className="space-y-2 text-sm text-stone-500">
                 <li>
                   <a
-                    href={`https://lannabloom.shop/${isThaiLocale(lang) ? 'th' : 'en'}/flower-delivery-thailand`}
+                    href={`https://lannabloom.shop/${'en'}/flower-delivery-thailand`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#C5A059] transition-colors font-medium text-stone-600"
@@ -264,6 +264,13 @@ export function Footer({ lang }: { lang: Locale }) {
           </div>
         </div>
         <div className="flex flex-col gap-4 pt-8 border-t border-stone-200 text-xs text-stone-400">
+          <p className="text-center text-stone-500 max-w-3xl mx-auto leading-relaxed px-2">
+            {t.siteUsageNoticeBefore}{' '}
+            <Link href={`/${lang}/privacy`} className="text-stone-600 font-medium hover:underline">
+              {t.siteUsageNoticeLink}
+            </Link>{' '}
+            {t.siteUsageNoticeAfter}
+          </p>
           <p className="text-center text-stone-500 max-w-3xl mx-auto leading-relaxed px-2">{t.cookieNotice}</p>
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <p>{t.copyright}</p>
@@ -301,7 +308,7 @@ export function Footer({ lang }: { lang: Locale }) {
               {t.privacyPolicy}
             </Link>
             <Link href={`/${lang}/cookies`} className="hover:text-stone-600 transition-colors">
-              {isThaiLocale(lang) ? 'นโยบายคุกกี้' : 'Cookie Policy'}
+              {'Cookie Policy'}
             </Link>
           </div>
           </div>

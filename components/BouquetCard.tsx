@@ -9,7 +9,7 @@ import { optionDisplayLabel } from '@/lib/bouquetOptions';
 import { getBouquetDisplayCategory } from '@/lib/catalogCategories';
 import type { Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
 import { useCart } from '@/contexts/CartContext';

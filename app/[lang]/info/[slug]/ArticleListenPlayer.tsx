@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { isThaiLocale } from '@/lib/i18n';
 import styles from './ArticleListenPlayer.module.css';
 
 type Props = {
@@ -28,11 +27,9 @@ export function ArticleListenPlayer({ src, lang }: Props) {
     else el.addEventListener('canplay', tryPlay, { once: true });
   }, [active]);
 
-  const title = isThaiLocale(lang) ? 'ฟังบทความนี้' : 'Listen to this article';
+  const title = 'Listen to this article';
   const hint =
-    isThaiLocale(lang)
-      ? 'ไฟล์เสียงจะเริ่มโหลดเมื่อคุณกดเล่นเท่านั้น — ไม่โหลดพร้อมหน้าเว็บ'
-      : 'Audio only starts loading when you press play — it does not download with the page.';
+    'Audio only starts loading when you press play — it does not download with the page.';
 
   return (
     <section className={styles.listenWrap} aria-label={title}>
@@ -48,7 +45,7 @@ export function ArticleListenPlayer({ src, lang }: Props) {
         </div>
         {!active ? (
           <button type="button" className={styles.listenPlay} onClick={() => setActive(true)}>
-            {isThaiLocale(lang) ? 'เล่นเสียง' : 'Play audio'}
+            {'Play audio'}
           </button>
         ) : (
           <audio

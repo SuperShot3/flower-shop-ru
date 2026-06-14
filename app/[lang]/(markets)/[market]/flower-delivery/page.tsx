@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import {isValidLocale, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, type Locale} from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
 import {
   getCatalogBouquetsPaginated,
@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const m = getMarketByPathSlug(params.market);
   if (!m) return {};
-  const isTh = isThaiLocale(params.lang);
+  const isTh = params.lang === 'ru';
   const place =
     params.lang === 'ru'
       ? m.customerFacingNameRu
@@ -55,7 +55,7 @@ export default async function MarketFlowerDeliveryPage({
     getCatalogHeroCarouselImages(),
   ]);
 
-  const isTh = isThaiLocale(lang);
+  const isTh = lang === 'ru';
   const marketH1 =
     lang === 'ru'
       ? `Доставка цветов — ${entry.customerFacingNameRu}`

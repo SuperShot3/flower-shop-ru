@@ -6,8 +6,6 @@ export interface ShareButtonProps {
   url: string;
   title: string;
   text?: string;
-  /** Optional: show Facebook share link (for article page) */
-  showFacebook?: boolean;
   /** Aria label for the Share button */
   ariaLabel?: string;
   /** Visible label (hidden in compact variant). Defaults to "Share". */
@@ -25,7 +23,6 @@ export function ShareButton({
   url,
   title,
   text,
-  showFacebook = false,
   ariaLabel = 'Share',
   buttonText = 'Share',
   copySuccessMessage = 'Link copied',
@@ -74,15 +71,6 @@ export function ShareButton({
     }
   };
 
-  const handleFacebookShare = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const resolvedUrl = resolveUrl();
-    if (!resolvedUrl || resolvedUrl === '#') return;
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resolvedUrl)}`;
-    window.open(fbUrl, '_blank', 'noopener,noreferrer,width=600,height=400');
-  };
-
   return (
     <div className={`share-button-wrap ${variant} ${className}`.trim()}>
       <button
@@ -97,18 +85,6 @@ export function ShareButton({
           <span className="share-button-text">{buttonText}</span>
         ) : null}
       </button>
-      {showFacebook && (
-        <button
-          type="button"
-          onClick={handleFacebookShare}
-          className="share-button"
-          aria-label="Share on Facebook"
-          title="Share on Facebook"
-        >
-          <FacebookIcon />
-          <span className="share-button-text">Facebook</span>
-        </button>
-      )}
       <style jsx>{`
         .share-button-wrap {
           display: inline-flex;
@@ -239,20 +215,6 @@ function AppleShareIcon() {
         fill="currentColor"
         d="M35 40H15c-1.7 0-3-1.3-3-3V19c0-1.7 1.3-3 3-3h7v2h-7c-.6 0-1 .4-1 1v18c0 .6.4 1 1 1h20c.6 0 1-.4 1-1V19c0-.6-.4-1-1-1h-7v-2h7c1.7 0 3 1.3 3 3v18c0 1.7-1.3 3-3 3z"
       />
-    </svg>
-  );
-}
-
-function FacebookIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     </svg>
   );
 }

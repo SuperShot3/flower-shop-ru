@@ -1,7 +1,7 @@
 /**
  * Catalog bouquet pricing types, migration helpers, and sellable-option builders.
  */
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 import {
   friendlyLegacyLabel,
   labelSingleStemCount,

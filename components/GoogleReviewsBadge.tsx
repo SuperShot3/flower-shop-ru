@@ -7,7 +7,7 @@ import {
   GOOGLE_PLACE_URL,
 } from '@/lib/reviewsConfig';
 import type { Locale } from '@/lib/i18n';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import styles from './google-reviews-badge.module.css';
 
 function GoogleGLogo() {
@@ -65,7 +65,7 @@ export function GoogleReviewsBadge({ lang, className = '', mapsUrl }: Props) {
   const reviewCount = GOOGLE_BUSINESS_REVIEW_COUNT;
   const href = mapsUrl?.trim() || GOOGLE_PLACE_URL;
   const baseId = useId().replace(/:/g, '');
-  const locale = isThaiLocale(lang) ? 'th-TH' : 'en-US';
+  const locale = (lang === 'ru' ? 'ru-RU' : 'en-US');
 
   const stars = useMemo(
     () =>

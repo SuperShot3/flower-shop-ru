@@ -8,7 +8,7 @@ import { PartnersCarousel } from '@/components/PartnersCarousel';
 import { ReviewsSection } from '@/components/reviews/ReviewsSection';
 import { getCatalogHeroImage, getCatalogHeroCarouselImages } from '@/lib/catalogReads';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, defaultLocale, locales, type Locale, isThaiLocale, getBrandName} from '@/lib/i18n';
+import {isValidLocale, defaultLocale, locales, type Locale, getBrandName} from '@/lib/i18n';
 import { Suspense } from 'react';
 
 /** Regenerate every 60s so popular catalog items shuffle on each update */
@@ -30,18 +30,10 @@ export async function generateMetadata({
       alternates: { canonical },
     };
   }
-  if (isThaiLocale(params.lang)) {
-    return {
-      title: 'Lanna Bloom | ส่งดอกไม้และของขวัญ เชียงใหม่',
-      description:
-        'บริการส่งดอกไม้และของขวัญพรีเมียมในเชียงใหม่ สั่งออนไลน์ชำระเงินปลอดภัย จัดส่งวันเดียวได้ตามเงื่อนไข และจัดส่งช่อในจุดหมายที่เลือกทั่วประเทศไทย',
-      alternates: { canonical },
-    };
-  }
   return {
-    title: `${getBrandName('en')} | Flower & gift delivery Chiang Mai`,
+    title: `${getBrandName('en')} | Flower delivery in Yekaterinburg`,
     description:
-      'Premium flower and gift delivery in Chiang Mai, Thailand. Order online with secure checkout — same-day delivery when available. Bouquet delivery in Phuket, Hua Hin, Koh Samui, Krabi & Ao Nang, and Pattaya.',
+      'Premium flower delivery in Yekaterinburg. Order fresh bouquets online — same-day delivery during working hours.',
     alternates: { canonical },
   };
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { BouquetSize } from '@/lib/bouquets';
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 import { optionDisplayLabel } from '@/lib/bouquetOptions';
 import type { DeliveryDestinationId } from '@/lib/delivery/markets';
 import { effectiveCatalogUnitPriceWithExpansion } from '@/lib/catalogDiscount';
@@ -22,7 +22,7 @@ export function SizeSelector({
   discountPercent?: number;
 }) {
   const selectedSizeLabel = optionDisplayLabel(selected, lang);
-  const selectedSizeText = isThaiLocale(lang) ? `ขนาดที่เลือก: ${selectedSizeLabel}` : `Selected size: ${selectedSizeLabel}`;
+  const selectedSizeText = `Selected size: ${selectedSizeLabel}`;
 
   return (
     <div className="size-selector">

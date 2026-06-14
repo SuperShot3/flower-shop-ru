@@ -61,10 +61,10 @@ function revalidateProductAdminPaths(productId: string): void {
 async function revalidateProductCatalogPaths(writeId: string): Promise<void> {
   const product = await getCatalogProductByIdForAdmin(writeId);
   revalidatePath('/en/catalog', 'layout');
-  revalidatePath('/th/catalog', 'layout');
+  revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
   if (product?.slug) {
     revalidatePath(`/en/catalog/${product.slug}`);
-    revalidatePath(`/th/catalog/${product.slug}`);
+    revalidatePath(`/ru/catalog/${product.slug}`);
   }
   revalidateCatalogCacheAfterSupabaseWrite();
 }
@@ -482,10 +482,10 @@ export async function approveBouquetAction(bouquetId: string): Promise<{ error?:
     revalidatePath(`/admin/products/review/${bouquetId}`);
     revalidatePath(`/admin/products/bouquet/${bouquetId}`);
     revalidatePath('/en/catalog', 'layout');
-    revalidatePath('/th/catalog', 'layout');
+    revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
     if (bouquet?.slug) {
       revalidatePath(`/en/catalog/${bouquet.slug}`);
-      revalidatePath(`/th/catalog/${bouquet.slug}`);
+      revalidatePath(`/ru/catalog/${bouquet.slug}`);
     }
     revalidateCatalogCacheAfterSupabaseWrite();
     return {};
@@ -512,10 +512,10 @@ export async function deleteBouquetAction(bouquetId: string): Promise<{ error?: 
     revalidatePath(`/admin/products/review/${bouquetId}`);
     revalidatePath(`/admin/products/bouquet/${bouquetId}`);
     revalidatePath('/en/catalog', 'layout');
-    revalidatePath('/th/catalog', 'layout');
+    revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
     if (bouquet?.slug) {
       revalidatePath(`/en/catalog/${bouquet.slug}`);
-      revalidatePath(`/th/catalog/${bouquet.slug}`);
+      revalidatePath(`/ru/catalog/${bouquet.slug}`);
     }
     revalidateCatalogCacheAfterSupabaseWrite();
     return {};
@@ -644,10 +644,10 @@ export async function deleteProductAction(productId: string): Promise<{ error?: 
     revalidatePath(`/admin/products/edit/${productId}`);
     revalidatePath(`/admin/products/product/${productId}`);
     revalidatePath('/en/catalog', 'layout');
-    revalidatePath('/th/catalog', 'layout');
+    revalidatePath('/ru/catalog', 'layout'); revalidatePath('/en/catalog', 'layout');
     if (product?.slug) {
       revalidatePath(`/en/catalog/${product.slug}`);
-      revalidatePath(`/th/catalog/${product.slug}`);
+      revalidatePath(`/ru/catalog/${product.slug}`);
     }
     revalidateCatalogCacheAfterSupabaseWrite();
     return {};

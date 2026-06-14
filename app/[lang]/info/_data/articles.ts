@@ -1,10 +1,7 @@
-import { isThaiLocale } from '@/lib/i18n';
 /**
  * Articles registry for the Guides / Info section.
  * Each article maps to a slug and usually MDX files:
  * - content/info/[slug].en.mdx (English)
- * - content/info/[slug].th.mdx (Thai)
- * If .th.mdx is missing, falls back to .en.mdx for Thai locale.
  *
  * Entries with `externalPath` skip MDX and redirect `/info/{slug}` to `/{locale}{externalPath}`.
  */
@@ -24,10 +21,6 @@ export type ArticleMeta = {
   titleRu?: string;
   /** Russian excerpt (optional; falls back to excerpt if missing) */
   excerptRu?: string;
-  /** Thai title (optional; falls back to title if missing) */
-  titleTh?: string;
-  /** Thai excerpt (optional; falls back to excerpt if missing) */
-  excerptTh?: string;
   /**
    * If set, the info hub card links to `/{locale}{externalPath}` (e.g. guide route).
    * The `/info/{slug}` page redirects there; no MDX file is required for this slug.
@@ -52,9 +45,6 @@ export const articles: ArticleMeta[] = [
     title: 'Plush Toys and Teddy Bears Now Available at Lanna Bloom in Chiang Mai',
     excerpt:
       'Add a teddy bear or plush toy to selected flower orders in Chiang Mai—an easy way to make bouquets feel warmer, more personal, and more complete for birthdays, romance, get-well wishes, and long-distance gifts.',
-    titleTh: 'ตุ๊กตานุ่มและหมีเท็ดดี้ที่ Lanna Bloom เชียงใหม่',
-    excerptTh:
-      'เพิ่มหมีเท็ดดี้หรือตุ๊กตานุ่มในบางออเดอร์ดอกไม้ในเชียงใหม่—วิธีง่าย ๆ ที่ทำให้ช่อดอกไม้ดูอบอุ่น เป็นส่วนตัว และครบมากขึ้น ไม่ว่าจะวันเกิด โรแมนติก อวยหายป่วย หรือของขวัญจากระยะไกล',
     publishedAt: '2026-04-10T00:00:00.000Z',
     featured: false,
     cover: {
@@ -64,8 +54,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🧸' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
-      { label: 'Contact us', labelRu: 'ติดต่อเรา', href: '/contact' },
+      { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
+      { label: 'Contact us', labelRu: 'Связаться с нами', href: '/contact' },
     ],
   },
   {
@@ -73,9 +63,6 @@ export const articles: ArticleMeta[] = [
     title: 'Birthday Flower Gift Guide: Four Luxury Bouquets to Shop Now',
     excerpt:
       'Find a memorable birthday flower gift: compare four luxury bouquets—bold sunset, vivid citrus, timeless roses and lilies, romantic ruby—then shop online from each section.',
-    titleTh: 'ไอเดียของขวัญดอกไม้วันเกิด: ช่อพรีเมียมสี่สไตล์',
-    excerptTh:
-      'เลือกของขวัญดอกไม้วันเกิดให้จำได้นาน: เปรียบเทียบช่อพรีเมียมสี่สไตล์—โทนซันเซ็ตสะดุดตา ซิตรัสสดใส กุหลาบและลิลลี่คลาสสิก โรแมนติกโทนรูบี้—แล้วเลือกซื้อออนไลน์ได้จากแต่ละหัวข้อ',
     externalPath: '/info/birthday-flower-gift',
     publishedAt: '2026-04-30T00:00:00.000Z',
     featured: false,
@@ -85,37 +72,15 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🎂' },
     },
     ctaLinks: [
-      { label: 'Browse birthday flowers', labelRu: 'ดูดอกไม้วันเกิด', href: '/catalog?occasion=birthday' },
-      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
+      { label: 'Browse birthday flowers', labelRu: 'Букеты на день рождения', href: '/catalog?occasion=birthday' },
+      { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
     ],
-  },
-  {
-    slug: 'order-flowers-website-vs-facebook-chiang-mai',
-    title:
-      'Why Ordering Flowers on a Website Can Be Easier Than Ordering Through Facebook Messages',
-    excerpt:
-      'Many people find flower shops on Facebook first—but chat orders can feel slow and unclear. Here is how using the website can make browsing, comparing, and ordering simpler, especially for busy customers and overseas buyers. Delivery is available in Chiang Mai and nearby areas only. See below for more details.',
-    titleTh:
-      'ทำไมการสั่งดอกไม้ผ่านเว็บไซต์อาจสะดวกกว่าการสั่งผ่านข้อความ Facebook',
-    excerptTh:
-      'หลายคนรู้จักร้านดอกไม้ผ่าน Facebook ก่อน แต่การสั่งทางแชทบางครั้งช้าและไม่ชัดเจน บทความนี้อธิบายว่าทำไมการใช้เว็บไซต์จึงช่วยให้ดูตัวเลือก เปรียบเทียบ และสั่งซื้อได้ง่ายขึ้น โดยเฉพาะลูกค้าที่ยุ่งหรือสั่งจากต่างประเทศ จัดส่งเฉพาะในเชียงใหม่และพื้นที่ใกล้เคียงเท่านั้น ดูรายละเอียดเพิ่มเติมด้านล่าง',
-    publishedAt: '2026-04-02T00:00:00.000Z',
-    featured: false,
-    cover: {
-      type: 'image',
-      src: '/blog_images/order_onwebsite/lannabloom_website.webp',
-      alt: 'Lanna Bloom website shown on a laptop',
-    },
-    ctaLinks: [{ label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' }],
   },
   {
     slug: 'birthday-flowers-chiang-mai-from-abroad',
     title: 'Send Flowers to Chiang Mai From Abroad: What to Expect',
     excerpt:
       'Ordering from another country should feel thoughtful, not stressful. Here is what overseas customers can expect when sending flowers to Chiang Mai: clear steps, secure checkout, and local delivery handled with care.',
-    titleTh: 'ส่งดอกไม้ให้คนในเชียงใหม่จากต่างประเทศ: สิ่งที่ควรคาดหวัง',
-    excerptTh:
-      'การสั่งจากต่างประเทศควรรู้สึกใส่ใจ ไม่ใช่เครียด บทความนี้อธิบายขั้นตอน การชำระเงินออนไลน์ และการจัดส่งในพื้นที่อย่างใส่ใจ',
     publishedAt: '2026-04-03T00:00:00.000Z',
     featured: false,
     cover: {
@@ -124,8 +89,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🎂' },
     },
     ctaLinks: [
-      { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
-      { label: 'Delivery policy', labelRu: 'นโยบายจัดส่ง', href: '/info/delivery-policy' },
+      { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
+      { label: 'Delivery policy', labelRu: 'Правила доставки', href: '/info/delivery-policy' },
     ],
   },
   {
@@ -152,8 +117,6 @@ export const articles: ArticleMeta[] = [
     slug: 'rose-bouquets-chiang-mai', // URL-friendly, lowercase, hyphens (e.g. birthday-flowers)
     title: 'Rose Bouquets Delivery in Chiang Mai', // English title
     excerpt: 'Order beautiful rose bouquets and have them delivered across Chiang Mai. Same-day delivery during working hours. Message us via LINE or WhatsApp with your choice and delivery details.', // English excerpt (1–2 sentences)
-    titleTh: 'บริการส่งช่อกุหลาบในเชียงใหม่', // Thai title
-    excerptTh: 'สั่งช่อกุหลาบสวย ๆ พร้อมบริการจัดส่งทั่วเชียงใหม่ จัดส่งภายในวันเดียวได้ในช่วงเวลาทำการ ทักหาเราผ่าน LINE หรือ WhatsApp พร้อมแจ้งแบบช่อและรายละเอียดการจัดส่งได้เลย', // Thai excerpt (1–2 sentences)
     publishedAt: '2026-02-19T00:00:00.000Z', // ISO date
     featured: false, // true = shown in featured section at top
     cover: {
@@ -162,10 +125,10 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🚕' },
     },
     ctaLinks: [
-      { label: 'Browse rose bouquets', labelRu: 'ดูช่อกุหลาบ', href: '/catalog?types=rose' },
-      { label: 'Red roses', labelRu: 'กุหลาบแดง', href: '/catalog?types=rose&colors=red' },
-      { label: 'White roses', labelRu: 'กุหลาบขาว', href: '/catalog?types=rose&colors=white' },
-      { label: 'Order now', labelRu: 'สั่งซื้อเลย', href: '/catalog' },
+      { label: 'Browse rose bouquets', labelRu: 'Букеты из роз', href: '/catalog?types=rose' },
+      { label: 'Red roses', labelRu: 'Красные розы', href: '/catalog?types=rose&colors=red' },
+      { label: 'White roses', labelRu: 'Белые розы', href: '/catalog?types=rose&colors=white' },
+      { label: 'Order now', labelRu: 'Заказать', href: '/catalog' },
     ],
   },
   {
@@ -173,9 +136,6 @@ export const articles: ArticleMeta[] = [
     title: '51 Roses Bouquet in Chiang Mai: Statement Rose Gifts',
     excerpt:
       'A 51 roses bouquet is a bold, beautiful choice for anniversaries, proposals, and romantic surprises in Chiang Mai. Compare classic red, soft pink, and red-and-white styles—then open any bouquet to see details and order.',
-    titleTh: 'ช่อกุหลาบ 51 ดอกในเชียงใหม่: ของขวัญโรแมนติกที่โดดเด่น',
-    excerptTh:
-      'ช่อกุหลาบ 51 ดอกเป็นตัวเลือกที่สะดุดตาและโรแมนติก ไม่ว่าจะครบรอบ ขอแต่งงาน หรือเซอร์ไพรส์คนพิเศษในเชียงใหม่ เปรียบเทียบโทนแดงคลาสสิก ชมพูนุ่ม และแดง-ขาว—แล้วเปิดหน้าช่อเพื่อดูรายละเอียดและสั่งซื้อ',
     publishedAt: '2026-05-04T00:00:00.000Z',
     featured: false,
     cover: {
@@ -185,9 +145,9 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🌹' },
     },
     ctaLinks: [
-      { label: '51 red roses', labelRu: 'กุหลาบแดง 51 ดอก', href: '/catalog/51-red-roses' },
-      { label: 'All rose bouquets', labelRu: 'ช่อกุหลาบทั้งหมด', href: '/info/rose-bouquets-chiang-mai' },
-      { label: 'Browse the catalog', labelRu: 'ดูแคตตาล็อก', href: '/catalog?types=rose' },
+      { label: '51 red roses', labelRu: '51 красная роза', href: '/catalog/51-red-roses' },
+      { label: 'All rose bouquets', labelRu: 'Все букеты из роз', href: '/info/rose-bouquets-chiang-mai' },
+      { label: 'Browse the catalog', labelRu: 'Смотреть каталог', href: '/catalog?types=rose' },
     ],
   },
   {
@@ -195,8 +155,6 @@ export const articles: ArticleMeta[] = [
     title: 'Same-day flower delivery in Chiang Mai',
     excerpt:
       'Need flowers delivered today? Order same-day flower delivery across Chiang Mai. Message us early for the best choice; we deliver during working hours (09:00–20:00).',
-      titleTh: 'บริการส่งดอกไม้ในวันเดียวกันในเชียงใหม่',
-      excerptTh: 'ต้องการส่งดอกไม้วันนี้ไหม? สั่งดอกไม้ส่งด่วนในวันเดียวกันทั่วเชียงใหม่ได้เลย ติดต่อเราล่วงหน้าเพื่อเลือกดอกไม้ที่ชอบที่สุด เราจัดส่งในช่วงเวลาทำการ (09:00–20:00)',
     publishedAt: '2026-02-19T00:00:00.000Z',
     featured: false,
     cover: {
@@ -205,8 +163,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🚚' },
     },
     ctaLinks: [
-      { label: 'Order same-day delivery', labelRu: 'สั่งจัดส่งวันเดียว', href: '/catalog' },
-      { label: 'Message us to order', labelRu: 'ทักสั่งซื้อ', href: '/contact' },
+      { label: 'Order same-day delivery', labelRu: 'Заказ на сегодня', href: '/catalog' },
+      { label: 'Message us to order', labelRu: 'Написать нам', href: '/contact' },
     ],
   },
   {
@@ -217,9 +175,6 @@ export const articles: ArticleMeta[] = [
     titleRu: 'Правила доставки',
     excerptRu:
       'Доставка по Екатеринбургу и ближайшим городам: часы 09:00–20:00, доставка в тот же день (заказы после 18:00 обычно на следующий день), зоны и стоимость при оформлении заказа.',
-    titleTh: 'นโยบายการจัดส่ง',
-    excerptTh:
-      'สรุปการจัดส่งทุกโซนที่เราเปิดให้บริการ: เวลาให้บริการ 09:00–20:00 แนวทางจัดส่งภายในวัน (ออเดอร์หลัง 18:00 มักนัดวันถัดไป) โซนและค่าจัดส่งตอนเช็กเอาต์ การยืนยันทางแชทหลังสั่งบนเว็บ และข้อมูลที่อยู่ที่ควรเตรียม ต้องการงานพิเศษหรือสอบถามเพิ่มเติม ทัก LINE หรือ WhatsApp ได้เลย',
     publishedAt: '2026-02-20T00:00:00.000Z',
     featured: false,
     cover: {
@@ -236,8 +191,6 @@ export const articles: ArticleMeta[] = [
     slug: 'flower-delivery-to-hospitals-chiang-mai', // URL-friendly, lowercase, hyphens (e.g. birthday-flowers)
     title: 'How to Deliver Flowers to Hospitals in Chiang Mai', // English title
     excerpt: 'Sending flowers to someone in a hospital? Here’s the easiest way to arrange delivery in Chiang Mai, plus links to major hospitals to confirm addresses and contact numbers.', // English excerpt (1–2 sentences)
-    titleTh: 'วิธีส่งดอกไม้ไปโรงพยาบาลในเชียงใหม่', // Thai title
-    excerptTh: 'อยากส่งดอกไม้ให้คนที่อยู่โรงพยาบาล? คู่มือนี้อธิบายวิธีสั่งและจัดส่งในเชียงใหม่ พร้อมลิงก์ไปยังโรงพยาบาลหลักเพื่อเช็คที่อยู่และเบอร์ติดต่อ', // Thai excerpt (1–2 sentences)
     publishedAt: '2026-02-19T00:00:00.000Z', // ISO date
     featured: true, // true = shown in featured section at top
     cover: {
@@ -246,8 +199,8 @@ export const articles: ArticleMeta[] = [
       center: { kind: 'emoji', value: '🏥' },
     },
     ctaLinks: [
-      { label: 'Order flowers for delivery', labelRu: 'สั่งดอกไม้จัดส่ง', href: '/catalog' },
-      { label: 'Contact us', labelRu: 'ติดต่อเรา', href: '/contact' },
+      { label: 'Order flowers for delivery', labelRu: 'Заказать доставку', href: '/catalog' },
+      { label: 'Contact us', labelRu: 'Связаться с нами', href: '/contact' },
     ],
   },
 ];
@@ -256,23 +209,21 @@ export function getArticleBySlug(slug: string): ArticleMeta | undefined {
   return articles.find((a) => a.slug === slug);
 }
 
-/** Get localized title (lang: 'en' | 'ru' | 'th') */
+/** Get localized title (lang: 'en' | 'ru') */
 export function getArticleTitle(article: ArticleMeta, lang: string): string {
   if (lang === 'ru' && article.titleRu) return article.titleRu;
-  if (isThaiLocale(lang) && article.titleTh) return article.titleTh;
   return article.title;
 }
 
-/** Get localized excerpt (lang: 'en' | 'ru' | 'th') */
+/** Get localized excerpt (lang: 'en' | 'ru') */
 export function getArticleExcerpt(article: ArticleMeta, lang: string): string {
   if (lang === 'ru' && article.excerptRu) return article.excerptRu;
-  if (isThaiLocale(lang) && article.excerptTh) return article.excerptTh;
   return article.excerpt;
 }
 
 const DEFAULT_CTA: ArticleCtaLink[] = [
-  { label: 'Browse bouquets', labelRu: 'เลือกช่อดอกไม้', href: '/catalog' },
-  { label: 'Order via LINE / WhatsApp', labelRu: 'สั่งผ่าน LINE / WhatsApp', href: '/contact' },
+  { label: 'Browse bouquets', labelRu: 'Смотреть букеты', href: '/catalog' },
+  { label: 'Contact us', labelRu: 'Связаться с нами', href: '/contact' },
 ];
 
 /** Get CTA links for article. Uses article's ctaLinks or default. */

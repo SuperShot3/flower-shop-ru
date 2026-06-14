@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import type { Locale } from '@/lib/i18n';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations, localeDateFormat} from '@/lib/i18n';
 import {
   getBangkokYmd,
   getSameDayDeliveryPhaseBangkok,
@@ -37,7 +37,7 @@ const DELIVERY_END_TIME = '20:00';
 
 function formatDeliveryDate(ymd: string, lang: Locale): string {
   const date = new Date(`${ymd}T12:00:00+07:00`);
-  return date.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en-GB', {
+  return date.toLocaleDateString(localeDateFormat(lang), {
     timeZone: 'Asia/Bangkok',
     weekday: 'short',
     day: 'numeric',
@@ -177,13 +177,13 @@ export function CatalogDeliveryBar({
           </span>
           <label className="catalog-delivery-location-wrap">
             <span className="sr-only">
-              {isThaiLocale(lang) ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
+              {'Choose delivery location'}
             </span>
             <select
               className="catalog-delivery-location-select"
               value={locationValue}
               onChange={handleLocationChange}
-              aria-label={isThaiLocale(lang) ? 'เลือกพื้นที่จัดส่ง' : 'Choose delivery location'}
+              aria-label={'Choose delivery location'}
             >
               <option value="CHIANG_MAI">{destinationDisplayName('CHIANG_MAI', lang)}</option>
               {MARKETS.map((m) => (
@@ -197,15 +197,13 @@ export function CatalogDeliveryBar({
         <div
           className="catalog-delivery-clock"
           title={
-            isThaiLocale(lang)
-              ? 'เวลาท้องถิ่น (เชียงใหม่)'
-              : 'Local time (Asia/Bangkok)'
+            'Local time (Asia/Bangkok)'
           }
         >
           <time dateTime={now?.toISOString()} suppressHydrationWarning>
             {now ? formatBangkokTime(now, lang) : '--:--'}
           </time>
-          <span>{isThaiLocale(lang) ? 'เวลาท้องถิ่น' : 'local'}</span>
+          <span>{'local'}</span>
         </div>
       </div>
 

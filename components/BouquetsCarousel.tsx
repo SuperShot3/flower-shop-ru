@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { Bouquet } from '@/lib/bouquets';
-import { isThaiLocale, type Locale } from '@/lib/i18n'
+import { type Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
 import { trackSelectItem } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
@@ -86,7 +86,7 @@ export function BouquetsCarousel({ bouquets, lang }: { bouquets: Bouquet[]; lang
                         {name}
                       </p>
                       <p className={interest.price}>
-                        {isThaiLocale(lang) ? 'เริ่มต้น ' : 'From '}₽{displayMinPrice.toLocaleString()}
+                        {'From '}₽{displayMinPrice.toLocaleString()}
                       </p>
                     </div>
                   </Link>
@@ -98,7 +98,7 @@ export function BouquetsCarousel({ bouquets, lang }: { bouquets: Bouquet[]; lang
       </div>
       {bouquets.length > 1 && (
         <p className="bouquets-carousel-swipe-hint" aria-hidden>
-          {isThaiLocale(lang) ? 'เลื่อนเพื่อดูเพิ่มเติม' : 'Swipe to browse'}
+          {'Swipe to browse'}
         </p>
       )}
       <style jsx>{`

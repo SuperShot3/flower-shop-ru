@@ -3,7 +3,7 @@
  * Internal id `CHIANG_MAI` is the primary Yekaterinburg service area (legacy key from Thailand fork).
  */
 
-import { isThaiLocale, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
 
 export const DELIVERY_DESTINATIONS = [
   'CHIANG_MAI',
@@ -85,17 +85,14 @@ export function isExpansionDestination(id: DeliveryDestinationId): boolean {
 
 export function destinationDisplayName(
   id: DeliveryDestinationId,
-  lang: Locale | 'th'
+  lang: Locale
 ): string {
   if (id === 'CHIANG_MAI') {
-    if (lang === 'ru') return 'Екатеринбург';
-    if (isThaiLocale(lang)) return 'Екатеринбург';
-    return 'Yekaterinburg';
+    return lang === 'ru' ? 'Екатеринбург' : 'Yekaterinburg';
   }
   const m = MARKETS.find((x) => x.destinationId === id);
   if (!m) return id;
-  if (lang === 'ru' || isThaiLocale(lang)) return m.customerFacingNameRu;
-  return m.customerFacingNameEn;
+  return lang === 'ru' ? m.customerFacingNameRu : m.customerFacingNameEn;
 }
 
 /** @deprecated Use customerFacingNameRu — kept for Thailand-era call sites. */

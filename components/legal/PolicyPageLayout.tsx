@@ -20,6 +20,7 @@ function PolicyListIcon() {
 export function PolicyPageLayout({
   lang,
   title,
+  subtitle,
   intro,
   callout,
   lastUpdated,
@@ -27,6 +28,7 @@ export function PolicyPageLayout({
 }: {
   lang: Locale;
   title: string;
+  subtitle?: string;
   intro?: string;
   callout?: string;
   lastUpdated?: string;
@@ -39,6 +41,7 @@ export function PolicyPageLayout({
       <div className="container policy-page-inner">
         <header className="policy-page-hero">
           <h1 className="policy-title">{title}</h1>
+          {subtitle ? <p className="policy-subtitle">{subtitle}</p> : null}
           {lastUpdated ? <p className="policy-last-updated">{lastUpdated}</p> : null}
           {intro ? <p className="policy-intro">{intro}</p> : null}
         </header>

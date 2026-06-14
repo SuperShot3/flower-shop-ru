@@ -16,7 +16,7 @@ import {
 } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import type { Locale } from '@/lib/i18n';
-import { translations, isThaiLocale } from '@/lib/i18n';
+import { translations } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 function ymdToDate(ymd: string): Date {
@@ -103,7 +103,7 @@ export function DeliveryDatePicker({
     selectedDate &&
     format(
       selectedDate,
-      lang === 'ru' ? 'EEE, d MMM yyyy' : isThaiLocale(lang) ? 'EEEEที่ d MMM yyyy' : 'EEE, MMM d, yyyy',
+      lang === 'ru' ? 'EEE, d MMM yyyy' : 'EEE, MMM d, yyyy',
       { locale }
     );
 

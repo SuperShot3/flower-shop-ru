@@ -50,7 +50,7 @@ export function MainSiteChrome({
         <main>{children}</main>
       </div>
       <Footer lang={lang} />
-      {!isCartRoute && <LineFloatingButton />}
+      {!isCartRoute && <LineFloatingButton lang={lang} />}
     </>
   );
 }

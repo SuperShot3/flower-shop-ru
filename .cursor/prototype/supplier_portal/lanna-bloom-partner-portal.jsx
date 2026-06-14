@@ -197,8 +197,6 @@ const ApplyScreen=()=>{
               <Btn variant="ghost" small>📞 โทร</Btn>
             </div>
           </div>
-          <Inp label="Instagram (ถ้ามี)" sub="Optional" placeholder="@yourshop" value={f.ig} onChange={e=>u("ig",e.target.value)}/>
-          <Inp label="Facebook (ถ้ามี)" sub="Optional" placeholder="facebook.com/yourshop" value={f.fb} onChange={e=>u("fb",e.target.value)}/>
         </>)}
 
         {step===1&&(<>

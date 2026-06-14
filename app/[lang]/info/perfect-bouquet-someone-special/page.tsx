@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Bouquet } from '@/lib/bouquets';
 import { getBaseUrl } from '@/lib/orders';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n';
+import {isValidLocale, locales, type Locale} from '@/lib/i18n';
 import { getCatalogBouquetBySlug } from '@/lib/catalogReads';
 import { BouquetCard } from '@/components/BouquetCard';
 import { MessengerOrderButtons } from '@/components/MessengerOrderButtons';
@@ -237,7 +237,7 @@ const COPY = {
 type CopyLocale = 'en' | 'th';
 
 function getCopyLocale(locale: Locale): CopyLocale {
-  return isThaiLocale(locale) ? 'th' : 'en';
+  return 'en';
 }
 
 export const revalidate = 60;
@@ -285,7 +285,7 @@ function bouquetDisplayName(
 ): string {
   if (!bouquet) return fallbackEn;
   const th = bouquet.nameRu?.trim();
-  return isThaiLocale(locale) && th ? th : bouquet.nameEn;
+  return locale === 'ru' && th ? th : bouquet.nameEn;
 }
 
 export default async function PerfectBouquetGuidePage({
@@ -377,9 +377,7 @@ export default async function PerfectBouquetGuidePage({
                     <aside
                       className="guide-bouquet-detail-aside"
                       aria-label={
-                        isThaiLocale(locale)
-                          ? `ช่อดอกไม้ ${displayName}`
-                          : `Bouquet: ${displayName}`
+                        `Bouquet: ${displayName}`
                       }
                     >
                       <div className="guide-bouquet-slot">

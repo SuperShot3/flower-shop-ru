@@ -75,6 +75,7 @@ export function buildStripeCheckoutSessionRequestBody(params: {
   phoneCountryCode: string;
   customerEmail?: string;
   marketingEmailConsent?: boolean;
+  personalDataConsent?: boolean;
   contactPreference: ContactPreferenceOption[];
   submissionToken: string;
   recipientName?: string;
@@ -94,6 +95,7 @@ export function buildStripeCheckoutSessionRequestBody(params: {
     phoneCountryCode,
     customerEmail,
     marketingEmailConsent,
+    personalDataConsent,
     contactPreference,
     submissionToken,
     recipientName,
@@ -176,6 +178,10 @@ export function buildStripeCheckoutSessionRequestBody(params: {
 
   if (marketingEmailConsent === true) {
     body.marketingEmailConsent = true;
+  }
+
+  if (personalDataConsent === true) {
+    body.personalDataConsent = true;
   }
 
   if (resolvedDiscount && referralDiscount > 0) {

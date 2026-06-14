@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useCallback } from 'react';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 import { detectDistrictFromAddress, type DistrictKey } from '@/lib/deliveryFees';
 import type { OrderDeliveryDestinationId } from '@/lib/orders';
@@ -131,7 +131,7 @@ export function DeliveryForm({
   /** Chiang Mai district/zones UI vs expansion read-only destination + zones */
   deliveryVariant?: 'chiang-mai' | 'expansion';
   /** Required when deliveryVariant is expansion */
-  expansionLabels?: { en: string; th: string };
+  expansionLabels?: { en: string; ru: string };
 }) {
   const t = translations[lang].buyNow;
   const zoneManuallyChangedRef = useRef(false);
@@ -180,7 +180,7 @@ export function DeliveryForm({
     if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return '';
     const d = new Date(dateStr + 'T12:00:00');
     const day = String(d.getDate()).padStart(2, '0');
-    const month = d.toLocaleDateString(isThaiLocale(lang) ? 'th-TH' : 'en', { month: 'short' });
+    const month = d.toLocaleDateString((lang === 'ru' ? 'ru-RU' : 'en'), { month: 'short' });
     return `${day} ${month}`;
   }, [lang]);
 
@@ -210,15 +210,15 @@ export function DeliveryForm({
             {deliveryVariant === 'expansion' && expansionLabels && (
               <div className="buy-now-field">
                 <label className="buy-now-label" htmlFor="buy-now-destination-readonly">
-                  {isThaiLocale(lang) ? 'พื้นที่จัดส่ง' : 'Delivery destination'}
+                  {'Delivery destination'}
                 </label>
                 <input
                   id="buy-now-destination-readonly"
                   type="text"
                   readOnly
                   className="buy-now-input buy-now-input-readonly"
-                  value={isThaiLocale(lang) ? expansionLabels.th : expansionLabels.en}
-                  aria-label={isThaiLocale(lang) ? expansionLabels.th : expansionLabels.en}
+                  value={lang === 'ru' ? expansionLabels.ru : expansionLabels.en}
+                  aria-label={lang === 'ru' ? expansionLabels.ru : expansionLabels.en}
                 />
               </div>
             )}

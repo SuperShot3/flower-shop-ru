@@ -277,7 +277,7 @@ function deliveryDestinationLabelTh(destination: string | null | undefined): str
   const value = destination?.trim();
   if (!value) return null;
   try {
-    return destinationDisplayName(value as DeliveryDestinationId, 'th');
+    return destinationDisplayName(value as DeliveryDestinationId, 'ru');
   } catch {
     return value;
   }
@@ -287,7 +287,7 @@ function deliveryZoneLabelTh(destination: string | null | undefined, zone: strin
   const dest = destination?.trim();
   const z = zone?.trim();
   if (!dest || !z) return null;
-  return zoneLabel(dest as DeliveryDestinationId, z, 'th') ?? z;
+  return zoneLabel(dest as DeliveryDestinationId, z, 'ru') ?? z;
 }
 
 function deliveryAreaText(snapshot: SupplierPreparationSnapshot): string {

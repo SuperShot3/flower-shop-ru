@@ -141,6 +141,8 @@ export interface OrderPayload {
   customerEmail?: string;
   /** Checkout opt-in for offers and review-invitation email (Trustpilot BCC when delivered email is sent). */
   marketingEmailConsent?: boolean;
+  /** Explicit checkout consent to process personal data for order fulfilment (152-FZ). */
+  personalDataConsent?: boolean;
   items: OrderItem[];
   delivery: OrderDelivery;
   pricing: OrderPricing;

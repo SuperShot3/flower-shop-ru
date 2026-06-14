@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { isThaiLocale } from '@/lib/i18n';
 import type { FormEvent } from 'react';
 import type {
   SupplierMessageCardSnapshot,
@@ -17,7 +16,7 @@ interface SupplierResponseFormProps {
   messageCard: SupplierMessageCardSnapshot;
 }
 
-type Lang = 'th' | 'en';
+type Lang = 'ru' | 'en';
 
 type CompletionSummary = {
   responseType: SupplierResponseType;
@@ -35,9 +34,9 @@ const RESPONSE_COPY: Record<
   Record<Lang, { title: string; helper: string }>
 > = {
   PREPARE: {
-    th: {
-      title: 'รับทำตามรายละเอียด',
-      helper: 'ราคาและเวลาพร้อมตามที่แจ้งได้',
+    ru: {
+      title: 'Принять как указано',
+      helper: 'Цена и время соответствуют запросу',
     },
     en: {
       title: 'Accept as specified',
@@ -45,9 +44,9 @@ const RESPONSE_COPY: Record<
     },
   },
   PREPARE_WITH_CHANGES: {
-    th: {
-      title: 'รับทำได้ แต่มีรายละเอียดต้องปรับ',
-      helper: 'เช่น สี ดอกไม้ เวลา หรือราคา',
+    ru: {
+      title: 'Могу выполнить с изменениями',
+      helper: 'например, цвет, цветы, время или цена',
     },
     en: {
       title: 'Can fulfill with changes',
@@ -55,9 +54,9 @@ const RESPONSE_COPY: Record<
     },
   },
   DECLINE: {
-    th: {
-      title: 'ไม่สะดวกรับงานนี้',
-      helper: 'แจ้งเหตุผลสั้น ๆ เพื่อให้ผู้ประสานงานทราบ',
+    ru: {
+      title: 'Не могу принять заказ',
+      helper: 'Кратко укажите причину для координатора',
     },
     en: {
       title: 'Cannot take this job',
@@ -71,7 +70,7 @@ function supplierTaskCompletionKey(publicToken: string) {
 }
 
 function formatPriceDisplay(value: number, lang: Lang): string {
-  return new Intl.NumberFormat(isThaiLocale(lang) ? 'th-TH' : 'en-US', {
+  return new Intl.NumberFormat((lang === 'ru' ? 'ru-RU' : 'en-US'), {
     style: 'currency',
     currency: 'RUB',
     minimumFractionDigits: 0,
@@ -161,62 +160,62 @@ const UI: Record<
     closeTabHint: string;
     sendingOverlay: string;
     langGroup: string;
-    thai: string;
+    russian: string;
     english: string;
   }
 > = {
-  th: {
-    openPhoto: 'เปิดรูปสินค้า',
-    productPhotoAlt: 'รูปสินค้า',
-    noPhoto: 'ไม่มีรูปสินค้า',
-    kicker: 'คำขอจัดเตรียมสินค้า',
-    heroTitle: 'รายละเอียดงาน',
-    heroHint: 'กรุณาตรวจสอบสินค้า เวลา และรายละเอียดการ์ดก่อนตอบกลับ',
-    sectionProduct: 'สินค้า',
-    size: 'ขนาด',
-    prepTime: (m) => `เวลาเตรียม ${m} นาที`,
-    unspecified: 'ไม่ระบุ',
-    customGiftNote: (text) => `รายละเอียดออเดอร์พิเศษ: ${text}`,
-    customCommentsNote: (text) => `หมายเหตุเพิ่มเติม: ${text}`,
-    sectionTimePlace: 'เวลาและพื้นที่',
-    date: 'วันที่',
-    window: 'ช่วงเวลา',
-    sectionMessage: 'ข้อความและของตกแต่ง',
-    card: 'การ์ด',
-    balloon: 'บอลลูน',
-    wrap: 'ห่อ',
-    customCard: 'การ์ดออเดอร์พิเศษ',
-    noExtraMessage: 'ไม่มีข้อความเพิ่มเติม',
-    replyHeading: 'ตอบกลับงานนี้',
-    priceLabel: 'ราคาเสนอ',
-    pricePlaceholder: 'เช่น 500 บาท',
-    readyLabel: 'เวลาที่พร้อม',
-    readyPlaceholder: 'เช่น วันนี้ 16:00',
-    reasonLabel: 'เหตุผลหรือเงื่อนไข',
-    reasonPlaceholder: 'แจ้งสิ่งที่ต้องปรับ หรือเหตุผลที่ไม่สะดวกรับงาน',
-    notesLabel: 'โน้ตเพิ่มเติม',
-    notesPlaceholder: 'รายละเอียดเพิ่มเติมสำหรับผู้ประสานงาน',
-    storePhotosLabel: 'รูปจากร้าน',
-    storePhotosSoon: 'เพิ่มรูปภาพเร็ว ๆ นี้',
-    submit: 'ส่งคำตอบ',
-    submitting: 'กำลังส่ง…',
-    modalClose: 'ปิด',
-    submitError: 'ส่งคำตอบไม่สำเร็จ กรุณาลองอีกครั้ง',
-    submitErrorNetwork: 'ส่งคำตอบไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง',
-    validationPriceReady: 'กรุณากรอกราคาและเวลาที่พร้อม',
-    invalidPrice: 'กรุณาระบุราคาเป็นตัวเลขที่ถูกต้อง',
-    thankYouHeadline: 'ส่งคำตอบแล้ว ขอบคุณค่ะ',
-    summaryHeading: 'สรุปที่ส่งมา',
-    summaryReply: 'คำตอบ',
-    summaryPrice: 'ราคาเสนอ',
-    summaryReady: 'เวลาที่พร้อม',
-    summaryReason: 'เหตุผลหรือเงื่อนไข',
-    summaryNotes: 'โน้ตเพิ่มเติม',
-    closeWindow: 'ปิดหน้าต่าง',
-    closeTabHint: 'หากหน้าต่างไม่ปิด คุณสามารถปิดแท็บนี้ได้ด้วยตนเอง',
-    sendingOverlay: 'กำลังส่งคำตอบ…',
-    langGroup: 'เลือกภาษา',
-    thai: 'ไทย',
+  ru: {
+    openPhoto: 'Открыть фото товара',
+    productPhotoAlt: 'Фото товара',
+    noPhoto: 'Нет фото товара',
+    kicker: 'Запрос на подготовку',
+    heroTitle: 'Детали заказа',
+    heroHint: 'Проверьте товар, время и текст открытки перед ответом.',
+    sectionProduct: 'Товары',
+    size: 'Размер',
+    prepTime: (m) => `Время подготовки ${m} мин`,
+    unspecified: 'Не указано',
+    customGiftNote: (text) => `Детали индивидуального заказа: ${text}`,
+    customCommentsNote: (text) => `Дополнительные комментарии: ${text}`,
+    sectionTimePlace: 'Время и район',
+    date: 'Дата',
+    window: 'Временной интервал',
+    sectionMessage: 'Сообщения и дополнения',
+    card: 'Открытка',
+    balloon: 'Шар',
+    wrap: 'Упаковка',
+    customCard: 'Индивидуальная открытка',
+    noExtraMessage: 'Без дополнительного текста',
+    replyHeading: 'Ответить на запрос',
+    priceLabel: 'Предложенная цена',
+    pricePlaceholder: 'например, 500 ₽',
+    readyLabel: 'Время готовности',
+    readyPlaceholder: 'например, сегодня 16:00',
+    reasonLabel: 'Причина или условия',
+    reasonPlaceholder: 'Что нужно изменить или почему не можете принять заказ',
+    notesLabel: 'Дополнительные заметки',
+    notesPlaceholder: 'Подробности для координатора',
+    storePhotosLabel: 'Фото из магазина',
+    storePhotosSoon: 'Загрузка фото скоро будет доступна',
+    submit: 'Отправить ответ',
+    submitting: 'Отправка…',
+    modalClose: 'Закрыть',
+    submitError: 'Не удалось отправить ответ. Попробуйте ещё раз.',
+    submitErrorNetwork: 'Не удалось отправить ответ. Проверьте интернет и попробуйте снова.',
+    validationPriceReady: 'Укажите цену и время готовности.',
+    invalidPrice: 'Укажите корректную цену.',
+    thankYouHeadline: 'Ответ отправлен. Спасибо.',
+    summaryHeading: 'Отправленные данные',
+    summaryReply: 'Ваш ответ',
+    summaryPrice: 'Предложенная цена',
+    summaryReady: 'Время готовности',
+    summaryReason: 'Причина или условия',
+    summaryNotes: 'Дополнительные заметки',
+    closeWindow: 'Закрыть окно',
+    closeTabHint: 'Если окно не закрылось, закройте вкладку вручную.',
+    sendingOverlay: 'Отправка ответа…',
+    langGroup: 'Язык',
+    russian: 'Русский',
     english: 'English',
   },
   en: {
@@ -270,7 +269,7 @@ const UI: Record<
     closeTabHint: 'If the window did not close, you can close this tab manually.',
     sendingOverlay: 'Sending your reply…',
     langGroup: 'Language',
-    thai: 'ไทย',
+    russian: 'Русский',
     english: 'English',
   },
 };
@@ -281,7 +280,7 @@ export function SupplierResponseForm({
   preparation,
   messageCard,
 }: SupplierResponseFormProps) {
-  const [lang, setLang] = useState<Lang>('th');
+  const [lang, setLang] = useState<Lang>('ru');
   const t = UI[lang];
 
   const firstImage = product.items.find((item) => item.imageUrl)?.imageUrl ?? null;
@@ -390,11 +389,11 @@ export function SupplierResponseForm({
           <div className="supplier-task-lang" role="group" aria-label={tc.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
-              onClick={() => setLang('th')}
-              aria-pressed={isThaiLocale(lang)}
+              className={`supplier-task-lang-btn ${''}`}
+              onClick={() => setLang('ru')}
+              aria-pressed={lang === 'ru'}
             >
-              {tc.thai}
+              {tc.russian}
             </button>
             <button
               type="button"
@@ -463,11 +462,11 @@ export function SupplierResponseForm({
           <div className="supplier-task-lang" role="group" aria-label={t.langGroup}>
             <button
               type="button"
-              className={`supplier-task-lang-btn ${isThaiLocale(lang) ? 'is-active' : ''}`}
-              onClick={() => setLang('th')}
-              aria-pressed={isThaiLocale(lang)}
+              className={`supplier-task-lang-btn ${''}`}
+              onClick={() => setLang('ru')}
+              aria-pressed={lang === 'ru'}
             >
-              {t.thai}
+              {t.russian}
             </button>
             <button
               type="button"

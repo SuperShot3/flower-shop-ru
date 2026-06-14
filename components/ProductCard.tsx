@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import type { CatalogProduct } from '@/lib/catalog/types';
 import type { Locale } from '@/lib/i18n'
 import { catalogLocalizedName } from '@/lib/catalogLocale';
-import {translations, isThaiLocale} from '@/lib/i18n';
+import {translations} from '@/lib/i18n';
 import { trackSelectItem, trackAddToCart } from '@/lib/analytics';
 import type { AnalyticsItem } from '@/lib/analytics';
 import { computeFinalPrice } from '@/lib/partnerPricing';
@@ -407,7 +407,7 @@ export function ProductCard({
           onTouchStart={canSwipeStandaloneImages ? handleTouchStart : undefined}
           onTouchEnd={canSwipeStandaloneImages ? handleTouchEnd : undefined}
           onMouseDown={canSwipeStandaloneImages ? handleMouseDown : undefined}
-          aria-label={canSwipeStandaloneImages ? (isThaiLocale(lang) ? 'เลื่อนเพื่อดูรูปเพิ่ม' : 'Swipe to see more images') : undefined}
+          aria-label={canSwipeStandaloneImages ? ('Swipe to see more images') : undefined}
         >
           {product.isHit ? <span className="pcard-hit">{t.hitBadge}</span> : null}
           <CatalogDiscountBadge

@@ -15,7 +15,7 @@ import {
   getCatalogProductsFiltered,
 } from '@/lib/catalogReads';
 import { isDatabaseConfigured } from '@/lib/db/client';
-import {isValidLocale, locales, type Locale, isThaiLocale} from '@/lib/i18n'
+import {isValidLocale, locales, type Locale} from '@/lib/i18n'
 import { catalogLocalizedComposition, catalogLocalizedDescription, catalogLocalizedName } from '@/lib/catalogLocale';
 import { translations } from '@/lib/i18n';
 import { getMarketByPathSlug } from '@/lib/delivery/markets';
@@ -46,7 +46,7 @@ export async function generateMetadata({
   const bouquet = await getCatalogBouquetBySlug(params.slug);
   if (!bouquet) return {};
 
-  const isTh = isThaiLocale(params.lang);
+  const isTh = params.lang === 'ru';
   const name = isTh ? bouquet.nameRu : bouquet.nameEn;
   const title =
     (isTh ? bouquet.seoTitleRu : bouquet.seoTitleEn)?.trim() ||
@@ -133,7 +133,7 @@ export default async function ProductPage({
   const plushyToy = await getCatalogPlushyToyBySlug(params.slug);
   if (plushyToy) {
     const name = catalogLocalizedName(plushyToy, lang);
-    const description = (isThaiLocale(lang) ? plushyToy.descriptionRu : plushyToy.descriptionEn) || '';
+    const description = (lang === 'ru' ? plushyToy.descriptionRu : plushyToy.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
     const suggestedBouquets = await getCatalogPopularBouquets(8);
@@ -166,7 +166,7 @@ export default async function ProductPage({
   const balloon = await getCatalogBalloonBySlug(params.slug);
   if (balloon) {
     const name = catalogLocalizedName(balloon, lang);
-    const description = (isThaiLocale(lang) ? balloon.descriptionRu : balloon.descriptionEn) || '';
+    const description = (lang === 'ru' ? balloon.descriptionRu : balloon.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog?topCategory=balloons`;
     const suggestedBouquets = await getCatalogPopularBouquets(8);
@@ -200,7 +200,7 @@ export default async function ProductPage({
   if (product) {
     const gifts = await getCatalogProductsFiltered({ categoryKey: 'gifts' });
     const name = catalogLocalizedName(product, lang);
-    const description = (isThaiLocale(lang) ? product.descriptionRu : product.descriptionEn) || '';
+    const description = (lang === 'ru' ? product.descriptionRu : product.descriptionEn) || '';
     const nav = translations[lang as Locale].nav;
     const catalogHref = `/${lang}/catalog`;
 
