@@ -166,10 +166,12 @@ export function CartCheckoutView({
     hasDeliveryDistrict: hasDeliveryZone,
     isFormValid: isPaymentUnlocked,
     isLoading: placing,
+    hasPersonalDataConsent: personalDataConsent,
     firstIncompleteHint: undefined,
     messages: {
       selectDeliveryArea: t.selectDeliveryAreaPayment,
       processing: t.processing,
+      personalDataConsentRequired: t.personalDataConsentRequired,
     },
   });
   const paymentAvailability =
@@ -212,9 +214,9 @@ export function CartCheckoutView({
       securePaymentLabel: translations[lang].trustBadges.securePayments,
       deliveryPolicyHref: `/${lang}/info/delivery-policy`,
       refundPolicyHref: `/${lang}/refund-replacement`,
-      readyToPay: isPaymentUnlocked,
+      readyToPay: isPaymentUnlocked && personalDataConsent,
       loading: placing,
-      disabled: !checkoutSubmissionToken,
+      disabled: !checkoutSubmissionToken || !personalDataConsent,
       onAction: () => onBottomActionRef.current(),
       continueLabel: tPremium.continueBtn,
       payNowLabel: tPremium.payNowBtn,
@@ -223,6 +225,7 @@ export function CartCheckoutView({
   }, [
     grandTotal,
     isPaymentUnlocked,
+    personalDataConsent,
     placing,
     checkoutSubmissionToken,
     stickyItemSummary,
@@ -292,7 +295,7 @@ export function CartCheckoutView({
           <div className="co-payment-block">
             <CheckoutPersonalDataConsent
               lang={lang}
-              id="checkout-pd-consent-desktop"
+              id="checkout-pd-consent"
               checked={personalDataConsent}
               onChange={onPersonalDataConsentChange}
             />
@@ -301,6 +304,7 @@ export function CartCheckoutView({
               className="co-payment-btn"
               onClick={onPay}
               disabled={checkoutDisabled}
+              aria-disabled={checkoutDisabled}
               aria-busy={placing}
             >
               {placing ? t.creatingCheckout : tPremium.paySecurely}
@@ -341,9 +345,8 @@ export function CartCheckoutView({
         deliveryFeeKnown={hasDeliveryZone}
         readyToPay={isPaymentUnlocked}
         loading={placing}
-        disabled={!checkoutSubmissionToken}
+        disabled={!checkoutSubmissionToken || !personalDataConsent}
         personalDataConsent={personalDataConsent}
-        onPersonalDataConsentChange={onPersonalDataConsentChange}
         onAction={onBottomAction}
         labels={{
           continue: tPremium.continueBtn,

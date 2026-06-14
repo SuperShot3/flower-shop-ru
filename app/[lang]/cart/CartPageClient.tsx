@@ -1001,6 +1001,9 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         return fmt(String(tC.recipientPhone ?? 'Recipient phone'));
       }
     }
+    if (!personalDataConsent) {
+      return t.personalDataConsentRequired;
+    }
     return '';
   };
 
@@ -1010,10 +1013,12 @@ export function CartPageClient({ lang }: { lang: Locale }) {
     hasDeliveryDistrict: hasDeliveryZone,
     isFormValid: isPaymentUnlocked,
     isLoading: placing,
+    hasPersonalDataConsent: personalDataConsent,
     firstIncompleteHint: getFirstIncompleteHint(),
     messages: {
       selectDeliveryArea: t.selectDeliveryAreaPayment,
       processing: t.processing,
+      personalDataConsentRequired: t.personalDataConsentRequired,
     },
   });
   const paymentAvailabilityDesktop =
@@ -1116,6 +1121,11 @@ export function CartPageClient({ lang }: { lang: Locale }) {
 
 
   const runStripeCheckoutSubmit = async () => {
+    if (!personalDataConsent) {
+      setOrderError(t.personalDataConsentRequired);
+      scrollToPersonalDataConsent();
+      return;
+    }
     if (!checkoutSubmissionToken) {
       setOrderError(t.refreshAndTryAgain);
       return;
@@ -1145,7 +1155,7 @@ export function CartPageClient({ lang }: { lang: Locale }) {
         phoneCountryCode: countryCode,
         customerEmail: customerEmail.trim() || undefined,
         ...(marketingEmailConsent ? { marketingEmailConsent: true } : {}),
-        personalDataConsent: true,
+        personalDataConsent,
         contactPreference,
         submissionToken: checkoutSubmissionToken,
         recipientName: isOrderingForSomeoneElse ? recipientName.trim() : undefined,

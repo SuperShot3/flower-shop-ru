@@ -1,9 +1,7 @@
 'use client';
 
 import { LineIcon, WhatsAppIcon } from '@/components/icons';
-import { MessengerPrivacyConsentLine } from '@/components/legal/MessengerPrivacyConsentLine';
 import { useFlowerFilterSheetOpen } from '@/contexts/FlowerFilterSheetOpenContext';
-import type { Locale } from '@/lib/i18n';
 import { getLineContactUrl, getWhatsAppContactUrl } from '@/lib/messenger';
 
 const contactButtons = [
@@ -29,7 +27,7 @@ const contactButtons = [
   },
 ];
 
-export function LineFloatingButton({ lang }: { lang: Locale }) {
+export function LineFloatingButton() {
   const { isOpen: flowerFilterSheetOpen } = useFlowerFilterSheetOpen();
   if (flowerFilterSheetOpen) return null;
 
@@ -89,14 +87,7 @@ export function LineFloatingButton({ lang }: { lang: Locale }) {
             </a>
           </div>
         ))}
-        <MessengerPrivacyConsentLine lang={lang} className="floating-messenger-privacy" />
       </div>
-      <style jsx global>{`
-        .floating-messenger-privacy {
-          max-width: 9rem;
-          text-align: right;
-        }
-      `}</style>
     </div>
   );
 }

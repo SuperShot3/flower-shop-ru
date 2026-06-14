@@ -180,9 +180,10 @@ export function buildStripeCheckoutSessionRequestBody(params: {
     body.marketingEmailConsent = true;
   }
 
-  if (personalDataConsent === true) {
-    body.personalDataConsent = true;
+  if (personalDataConsent !== true) {
+    throw new Error('Personal data consent is required');
   }
+  body.personalDataConsent = true;
 
   if (resolvedDiscount && referralDiscount > 0) {
     body.referralCode = resolvedDiscount.code;
